@@ -18,23 +18,6 @@ Taison is a personal fork of [Mihon](https://github.com/mihonapp/mihon), the ope
 
 Changelogs are published on the [Gent8/Taison releases page](https://github.com/Gent8/Taison/releases).  
 
-## Build
-
-Make sure the Android 14 (API 34) SDK and command-line tools are installed.
-
-```bash
-./gradlew assembleRelease
-```
-
-Signed APKs land in `app/build/outputs/apk/release/`. Add `bundleRelease` if you need an `.aab`.
-
-## Releasing
-
-- Update `versionCode`/`versionName` in `app/build.gradle.kts` and summarize the changes in `CHANGELOG.md`.
-- Generate a signed `release` build with your keystore (`./gradlew assembleRelease` after configuring `signingConfigs`, or Android Studio’s **Build › Generate Signed Bundle / APK**).
-- Commit the release changes, tag them (e.g. `git tag v1.0.0 && git push --tags`), then draft a GitHub release referencing the changelog entry.
-- Attach the signed artifacts to the release and verify the APK installs before hitting publish.
-
 ## License
 
 Taison is distributed under the [Apache License, Version 2.0](./LICENSE).
