@@ -24,10 +24,10 @@ android {
     namespace = "eu.kanade.tachiyomi"
 
     defaultConfig {
-        applicationId = "app.mihon"
+        applicationId = "com.gent8.taison"
 
-        versionCode = 13
-        versionName = "0.19.1"
+        versionCode = 14
+        versionName = "0.19.3"
 
         buildConfigField("String", "COMMIT_COUNT", "\"${getCommitCount()}\"")
         buildConfigField("String", "COMMIT_SHA", "\"${getGitSha()}\"")

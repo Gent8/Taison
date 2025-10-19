@@ -12,7 +12,8 @@ SELECT
     history.last_read AS readAt,
     history.time_read AS readDuration,
     max_last_read.last_read AS maxReadAt,
-    max_last_read.chapter_id AS maxReadAtChapterId
+    max_last_read.chapter_id AS maxReadAtChapterId,
+    coalesce(manga_categories.categories, '0') AS categories
 FROM mangas
 JOIN chapters
 ON mangas._id = chapters.manga_id
@@ -24,7 +25,13 @@ JOIN (
     ON chapters._id = history.chapter_id
     GROUP BY chapters.manga_id
 ) AS max_last_read
-ON chapters.manga_id = max_last_read.manga_id;
+ON chapters.manga_id = max_last_read.manga_id
+LEFT JOIN (
+    SELECT mangas_categories.manga_id, group_concat(mangas_categories.category_id) AS categories
+    FROM mangas_categories
+    GROUP BY mangas_categories.manga_id
+) AS manga_categories
+ON manga_categories.manga_id = mangas._id;
 
 history:
 SELECT
@@ -38,7 +45,8 @@ favorite,
 cover_last_modified,
 chapterNumber,
 readAt,
-readDuration
+readDuration,
+categories
 FROM historyView
 WHERE historyView.readAt > 0
 AND maxReadAtChapterId = historyView.chapterId
@@ -57,7 +65,8 @@ favorite,
 cover_last_modified,
 chapterNumber,
 readAt,
-readDuration
+readDuration,
+categories
 FROM historyView
 WHERE historyView.readAt > 0
 ORDER BY readAt DESC

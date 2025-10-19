@@ -35,7 +35,7 @@ class BangumiInterceptor(private val bangumi: Bangumi) : Interceptor {
         return originalRequest.newBuilder()
             .header(
                 "User-Agent",
-                "antsylich/Mihon/v${BuildConfig.VERSION_NAME} (Android) (http://github.com/mihonapp/mihon)",
+                "Gent8/Taison/v${BuildConfig.VERSION_NAME} (Android) (https://github.com/Gent8/Taison)",
             )
             .apply {
                 addHeader("Authorization", "Bearer ${currAuth.accessToken}")

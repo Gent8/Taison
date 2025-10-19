@@ -4,17 +4,26 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.graphics.res.animatedVectorResource
 import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
 import androidx.compose.animation.graphics.vector.AnimatedImageVector
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.HelpOutline
+import androidx.compose.material.icons.outlined.Check
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
@@ -28,6 +37,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import eu.kanade.presentation.category.components.ChangeCategoryDialog
+import eu.kanade.presentation.category.visualName
 import eu.kanade.presentation.library.DeleteLibraryMangaDialog
 import eu.kanade.presentation.library.LibrarySettingsDialog
 import eu.kanade.presentation.library.components.LibraryContent
@@ -92,6 +102,14 @@ data object LibraryTab : Tab {
         val state by screenModel.state.collectAsState()
 
         val snackbarHostState = remember { SnackbarHostState() }
+        var showCategoryMenu by rememberSaveable { mutableStateOf(false) }
+        val categorySelectorEnabled = !state.showCategoryTabs && state.displayedCategories.size > 1
+
+        LaunchedEffect(categorySelectorEnabled) {
+            if (!categorySelectorEnabled) {
+                showCategoryMenu = false
+            }
+        }
 
         val onClickRefresh: (Category?) -> Boolean = { category ->
             val started = LibraryUpdateJob.startNow(context, category)
@@ -113,33 +131,66 @@ data object LibraryTab : Tab {
                     defaultCategoryTitle = stringResource(MR.strings.label_default),
                     page = state.coercedActiveCategoryIndex,
                 )
-                LibraryToolbar(
-                    hasActiveFilters = state.hasActiveFilters,
-                    selectedCount = state.selection.size,
-                    title = title,
-                    onClickUnselectAll = screenModel::clearSelection,
-                    onClickSelectAll = screenModel::selectAll,
-                    onClickInvertSelection = screenModel::invertSelection,
-                    onClickFilter = screenModel::showSettingsDialog,
-                    onClickRefresh = { onClickRefresh(state.activeCategory) },
-                    onClickGlobalUpdate = { onClickRefresh(null) },
-                    onClickOpenRandomManga = {
-                        scope.launch {
-                            val randomItem = screenModel.getRandomLibraryItemForCurrentCategory()
-                            if (randomItem != null) {
-                                navigator.push(MangaScreen(randomItem.libraryManga.manga.id))
-                            } else {
-                                snackbarHostState.showSnackbar(
-                                    context.stringResource(MR.strings.information_no_entries_found),
-                                )
+                Box {
+                    LibraryToolbar(
+                        hasActiveFilters = state.hasActiveFilters,
+                        selectedCount = state.selection.size,
+                        title = title,
+                        onClickTitle = if (categorySelectorEnabled) {
+                            { showCategoryMenu = true }
+                        } else {
+                            null
+                        },
+                        showTitleDropdownIndicator = categorySelectorEnabled,
+                        onClickUnselectAll = screenModel::clearSelection,
+                        onClickSelectAll = screenModel::selectAll,
+                        onClickInvertSelection = screenModel::invertSelection,
+                        onClickFilter = screenModel::showSettingsDialog,
+                        onClickRefresh = { onClickRefresh(state.activeCategory) },
+                        onClickGlobalUpdate = { onClickRefresh(null) },
+                        onClickOpenRandomManga = {
+                            scope.launch {
+                                val randomItem = screenModel.getRandomLibraryItemForCurrentCategory()
+                                if (randomItem != null) {
+                                    navigator.push(MangaScreen(randomItem.libraryManga.manga.id))
+                                } else {
+                                    snackbarHostState.showSnackbar(
+                                        context.stringResource(MR.strings.information_no_entries_found),
+                                    )
+                                }
                             }
+                        },
+                        searchQuery = state.searchQuery,
+                        onSearchQueryChange = screenModel::search,
+                        // For scroll overlay when no tab
+                        scrollBehavior = scrollBehavior.takeIf { !state.showCategoryTabs },
+                    )
+
+                    DropdownMenu(
+                        expanded = showCategoryMenu,
+                        onDismissRequest = { showCategoryMenu = false },
+                    ) {
+                        state.displayedCategories.forEachIndexed { index, category ->
+                            DropdownMenuItem(
+                                text = { Text(category.visualName) },
+                                onClick = {
+                                    showCategoryMenu = false
+                                    screenModel.updateActiveCategoryIndex(index)
+                                },
+                                trailingIcon = if (state.coercedActiveCategoryIndex == index) {
+                                    {
+                                        Icon(
+                                            imageVector = Icons.Outlined.Check,
+                                            contentDescription = null,
+                                        )
+                                    }
+                                } else {
+                                    null
+                                },
+                            )
                         }
-                    },
-                    searchQuery = state.searchQuery,
-                    onSearchQueryChange = screenModel::search,
-                    // For scroll overlay when no tab
-                    scrollBehavior = scrollBehavior.takeIf { !state.showCategoryTabs },
-                )
+                    }
+                }
             },
             bottomBar = {
                 LibraryBottomActionMenu(

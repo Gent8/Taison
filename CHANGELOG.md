@@ -13,9 +13,13 @@ The format is a modified version of [Keep a Changelog](https://keepachangelog.co
 ## [Unreleased]
 ### Added
 - Advanced setting to limit download filenames to ASCII characters. This is provided only as a workaround for OSes that do not properly handle standard Unicode filenames. This setting is generally not recommended and should only be used as a last resort ([@raxod502](https://github.com/radian-software)) ([#2305](https://github.com/mihonapp/mihon/pull/2305))
+- Option to scope history entries to the active library category (toggle in **Settings › Library › Categories**).
 
 ### Changed
 - Delegate Suwayomi tracker authentication to extension ([@cpiber](https://github.com/cpiber)) ([#2476](https://github.com/mihonapp/mihon/pull/2476))
+- Streamlined the library tab by hiding category tabs by default and adding a toolbar dropdown for quick switching.
+- Sunrise becomes the default Taison theme, with the legacy blue palette available as Classic Blue.
+- Rebranded the launcher, user agents, and documentation to the new Taison identity (including application ID `com.gent8.taison`).
 
 ### Improved
 - Spoofing of `X-Requested-With` header to support newer WebView versions ([@Guzmazow](https://github.com/Guzmazow)) ([#2491](https://github.com/mihonapp/mihon/pull/2491))

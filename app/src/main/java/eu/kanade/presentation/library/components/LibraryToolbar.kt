@@ -1,13 +1,19 @@
 package eu.kanade.presentation.library.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FilterList
 import androidx.compose.material.icons.outlined.FlipToBack
+import androidx.compose.material.icons.outlined.KeyboardArrowDown
 import androidx.compose.material.icons.outlined.SelectAll
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
@@ -15,6 +21,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.components.AppBarActions
@@ -30,6 +37,8 @@ fun LibraryToolbar(
     hasActiveFilters: Boolean,
     selectedCount: Int,
     title: LibraryToolbarTitle,
+    onClickTitle: (() -> Unit)? = null,
+    showTitleDropdownIndicator: Boolean = false,
     onClickUnselectAll: () -> Unit,
     onClickSelectAll: () -> Unit,
     onClickInvertSelection: () -> Unit,
@@ -50,6 +59,8 @@ fun LibraryToolbar(
     else -> LibraryRegularToolbar(
         title = title,
         hasFilters = hasActiveFilters,
+        onClickTitle = onClickTitle,
+        showTitleDropdownIndicator = showTitleDropdownIndicator,
         searchQuery = searchQuery,
         onSearchQueryChange = onSearchQueryChange,
         onClickFilter = onClickFilter,
@@ -64,6 +75,8 @@ fun LibraryToolbar(
 private fun LibraryRegularToolbar(
     title: LibraryToolbarTitle,
     hasFilters: Boolean,
+    onClickTitle: (() -> Unit)?,
+    showTitleDropdownIndicator: Boolean,
     searchQuery: String?,
     onSearchQueryChange: (String?) -> Unit,
     onClickFilter: () -> Unit,
@@ -75,7 +88,16 @@ private fun LibraryRegularToolbar(
     val pillAlpha = if (isSystemInDarkTheme()) 0.12f else 0.08f
     SearchToolbar(
         titleContent = {
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            val clickableModifier = onClickTitle?.let {
+                Modifier
+                    .fillMaxWidth()
+                    .clickable(onClick = it)
+            } ?: Modifier.fillMaxWidth()
+
+            Row(
+                modifier = clickableModifier,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
                 Text(
                     text = title.text,
                     maxLines = 1,
@@ -83,10 +105,18 @@ private fun LibraryRegularToolbar(
                     overflow = TextOverflow.Ellipsis,
                 )
                 if (title.numberOfManga != null) {
+                    Spacer(modifier = Modifier.width(8.dp))
                     Pill(
                         text = "${title.numberOfManga}",
                         color = MaterialTheme.colorScheme.onBackground.copy(alpha = pillAlpha),
                         fontSize = 14.sp,
+                    )
+                }
+                if (showTitleDropdownIndicator) {
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Icon(
+                        imageVector = Icons.Outlined.KeyboardArrowDown,
+                        contentDescription = stringResource(MR.strings.categories),
                     )
                 }
             }

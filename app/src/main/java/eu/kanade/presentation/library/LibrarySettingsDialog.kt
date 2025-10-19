@@ -293,6 +293,10 @@ private fun ColumnScope.DisplayPage(
         pref = screenModel.libraryPreferences.categoryTabs(),
     )
     CheckboxItem(
+        label = stringResource(MR.strings.pref_history_scope_active_category),
+        pref = screenModel.libraryPreferences.historyScopeByCategory(),
+    )
+    CheckboxItem(
         label = stringResource(MR.strings.action_display_show_number_of_items),
         pref = screenModel.libraryPreferences.categoryNumberOfItems(),
     )

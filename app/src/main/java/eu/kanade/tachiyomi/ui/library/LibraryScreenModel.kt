@@ -129,11 +129,22 @@ class LibraryScreenModel(
                         .applyGrouping(data.categories, data.showSystemCategory)
                         .applySort(data.favoritesById, data.tracksMap, data.loggedInTrackerIds)
                 }
-                .collectLatest {
+                .collectLatest { grouped ->
+                    val categories = grouped.keys.toList()
+                    val preferredIndex = resolveActiveCategoryIndex(categories, state.value.activeCategoryIndex)
+                    val currentCategoryId = categories.getOrNull(preferredIndex)?.id ?: -1L
+                    if (libraryPreferences.lastUsedCategoryId().get() != currentCategoryId) {
+                        libraryPreferences.lastUsedCategoryId().set(currentCategoryId)
+                    }
                     mutableState.update { state ->
+                        val newIndex = preferredIndex.coerceIn(
+                            minimumValue = 0,
+                            maximumValue = categories.lastIndex.coerceAtLeast(0),
+                        )
                         state.copy(
                             isLoading = false,
-                            groupedFavorites = it,
+                            groupedFavorites = grouped,
+                            activeCategoryIndex = newIndex,
                         )
                     }
                 }
@@ -657,12 +668,13 @@ class LibraryScreenModel(
     }
 
     fun updateActiveCategoryIndex(index: Int) {
-        val newIndex = mutableState.updateAndGet { state ->
+        val newState = mutableState.updateAndGet { state ->
             state.copy(activeCategoryIndex = index)
         }
-            .coercedActiveCategoryIndex
-
-        libraryPreferences.lastUsedCategory().set(newIndex)
+        val coercedIndex = newState.coercedActiveCategoryIndex
+        libraryPreferences.lastUsedCategory().set(coercedIndex)
+        val activeCategoryId = newState.displayedCategories.getOrNull(coercedIndex)?.id ?: -1L
+        libraryPreferences.lastUsedCategoryId().set(activeCategoryId)
     }
 
     fun openChangeCategoryDialog() {
@@ -748,7 +760,7 @@ class LibraryScreenModel(
         val showMangaContinueButton: Boolean = false,
         val dialog: Dialog? = null,
         val libraryData: LibraryData = LibraryData(),
-        private val activeCategoryIndex: Int = 0,
+        val activeCategoryIndex: Int = 0,
         private val groupedFavorites: Map<Category, List</* LibraryItem */ Long>> = emptyMap(),
     ) {
         val displayedCategories: List<Category> = groupedFavorites.keys.toList()
@@ -798,5 +810,29 @@ class LibraryScreenModel(
             }
             return LibraryToolbarTitle(title, count)
         }
+    }
+
+    private fun resolveActiveCategoryIndex(
+        categories: List<Category>,
+        currentIndex: Int,
+    ): Int {
+        if (categories.isEmpty()) return 0
+
+        val storedCategoryId = libraryPreferences.lastUsedCategoryId().get()
+        val storedIndex = libraryPreferences.lastUsedCategory().get()
+        val current = if (currentIndex in categories.indices) currentIndex else -1
+        val indexFromId = if (storedCategoryId != -1L) {
+            categories.indexOfFirst { it.id == storedCategoryId }
+        } else {
+            -1
+        }
+
+        val preferred = when {
+            indexFromId != -1 -> indexFromId
+            current != -1 -> current
+            else -> storedIndex
+        }
+
+        return preferred.coerceIn(0, categories.lastIndex)
     }
 }

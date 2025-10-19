@@ -30,6 +30,7 @@ object HistoryMapper {
         chapterNumber: Double,
         readAt: Date?,
         readDuration: Long,
+        categories: String?,
     ): HistoryWithRelations = HistoryWithRelations(
         id = historyId,
         chapterId = chapterId,
@@ -38,6 +39,7 @@ object HistoryMapper {
         chapterNumber = chapterNumber,
         readAt = readAt,
         readDuration = readDuration,
+        categoryIds = parseCategoryIds(categories),
         coverData = MangaCover(
             mangaId = mangaId,
             sourceId = sourceId,
@@ -46,4 +48,11 @@ object HistoryMapper {
             lastModified = coverLastModified,
         ),
     )
+
+    private fun parseCategoryIds(raw: String?): List<Long> {
+        if (raw.isNullOrEmpty()) return emptyList()
+
+        return raw.split(',')
+            .mapNotNull { it.trim().toLongOrNull() }
+    }
 }
