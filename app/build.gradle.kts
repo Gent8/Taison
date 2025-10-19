@@ -1,3 +1,4 @@
+import java.util.Properties
 import mihon.buildlogic.Config
 import mihon.buildlogic.getBuildTime
 import mihon.buildlogic.getCommitCount
@@ -20,8 +21,36 @@ if (Config.includeTelemetry) {
 
 shortcutHelper.setFilePath("./shortcuts.xml")
 
+val keystoreProperties = Properties().apply {
+    val keystorePropertiesFile = rootProject.file("keystore.properties")
+    if (keystorePropertiesFile.exists()) {
+        keystorePropertiesFile.inputStream().use(::load)
+    }
+}
+
 android {
     namespace = "eu.kanade.tachiyomi"
+
+    val releaseSigningConfig = if (keystoreProperties.isNotEmpty()) {
+        signingConfigs.create("release") {
+            val storeFilePath = keystoreProperties.getProperty("storeFile")?.trim()
+            val storePasswordValue = keystoreProperties.getProperty("storePassword")?.trim()
+            val keyAliasValue = keystoreProperties.getProperty("keyAlias")?.trim()
+            val keyPasswordValue = keystoreProperties.getProperty("keyPassword")?.trim()
+
+            require(!storeFilePath.isNullOrEmpty()) { "storeFile is missing in keystore.properties" }
+            require(!storePasswordValue.isNullOrEmpty()) { "storePassword is missing in keystore.properties" }
+            require(!keyAliasValue.isNullOrEmpty()) { "keyAlias is missing in keystore.properties" }
+            require(!keyPasswordValue.isNullOrEmpty()) { "keyPassword is missing in keystore.properties" }
+
+            storeFile = file(storeFilePath)
+            storePassword = storePasswordValue
+            keyAlias = keyAliasValue
+            keyPassword = keyPasswordValue
+        }
+    } else {
+        null
+    }
 
     defaultConfig {
         applicationId = "com.gent8.taison"
@@ -51,6 +80,10 @@ android {
             proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
 
             buildConfigField("String", "BUILD_TIME", "\"${getBuildTime(useLastCommitTime = true)}\"")
+
+            if (releaseSigningConfig != null) {
+                signingConfig = releaseSigningConfig
+            }
         }
 
         val commonMatchingFallbacks = listOf(release.name)
