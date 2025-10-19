@@ -1,0 +1,33 @@
+From de80706a94fb764d3642be70ff6778b4519dffb1 Mon Sep 17 00:00:00 2001
+From: Gent8 <deboordermounir@gmail.com>
+Date: Sun, 19 Oct 2025 14:47:29 +0200
+Subject: [PATCH 10/24] Update CHANGELOG.md to reflect the addition of the
+ Sunrise theme as the new default look and the legacy blue palette as Classic
+ Blue in version 0.19.3. Remove unreleased changes section.
+
+---
+ CHANGELOG.md | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 18bcd7291..f741b63b5 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -11,12 +11,12 @@ The format is a modified version of [Keep a Changelog](https://keepachangelog.co
+ - `Other` - for technical stuff.
+ 
+ ## [Unreleased]
+-### Added
+-- Sunrise theme as the new default look, with the legacy blue palette available as Classic Blue.
++_No unreleased changes._
+ 
+ ## [v0.19.3] - 2025-10-19
+ ### Added
+ - Option to scope history entries to the active library category via Settings › Library › Categories.
++- Sunrise theme as the new default look, with the legacy blue palette available as Classic Blue.
+ 
+ ### Changed
+ - Streamlined the library tab by hiding category tabs by default and adding a toolbar dropdown for quick switching.
+-- 
+2.39.5 (Apple Git-154)
+
