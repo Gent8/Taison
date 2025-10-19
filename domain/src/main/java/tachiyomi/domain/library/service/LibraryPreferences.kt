@@ -121,7 +121,7 @@ class LibraryPreferences(
 
     fun categoryTabs() = preferenceStore.getBoolean("display_category_tabs", false)
 
-    fun historyScopeByCategory() = preferenceStore.getBoolean("history_scope_by_category", false)
+    fun historyScopeByCategory() = preferenceStore.getBoolean("history_scope_by_category", true)
 
     fun categoryNumberOfItems() = preferenceStore.getBoolean("display_number_of_items", false)
 
