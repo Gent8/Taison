@@ -6,8 +6,6 @@
   # Taison <span style="color:#eab710;">App</span>
 </div>
 
-# Taison
-
 Taison is a personal fork of [Mihon](https://github.com/mihonapp/mihon), the open source manga reader for Android.  It keeps pace with upstream while experimenting with quality-of-life tweaks and a refreshed visual identity.
 
 ## Taison Highlights
