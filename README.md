@@ -1,9 +1,10 @@
-<p align="center">
-  <img src="app/src/main/res/mipmap/ic_launcher.png" alt="Taison Logo" width="128">
-</p>
-<p align="center">
-  Taison <span style="color:#eab710;">App.</span>
-</p>
+<div align="center">
+  <a href="#taison">
+    <img src="app/src/main/res/mipmap/ic_launcher.png" alt="Taison logo" title="Taison logo" width="128"/>
+  </a>
+
+  # Taison <span style="color:#eab710;">App</span>
+</div>
 
 # Taison
 
