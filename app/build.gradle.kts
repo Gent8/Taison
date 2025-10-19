@@ -26,8 +26,8 @@ android {
     defaultConfig {
         applicationId = "com.gent8.taison"
 
-        versionCode = 14
-        versionName = "0.19.3"
+        versionCode = 100
+        versionName = "1.0.0"
 
         buildConfigField("String", "COMMIT_COUNT", "\"${getCommitCount()}\"")
         buildConfigField("String", "COMMIT_SHA", "\"${getGitSha()}\"")

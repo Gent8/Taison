@@ -11,6 +11,10 @@ build
 
 # Configuration files
 local.properties
+keystore.properties
 
 # macOS specific files
 .DS_Store
+
+# Keystore files
+my-release-key.jks  
