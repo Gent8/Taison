@@ -18,7 +18,7 @@ The format is a modified version of [Keep a Changelog](https://keepachangelog.co
 ### Changed
 - Delegate Suwayomi tracker authentication to extension ([@cpiber](https://github.com/cpiber)) ([#2476](https://github.com/mihonapp/mihon/pull/2476))
 - Streamlined the library tab by hiding category tabs by default and adding a toolbar dropdown for quick switching.
-- Sunrise becomes the default Taison theme, with the legacy blue palette available as Classic Blue.
+- Taison becomes the default app theme, with the legacy blue palette available as Classic Blue.
 - Rebranded the launcher, user agents, and documentation to the new Taison identity (including application ID `com.gent8.taison`).
 
 ### Improved

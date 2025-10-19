@@ -6,7 +6,7 @@ Taison is a personal fork of [Mihon](https://github.com/mihonapp/mihon), the ope
 
 - **Library navigation** – category tabs are hidden by default, replaced with a quick category dropdown inside the toolbar. Tabs can still be re-enabled in settings.
 - **History scoping** – History entries are limited to the active library category from *Settings › Library › Categories*. This option can also be turned off in settings.
-- **Sunrise look** – a new warm Taison default theme; the legacy blue palette lives on as *Classic Blue*.
+- **Taison look** – a warm default palette unique to this fork; the legacy blue palette lives on as *Classic Blue*.
 
 ## Download
 

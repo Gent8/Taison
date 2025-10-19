@@ -5,7 +5,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
 /**
- * Colors for the Sunrise default theme
+ * Colors for the Taison default theme
  * Centered around the accent color #EAB710
  */
 internal object TachiyomiColorScheme : BaseColorScheme() {
