@@ -43,7 +43,11 @@ android {
             require(!keyAliasValue.isNullOrEmpty()) { "keyAlias is missing in keystore.properties" }
             require(!keyPasswordValue.isNullOrEmpty()) { "keyPassword is missing in keystore.properties" }
 
-            storeFile = file(storeFilePath)
+            val storeFileCandidate = rootProject.file(storeFilePath)
+            check(storeFileCandidate.exists()) {
+                "Keystore file $storeFilePath (resolved to ${storeFileCandidate.absolutePath}) does not exist"
+            }
+            storeFile = storeFileCandidate
             storePassword = storePasswordValue
             keyAlias = keyAliasValue
             keyPassword = keyPasswordValue
