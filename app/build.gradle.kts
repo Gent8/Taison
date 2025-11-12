@@ -164,6 +164,7 @@ android {
                 "META-INF/NOTICE",
                 "META-INF/README.md",
             )
+            pickFirsts += setOf("META-INF/versions/9/OSGI-INF/MANIFEST.MF")
         }
     }
 
