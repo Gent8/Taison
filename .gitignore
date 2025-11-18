@@ -18,3 +18,4 @@ keystore.properties
 
 # Keystore files
 my-release-key.jks  
+*.keystore
