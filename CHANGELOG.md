@@ -14,6 +14,30 @@ The format is a modified version of [Keep a Changelog](https://keepachangelog.co
 ### Fixed
 - Fix reader tap zones triggering after scrolling is stopped by tapping ([@NGB-Was-Taken](https://github.com/NGB-Was-Taken)) ([#2680](https://github.com/mihonapp/mihon/pull/2680))
 
+---
+
+## [Taison v1.0.1] - 2025-11-18
+This section tracks changes unique to the Taison fork so they don't conflict with upstream Mihon release notes.
+
+### Changed
+- Synced the fork to Mihon v0.19.3, pulling in the latest upstream fixes and improvements ([@Gent8](https://github.com/Gent8)).
+
+---
+
+## [Taison v1.0.0] - 2025-10-19
+This section tracks changes unique to the Taison fork so they don't conflict with upstream Mihon release notes.
+
+### Added
+- Option to scope history entries to the active library category (toggle in **Settings › Library › Categories**) ([@Gent8](https://github.com/Gent8)).
+
+### Changed
+- Streamlined the library tab by hiding category tabs by default and adding a toolbar dropdown for quick switching ([@Gent8](https://github.com/Gent8)).
+- Taison becomes the default app theme, with the legacy blue palette available as Classic Blue ([@Gent8](https://github.com/Gent8)).
+- Rebranded the launcher, user agents, and documentation to the new Taison identity (including application ID `com.gent8.taison`) ([@Gent8](https://github.com/Gent8)).
+
+---
+
+
 ## [v0.19.3] - 2025-11-07
 ### Improved
 - Improved various aspects of the WebView multi window support ([@TheUnlocked](https://github.com/TheUnlocked)) ([#2662](https://github.com/mihonapp/mihon/pull/2662))
@@ -33,6 +57,47 @@ The format is a modified version of [Keep a Changelog](https://keepachangelog.co
 
 ### Changed
 - Increased default concurrent page downloads to 5 ([@AntsyLich](https://github.com/AntsyLich)) ([#2637](https://github.com/mihonapp/mihon/pull/2637))
+
+### Improved
+- Spoofing of `X-Requested-With` header to support newer WebView versions ([@Guzmazow](https://github.com/Guzmazow)) ([#2491](https://github.com/mihonapp/mihon/pull/2491))
+- Download support for chapters with the same metadata. Now a hash based on chapter's url is appended to download filename to tell them apart, letting you download both. Existing downloaded chapters will continue to work normally ([@raxod502](https://github.com/radian-software)) ([#2305](https://github.com/mihonapp/mihon/pull/2305))
+- Auto refresh extension list whenever a repository is added or removed ([@c2y5](https://github.com/c2y5)) ([#2483](https://github.com/mihonapp/mihon/pull/2483))
+- Added proper multi window support in WebView instead of treating everything as a redirect ([@TheUnlocked](https://github.com/TheUnlocked)) ([#2584](https://github.com/mihonapp/mihon/pull/2584))
+
+### Fixed
+- Fix height of description not being calculated correctly if images are present ([@Secozzi](https://github.com/Secozzi)) ([#2382](https://github.com/mihonapp/mihon/pull/2382))
+- Fix migration progress not updating after manual search ([@Secozzi](https://github.com/Secozzi)) ([#2484](https://github.com/mihonapp/mihon/pull/2484))
+- Fix category migration flag being ignored due to incorrect check against chapter flag ([@Secozzi](https://github.com/Secozzi)) ([#2484](https://github.com/mihonapp/mihon/pull/2484))
+- Fix disabling incognito mode from notification ([@NGB-Was-Taken](https://github.com/NGB-Was-Taken)) ([#2512](https://github.com/mihonapp/mihon/pull/2512))
+- Fix mass migration advanced search query building ([@AntsyLich](https://github.com/AntsyLich)) ([#2629](https://github.com/mihonapp/mihon/pull/2629))
+- Fix migration dialog migrating to wrong entry ([@AntsyLich](https://github.com/AntsyLich)) ([#2631](https://github.com/mihonapp/mihon/pull/2631))
+- Fix migration "Attempt to invoke virtual method" crash ([@AntsyLich](https://github.com/AntsyLich)) ([#2632](https://github.com/mihonapp/mihon/pull/2632))
+- Fix reader "Unable to edit key" error ([@AntsyLich](https://github.com/AntsyLich)) ([#2634](https://github.com/mihonapp/mihon/pull/2634))
+- Fix extension download stuck in pending state in some cases ([@c2y5](https://github.com/c2y5)) ([#2483](https://github.com/mihonapp/mihon/pull/2483))
+- Fix scrollbar not showing when animator duration scale animation is turned off ([@anirudhsnayak](https://github.com/anirudhsnayak)) ([#2398](https://github.com/mihonapp/mihon/pull/2398))
+- Fix date picker not allowing the same start and finish date in negative time zones ([@AntsyLich](https://github.com/AntsyLich), [@kashish-aggarwal21](https://github.com/kashish-aggarwal21)) ([#2617](https://github.com/mihonapp/mihon/pull/2617))
+- Fix reader tap zones triggering after scrolling was stopped by the user ([@Naputt1](https://github.com/Naputt1), [@AntsyLich](https://github.com/AntsyLich)) ([#2518](https://github.com/mihonapp/mihon/pull/2518))
+- Fix reader page indicator being partially visible on some devices ([@AntsyLich](https://github.com/AntsyLich)) ([#1908](https://github.com/mihonapp/mihon/pull/1908))
+- Fix inconsistent system bar and reader app bar background ([@AntsyLich](https://github.com/AntsyLich)) ([#1908](https://github.com/mihonapp/mihon/pull/1908))
+- Fix transparent system bar background in reader on Android 15+ ([@AntsyLich](https://github.com/AntsyLich)) ([#1908](https://github.com/mihonapp/mihon/pull/1908))
+
+### Other
+- Delegate Suwayomi tracker authentication to extension ([@cpiber](https://github.com/cpiber)) ([#2476](https://github.com/mihonapp/mihon/pull/2476))
+- Fix Kitsu tracker to conform to tracker data structure properly ([@cpiber](https://github.com/cpiber)) ([#2609](https://github.com/mihonapp/mihon/pull/2609))
+- Update Suwayomi tracker to use GraphQL API instead of REST API ([@cpiber](https://github.com/cpiber)) ([#2585](https://github.com/mihonapp/mihon/pull/2585))
+
+## [v1.0.0] - 2025-10-19
+### Added
+- Advanced setting to limit download filenames to ASCII characters. This is provided only as a workaround for OSes that do not properly handle standard Unicode filenames. This setting is generally not recommended and should only be used as a last resort ([@raxod502](https://github.com/radian-software)) ([#2305](https://github.com/mihonapp/mihon/pull/2305))
+- Option to scope history entries to the active library category (toggle in **Settings › Library › Categories**) ([@Gent8](https://github.com/Gent8)).
+- Option to customize the number of concurrent source and page downloads ([@AntsyLich](https://github.com/AntsyLich)) ([#2637](https://github.com/mihonapp/mihon/pull/2637))
+
+### Changed
+- Streamlined the library tab by hiding category tabs by default and adding a toolbar dropdown for quick switching ([@Gent8](https://github.com/Gent8)).
+- Taison becomes the default app theme, with the legacy blue palette available as Classic Blue ([@Gent8](https://github.com/Gent8)).
+- Rebranded the launcher, user agents, and documentation to the new Taison identity (including application ID `com.gent8.taison`) ([@Gent8](https://github.com/Gent8)).
+- Increased default concurrent page downloads to 5 ([@AntsyLich](https://github.com/AntsyLich)) ([#2637](https://github.com/mihonapp/mihon/pull/2637))
+- Hide "Show content in cutout area" reader setting on Android 15+ as it's not supported ([@AntsyLich](https://github.com/AntsyLich)) ([#1908](https://github.com/mihonapp/mihon/pull/1908))
 
 ### Improved
 - Spoofing of `X-Requested-With` header to support newer WebView versions ([@Guzmazow](https://github.com/Guzmazow)) ([#2491](https://github.com/mihonapp/mihon/pull/2491))

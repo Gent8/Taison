@@ -1,3 +1,4 @@
+import java.util.Properties
 import mihon.buildlogic.Config
 import mihon.buildlogic.getBuildTime
 import mihon.buildlogic.getCommitCount
@@ -20,14 +21,46 @@ if (Config.includeTelemetry) {
 
 shortcutHelper.setFilePath("./shortcuts.xml")
 
+val keystoreProperties = Properties().apply {
+    val keystorePropertiesFile = rootProject.file("keystore.properties")
+    if (keystorePropertiesFile.exists()) {
+        keystorePropertiesFile.inputStream().use(::load)
+    }
+}
+
 android {
     namespace = "eu.kanade.tachiyomi"
 
-    defaultConfig {
-        applicationId = "app.mihon"
+    val releaseSigningConfig = if (keystoreProperties.isNotEmpty()) {
+        signingConfigs.create("release") {
+            val storeFilePath = keystoreProperties.getProperty("storeFile")?.trim()
+            val storePasswordValue = keystoreProperties.getProperty("storePassword")?.trim()
+            val keyAliasValue = keystoreProperties.getProperty("keyAlias")?.trim()
+            val keyPasswordValue = keystoreProperties.getProperty("keyPassword")?.trim()
 
-        versionCode = 16
-        versionName = "0.19.3"
+            require(!storeFilePath.isNullOrEmpty()) { "storeFile is missing in keystore.properties" }
+            require(!storePasswordValue.isNullOrEmpty()) { "storePassword is missing in keystore.properties" }
+            require(!keyAliasValue.isNullOrEmpty()) { "keyAlias is missing in keystore.properties" }
+            require(!keyPasswordValue.isNullOrEmpty()) { "keyPassword is missing in keystore.properties" }
+
+            val storeFileCandidate = rootProject.file(storeFilePath)
+            check(storeFileCandidate.exists()) {
+                "Keystore file $storeFilePath (resolved to ${storeFileCandidate.absolutePath}) does not exist"
+            }
+            storeFile = storeFileCandidate
+            storePassword = storePasswordValue
+            keyAlias = keyAliasValue
+            keyPassword = keyPasswordValue
+        }
+    } else {
+        null
+    }
+
+    defaultConfig {
+        applicationId = "com.gent8.taison"
+
+        versionCode = 101
+        versionName = "1.0.1"
 
         buildConfigField("String", "COMMIT_COUNT", "\"${getCommitCount()}\"")
         buildConfigField("String", "COMMIT_SHA", "\"${getGitSha()}\"")
@@ -51,6 +84,10 @@ android {
             proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
 
             buildConfigField("String", "BUILD_TIME", "\"${getBuildTime(useLastCommitTime = true)}\"")
+
+            if (releaseSigningConfig != null) {
+                signingConfig = releaseSigningConfig
+            }
         }
 
         val commonMatchingFallbacks = listOf(release.name)
@@ -127,6 +164,7 @@ android {
                 "META-INF/NOTICE",
                 "META-INF/README.md",
             )
+            pickFirsts += setOf("META-INF/versions/9/OSGI-INF/MANIFEST.MF")
         }
     }
 

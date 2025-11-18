@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import eu.kanade.presentation.category.visualName
 import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.components.AppBarActions
 import eu.kanade.presentation.components.AppBarTitle
@@ -44,7 +45,17 @@ fun HistoryScreen(
     Scaffold(
         topBar = { scrollBehavior ->
             SearchToolbar(
-                titleContent = { AppBarTitle(stringResource(MR.strings.history)) },
+                titleContent = {
+                    val subtitle = if (state.historyScopeEnabled) {
+                        state.activeCategory?.visualName
+                    } else {
+                        null
+                    }
+                    AppBarTitle(
+                        title = stringResource(MR.strings.history),
+                        subtitle = subtitle,
+                    )
+                },
                 searchQuery = state.searchQuery,
                 onChangeSearchQuery = onSearchQueryChange,
                 actions = {

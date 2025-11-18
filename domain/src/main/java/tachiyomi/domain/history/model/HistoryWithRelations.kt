@@ -11,5 +11,6 @@ data class HistoryWithRelations(
     val chapterNumber: Double,
     val readAt: Date?,
     val readDuration: Long,
+    val categoryIds: List<Long>,
     val coverData: MangaCover,
 )

@@ -107,6 +107,14 @@ object SettingsLibraryScreen : SearchableSettings {
                         true
                     },
                 ),
+                Preference.PreferenceItem.SwitchPreference(
+                    preference = libraryPreferences.categoryTabs(),
+                    title = stringResource(MR.strings.action_display_show_tabs),
+                ),
+                Preference.PreferenceItem.SwitchPreference(
+                    preference = libraryPreferences.historyScopeByCategory(),
+                    title = stringResource(MR.strings.pref_history_scope_active_category),
+                ),
             ),
         )
     }

@@ -88,6 +88,44 @@
     <!--== Default Theme ==-->
     <style name="Theme.Tachiyomi" parent="Base.Theme.Tachiyomi" />
 
+    <!--== Classic Theme ==-->
+    <style name="Theme.Tachiyomi.Classic">
+        <!-- Theme Colors -->
+        <item name="colorPrimary">@color/classic_primary</item>
+        <item name="colorOnPrimary">@color/classic_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/classic_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/classic_onPrimaryContainer</item>
+        <item name="colorPrimaryInverse">@color/classic_inversePrimary</item>
+        <item name="colorSecondary">@color/classic_secondary</item>
+        <item name="colorOnSecondary">@color/classic_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/classic_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/classic_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/classic_tertiary</item>
+        <item name="colorOnTertiary">@color/classic_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/classic_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/classic_onTertiaryContainer</item>
+        <item name="android:colorBackground">@color/classic_background</item>
+        <item name="colorOnBackground">@color/classic_onBackground</item>
+        <item name="colorSurface">@color/classic_surface</item>
+        <item name="colorOnSurface">@color/classic_onSurface</item>
+        <item name="colorSurfaceVariant">@color/classic_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/classic_onSurfaceVariant</item>
+        <item name="elevationOverlayColor">@color/classic_surfaceTint</item>
+        <item name="colorSurfaceInverse">@color/classic_inverseSurface</item>
+        <item name="colorOnSurfaceInverse">@color/classic_inverseOnSurface</item>
+        <item name="colorError">@color/classic_error</item>
+        <item name="colorOnError">@color/classic_onError</item>
+        <item name="colorErrorContainer">@color/classic_errorContainer</item>
+        <item name="colorOnErrorContainer">@color/classic_onErrorContainer</item>
+        <item name="colorOutline">@color/classic_outline</item>
+        <item name="colorOutlineVariant">@color/classic_outlineVariant</item>
+        <item name="colorSurfaceContainer">@color/classic_surfaceContainer</item>
+        <item name="colorSurfaceContainerHigh">@color/classic_surfaceContainerHigh</item>
+        <item name="colorSurfaceContainerHighest">@color/classic_surfaceContainerHighest</item>
+        <item name="colorSurfaceContainerLow">@color/classic_surfaceContainerLow</item>
+        <item name="colorSurfaceContainerLowest">@color/classic_surfaceContainerLowest</item>
+    </style>
+
     <!-- Monet theme only support S+ -->
     <style name="Theme.Tachiyomi.Monet" />
 

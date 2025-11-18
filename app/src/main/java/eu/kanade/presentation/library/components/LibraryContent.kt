@@ -113,6 +113,15 @@ fun LibraryContent(
             )
         }
 
+        LaunchedEffect(currentPage, categories) {
+            val pageCount = categories.size
+            if (pageCount == 0) return@LaunchedEffect
+            val targetPage = currentPage.coerceIn(0, pageCount - 1)
+            if (targetPage != pagerState.currentPage) {
+                pagerState.scrollToPage(targetPage)
+            }
+        }
+
         LaunchedEffect(pagerState.currentPage) {
             onChangeCurrentPage(pagerState.currentPage)
         }

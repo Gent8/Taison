@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOn
@@ -65,19 +66,58 @@ class HistoryScreenModel(
 
     init {
         screenModelScope.launch {
-            state.map { it.searchQuery }
-                .distinctUntilChanged()
-                .flatMapLatest { query ->
-                    getHistory.subscribe(query ?: "")
+            combine(
+                state.map { it.searchQuery }.distinctUntilChanged(),
+                libraryPreferences.historyScopeByCategory().changes().distinctUntilChanged(),
+                libraryPreferences.lastUsedCategoryId().changes().distinctUntilChanged(),
+                getCategories.subscribe().distinctUntilChanged(),
+            ) { query, scopeEnabled, categoryId, categories ->
+                HistoryFilterConfig(
+                    query = query,
+                    scopeEnabled = scopeEnabled,
+                    activeCategoryId = categoryId,
+                    categories = categories,
+                )
+            }
+                .flatMapLatest { config ->
+                    getHistory.subscribe(config.query.orEmpty())
                         .distinctUntilChanged()
                         .catch { error ->
                             logcat(LogPriority.ERROR, error)
                             _events.send(Event.InternalError)
+                            emit(emptyList())
                         }
-                        .map { it.toHistoryUiModels() }
+                        .map { histories ->
+                            val resolvedCategoryId = config.resolvedCategoryId()
+                            val filteredHistory = filterByCategory(histories, resolvedCategoryId)
+                            val activeCategory = resolvedCategoryId?.let { id ->
+                                when (id) {
+                                    Category.UNCATEGORIZED_ID -> Category(
+                                        id = Category.UNCATEGORIZED_ID,
+                                        name = "",
+                                        order = 0,
+                                        flags = 0,
+                                    )
+                                    else -> config.categories.firstOrNull { it.id == id }
+                                }
+                            }
+                            HistoryFilterResult(
+                                uiModels = filteredHistory.toHistoryUiModels(),
+                                activeCategory = activeCategory,
+                                scopeActive = resolvedCategoryId != null,
+                            )
+                        }
                         .flowOn(Dispatchers.IO)
                 }
-                .collect { newList -> mutableState.update { it.copy(list = newList) } }
+                .collect { result ->
+                    mutableState.update { currentState ->
+                        currentState.copy(
+                            list = result.uiModels,
+                            historyScopeEnabled = result.scopeActive,
+                            activeCategory = result.activeCategory,
+                        )
+                    }
+                }
         }
     }
 
@@ -92,6 +132,41 @@ class HistoryScreenModel(
                     else -> null
                 }
             }
+    }
+
+    private data class HistoryFilterConfig(
+        val query: String?,
+        val scopeEnabled: Boolean,
+        val activeCategoryId: Long,
+        val categories: List<Category>,
+    ) {
+        fun resolvedCategoryId(): Long? {
+            if (!scopeEnabled) return null
+            if (activeCategoryId < 0) return null
+
+            if (activeCategoryId == 0L) return 0L
+            return categories.firstOrNull { it.id == activeCategoryId }?.id
+        }
+    }
+
+    private data class HistoryFilterResult(
+        val uiModels: List<HistoryUiModel>,
+        val activeCategory: Category?,
+        val scopeActive: Boolean,
+    )
+
+    private fun filterByCategory(
+        history: List<HistoryWithRelations>,
+        categoryId: Long?,
+    ): List<HistoryWithRelations> {
+        if (categoryId == null) return history
+
+        return history.filter { entry ->
+            when {
+                categoryId == 0L -> entry.categoryIds.isEmpty() || entry.categoryIds.contains(0L)
+                else -> entry.categoryIds.contains(categoryId)
+            }
+        }
     }
 
     suspend fun getNextChapter(): Chapter? {
@@ -242,6 +317,8 @@ class HistoryScreenModel(
         val searchQuery: String? = null,
         val list: List<HistoryUiModel>? = null,
         val dialog: Dialog? = null,
+        val historyScopeEnabled: Boolean = false,
+        val activeCategory: Category? = null,
     )
 
     sealed interface Dialog {

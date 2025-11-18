@@ -1,15 +1,15 @@
-Looking to report an issue/bug or make a feature request? Please refer to the [README file](https://github.com/mihonapp/mihon#issues-feature-requests-and-contributing).
+Looking to report an issue/bug or make a feature request? Please refer to the [README file](./README.md).
 
 ---
 
-Thanks for your interest in contributing to Mihon!
+Thanks for your interest in contributing to Taison!
 
 
 # Code contributions
 
 Pull requests are welcome!
 
-If you're interested in taking on [an open issue](https://github.com/mihonapp/mihon/issues), please comment on it so others are aware.
+If you're interested in taking on [an open issue](https://github.com/Gent8/Taison/issues), please comment on it so others are aware.
 You do not need to ask for permission nor an assignment.
 
 ## Prerequisites

@@ -117,7 +117,11 @@ class LibraryPreferences(
 
     fun lastUsedCategory() = preferenceStore.getInt(Preference.appStateKey("last_used_category"), 0)
 
-    fun categoryTabs() = preferenceStore.getBoolean("display_category_tabs", true)
+    fun lastUsedCategoryId() = preferenceStore.getLong(Preference.appStateKey("last_used_category_id"), -1L)
+
+    fun categoryTabs() = preferenceStore.getBoolean("display_category_tabs", false)
+
+    fun historyScopeByCategory() = preferenceStore.getBoolean("history_scope_by_category", true)
 
     fun categoryNumberOfItems() = preferenceStore.getBoolean("display_number_of_items", false)
 
