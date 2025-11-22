@@ -38,6 +38,7 @@ import androidx.compose.material3.TooltipDefaults
 import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -58,6 +59,7 @@ import eu.kanade.presentation.history.components.HistoryItem
 import eu.kanade.presentation.theme.TachiyomiPreviewTheme
 import eu.kanade.presentation.util.animateItemFastScroll
 import eu.kanade.tachiyomi.ui.history.HistoryScreenModel
+import eu.kanade.tachiyomi.ui.history.toHistoryUiModels
 import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.history.model.HistoryWithRelations
 import tachiyomi.domain.library.service.LibraryPreferences
@@ -275,9 +277,15 @@ fun HistoryScreen(
                             verticalAlignment = Alignment.Top,
                         ) { page ->
                             val categoryId = state.categories.getOrNull(page)?.id
-                            val categoryHistory = when {
-                                categoryId != null -> state.categoryHistories[categoryId].orEmpty()
-                                else -> historyList
+                            val categoryEntries = categoryId?.let { state.categoryHistories[it] }
+                            val categoryHistory by remember(categoryEntries, historyList) {
+                                derivedStateOf {
+                                    if (categoryEntries != null) {
+                                        categoryEntries.toHistoryUiModels()
+                                    } else {
+                                        historyList
+                                    }
+                                }
                             }
                             HistoryListOrEmpty(
                                 history = categoryHistory,

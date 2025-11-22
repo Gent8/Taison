@@ -11,7 +11,13 @@ import eu.kanade.presentation.history.HistoryUiModel
 import eu.kanade.tachiyomi.util.category.LastUsedCategoryState
 import eu.kanade.tachiyomi.util.lang.toLocalDate
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.ImmutableMap
+import kotlinx.collections.immutable.PersistentMap
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.persistentMapOf
 import kotlinx.collections.immutable.toImmutableList
+import kotlinx.collections.immutable.toPersistentHashMap
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -128,19 +134,17 @@ class HistoryScreenModel(
                     val resolvedCategoryId = config.resolvedCategoryId()
                     val navigationCategories = buildCategoryNavigation(config.categories)
                     val categoryHistories = if (config.scopeEnabled) {
-                        navigationCategories.associate { category ->
-                            category.id to filterByCategory(
-                                history = histories,
-                                categoryId = category.id,
-                                includeNonLibraryEntries = config.includeNonLibraryEntries,
-                            ).toHistoryUiModels()
-                        }
+                        buildCategoryHistories(
+                            history = histories,
+                            categories = navigationCategories,
+                            includeNonLibraryEntries = config.includeNonLibraryEntries,
+                        )
                     } else {
                         emptyMap()
                     }
                     val filteredHistory = when (resolvedCategoryId) {
                         null -> histories.toHistoryUiModels()
-                        else -> categoryHistories[resolvedCategoryId].orEmpty()
+                        else -> categoryHistories[resolvedCategoryId].orEmpty().toHistoryUiModels()
                     }
                     val activeCategory = resolvedCategoryId?.let { id ->
                         when (id) {
@@ -154,15 +158,17 @@ class HistoryScreenModel(
                         }
                     }
                     HistoryFilterResult(
-                        uiModels = filteredHistory,
+                        uiModels = filteredHistory.toImmutableList(),
                         activeCategory = activeCategory,
                         scopeActive = resolvedCategoryId != null,
                         hasNonLibraryEntries = histories.any { !it.coverData.isMangaFavorite },
-                        categories = navigationCategories,
+                        categories = navigationCategories.toImmutableList(),
                         categoryNavigationEnabled = config.categoryNavigationEnabled,
                         categoryNavigationMode = config.navigationMode,
                         activeCategoryId = resolvedCategoryId,
-                        categoryHistories = categoryHistories,
+                        categoryHistories = categoryHistories
+                            .mapValues { (_, value) -> value.toImmutableList() }
+                            .toPersistentHashMap(),
                     )
                 }
                 .flowOn(Dispatchers.IO)
@@ -184,19 +190,6 @@ class HistoryScreenModel(
         }
     }
 
-    private fun List<HistoryWithRelations>.toHistoryUiModels(): List<HistoryUiModel> {
-        return map { HistoryUiModel.Item(it) }
-            .insertSeparators { before, after ->
-                val beforeDate = before?.item?.readAt?.time?.toLocalDate()
-                val afterDate = after?.item?.readAt?.time?.toLocalDate()
-                when {
-                    beforeDate != afterDate && afterDate != null -> HistoryUiModel.Header(afterDate)
-                    // Return null to avoid adding a separator between two items.
-                    else -> null
-                }
-            }
-    }
-
     private fun buildCategoryNavigation(categories: List<Category>): List<Category> {
         val defaultCategory = Category(
             id = Category.UNCATEGORIZED_ID,
@@ -206,6 +199,58 @@ class HistoryScreenModel(
         )
         val filtered = categories.filter { it.id != Category.UNCATEGORIZED_ID }
         return listOf(defaultCategory) + filtered
+    }
+
+    private fun buildCategoryHistories(
+        history: List<HistoryWithRelations>,
+        categories: List<Category>,
+        includeNonLibraryEntries: Boolean,
+    ): Map<Long, List<HistoryWithRelations>> {
+        if (categories.isEmpty()) return emptyMap()
+
+        val categoryBuckets = mutableMapOf<Long, MutableList<HistoryWithRelations>>()
+        categories.forEach { category ->
+            categoryBuckets[category.id] = mutableListOf()
+        }
+
+        val defaultBucket = categoryBuckets[Category.UNCATEGORIZED_ID]
+        val includeNonLibrary = includeNonLibraryEntries && categories.isNotEmpty()
+
+        history.forEach { entry ->
+            val isNonLibraryEntry = !entry.coverData.isMangaFavorite
+            if (isNonLibraryEntry) {
+                if (includeNonLibrary) {
+                    categoryBuckets.values.forEach { bucket -> bucket.add(entry) }
+                }
+                return@forEach
+            }
+
+            var assigned = false
+            val entryCategoryIds = entry.categoryIds
+            if (entryCategoryIds.isEmpty()) {
+                defaultBucket?.add(entry)
+                assigned = true
+            } else {
+                entryCategoryIds.forEach { categoryId ->
+                    when {
+                        categoryId == Category.UNCATEGORIZED_ID -> {
+                            defaultBucket?.add(entry)
+                            assigned = true
+                        }
+                        categoryBuckets.containsKey(categoryId) -> {
+                            categoryBuckets[categoryId]?.add(entry)
+                            assigned = true
+                        }
+                    }
+                }
+            }
+
+            if (!assigned) {
+                defaultBucket?.add(entry)
+            }
+        }
+
+        return categoryBuckets.mapValues { (_, entries) -> entries.toList() }
     }
 
     private data class HistoryFilterInputs(
@@ -234,15 +279,15 @@ class HistoryScreenModel(
     }
 
     private data class HistoryFilterResult(
-        val uiModels: List<HistoryUiModel>,
+        val uiModels: ImmutableList<HistoryUiModel>,
         val activeCategory: Category?,
         val scopeActive: Boolean,
         val hasNonLibraryEntries: Boolean,
-        val categories: List<Category>,
+        val categories: ImmutableList<Category>,
         val categoryNavigationEnabled: Boolean,
         val categoryNavigationMode: LibraryPreferences.CategoryNavigationMode,
         val activeCategoryId: Long?,
-        val categoryHistories: Map<Long, List<HistoryUiModel>>,
+        val categoryHistories: ImmutableMap<Long, ImmutableList<HistoryWithRelations>>,
     )
 
     private fun filterByCategory(
@@ -435,18 +480,18 @@ class HistoryScreenModel(
     @Immutable
     data class State(
         val searchQuery: String? = null,
-        val list: List<HistoryUiModel>? = null,
+        val list: ImmutableList<HistoryUiModel>? = null,
         val dialog: Dialog? = null,
         val historyScopeEnabled: Boolean = false,
         val activeCategory: Category? = null,
         val activeCategoryId: Long? = null,
-        val categories: List<Category> = emptyList(),
+        val categories: ImmutableList<Category> = persistentListOf(),
         val categoryNavigationEnabled: Boolean = false,
         val categoryNavigationMode: LibraryPreferences.CategoryNavigationMode =
             LibraryPreferences.CategoryNavigationMode.DROPDOWN,
         val showNonLibraryEntries: Boolean = false,
         val hasNonLibraryEntries: Boolean = false,
-        val categoryHistories: Map<Long, List<HistoryUiModel>> = emptyMap(),
+        val categoryHistories: ImmutableMap<Long, ImmutableList<HistoryWithRelations>> = persistentMapOf(),
     )
 
     sealed interface Dialog {
@@ -465,4 +510,16 @@ class HistoryScreenModel(
         data object InternalError : Event
         data object HistoryCleared : Event
     }
+}
+
+internal fun List<HistoryWithRelations>.toHistoryUiModels(): List<HistoryUiModel> {
+    return map { HistoryUiModel.Item(it) }
+        .insertSeparators { before, after ->
+            val beforeDate = before?.item?.readAt?.time?.toLocalDate()
+            val afterDate = after?.item?.readAt?.time?.toLocalDate()
+            when {
+                beforeDate != afterDate && afterDate != null -> HistoryUiModel.Header(afterDate)
+                else -> null
+            }
+        }
 }

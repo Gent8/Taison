@@ -2,6 +2,8 @@ package eu.kanade.presentation.history
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import eu.kanade.tachiyomi.ui.history.HistoryScreenModel
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toPersistentList
 import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.history.model.HistoryWithRelations
 import tachiyomi.domain.library.service.LibraryPreferences
@@ -16,20 +18,19 @@ class HistoryScreenModelStateProvider : PreviewParameterProvider<HistoryScreenMo
 
     private val multiPage = HistoryScreenModel.State(
         searchQuery = null,
-        list =
-        listOf(HistoryUiModelExamples.headerToday)
+        list = listOf(HistoryUiModelExamples.headerToday)
             .asSequence()
             .plus(HistoryUiModelExamples.items().take(3))
             .plus(HistoryUiModelExamples.header { it.minus(1, ChronoUnit.DAYS) })
             .plus(HistoryUiModelExamples.items().take(1))
             .plus(HistoryUiModelExamples.header { it.minus(2, ChronoUnit.DAYS) })
             .plus(HistoryUiModelExamples.items().take(7))
-            .toList(),
+            .toPersistentList(),
         dialog = null,
         historyScopeEnabled = true,
         activeCategory = Category(id = Category.UNCATEGORIZED_ID, name = "", order = 0, flags = 0),
         activeCategoryId = Category.UNCATEGORIZED_ID,
-        categories = listOf(
+        categories = persistentListOf(
             Category(id = Category.UNCATEGORIZED_ID, name = "", order = 0, flags = 0),
             Category(id = 1L, name = "Action", order = 1, flags = 0),
             Category(id = 2L, name = "Drama", order = 2, flags = 0),
@@ -40,7 +41,7 @@ class HistoryScreenModelStateProvider : PreviewParameterProvider<HistoryScreenMo
 
     private val shortRecent = HistoryScreenModel.State(
         searchQuery = null,
-        list = listOf(
+        list = persistentListOf(
             HistoryUiModelExamples.headerToday,
             HistoryUiModelExamples.items().first(),
         ),
@@ -49,7 +50,7 @@ class HistoryScreenModelStateProvider : PreviewParameterProvider<HistoryScreenMo
 
     private val shortFuture = HistoryScreenModel.State(
         searchQuery = null,
-        list = listOf(
+        list = persistentListOf(
             HistoryUiModelExamples.headerTomorrow,
             HistoryUiModelExamples.items().first(),
         ),
@@ -58,7 +59,7 @@ class HistoryScreenModelStateProvider : PreviewParameterProvider<HistoryScreenMo
 
     private val empty = HistoryScreenModel.State(
         searchQuery = null,
-        list = listOf(),
+        list = persistentListOf(),
         dialog = null,
     )
 
