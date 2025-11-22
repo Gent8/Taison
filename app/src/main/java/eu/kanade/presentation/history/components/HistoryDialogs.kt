@@ -71,6 +71,7 @@ fun HistoryDeleteDialog(
 fun HistoryDeleteAllDialog(
     canTargetActiveScope: Boolean,
     activeScopeLabel: String,
+    includeNonLibraryLabel: Boolean,
     selection: HistoryScreenModel.HistoryDeletionScope,
     onSelectionChange: (HistoryScreenModel.HistoryDeletionScope) -> Unit,
     onDismissRequest: () -> Unit,
@@ -86,9 +87,20 @@ fun HistoryDeleteAllDialog(
             ) {
                 Text(text = stringResource(MR.strings.history_delete_scope_message))
                 if (canTargetActiveScope) {
+                    val activeDescription = if (includeNonLibraryLabel) {
+                        stringResource(
+                            MR.strings.history_delete_scope_active_with_nonlibrary,
+                            activeScopeLabel,
+                        )
+                    } else {
+                        stringResource(
+                            MR.strings.history_delete_scope_active,
+                            activeScopeLabel,
+                        )
+                    }
                     HistoryDeleteScopeRow(
-                        title = stringResource(MR.strings.history_delete_scope_active),
-                        description = activeScopeLabel,
+                        title = stringResource(MR.strings.history_delete_scope_active_title),
+                        description = activeDescription,
                         selected = selection == HistoryScreenModel.HistoryDeletionScope.ACTIVE_SCOPE,
                         onClick = { onSelectionChange(HistoryScreenModel.HistoryDeletionScope.ACTIVE_SCOPE) },
                     )
@@ -136,6 +148,7 @@ private fun HistoryDeleteAllDialogPreview() {
         HistoryDeleteAllDialog(
             canTargetActiveScope = true,
             activeScopeLabel = "Action",
+            includeNonLibraryLabel = true,
             selection = HistoryScreenModel.HistoryDeletionScope.ACTIVE_SCOPE,
             onSelectionChange = {},
             onDismissRequest = {},

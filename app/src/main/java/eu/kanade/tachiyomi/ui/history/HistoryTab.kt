@@ -98,6 +98,7 @@ data object HistoryTab : Tab {
                 HistoryDeleteAllDialog(
                     canTargetActiveScope = canDeleteActiveScope,
                     activeScopeLabel = activeCategoryLabel,
+                    includeNonLibraryLabel = state.showNonLibraryEntries,
                     selection = dialog.scope,
                     onSelectionChange = { scope ->
                         if (canDeleteActiveScope) {
