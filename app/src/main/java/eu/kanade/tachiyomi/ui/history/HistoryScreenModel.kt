@@ -8,6 +8,7 @@ import eu.kanade.core.util.insertSeparators
 import eu.kanade.domain.manga.interactor.UpdateManga
 import eu.kanade.domain.track.interactor.AddTracks
 import eu.kanade.presentation.history.HistoryUiModel
+import eu.kanade.tachiyomi.util.category.LastUsedCategoryState
 import eu.kanade.tachiyomi.util.lang.toLocalDate
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
@@ -54,6 +55,7 @@ class HistoryScreenModel(
     private val getManga: GetManga = Injekt.get(),
     private val getNextChapters: GetNextChapters = Injekt.get(),
     private val libraryPreferences: LibraryPreferences = Injekt.get(),
+    private val lastUsedCategoryState: LastUsedCategoryState = Injekt.get(),
     private val removeHistory: RemoveHistory = Injekt.get(),
     private val setMangaCategories: SetMangaCategories = Injekt.get(),
     private val updateManga: UpdateManga = Injekt.get(),
@@ -66,55 +68,116 @@ class HistoryScreenModel(
 
     init {
         screenModelScope.launch {
-            combine(
-                state.map { it.searchQuery }.distinctUntilChanged(),
-                libraryPreferences.historyScopeByCategory().changes().distinctUntilChanged(),
-                libraryPreferences.lastUsedCategoryId().changes().distinctUntilChanged(),
-                getCategories.subscribe().distinctUntilChanged(),
-            ) { query, scopeEnabled, categoryId, categories ->
-                HistoryFilterConfig(
-                    query = query,
-                    scopeEnabled = scopeEnabled,
-                    activeCategoryId = categoryId,
-                    categories = categories,
-                )
-            }
-                .flatMapLatest { config ->
-                    getHistory.subscribe(config.query.orEmpty())
+            val searchQueryFlow = state.map { it.searchQuery }.distinctUntilChanged()
+            val showNonLibraryEntriesFlow = state.map { it.showNonLibraryEntries }.distinctUntilChanged()
+            val scopeEnabledFlow = libraryPreferences.historyScopeByCategory().changes().distinctUntilChanged()
+            val activeCategoryIdFlow = lastUsedCategoryState.state
+            val categoriesFlow = getCategories.subscribe().distinctUntilChanged()
+            val historyNavigationEnabledFlow = libraryPreferences.historyCategoryNavigation().changes().distinctUntilChanged()
+            val navigationModeFlow = libraryPreferences.categoryNavigationMode().changes().distinctUntilChanged()
+
+            val historyFlow = searchQueryFlow
+                .flatMapLatest { query ->
+                    getHistory.subscribe(query.orEmpty())
                         .distinctUntilChanged()
                         .catch { error ->
                             logcat(LogPriority.ERROR, error)
                             _events.send(Event.InternalError)
                             emit(emptyList())
                         }
-                        .map { histories ->
-                            val resolvedCategoryId = config.resolvedCategoryId()
-                            val filteredHistory = filterByCategory(histories, resolvedCategoryId)
-                            val activeCategory = resolvedCategoryId?.let { id ->
-                                when (id) {
-                                    Category.UNCATEGORIZED_ID -> Category(
-                                        id = Category.UNCATEGORIZED_ID,
-                                        name = "",
-                                        order = 0,
-                                        flags = 0,
-                                    )
-                                    else -> config.categories.firstOrNull { it.id == id }
-                                }
-                            }
-                            HistoryFilterResult(
-                                uiModels = filteredHistory.toHistoryUiModels(),
-                                activeCategory = activeCategory,
-                                scopeActive = resolvedCategoryId != null,
-                            )
-                        }
                         .flowOn(Dispatchers.IO)
                 }
+
+            val filterInputsFlow = combine(
+                showNonLibraryEntriesFlow,
+                scopeEnabledFlow,
+                activeCategoryIdFlow,
+                categoriesFlow,
+                historyNavigationEnabledFlow,
+            ) { includeNonLibraryEntries, scopeEnabled, categoryId, categories, categoryNavigationEnabled ->
+                HistoryFilterInputs(
+                    includeNonLibraryEntries = includeNonLibraryEntries,
+                    scopeEnabled = scopeEnabled,
+                    activeCategoryId = categoryId,
+                    categories = categories,
+                    categoryNavigationEnabled = categoryNavigationEnabled,
+                )
+            }
+
+            val filterConfigFlow = combine(
+                filterInputsFlow,
+                navigationModeFlow,
+            ) { inputs, navigationMode ->
+                HistoryFilterConfig(
+                    includeNonLibraryEntries = inputs.includeNonLibraryEntries,
+                    scopeEnabled = inputs.scopeEnabled,
+                    activeCategoryId = inputs.activeCategoryId,
+                    categories = inputs.categories,
+                    categoryNavigationEnabled = inputs.categoryNavigationEnabled,
+                    navigationMode = navigationMode,
+                )
+            }
+
+            combine(
+                historyFlow,
+                filterConfigFlow,
+            ) { histories, config ->
+                histories to config
+            }
+                .map { (histories, config) ->
+                    val resolvedCategoryId = config.resolvedCategoryId()
+                    val navigationCategories = buildCategoryNavigation(config.categories)
+                    val categoryHistories = if (config.scopeEnabled) {
+                        navigationCategories.associate { category ->
+                            category.id to filterByCategory(
+                                history = histories,
+                                categoryId = category.id,
+                                includeNonLibraryEntries = config.includeNonLibraryEntries,
+                            ).toHistoryUiModels()
+                        }
+                    } else {
+                        emptyMap()
+                    }
+                    val filteredHistory = when (resolvedCategoryId) {
+                        null -> histories.toHistoryUiModels()
+                        else -> categoryHistories[resolvedCategoryId].orEmpty()
+                    }
+                    val activeCategory = resolvedCategoryId?.let { id ->
+                        when (id) {
+                            Category.UNCATEGORIZED_ID -> Category(
+                                id = Category.UNCATEGORIZED_ID,
+                                name = "",
+                                order = 0,
+                                flags = 0,
+                            )
+                            else -> navigationCategories.firstOrNull { it.id == id }
+                        }
+                    }
+                    HistoryFilterResult(
+                        uiModels = filteredHistory,
+                        activeCategory = activeCategory,
+                        scopeActive = resolvedCategoryId != null,
+                        hasNonLibraryEntries = histories.any { !it.coverData.isMangaFavorite },
+                        categories = navigationCategories,
+                        categoryNavigationEnabled = config.categoryNavigationEnabled,
+                        categoryNavigationMode = config.navigationMode,
+                        activeCategoryId = resolvedCategoryId,
+                        categoryHistories = categoryHistories,
+                    )
+                }
+                .flowOn(Dispatchers.IO)
                 .collect { result ->
                     mutableState.update { currentState ->
                         currentState.copy(
                             list = result.uiModels,
                             historyScopeEnabled = result.scopeActive,
                             activeCategory = result.activeCategory,
+                            hasNonLibraryEntries = result.hasNonLibraryEntries,
+                            categories = result.categories,
+                            categoryNavigationEnabled = result.categoryNavigationEnabled,
+                            categoryNavigationMode = result.categoryNavigationMode,
+                            activeCategoryId = result.activeCategoryId,
+                            categoryHistories = result.categoryHistories,
                         )
                     }
                 }
@@ -134,11 +197,32 @@ class HistoryScreenModel(
             }
     }
 
-    private data class HistoryFilterConfig(
-        val query: String?,
+    private fun buildCategoryNavigation(categories: List<Category>): List<Category> {
+        val defaultCategory = Category(
+            id = Category.UNCATEGORIZED_ID,
+            name = "",
+            order = 0,
+            flags = 0,
+        )
+        val filtered = categories.filter { it.id != Category.UNCATEGORIZED_ID }
+        return listOf(defaultCategory) + filtered
+    }
+
+    private data class HistoryFilterInputs(
+        val includeNonLibraryEntries: Boolean,
         val scopeEnabled: Boolean,
         val activeCategoryId: Long,
         val categories: List<Category>,
+        val categoryNavigationEnabled: Boolean,
+    )
+
+    private data class HistoryFilterConfig(
+        val includeNonLibraryEntries: Boolean,
+        val scopeEnabled: Boolean,
+        val activeCategoryId: Long,
+        val categories: List<Category>,
+        val categoryNavigationEnabled: Boolean,
+        val navigationMode: LibraryPreferences.CategoryNavigationMode,
     ) {
         fun resolvedCategoryId(): Long? {
             if (!scopeEnabled) return null
@@ -153,18 +237,32 @@ class HistoryScreenModel(
         val uiModels: List<HistoryUiModel>,
         val activeCategory: Category?,
         val scopeActive: Boolean,
+        val hasNonLibraryEntries: Boolean,
+        val categories: List<Category>,
+        val categoryNavigationEnabled: Boolean,
+        val categoryNavigationMode: LibraryPreferences.CategoryNavigationMode,
+        val activeCategoryId: Long?,
+        val categoryHistories: Map<Long, List<HistoryUiModel>>,
     )
 
     private fun filterByCategory(
         history: List<HistoryWithRelations>,
         categoryId: Long?,
+        includeNonLibraryEntries: Boolean,
     ): List<HistoryWithRelations> {
         if (categoryId == null) return history
 
         return history.filter { entry ->
+            val isNonLibraryEntry = !entry.coverData.isMangaFavorite
             when {
-                categoryId == 0L -> entry.categoryIds.isEmpty() || entry.categoryIds.contains(0L)
-                else -> entry.categoryIds.contains(categoryId)
+                categoryId == Category.UNCATEGORIZED_ID -> {
+                    val matchesDefaultCategory =
+                        entry.coverData.isMangaFavorite &&
+                            (entry.categoryIds.isEmpty() || entry.categoryIds.contains(Category.UNCATEGORIZED_ID))
+                    matchesDefaultCategory || (includeNonLibraryEntries && isNonLibraryEntry)
+                }
+                else -> entry.categoryIds.contains(categoryId) ||
+                    (includeNonLibraryEntries && isNonLibraryEntry)
             }
         }
     }
@@ -206,6 +304,28 @@ class HistoryScreenModel(
 
     fun updateSearchQuery(query: String?) {
         mutableState.update { it.copy(searchQuery = query) }
+    }
+
+    fun updateActiveCategory(categoryId: Long) {
+        mutableState.update { current ->
+            val activeCategory = current.categories.firstOrNull { it.id == categoryId }
+            current.copy(
+                activeCategoryId = categoryId,
+                activeCategory = activeCategory,
+            )
+        }
+        screenModelScope.launchIO {
+            lastUsedCategoryState.set(categoryId)
+            val categories = state.value.categories
+            val index = categories.indexOfFirst { it.id == categoryId }.let { found ->
+                if (found >= 0) found else 0
+            }
+            libraryPreferences.lastUsedCategory().set(index)
+        }
+    }
+
+    fun toggleNonLibraryEntries() {
+        mutableState.update { it.copy(showNonLibraryEntries = !it.showNonLibraryEntries) }
     }
 
     fun setDialog(dialog: Dialog?) {
@@ -319,6 +439,14 @@ class HistoryScreenModel(
         val dialog: Dialog? = null,
         val historyScopeEnabled: Boolean = false,
         val activeCategory: Category? = null,
+        val activeCategoryId: Long? = null,
+        val categories: List<Category> = emptyList(),
+        val categoryNavigationEnabled: Boolean = false,
+        val categoryNavigationMode: LibraryPreferences.CategoryNavigationMode =
+            LibraryPreferences.CategoryNavigationMode.DROPDOWN,
+        val showNonLibraryEntries: Boolean = false,
+        val hasNonLibraryEntries: Boolean = false,
+        val categoryHistories: Map<Long, List<HistoryUiModel>> = emptyMap(),
     )
 
     sealed interface Dialog {

@@ -59,7 +59,8 @@ fun LibraryContent(
         var isRefreshing by remember(pagerState.currentPage) { mutableStateOf(false) }
 
         if (showPageTabs && categories.isNotEmpty() && (categories.size > 1 || !categories.first().isSystemCategory)) {
-            LaunchedEffect(categories) {
+            LaunchedEffect(categories, pagerState.isScrollInProgress) {
+                if (pagerState.isScrollInProgress) return@LaunchedEffect
                 if (categories.size <= pagerState.currentPage) {
                     pagerState.scrollToPage(categories.size - 1)
                 }
@@ -114,6 +115,7 @@ fun LibraryContent(
         }
 
         LaunchedEffect(currentPage, categories) {
+            if (pagerState.isScrollInProgress) return@LaunchedEffect
             val pageCount = categories.size
             if (pageCount == 0) return@LaunchedEffect
             val targetPage = currentPage.coerceIn(0, pageCount - 1)
@@ -122,7 +124,8 @@ fun LibraryContent(
             }
         }
 
-        LaunchedEffect(pagerState.currentPage) {
+        LaunchedEffect(pagerState.currentPage, pagerState.isScrollInProgress) {
+            if (pagerState.isScrollInProgress) return@LaunchedEffect
             onChangeCurrentPage(pagerState.currentPage)
         }
     }

@@ -288,13 +288,30 @@ private fun ColumnScope.DisplayPage(
     )
 
     HeadingItem(MR.strings.tabs_header)
-    CheckboxItem(
-        label = stringResource(MR.strings.action_display_show_tabs),
-        pref = screenModel.libraryPreferences.categoryTabs(),
-    )
+    val categoryNavigationPref = remember { screenModel.libraryPreferences.categoryNavigationMode() }
+    val categoryNavigationMode by categoryNavigationPref.collectAsState()
+    SettingsChipRow(MR.strings.pref_category_navigation_type) {
+        LibraryPreferences.CategoryNavigationMode.entries.forEach { mode ->
+            FilterChip(
+                selected = categoryNavigationMode == mode,
+                onClick = { categoryNavigationPref.set(mode) },
+                label = {
+                    val labelRes = when (mode) {
+                        LibraryPreferences.CategoryNavigationMode.TABS -> MR.strings.category_navigation_tabs
+                        LibraryPreferences.CategoryNavigationMode.DROPDOWN -> MR.strings.category_navigation_dropdown
+                    }
+                    Text(stringResource(labelRes))
+                },
+            )
+        }
+    }
     CheckboxItem(
         label = stringResource(MR.strings.pref_history_scope_active_category),
         pref = screenModel.libraryPreferences.historyScopeByCategory(),
+    )
+    CheckboxItem(
+        label = stringResource(MR.strings.pref_history_category_navigation),
+        pref = screenModel.libraryPreferences.historyCategoryNavigation(),
     )
     CheckboxItem(
         label = stringResource(MR.strings.action_display_show_number_of_items),

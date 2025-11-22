@@ -119,9 +119,27 @@ class LibraryPreferences(
 
     fun lastUsedCategoryId() = preferenceStore.getLong(Preference.appStateKey("last_used_category_id"), -1L)
 
-    fun categoryTabs() = preferenceStore.getBoolean("display_category_tabs", false)
+    fun categoryNavigationMode(): Preference<CategoryNavigationMode> {
+        val preference = preferenceStore.getEnum(
+            "library_category_navigation_mode",
+            CategoryNavigationMode.DROPDOWN,
+        )
+        if (!preference.isSet()) {
+            val legacyPreference = preferenceStore.getBoolean("display_category_tabs", false)
+            preference.set(
+                if (legacyPreference.get()) {
+                    CategoryNavigationMode.TABS
+                } else {
+                    CategoryNavigationMode.DROPDOWN
+                },
+            )
+        }
+        return preference
+    }
 
     fun historyScopeByCategory() = preferenceStore.getBoolean("history_scope_by_category", true)
+
+    fun historyCategoryNavigation() = preferenceStore.getBoolean("history_category_navigation", false)
 
     fun categoryNumberOfItems() = preferenceStore.getBoolean("display_number_of_items", false)
 
@@ -205,6 +223,11 @@ class LibraryPreferences(
         ToggleBookmark,
         Download,
         Disabled,
+    }
+
+    enum class CategoryNavigationMode {
+        TABS,
+        DROPDOWN,
     }
 
     companion object {

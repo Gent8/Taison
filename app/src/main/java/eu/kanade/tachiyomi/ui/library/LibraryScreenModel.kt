@@ -21,6 +21,7 @@ import eu.kanade.tachiyomi.data.download.DownloadManager
 import eu.kanade.tachiyomi.data.track.TrackerManager
 import eu.kanade.tachiyomi.source.model.SManga
 import eu.kanade.tachiyomi.source.online.HttpSource
+import eu.kanade.tachiyomi.util.category.LastUsedCategoryState
 import eu.kanade.tachiyomi.util.chapter.getNextUnread
 import eu.kanade.tachiyomi.util.removeCovers
 import kotlinx.collections.immutable.ImmutableList
@@ -78,6 +79,7 @@ class LibraryScreenModel(
     private val setMangaCategories: SetMangaCategories = Injekt.get(),
     private val preferences: BasePreferences = Injekt.get(),
     private val libraryPreferences: LibraryPreferences = Injekt.get(),
+    private val lastUsedCategoryState: LastUsedCategoryState = Injekt.get(),
     private val coverCache: CoverCache = Injekt.get(),
     private val sourceManager: SourceManager = Injekt.get(),
     private val downloadManager: DownloadManager = Injekt.get(),
@@ -133,8 +135,8 @@ class LibraryScreenModel(
                     val categories = grouped.keys.toList()
                     val preferredIndex = resolveActiveCategoryIndex(categories, state.value.activeCategoryIndex)
                     val currentCategoryId = categories.getOrNull(preferredIndex)?.id ?: -1L
-                    if (libraryPreferences.lastUsedCategoryId().get() != currentCategoryId) {
-                        libraryPreferences.lastUsedCategoryId().set(currentCategoryId)
+                    if (lastUsedCategoryState.current != currentCategoryId) {
+                        lastUsedCategoryState.set(currentCategoryId)
                     }
                     mutableState.update { state ->
                         val newIndex = preferredIndex.coerceIn(
@@ -151,18 +153,33 @@ class LibraryScreenModel(
         }
 
         combine(
-            libraryPreferences.categoryTabs().changes(),
+            libraryPreferences.categoryNavigationMode().changes(),
             libraryPreferences.categoryNumberOfItems().changes(),
             libraryPreferences.showContinueReadingButton().changes(),
-        ) { a, b, c -> arrayOf(a, b, c) }
-            .onEach { (showCategoryTabs, showMangaCount, showMangaContinueButton) ->
+        ) { navigationMode, showMangaCount, showMangaContinueButton ->
+            Triple(navigationMode, showMangaCount, showMangaContinueButton)
+        }
+            .onEach { (navigationMode, showMangaCount, showMangaContinueButton) ->
                 mutableState.update { state ->
                     state.copy(
-                        showCategoryTabs = showCategoryTabs,
+                        categoryNavigationMode = navigationMode,
                         showMangaCount = showMangaCount,
                         showMangaContinueButton = showMangaContinueButton,
                     )
                 }
+        }
+            .launchIn(screenModelScope)
+
+        lastUsedCategoryState.state
+            .onEach { categoryId ->
+                if (categoryId == -1L) return@onEach
+                val categories = state.value.displayedCategories
+                if (categories.isEmpty()) return@onEach
+                val targetIndex = categories.indexOfFirst { it.id == categoryId }
+                if (targetIndex == -1) return@onEach
+                if (state.value.activeCategoryIndex == targetIndex) return@onEach
+                mutableState.update { it.copy(activeCategoryIndex = targetIndex) }
+                libraryPreferences.lastUsedCategory().set(targetIndex)
             }
             .launchIn(screenModelScope)
 
@@ -674,7 +691,7 @@ class LibraryScreenModel(
         val coercedIndex = newState.coercedActiveCategoryIndex
         libraryPreferences.lastUsedCategory().set(coercedIndex)
         val activeCategoryId = newState.displayedCategories.getOrNull(coercedIndex)?.id ?: -1L
-        libraryPreferences.lastUsedCategoryId().set(activeCategoryId)
+        lastUsedCategoryState.set(activeCategoryId)
     }
 
     fun openChangeCategoryDialog() {
@@ -755,7 +772,8 @@ class LibraryScreenModel(
         val searchQuery: String? = null,
         val selection: Set</* Manga */ Long> = setOf(),
         val hasActiveFilters: Boolean = false,
-        val showCategoryTabs: Boolean = false,
+        val categoryNavigationMode: LibraryPreferences.CategoryNavigationMode =
+            LibraryPreferences.CategoryNavigationMode.DROPDOWN,
         val showMangaCount: Boolean = false,
         val showMangaContinueButton: Boolean = false,
         val dialog: Dialog? = null,
@@ -763,6 +781,9 @@ class LibraryScreenModel(
         val activeCategoryIndex: Int = 0,
         private val groupedFavorites: Map<Category, List</* LibraryItem */ Long>> = emptyMap(),
     ) {
+        val showCategoryTabs: Boolean
+            get() = categoryNavigationMode == LibraryPreferences.CategoryNavigationMode.TABS
+
         val displayedCategories: List<Category> = groupedFavorites.keys.toList()
 
         val coercedActiveCategoryIndex = activeCategoryIndex.coerceIn(
@@ -818,7 +839,7 @@ class LibraryScreenModel(
     ): Int {
         if (categories.isEmpty()) return 0
 
-        val storedCategoryId = libraryPreferences.lastUsedCategoryId().get()
+        val storedCategoryId = lastUsedCategoryState.current
         val storedIndex = libraryPreferences.lastUsedCategory().get()
         val current = if (currentIndex in categories.indices) currentIndex else -1
         val indexFromId = if (storedCategoryId != -1L) {

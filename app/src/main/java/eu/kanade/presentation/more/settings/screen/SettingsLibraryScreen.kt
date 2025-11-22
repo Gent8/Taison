@@ -23,6 +23,7 @@ import eu.kanade.tachiyomi.ui.category.CategoryScreen
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentMapOf
 import kotlinx.collections.immutable.toImmutableMap
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.launch
 import tachiyomi.domain.category.interactor.GetCategories
 import tachiyomi.domain.category.interactor.ResetCategoryFlags
@@ -71,6 +72,8 @@ object SettingsLibraryScreen : SearchableSettings {
     ): Preference.PreferenceGroup {
         val scope = rememberCoroutineScope()
         val userCategoriesCount = allCategories.filterNot(Category::isSystemCategory).size
+        val historyScopePreference = libraryPreferences.historyScopeByCategory()
+        val historyScopeEnabled by historyScopePreference.collectAsState()
 
         // For default category
         val ids = listOf(libraryPreferences.defaultCategory().defaultValue()) +
@@ -78,9 +81,8 @@ object SettingsLibraryScreen : SearchableSettings {
         val labels = listOf(stringResource(MR.strings.default_category_summary)) +
             allCategories.fastMap { it.visualName }
 
-        return Preference.PreferenceGroup(
-            title = stringResource(MR.strings.categories),
-            preferenceItems = persistentListOf(
+        val preferenceItems = buildList {
+            add(
                 Preference.PreferenceItem.TextPreference(
                     title = stringResource(MR.strings.action_edit_categories),
                     subtitle = pluralStringResource(
@@ -90,11 +92,15 @@ object SettingsLibraryScreen : SearchableSettings {
                     ),
                     onClick = { navigator.push(CategoryScreen()) },
                 ),
+            )
+            add(
                 Preference.PreferenceItem.ListPreference(
                     preference = libraryPreferences.defaultCategory(),
                     entries = ids.zip(labels).toMap().toImmutableMap(),
                     title = stringResource(MR.strings.default_category),
                 ),
+            )
+            add(
                 Preference.PreferenceItem.SwitchPreference(
                     preference = libraryPreferences.categorizedDisplaySettings(),
                     title = stringResource(MR.strings.categorized_display_settings),
@@ -107,15 +113,36 @@ object SettingsLibraryScreen : SearchableSettings {
                         true
                     },
                 ),
-                Preference.PreferenceItem.SwitchPreference(
-                    preference = libraryPreferences.categoryTabs(),
-                    title = stringResource(MR.strings.action_display_show_tabs),
+            )
+            add(
+                Preference.PreferenceItem.ListPreference(
+                    preference = libraryPreferences.categoryNavigationMode(),
+                    entries = persistentMapOf(
+                        LibraryPreferences.CategoryNavigationMode.DROPDOWN to stringResource(MR.strings.category_navigation_dropdown),
+                        LibraryPreferences.CategoryNavigationMode.TABS to stringResource(MR.strings.category_navigation_tabs),
+                    ),
+                    title = stringResource(MR.strings.pref_category_navigation_type),
                 ),
+            )
+            add(
                 Preference.PreferenceItem.SwitchPreference(
-                    preference = libraryPreferences.historyScopeByCategory(),
+                    preference = historyScopePreference,
                     title = stringResource(MR.strings.pref_history_scope_active_category),
                 ),
-            ),
+            )
+            if (historyScopeEnabled) {
+                add(
+                    Preference.PreferenceItem.SwitchPreference(
+                        preference = libraryPreferences.historyCategoryNavigation(),
+                        title = stringResource(MR.strings.pref_history_category_navigation),
+                    ),
+                )
+            }
+        }.toPersistentList()
+
+        return Preference.PreferenceGroup(
+            title = stringResource(MR.strings.categories),
+            preferenceItems = preferenceItems,
         )
     }
 

@@ -2,7 +2,9 @@ package eu.kanade.presentation.history
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import eu.kanade.tachiyomi.ui.history.HistoryScreenModel
+import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.history.model.HistoryWithRelations
+import tachiyomi.domain.library.service.LibraryPreferences
 import tachiyomi.domain.manga.model.MangaCover
 import java.time.Instant
 import java.time.LocalDate
@@ -24,6 +26,16 @@ class HistoryScreenModelStateProvider : PreviewParameterProvider<HistoryScreenMo
             .plus(HistoryUiModelExamples.items().take(7))
             .toList(),
         dialog = null,
+        historyScopeEnabled = true,
+        activeCategory = Category(id = Category.UNCATEGORIZED_ID, name = "", order = 0, flags = 0),
+        activeCategoryId = Category.UNCATEGORIZED_ID,
+        categories = listOf(
+            Category(id = Category.UNCATEGORIZED_ID, name = "", order = 0, flags = 0),
+            Category(id = 1L, name = "Action", order = 1, flags = 0),
+            Category(id = 2L, name = "Drama", order = 2, flags = 0),
+        ),
+        categoryNavigationEnabled = true,
+        categoryNavigationMode = LibraryPreferences.CategoryNavigationMode.TABS,
     )
 
     private val shortRecent = HistoryScreenModel.State(

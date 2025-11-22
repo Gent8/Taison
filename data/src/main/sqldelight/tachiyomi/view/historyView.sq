@@ -13,7 +13,13 @@ SELECT
     history.time_read AS readDuration,
     max_last_read.last_read AS maxReadAt,
     max_last_read.chapter_id AS maxReadAtChapterId,
-    coalesce(manga_categories.categories, '0') AS categories
+    CAST(
+        CASE
+            WHEN manga_categories.categories IS NOT NULL THEN manga_categories.categories
+            WHEN mangas.favorite = 1 THEN '0'
+            ELSE NULL
+        END AS TEXT
+    ) AS categories
 FROM mangas
 JOIN chapters
 ON mangas._id = chapters.manga_id
