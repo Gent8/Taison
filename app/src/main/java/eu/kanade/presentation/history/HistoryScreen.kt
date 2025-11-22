@@ -203,14 +203,15 @@ fun HistoryScreen(
                         .padding(contentPadding)
                         .fillMaxSize(),
                 ) {
-                    val showCategoryTabs = state.historyScopeEnabled &&
+                    val enableCategoryPager = state.historyScopeEnabled &&
                         state.categoryNavigationEnabled &&
-                        state.categories.size > 1 &&
+                        state.categories.size > 1
+                    val showCategoryTabs = enableCategoryPager &&
                         state.categoryNavigationMode == LibraryPreferences.CategoryNavigationMode.TABS
                     val selectedIndex = state.categories.indexOfFirst { category ->
                         category.id == state.activeCategoryId
                     }.takeIf { index -> index >= 0 } ?: 0
-                    val pagerState = if (showCategoryTabs) {
+                    val pagerState = if (enableCategoryPager) {
                         rememberPagerState(initialPage = selectedIndex) {
                             state.categories.size
                         }
@@ -219,7 +220,7 @@ fun HistoryScreen(
                     }
                     val coroutineScope = rememberCoroutineScope()
 
-                    if (showCategoryTabs && pagerState != null) {
+                    if (enableCategoryPager && pagerState != null) {
                         var pagerSelectionInProgress by remember(pagerState) { mutableStateOf(false) }
 
                         LaunchedEffect(state.activeCategoryId, state.categories) {
@@ -257,20 +258,22 @@ fun HistoryScreen(
                             }
                         }
 
-                        HistoryCategoryTabs(
-                            categories = state.categories,
-                            pagerState = pagerState,
-                            onTabItemClick = tab@{ index ->
-                                if (index == pagerState.currentPage) return@tab
-                                val targetCategoryId = state.categories.getOrNull(index)?.id ?: return@tab
-                                pagerSelectionInProgress = true
-                                onSelectCategory(targetCategoryId)
-                                coroutineScope.launch {
-                                    pagerState.animateScrollToPage(index)
-                                }
-                            },
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
+                        if (showCategoryTabs) {
+                            HistoryCategoryTabs(
+                                categories = state.categories,
+                                pagerState = pagerState,
+                                onTabItemClick = tab@{ index ->
+                                    if (index == pagerState.currentPage) return@tab
+                                    val targetCategoryId = state.categories.getOrNull(index)?.id ?: return@tab
+                                    pagerSelectionInProgress = true
+                                    onSelectCategory(targetCategoryId)
+                                    coroutineScope.launch {
+                                        pagerState.animateScrollToPage(index)
+                                    }
+                                },
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                        }
                         HorizontalPager(
                             modifier = Modifier.fillMaxSize(),
                             state = pagerState,
