@@ -151,7 +151,12 @@ fun HistoryScreen(
                         state = rememberTooltipState(),
                         focusable = false,
                     ) {
-                        IconButton(onClick = { onDialogChange(HistoryScreenModel.Dialog.DeleteAll) }) {
+                        val defaultScope = if (state.historyScopeEnabled && state.activeCategoryId != null) {
+                            HistoryScreenModel.HistoryDeletionScope.ACTIVE_SCOPE
+                        } else {
+                            HistoryScreenModel.HistoryDeletionScope.EVERYTHING
+                        }
+                        IconButton(onClick = { onDialogChange(HistoryScreenModel.Dialog.DeleteAll(defaultScope)) }) {
                             Icon(
                                 imageVector = Icons.Outlined.DeleteSweep,
                                 contentDescription = stringResource(MR.strings.pref_clear_history),

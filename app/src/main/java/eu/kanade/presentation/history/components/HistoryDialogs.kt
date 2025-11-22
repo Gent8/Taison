@@ -2,8 +2,11 @@ package eu.kanade.presentation.history.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.AlertDialog
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -12,7 +15,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.Alignment
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.ui.unit.dp
 import eu.kanade.presentation.theme.TachiyomiPreviewTheme
+import eu.kanade.tachiyomi.ui.history.HistoryScreenModel
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.LabeledCheckbox
 import tachiyomi.presentation.core.components.material.padding
@@ -61,15 +69,37 @@ fun HistoryDeleteDialog(
 
 @Composable
 fun HistoryDeleteAllDialog(
+    canTargetActiveScope: Boolean,
+    activeScopeLabel: String,
+    selection: HistoryScreenModel.HistoryDeletionScope,
+    onSelectionChange: (HistoryScreenModel.HistoryDeletionScope) -> Unit,
     onDismissRequest: () -> Unit,
     onDelete: () -> Unit,
 ) {
     AlertDialog(
         title = {
-            Text(text = stringResource(MR.strings.action_remove_everything))
+            Text(text = stringResource(MR.strings.history_delete_title))
         },
         text = {
-            Text(text = stringResource(MR.strings.clear_history_confirmation))
+            Column(
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+            ) {
+                Text(text = stringResource(MR.strings.history_delete_scope_message))
+                if (canTargetActiveScope) {
+                    HistoryDeleteScopeRow(
+                        title = stringResource(MR.strings.history_delete_scope_active),
+                        description = activeScopeLabel,
+                        selected = selection == HistoryScreenModel.HistoryDeletionScope.ACTIVE_SCOPE,
+                        onClick = { onSelectionChange(HistoryScreenModel.HistoryDeletionScope.ACTIVE_SCOPE) },
+                    )
+                }
+                HistoryDeleteScopeRow(
+                    title = stringResource(MR.strings.history_delete_scope_everything),
+                    description = stringResource(MR.strings.history_delete_scope_everything_description),
+                    selected = selection == HistoryScreenModel.HistoryDeletionScope.EVERYTHING,
+                    onClick = { onSelectionChange(HistoryScreenModel.HistoryDeletionScope.EVERYTHING) },
+                )
+            }
         },
         onDismissRequest = onDismissRequest,
         confirmButton = {
@@ -96,5 +126,47 @@ private fun HistoryDeleteDialogPreview() {
             onDismissRequest = {},
             onDelete = {},
         )
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun HistoryDeleteAllDialogPreview() {
+    TachiyomiPreviewTheme {
+        HistoryDeleteAllDialog(
+            canTargetActiveScope = true,
+            activeScopeLabel = "Action",
+            selection = HistoryScreenModel.HistoryDeletionScope.ACTIVE_SCOPE,
+            onSelectionChange = {},
+            onDismissRequest = {},
+            onDelete = {},
+        )
+    }
+}
+
+@Composable
+private fun HistoryDeleteScopeRow(
+    title: String,
+    description: String,
+    selected: Boolean,
+    onClick: () -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .selectable(selected = selected, onClick = onClick)
+            .padding(vertical = 4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        RadioButton(selected = selected, onClick = null)
+        Column(modifier = Modifier.padding(start = MaterialTheme.padding.small)) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.bodyLarge,
+            )
+            Text(
+                text = description,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+        }
     }
 }

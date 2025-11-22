@@ -339,10 +339,21 @@ class HistoryScreenModel(
         }
     }
 
-    fun removeAllHistory() {
+    fun clearHistory(scope: HistoryDeletionScope) {
         screenModelScope.launchIO {
-            val result = removeHistory.awaitAll()
-            if (!result) return@launchIO
+            when (scope) {
+                HistoryDeletionScope.EVERYTHING -> {
+                    val result = removeHistory.awaitAll()
+                    if (!result) return@launchIO
+                }
+                HistoryDeletionScope.ACTIVE_SCOPE -> {
+                    val mangaIds = getEntriesForActiveScope()
+                        .map { it.mangaId }
+                        .distinct()
+                    if (mangaIds.isEmpty()) return@launchIO
+                    mangaIds.forEach { removeHistory.await(it) }
+                }
+            }
             _events.send(Event.HistoryCleared)
         }
     }
@@ -495,7 +506,7 @@ class HistoryScreenModel(
     )
 
     sealed interface Dialog {
-        data object DeleteAll : Dialog
+        data class DeleteAll(val scope: HistoryDeletionScope = HistoryDeletionScope.ACTIVE_SCOPE) : Dialog
         data class Delete(val history: HistoryWithRelations) : Dialog
         data class DuplicateManga(val manga: Manga, val duplicates: List<MangaWithChapterCount>) : Dialog
         data class ChangeCategory(
@@ -505,10 +516,22 @@ class HistoryScreenModel(
         data class Migrate(val target: Manga, val current: Manga) : Dialog
     }
 
+    enum class HistoryDeletionScope {
+        EVERYTHING,
+        ACTIVE_SCOPE,
+    }
+
     sealed interface Event {
         data class OpenChapter(val chapter: Chapter?) : Event
         data object InternalError : Event
         data object HistoryCleared : Event
+    }
+
+    private fun getEntriesForActiveScope(): List<HistoryWithRelations> {
+        val currentState = state.value
+        if (!currentState.historyScopeEnabled) return emptyList()
+        val categoryId = currentState.activeCategoryId ?: return emptyList()
+        return currentState.categoryHistories[categoryId].orEmpty()
     }
 }
 

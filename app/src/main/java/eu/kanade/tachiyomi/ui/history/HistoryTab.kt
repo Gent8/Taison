@@ -17,6 +17,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import eu.kanade.presentation.category.components.ChangeCategoryDialog
+import eu.kanade.presentation.category.visualName
 import eu.kanade.presentation.history.HistoryScreen
 import eu.kanade.presentation.history.components.HistoryDeleteAllDialog
 import eu.kanade.presentation.history.components.HistoryDeleteDialog
@@ -92,9 +93,19 @@ data object HistoryTab : Tab {
                 )
             }
             is HistoryScreenModel.Dialog.DeleteAll -> {
+                val canDeleteActiveScope = state.historyScopeEnabled && state.activeCategoryId != null
+                val activeCategoryLabel = state.activeCategory?.visualName ?: stringResource(MR.strings.label_default)
                 HistoryDeleteAllDialog(
+                    canTargetActiveScope = canDeleteActiveScope,
+                    activeScopeLabel = activeCategoryLabel,
+                    selection = dialog.scope,
+                    onSelectionChange = { scope ->
+                        if (canDeleteActiveScope) {
+                            screenModel.setDialog(HistoryScreenModel.Dialog.DeleteAll(scope))
+                        }
+                    },
                     onDismissRequest = onDismissRequest,
-                    onDelete = screenModel::removeAllHistory,
+                    onDelete = { screenModel.clearHistory(dialog.scope) },
                 )
             }
             is HistoryScreenModel.Dialog.DuplicateManga -> {
