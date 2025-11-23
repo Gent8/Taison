@@ -6,11 +6,9 @@
 </p>
 
   <div>
-    <p align="center" style="margin:0;">
-      <a href="#taison">
-        <img src="docs/images/iconCropped.png" alt="Taison logo" title="Taison logo" width="128"/>
-      </a>
-    </p>
+    <a href="#taison">
+      <img src="docs/images/iconCropped.png" alt="Taison logo" title="Taison logo" width="128"/>
+    </a>
     <h1 id="taison" align="center" style="margin:0px 0 0;font-size:2.75rem;">
       Taison <span style="color:#eab710;">App</span>
     </h1>
