@@ -7,11 +7,11 @@
 
 </div>
 
-Taison is a personal fork of [Mihon](https://github.com/mihonapp/mihon), the open source manga reader for Android. It keeps pace with upstream while experimenting with quality-of-life tweaks and a refreshed visual identity.
+Taison is fork of [Mihon](https://github.com/mihonapp/mihon), the open source manga reader for Android. It keeps pace with upstream while adding polished quality-of-life upgrades, each chosen to give you more control and oversight without weighing down the interface.
 
 ## Download
 
-Download from F-Droid or grab the APK directly from GitHub releases:
+Download from F-Droid or grab the APK directly from GitHub releases. 
 
 <div display="flex" flex-direction="row">
 <p >
@@ -25,13 +25,15 @@ Download from F-Droid or grab the APK directly from GitHub releases:
 </p>
 </div>
 
+Note: F-Droid take longer to become available (3-7 days).
+
 _Requires Android 8.0 or higher._
 
 ## Taison Highlights
 
-- **Library navigation** – category tabs are hidden by default, replaced with a quick category dropdown inside the toolbar. Tabs can still be re-enabled in settings.
-- **History scoping** – History entries are limited to the active library category from _Settings › Library › Categories_. This option can also be turned off in settings.
-- **Taison look** – a warm default palette unique to this fork; the legacy blue palette lives on as _Classic Blue_.
+- **Library navigation** – category tabs are hidden by default in favor of a quick toolbar dropdown.
+- **History scoping** – library entries are scoped to their respective categories. The History tab includes its own category navigation, and the active category stays in sync between Library and History.
+- **Taison look** – a distinct, warm palette unique to this fork.
 
 ## Changelog
 
