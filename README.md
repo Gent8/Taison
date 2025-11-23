@@ -8,10 +8,10 @@
   <div>
     <p align="center" style="margin:0;">
       <a href="#taison">
-        <img src="app/src/main/res/mipmap/ic_launcher.png" alt="Taison logo" title="Taison logo" width="128"/>
+        <img src="docs/images/iconCropped.png" alt="Taison logo" title="Taison logo" width="128"/>
       </a>
     </p>
-    <h1 id="taison" align="center" style="margin:4px 0 0;font-size:2.75rem;">
+    <h1 id="taison" align="center" style="margin:0px 0 0;font-size:2.75rem;">
       Taison <span style="color:#eab710;">App</span>
     </h1>
   </div>
