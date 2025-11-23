@@ -1,5 +1,6 @@
 package eu.kanade.presentation.history
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
@@ -20,12 +20,12 @@ import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.DeleteSweep
 import androidx.compose.material.icons.outlined.KeyboardArrowDown
 import androidx.compose.material.icons.outlined.Visibility
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PlainTooltip
 import androidx.compose.material3.PrimaryScrollableTabRow
@@ -60,6 +60,7 @@ import eu.kanade.presentation.theme.TachiyomiPreviewTheme
 import eu.kanade.presentation.util.animateItemFastScroll
 import eu.kanade.tachiyomi.ui.history.HistoryScreenModel
 import eu.kanade.tachiyomi.ui.history.toHistoryUiModels
+import kotlinx.coroutines.launch
 import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.history.model.HistoryWithRelations
 import tachiyomi.domain.library.service.LibraryPreferences
@@ -71,7 +72,6 @@ import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.EmptyScreen
 import tachiyomi.presentation.core.screens.LoadingScreen
 import java.time.LocalDate
-import kotlinx.coroutines.launch
 
 @Composable
 fun HistoryScreen(
@@ -97,8 +97,10 @@ fun HistoryScreen(
                 SearchToolbar(
                     titleContent = {
                         val showSubtitle = state.historyScopeEnabled &&
-                            !(state.categoryNavigationEnabled &&
-                                state.categoryNavigationMode == LibraryPreferences.CategoryNavigationMode.TABS)
+                            !(
+                                state.categoryNavigationEnabled &&
+                                    state.categoryNavigationMode == LibraryPreferences.CategoryNavigationMode.TABS
+                                )
                         if (showToolbarDropdown) {
                             HistoryToolbarTitle(
                                 title = stringResource(MR.strings.history),
@@ -117,54 +119,62 @@ fun HistoryScreen(
                     searchQuery = state.searchQuery,
                     onChangeSearchQuery = onSearchQueryChange,
                     actions = {
-                    if (state.historyScopeEnabled) {
-                        val tooltip = if (state.showNonLibraryEntries) {
-                            stringResource(MR.strings.history_hide_non_library_entries)
-                        } else {
-                            stringResource(MR.strings.history_show_non_library_entries)
+                        if (state.historyScopeEnabled) {
+                            val tooltip = if (state.showNonLibraryEntries) {
+                                stringResource(MR.strings.history_hide_non_library_entries)
+                            } else {
+                                stringResource(MR.strings.history_show_non_library_entries)
+                            }
+                            TooltipBox(
+                                positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+                                tooltip = { PlainTooltip { Text(tooltip) } },
+                                state = rememberTooltipState(),
+                                focusable = false,
+                            ) {
+                                IconToggleButton(
+                                    checked = state.showNonLibraryEntries,
+                                    onCheckedChange = { onToggleNonLibraryEntries() },
+                                    enabled = state.hasNonLibraryEntries,
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Visibility,
+                                        contentDescription = tooltip,
+                                    )
+                                }
+                            }
                         }
                         TooltipBox(
                             positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
-                            tooltip = { PlainTooltip { Text(tooltip) } },
+                            tooltip = {
+                                PlainTooltip {
+                                    Text(stringResource(MR.strings.pref_clear_history))
+                                }
+                            },
                             state = rememberTooltipState(),
                             focusable = false,
                         ) {
-                            IconToggleButton(
-                                checked = state.showNonLibraryEntries,
-                                onCheckedChange = { onToggleNonLibraryEntries() },
-                                enabled = state.hasNonLibraryEntries,
+                            val defaultScope = if (state.historyScopeEnabled && state.activeCategoryId != null) {
+                                HistoryScreenModel.HistoryDeletionScope.ACTIVE_SCOPE
+                            } else {
+                                HistoryScreenModel.HistoryDeletionScope.EVERYTHING
+                            }
+                            IconButton(
+                                onClick = {
+                                    onDialogChange(
+                                        HistoryScreenModel.Dialog.DeleteAll(
+                                            defaultScope,
+                                        ),
+                                    )
+                                },
                             ) {
                                 Icon(
-                                    imageVector = Icons.Outlined.Visibility,
-                                    contentDescription = tooltip,
+                                    imageVector = Icons.Outlined.DeleteSweep,
+                                    contentDescription = stringResource(MR.strings.pref_clear_history),
                                 )
                             }
                         }
-                    }
-                    TooltipBox(
-                        positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
-                        tooltip = {
-                            PlainTooltip {
-                                Text(stringResource(MR.strings.pref_clear_history))
-                            }
-                        },
-                        state = rememberTooltipState(),
-                        focusable = false,
-                    ) {
-                        val defaultScope = if (state.historyScopeEnabled && state.activeCategoryId != null) {
-                            HistoryScreenModel.HistoryDeletionScope.ACTIVE_SCOPE
-                        } else {
-                            HistoryScreenModel.HistoryDeletionScope.EVERYTHING
-                        }
-                        IconButton(onClick = { onDialogChange(HistoryScreenModel.Dialog.DeleteAll(defaultScope)) }) {
-                            Icon(
-                                imageVector = Icons.Outlined.DeleteSweep,
-                                contentDescription = stringResource(MR.strings.pref_clear_history),
-                            )
-                        }
-                    }
-                },
-                scrollBehavior = scrollBehavior,
+                    },
+                    scrollBehavior = scrollBehavior,
                 )
                 DropdownMenu(
                     expanded = toolbarDropdownExpanded,

@@ -1,8 +1,8 @@
-import java.util.Properties
 import mihon.buildlogic.Config
 import mihon.buildlogic.getBuildTime
 import mihon.buildlogic.getCommitCount
 import mihon.buildlogic.getGitSha
+import java.util.Properties
 
 plugins {
     id("mihon.android.application")

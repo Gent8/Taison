@@ -118,8 +118,10 @@ object SettingsLibraryScreen : SearchableSettings {
                 Preference.PreferenceItem.ListPreference(
                     preference = libraryPreferences.categoryNavigationMode(),
                     entries = persistentMapOf(
-                        LibraryPreferences.CategoryNavigationMode.DROPDOWN to stringResource(MR.strings.category_navigation_dropdown),
-                        LibraryPreferences.CategoryNavigationMode.TABS to stringResource(MR.strings.category_navigation_tabs),
+                        LibraryPreferences.CategoryNavigationMode.DROPDOWN to
+                            stringResource(MR.strings.category_navigation_dropdown),
+                        LibraryPreferences.CategoryNavigationMode.TABS to
+                            stringResource(MR.strings.category_navigation_tabs),
                     ),
                     title = stringResource(MR.strings.pref_category_navigation_type),
                 ),

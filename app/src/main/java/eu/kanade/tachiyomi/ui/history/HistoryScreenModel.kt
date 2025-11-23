@@ -79,7 +79,10 @@ class HistoryScreenModel(
             val scopeEnabledFlow = libraryPreferences.historyScopeByCategory().changes().distinctUntilChanged()
             val activeCategoryIdFlow = lastUsedCategoryState.state
             val categoriesFlow = getCategories.subscribe().distinctUntilChanged()
-            val historyNavigationEnabledFlow = libraryPreferences.historyCategoryNavigation().changes().distinctUntilChanged()
+            val historyNavigationEnabledFlow = libraryPreferences
+                .historyCategoryNavigation()
+                .changes()
+                .distinctUntilChanged()
             val navigationModeFlow = libraryPreferences.categoryNavigationMode().changes().distinctUntilChanged()
 
             val historyFlow = searchQueryFlow

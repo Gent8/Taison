@@ -167,7 +167,7 @@ class LibraryScreenModel(
                         showMangaContinueButton = showMangaContinueButton,
                     )
                 }
-        }
+            }
             .launchIn(screenModelScope)
 
         lastUsedCategoryState.state
