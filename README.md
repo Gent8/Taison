@@ -1,18 +1,18 @@
 <div align="center">
 <p align="center">
-  <img src="docs/images/featureGraphic.png"
-       alt="Taison feature graphic" width="100%"
-       style="max-height:110px;object-fit:cover;margin:0 auto;">
+  <img src="docs/images/featureGraphicBanner.png"
+       alt="Taison feature graphic"
+       style="max-width:960px;width:100%;height:auto;">
 </p>
 
-  <a href="#taison">
-    <img src="app/src/main/res/mipmap/ic_launcher.png" alt="Taison logo" title="Taison logo" width="128"
-         style="margin-bottom:-12px;"/>
-  </a>
-
-<h1 align="center" style="margin:2px 0 0;">
-  Taison <span style="color:#eab710;">App</span>
-</h1>
+  <div style="display:flex;flex-direction:column;align-items:center;margin-top:12px;">
+    <a href="#taison">
+      <img src="app/src/main/res/mipmap/ic_launcher.png" alt="Taison logo" title="Taison logo" width="128"/>
+    </a>
+    <h1 style="margin:0;text-align:center;">
+      Taison <span style="color:#eab710;">App</span>
+    </h1>
+  </div>
 
 </div>
 
