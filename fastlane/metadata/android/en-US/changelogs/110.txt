@@ -1,0 +1,5 @@
+NEW in version 1.1.0
+
+- History now mirrors Library category tabs/dropdown, with an eye toggle for non-library entries and scoped deletion in the dialog.
+- New “Category navigation type” picker replaces the old boolean toggle for tabs vs dropdown.
+- Filters keep uncategorized favorites apart from other items and honor the non-library visibility toggle.

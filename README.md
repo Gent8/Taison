@@ -12,6 +12,7 @@ Taison is fork of [Mihon](https://github.com/mihonapp/mihon), the open source ma
 ## Download
 
 Download from F-Droid or grab the APK directly from GitHub releases. 
+_Note: F-Droid updates will always be slightly delayed._
 
 <div display="flex" flex-direction="row">
 <p >
@@ -24,8 +25,6 @@ Download from F-Droid or grab the APK directly from GitHub releases.
   </a>
 </p>
 </div>
-
-Note: F-Droid take longer to become available (3-7 days).
 
 _Requires Android 8.0 or higher._
 
