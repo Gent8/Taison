@@ -5,13 +5,15 @@
        style="max-width:960px;width:100%;height:auto;">
 </p>
 
-  <div style="display:flex;flex-direction:column;align-items:center;margin-top:12px;">
-    <a href="#taison">
-      <img src="app/src/main/res/mipmap/ic_launcher.png" alt="Taison logo" title="Taison logo" width="128"/>
-    </a>
-    <h1 style="margin:0;text-align:center;">
+  <div>
+    <p align="center" style="margin:0;">
+      <a href="#taison">
+        <img src="app/src/main/res/mipmap/ic_launcher.png" alt="Taison logo" title="Taison logo" width="128"/>
+      </a>
+    </p>
+    <p id="taison" align="center" style="font-size:2.75rem;font-weight:700;margin:0;">
       Taison <span style="color:#eab710;">App</span>
-    </h1>
+    </p>
   </div>
 
 </div>
