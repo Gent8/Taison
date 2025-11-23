@@ -1,9 +1,18 @@
 <div align="center">
+<p align="center">
+  <img src="docs/images/featureGraphic.png"
+       alt="Taison feature graphic" width="100%"
+       style="max-height:110px;object-fit:cover;margin:0 auto;">
+</p>
+
   <a href="#taison">
-    <img src="app/src/main/res/mipmap/ic_launcher.png" alt="Taison logo" title="Taison logo" width="128"/>
+    <img src="app/src/main/res/mipmap/ic_launcher.png" alt="Taison logo" title="Taison logo" width="128"
+         style="margin-bottom:-12px;"/>
   </a>
 
-# Taison <span style="color:#eab710;">App</span>
+<h1 align="center" style="margin:2px 0 0;">
+  Taison <span style="color:#eab710;">App</span>
+</h1>
 
 </div>
 
@@ -11,7 +20,7 @@ Taison is fork of [Mihon](https://github.com/mihonapp/mihon), the open source ma
 
 ## Download
 
-Download from F-Droid or grab the APK directly from GitHub releases. 
+Download from F-Droid or grab the APK directly from GitHub releases.
 _Note: F-Droid updates will always be slightly delayed._
 
 <div display="flex" flex-direction="row">
