@@ -11,9 +11,9 @@
         <img src="app/src/main/res/mipmap/ic_launcher.png" alt="Taison logo" title="Taison logo" width="128"/>
       </a>
     </p>
-    <p id="taison" align="center" style="font-size:2.75rem;font-weight:700;margin:0;">
+    <h1 id="taison" align="center" style="margin:4px 0 0;font-size:2.75rem;">
       Taison <span style="color:#eab710;">App</span>
-    </p>
+    </h1>
   </div>
 
 </div>
