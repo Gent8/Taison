@@ -1,5 +1,5 @@
-Taison is a personal fork of Mihon, the open source manga reader for Android. It keeps pace with upstream while experimenting with convenience upgrades and a refreshed look.
+Taison is a fork of Mihon, the open source manga reader for Android. It keeps pace with upstream while adding polished quality-of-life upgrades, each chosen to give you more control and oversight without weighing down the interface.
 
-• Library navigation – category tabs are hidden by default, replaced with a quick category dropdown inside the toolbar (tabs can still be re-enabled).
-• History scoping – history entries can be limited to the active library category from Settings › Library › Categories.
-• Taison look – a warm default palette unique to this fork, with the legacy blue palette still available as Classic Blue.
+• Library navigation – Category tabs are hidden by default in favor of a quick toolbar dropdown, and you can switch back to tabs.
+• History scoping –  Library entries are scoped to their respective categories. The History tab includes its own category navigation, and the active category stays in sync between Library and History.
+• Taison look – A distinct, warm palette unique to this fork.

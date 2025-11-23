@@ -1,1 +1,1 @@
-Manga reader fork with a warm theme and navigation tweaks
+Manga reader fork with quality-of-life upgrades

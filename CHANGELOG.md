@@ -16,6 +16,23 @@ The format is a modified version of [Keep a Changelog](https://keepachangelog.co
 
 ---
 
+## [Taison v1.1.0] - 2025-11-23
+This section tracks changes unique to the Taison fork so they don't conflict with upstream Mihon release notes.
+
+### Added
+- `History category navigation` (`Settings › Library › Enable category navigation in History`) mirrors the Library tabs/dropdown inside History, switching categories in either screen stays in sync with the other; it can only be toggled if `Scope history to respective category` is enabled ([@Gent8](https://github.com/Gent8)).
+- Toolbar eye toggle in History to include or hide entries that are outside the library, complete with disabled, active and inactive states ([@Gent8](https://github.com/Gent8)).
+- Scoped history deletion option in the History delete dialog so you can clear just the active category/non-library entries or wipe everything at once ([@Gent8](https://github.com/Gent8)).
+
+### Changed
+- Replaced previous setting "show category tabs at top" boolean with "Category navigation type" a picker (dropdown vs tabs) that is present in Settings ([@Gent8](https://github.com/Gent8)).
+- Edited the scoped-history setting text "Scope history to respective category" from "Scope history to active category" for clarity ([@Gent8](https://github.com/Gent8)).
+
+### Improved
+- History filter logic now keeps uncategorized favorites separate from non-library items, and filtering honors the "include non-library entries" toggle ([@Gent8](https://github.com/Gent8)).
+
+---
+
 ## [Taison v1.0.1] - 2025-11-18
 This section tracks changes unique to the Taison fork so they don't conflict with upstream Mihon release notes.
 
