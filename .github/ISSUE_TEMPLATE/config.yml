@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: ❌ Help with Extensions
-    url: https://mihon.app/docs/faq/browse/extensions
-    about: For extension-related questions/issues
-  - name: 🖥️ Mihon website
-    url: https://mihon.app/
-    about: Guides, troubleshooting, and answers to common questions
+    url: https://github.com/tachiyomiorg/extensions
+    about: Extensions are community-maintained; report issues to the source maintainers instead of this repository.
+  - name: 📘 Taison documentation
+    url: https://github.com/Gent8/Taison#readme
+    about: Guides, troubleshooting tips, and answers to common questions.
