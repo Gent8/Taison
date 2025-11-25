@@ -22,15 +22,20 @@ Download from F-Droid or grab the APK directly from GitHub releases.
 _Note: F-Droid updates will always be slightly delayed._
 
 <div display="flex" flex-direction="row">
-<p >
-  <a href="https://f-droid.org/en/packages/com.gent8.taison/">
-    <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="60"/>
-  </a>
-  &nbsp;
-  <a href="https://github.com/Gent8/Taison/releases">
-    <img src="https://img.shields.io/github/v/release/Gent8/Taison?color=24292e&label=Get%20it%20on%20GitHub&logo=github&style=for-the-badge" alt="Get it on GitHub" height="35"/>
-  </a>
-</p>
+  <p>
+    <a href="https://f-droid.org/en/packages/com.gent8.taison/">
+      <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="60"/>
+    </a>
+  </p>
+  <p>
+    <a href="https://github.com/Gent8/Taison/releases">
+      <img src="https://img.shields.io/github/v/release/Gent8/Taison?color=24292e&label=Get%20it%20on%20GitHub&logo=github&style=for-the-badge" alt="Get it on GitHub" height="35"/>
+    </a>
+    &nbsp;
+    <a href="https://github.com/Gent8/Taison/releases">
+      <img src="https://img.shields.io/github/downloads/Gent8/Taison/total?color=24292e&label=Total%20downloads&logo=github&style=for-the-badge" alt="Total downloads on GitHub" height="35"/>
+    </a>
+  </p>
 </div>
 
 _Requires Android 8.0 or higher._
