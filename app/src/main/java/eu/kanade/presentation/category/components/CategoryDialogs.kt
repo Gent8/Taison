@@ -25,6 +25,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.TextFieldValue
 import eu.kanade.core.preference.asToggleableState
 import eu.kanade.presentation.category.visualName
 import kotlinx.collections.immutable.ImmutableList
@@ -107,17 +109,21 @@ fun CategoryRenameDialog(
     category: String,
     isSystemCategory: Boolean = false,
 ) {
-    var name by remember { mutableStateOf(category) }
+    var textFieldValue by remember {
+        mutableStateOf(TextFieldValue(category, selection = TextRange(category.length)))
+    }
 
     val focusRequester = remember { FocusRequester() }
-    val nameAlreadyExists = remember(name) { name.isNotEmpty() && categories.contains(name) }
+    val nameAlreadyExists = remember(textFieldValue.text) {
+        textFieldValue.text.isNotEmpty() && categories.contains(textFieldValue.text)
+    }
 
-    val valueHasChanged = name != category
+    val valueHasChanged = textFieldValue.text != category
 
     val isValidName = if (isSystemCategory) {
         !nameAlreadyExists
     } else {
-        name.isNotEmpty() && !nameAlreadyExists
+        textFieldValue.text.isNotEmpty() && !nameAlreadyExists
     }
 
     AlertDialog(
@@ -126,7 +132,7 @@ fun CategoryRenameDialog(
             TextButton(
                 enabled = valueHasChanged && isValidName,
                 onClick = {
-                    onRename(name)
+                    onRename(textFieldValue.text)
                     onDismissRequest()
                 },
             ) {
@@ -144,8 +150,8 @@ fun CategoryRenameDialog(
         text = {
             OutlinedTextField(
                 modifier = Modifier.focusRequester(focusRequester),
-                value = name,
-                onValueChange = { name = it },
+                value = textFieldValue,
+                onValueChange = { textFieldValue = it },
                 label = { Text(text = stringResource(MR.strings.name)) },
                 supportingText = {
                     val msgRes = when {
