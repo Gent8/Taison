@@ -548,6 +548,7 @@
     <string name="pref_auto_clear_chapter_cache">अनुप्रयोगपिधाने अध्यायस्य काष्वस्तु मार्जयतु</string>
     <string name="cache_deleted">काष्वस्तु मार्जितम्। %1$d-सञ्चिकाः नाशिताः भूताः</string>
     <string name="error_category_exists">अनेन नाम्ना पूर्वमेव एकः वर्गः अस्ति</string>
+    <string name="label_default_category_help">\"प्राथमिकम्\" उपयोजयितुं रिक्तं स्थानं मुञ्चतु</string>
     <string name="confirm_set_image_as_cover">इदं चित्रं मुखचित्रम् इव उपयोजनीयं किम्</string>
     <string name="notification_first_add_to_library">एतत् करणात् पूर्वं कृपया तव ग्रन्थालयाय माङ्गाः योजयतु</string>
     <string name="library_errors_help">ग्रन्थालयनवीकरणदोषान् परिहर्तुं साहाय्यार्थं %1$s पश्य</string>

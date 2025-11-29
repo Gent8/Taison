@@ -187,6 +187,7 @@
     <string name="title">Título</string>
     <string name="status">Estado</string>
     <string name="error_category_exists">Já existe uma categoria com este nome!</string>
+    <string name="label_default_category_help">Deixe vazio para usar \"Padrão\"</string>
     <string name="snack_categories_deleted">Categorias excluídas</string>
     <string name="dialog_with_checkbox_remove_description">Isso irá remover a data de leitura deste capítulo. Você tem certeza?</string>
     <string name="dialog_with_checkbox_reset">Redefinir todos os capítulos deste item</string>

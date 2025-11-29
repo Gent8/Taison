@@ -261,6 +261,7 @@
     <string name="dialog_with_checkbox_remove_description">Ovo će ukloniti datum čitanja ovog poglavlja. Je li to stvarno želiš?</string>
     <string name="snack_categories_deleted">Izbrisane kategorije</string>
     <string name="error_category_exists">Kategorija s ovim imenom već postoji!</string>
+    <string name="label_default_category_help">Ostavite prazno za korištenje \"Standardno\"</string>
     <string name="track_type">Vrsta</string>
     <string name="track_status">Stanje</string>
     <string name="status">Stanje</string>

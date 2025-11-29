@@ -152,7 +152,8 @@
     <string name="status">Statut</string>
     <string name="chapters">Chapitres</string>
     <string name="error_category_exists">Une catégorie avec ce nom existe déjà !</string>
-    <string name="dialog_with_checkbox_remove_description">Ceci enlèvera la date de lecture de ce chapitre. Êtes-vous sûr(e) ?</string>
+    <string name="label_default_category_help">Laissez vide pour utiliser \"Par défaut\"</string>
+    <string name="dialog_with_checkbox_remove_description">Ceci enlèvera la date de lecture de ce chapitre. Êtes-vous sûr(e) ?</string>
     <string name="dialog_with_checkbox_reset">Réinitialiser tous les chapitres de cette série</string>
     <string name="snack_add_to_library">Ajouter à la bibliothèque ?</string>
     <string name="picture_saved">Image sauvegardée</string>

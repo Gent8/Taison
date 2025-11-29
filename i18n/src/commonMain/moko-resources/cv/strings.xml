@@ -293,6 +293,7 @@
     <string name="dialog_with_checkbox_remove_description">Ҫакӑ вара сыпӑка вулани вӑхӑта катертӗ. Чӑнах катертесшӗн-и?</string>
     <string name="snack_categories_deleted">Пухмӑшсем катертнӗ</string>
     <string name="error_category_exists">Ун пек ятпа пухмӑш пур ӗнтӗ!</string>
+    <string name="label_default_category_help">\"Йаланхилле\" усӑ курмашкӑн кӑна хуралта</string>
     <string name="track_type">Тӗс</string>
     <string name="track_status">Хал</string>
     <string name="status">Хал</string>

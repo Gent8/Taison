@@ -259,6 +259,7 @@
     <string name="repeating">다시 읽는 중</string>
     <string name="track_type">종류</string>
     <string name="error_category_exists">같은 이름을 가진 카테고리가 이미 존재합니다!</string>
+    <string name="label_default_category_help">\"기본값\"을 사용하려면 비워 두세요</string>
     <string name="migration_dialog_what_to_include">포함할 데이터를 선택하세요</string>
     <string name="migrate">데이터 이전</string>
     <string name="copy">복사</string>

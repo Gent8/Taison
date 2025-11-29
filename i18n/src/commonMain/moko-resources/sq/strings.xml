@@ -414,6 +414,7 @@
     <string name="on_hold_list">Në listën e pritjes</string>
     <string name="track_type">Lloji</string>
     <string name="error_category_exists">Një kategori me këtë emër ekziston tashmë!</string>
+    <string name="label_default_category_help">Lëreni bosh për të përdorur \"E paracaktuar\"</string>
     <string name="error_no_match">Nuk u gjet asnjë përputhje</string>
     <string name="dialog_with_checkbox_reset">Rivendos të gjithë kapitujt për këtë hyrje</string>
     <string name="set_as_cover">Vendos si kopertinë</string>

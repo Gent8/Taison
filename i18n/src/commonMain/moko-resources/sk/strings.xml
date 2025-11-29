@@ -240,6 +240,7 @@
     <string name="track_status">Stav</string>
     <string name="track_type">Typ</string>
     <string name="error_category_exists">Kategória s týmto názvom už existuje!</string>
+    <string name="label_default_category_help">Nechajte prázdne pre použitie \"Predvolené\"</string>
     <string name="snack_categories_deleted">Kategórie boli odstránené</string>
     <string name="dialog_with_checkbox_remove_description">Týmto sa odstráni dátum prečítania tejto kapitoly. Si si istý?</string>
     <string name="dialog_with_checkbox_reset">Resetovať všetky kapitoly mangy</string>

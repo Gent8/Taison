@@ -147,6 +147,7 @@
     <string name="title">Titel</string>
     <string name="status">Status</string>
     <string name="error_category_exists">Er bestaat al een categorie met deze naam!</string>
+    <string name="label_default_category_help">Laat leeg om \"Standaard\" te gebruiken</string>
     <string name="snack_categories_deleted">Categorieën verwijderd</string>
     <string name="dialog_with_checkbox_reset">Stel alle hoofdstukken voor dit item opnieuw in</string>
     <string name="snack_add_to_library">Toevoegen aan bibliotheek?</string>

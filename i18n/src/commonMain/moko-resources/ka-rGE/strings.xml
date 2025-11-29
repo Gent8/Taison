@@ -282,6 +282,7 @@
     <string name="track_status">სტატუსი</string>
     <string name="track_type">ტიპი</string>
     <string name="error_category_exists">კატეგორია მოცემული სახელით უკვე არსებობს!</string>
+    <string name="label_default_category_help">\"ნაგულისხმევი\" გამოსაყენებლად ცარიელი დატოვეთ</string>
     <string name="snack_categories_deleted">კატეგორიები წაიშალა</string>
     <string name="dialog_with_checkbox_remove_description">ეს წაშლის ამ თავის წაკითხვის თარიღს. დარწმუნებული ხართ?</string>
     <string name="picture_saved">სურათი შენახულია</string>

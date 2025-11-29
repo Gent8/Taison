@@ -297,6 +297,7 @@
     <string name="dialog_with_checkbox_remove_description">Tatanggalin nito ang petsa ng pagbasa sa kabanatang ito. Sigurado ka ba?</string>
     <string name="snack_categories_deleted">Binura na ang mga kategorya</string>
     <string name="error_category_exists">Mayroong kapangalan ang kategoryang ito!</string>
+    <string name="label_default_category_help">Iwanang walang laman upang gamitin ang \"Default\"</string>
     <string name="track_type">Uri</string>
     <string name="track_status">Estado</string>
     <string name="status">Estado</string>

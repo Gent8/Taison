@@ -221,6 +221,7 @@
     <string name="track_status">Istadu</string>
     <string name="track_type">Casta</string>
     <string name="error_category_exists">Esistit giai una categoria cun custu nùmene!</string>
+    <string name="label_default_category_help">Lassate bòidu pro impreare \"Predefinida\"</string>
     <string name="snack_categories_deleted">Categorias iscantzelladas</string>
     <string name="dialog_with_checkbox_remove_description">Custu at a bogare sa data de leghidura de custu capìtulu. Seguru ses?</string>
     <string name="dialog_with_checkbox_reset">Reseta totu sos capìtulos pro custu elementu</string>

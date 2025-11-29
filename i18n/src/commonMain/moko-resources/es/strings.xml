@@ -214,6 +214,7 @@
     <string name="chapter_paused">Pausado</string>
     <string name="manga_tracking_tab">Seguimiento</string>
     <string name="error_category_exists">¡Ya existe una categoría con este nombre!</string>
+    <string name="label_default_category_help">Deje vacío para usar \"Original\"</string>
     <string name="snack_categories_deleted">Categorías eliminadas</string>
     <string name="snack_add_to_library">¿Añadir manga a la biblioteca?</string>
     <string name="picture_saved">Imagen guardada</string>

@@ -222,6 +222,7 @@
     <string name="track_status">Durum</string>
     <string name="track_type">Tür</string>
     <string name="error_category_exists">Bu adda bir kategori zaten var!</string>
+    <string name="label_default_category_help">\"Varsayılan\"ı kullanmak için boş bırakın</string>
     <string name="snack_categories_deleted">Kategoriler silindi</string>
     <string name="dialog_with_checkbox_remove_description">Bu, bu bölümün okunma tarihini kaldıracak. Emin misiniz?</string>
     <string name="dialog_with_checkbox_reset">Bu girdi için tüm bölümleri sıfırla</string>

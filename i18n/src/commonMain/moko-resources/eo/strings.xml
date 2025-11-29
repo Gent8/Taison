@@ -239,6 +239,7 @@
     <string name="picture_saved">Bildo konservita</string>
     <string name="snack_categories_deleted">Kategorioj forigitaj</string>
     <string name="error_category_exists">Kategorio kun ĉi tiu nomo jam ekzistas!</string>
+    <string name="label_default_category_help">Lasu malplenan por uzi \"Defaŭlte\"</string>
     <string name="track_type">Speco</string>
     <string name="track_status">Stato</string>
     <string name="status">Stato</string>

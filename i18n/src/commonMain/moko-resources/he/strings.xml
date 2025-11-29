@@ -53,6 +53,7 @@
     <string name="dialog_with_checkbox_remove_description">פעולה זו תסיר את התאריך הקריאה של פרק זה. האם אתה בטוח?</string>
     <string name="snack_categories_deleted">הקטגוריות נמחקו</string>
     <string name="error_category_exists">קטגוריה עם שם זה כבר קיימת!</string>
+    <string name="label_default_category_help">השאר ריק כדי להשתמש ב-\"ברירת מחדל\"</string>
     <string name="track_type">סוג</string>
     <string name="track_status">סטטוס</string>
     <string name="status">סטטוס</string>

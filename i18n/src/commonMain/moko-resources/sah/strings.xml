@@ -340,6 +340,7 @@
     <string name="dialog_with_checkbox_remove_description">Бу дьайыы түһүмэх ааҕыллыбыт кэмин сотторуо. Эрэллээххин дуо?</string>
     <string name="snack_categories_deleted">Бөлөхтөр соттороллубуттар</string>
     <string name="error_category_exists">Оннук ааттах бөлөх уруккуттан баар!</string>
+    <string name="label_default_category_help">\"Аан бастаан\" туһаныахха кураанах хааллар</string>
     <string name="track_type">Көрүҥ</string>
     <string name="track_status">Турук</string>
     <string name="status">Турук</string>

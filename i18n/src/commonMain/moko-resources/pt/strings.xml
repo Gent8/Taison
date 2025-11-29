@@ -246,6 +246,7 @@
     <string name="track_status">Estado</string>
     <string name="track_type">Tipo</string>
     <string name="error_category_exists">Já existe uma categoria com este nome!</string>
+    <string name="label_default_category_help">Deixe vazio para usar \"Predefinição\"</string>
     <string name="snack_categories_deleted">Categorias eliminadas</string>
     <string name="snack_add_to_library">Adicionar à biblioteca?</string>
     <string name="picture_saved">Imagem guardada</string>

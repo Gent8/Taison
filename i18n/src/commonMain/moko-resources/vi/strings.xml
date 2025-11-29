@@ -162,6 +162,7 @@
     <string name="status">Trạng thái</string>
     <string name="chapters">Các chương</string>
     <string name="error_category_exists">Tên danh mục này đã tồn tại!</string>
+    <string name="label_default_category_help">Để trống để sử dụng \"Mặc định\"</string>
     <string name="snack_categories_deleted">Danh mục đã bị xóa</string>
     <string name="dialog_with_checkbox_remove_description">Sẽ xóa ngày đọc các chương. Bạn chắc chứ?</string>
     <string name="dialog_with_checkbox_reset">Làm mới mọi chương của truyện này</string>

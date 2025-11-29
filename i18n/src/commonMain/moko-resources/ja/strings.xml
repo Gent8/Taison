@@ -219,6 +219,7 @@
     <string name="track_status">ステータス</string>
     <string name="track_type">タイプ</string>
     <string name="error_category_exists">この名前が既に存在しています！</string>
+    <string name="label_default_category_help">\"デフォルト\"を使用するには空のままにしてください</string>
     <string name="snack_categories_deleted">カテゴリーが削除されました</string>
     <string name="dialog_with_checkbox_remove_description">この章の読書日時を削除してもよろしいですか？</string>
     <string name="dialog_with_checkbox_reset">この項目の章をすべてリセット</string>

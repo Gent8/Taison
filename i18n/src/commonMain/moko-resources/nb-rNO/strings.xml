@@ -218,6 +218,7 @@
     <string name="track_status">Status</string>
     <string name="track_type">Type</string>
     <string name="error_category_exists">En kategori ved dette navnet finnes allerede!</string>
+    <string name="label_default_category_help">La stå tomt for å bruke \"Standard\"</string>
     <string name="snack_categories_deleted">Kategorier slettet</string>
     <string name="dialog_with_checkbox_remove_description">Lesningsdato for dette kapittelet vil bli fjernet. Er du sikker?</string>
     <string name="dialog_with_checkbox_reset">Tilbakestill alle kapitler for denne oppføringen</string>

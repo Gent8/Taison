@@ -222,6 +222,7 @@
     <string name="track_status">Status</string>
     <string name="track_type">Typ</string>
     <string name="error_category_exists">En kategori med detta namn finns redan!</string>
+    <string name="label_default_category_help">Lämna tomt för att använda \"Standard\"</string>
     <string name="snack_categories_deleted">Kategorier raderade</string>
     <string name="dialog_with_checkbox_remove_description">Detta kommer att ta bort läs datumet för detta kapitel. Är du säker?</string>
     <string name="dialog_with_checkbox_reset">Återställ alla kapitel för denna post</string>

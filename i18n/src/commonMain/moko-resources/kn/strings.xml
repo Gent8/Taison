@@ -276,6 +276,7 @@
     <string name="dialog_with_checkbox_remove_description">ಇದು ಈ ಅಧ್ಯಾಯದ ಓದುವ ದಿನಾಂಕವನ್ನು ತೆಗೆದುಹಾಕುತ್ತದೆ. ನೀವು ಖಚಿತವಾಗಿರುವಿರಾ?</string>
     <string name="snack_categories_deleted">ವರ್ಗಗಳನ್ನು ಅಳಿಸಲಾಗಿದೆ</string>
     <string name="error_category_exists">ಈ ಹೆಸರಿನ ವರ್ಗವು ಈಗಾಗಲೇ ಅಸ್ತಿತ್ವದಲ್ಲಿದೆ!</string>
+    <string name="label_default_category_help">\"ಪೂರ್ವನಿಯೋಜಿತ\" ಬಳಸಲು ಖಾಲಿ ಬಿಡಿ</string>
     <string name="track_type">ಮಾದರಿ</string>
     <string name="track_status">ಸ್ಥಿತಿ</string>
     <string name="status">ಸ್ಥಿತಿ</string>

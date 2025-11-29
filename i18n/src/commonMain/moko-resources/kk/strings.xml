@@ -553,6 +553,7 @@
     <string name="sort_by_number">Тарау нөмірі бойынша</string>
     <string name="track_type">Түрі</string>
     <string name="error_category_exists">Бұндай санат атауы әлдеқашан бар!</string>
+    <string name="label_default_category_help">\"Әдепкі\" пайдалану үшін бос қалдырыңыз</string>
     <string name="picture_saved">Сурет сақталды</string>
     <string name="set_as_cover">Мұқабаға қою</string>
     <string name="pref_category_for_this_series">Осы туынды үшін</string>

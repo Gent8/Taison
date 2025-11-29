@@ -192,6 +192,7 @@
     <string name="title">Tajuk</string>
     <string name="status">Status</string>
     <string name="error_category_exists">Kategori dengan nama ini sudah wujud!</string>
+    <string name="label_default_category_help">Biarkan kosong untuk menggunakan \"Lalai\"</string>
     <string name="snack_categories_deleted">Kategori dipadam</string>
     <string name="dialog_with_checkbox_remove_description">Tarikh bacaan bab ini akan dipadam. Adakah anda pasti?</string>
     <string name="dialog_with_checkbox_reset">Set semula semua bab bagi entri ini</string>

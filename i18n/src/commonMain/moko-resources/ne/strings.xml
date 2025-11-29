@@ -518,6 +518,7 @@
     <string name="myanimelist_relogin">कृपया MAL मा फेरि लगइन गर्नुहोस्</string>
     <string name="source_unsupported">स्रोत समर्थित छैन</string>
     <string name="error_category_exists">सो नाम गरिएको वर्ग पहिले नै अवस्थित छ!</string>
+    <string name="label_default_category_help">\"पूर्वनिर्धारित\" प्रयोग गर्न खाली छोड्नुहोस्</string>
     <string name="snack_categories_deleted">वर्गहरू हटाइयो</string>
     <string name="dialog_with_checkbox_remove_description">यसले यस अध्यायको पढेको मिति हटाउनेछ। के तपाईँ निश्चित हुनुहुन्छ?</string>
     <string name="track_type">प्रकार</string>

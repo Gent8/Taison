@@ -161,6 +161,7 @@
     <string name="status">Статус</string>
     <string name="chapters">Глави</string>
     <string name="error_category_exists">Категория със същото име вече съществува!</string>
+    <string name="label_default_category_help">Оставете празно, за да използвате \"По подразбиране\"</string>
     <string name="snack_categories_deleted">Категориите бяха изтрити</string>
     <string name="dialog_with_checkbox_remove_description">Това ще премахне датата на прочитане на главата. Сигурни ли сте?</string>
     <string name="dialog_with_checkbox_reset">Изчисти всички дати за тази манга</string>

@@ -295,6 +295,7 @@
     <string name="dialog_with_checkbox_remove_description">Ово ће уклонити датум читања овог поглавља. Да ли сте сигурни да то желите?</string>
     <string name="snack_categories_deleted">Категорије обрисане</string>
     <string name="error_category_exists">Категорија са овим именом већ постоји!</string>
+    <string name="label_default_category_help">Оставите празно да бисте користили \"Подразумевано\"</string>
     <string name="track_type">Врста</string>
     <string name="track_status">Статус</string>
     <string name="status">Статус</string>

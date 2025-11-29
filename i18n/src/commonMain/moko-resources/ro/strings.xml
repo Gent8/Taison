@@ -222,6 +222,7 @@
     <string name="track_status">Status</string>
     <string name="track_type">Tip</string>
     <string name="error_category_exists">O categorie cu acest nume deja există!</string>
+    <string name="label_default_category_help">Lăsați gol pentru a folosi \"Implicit\"</string>
     <string name="snack_categories_deleted">Categoriile au fost șterse</string>
     <string name="dialog_with_checkbox_remove_description">Acest lucru va șterge data citirii acestui capitol. Ești sigur?</string>
     <string name="dialog_with_checkbox_reset">Resetați toate capitolele pentru această intrare</string>

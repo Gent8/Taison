@@ -155,6 +155,7 @@
     <string name="status">Stato</string>
     <string name="chapters">Capitoli</string>
     <string name="error_category_exists">Esiste già una categoria con questo nome!</string>
+    <string name="label_default_category_help">Lascia vuoto per usare \"Predefinita\"</string>
     <string name="dialog_with_checkbox_remove_description">Questo rimuoverà la data lettura di questo capitolo. Sei sicuro?</string>
     <string name="dialog_with_checkbox_reset">Reimposta tutti i capitoli di questa voce</string>
     <string name="picture_saved">Immagine salvata</string>

@@ -474,6 +474,7 @@
     <string name="set_chapter_settings_as_default">Uzstādīt kā noklusējuma</string>
     <string name="reading">Šobrīd lasa</string>
     <string name="error_category_exists">Kategorija ar šādu nosaukumu jau pastāv!</string>
+    <string name="label_default_category_help">Atstājiet tukšu, lai izmantotu \"Noklusējuma\"</string>
     <string name="snack_categories_deleted">Kategorija izdzēsta</string>
     <string name="transition_pages_error">Neizdevās ielādēt lapas: %1$s</string>
     <string name="recent_manga_time">Nodaļa %1$s-%2$s</string>

@@ -75,6 +75,7 @@
     <string name="download_unread">Непрочитанные главы</string>
     <string name="dropped">Брошено</string>
     <string name="error_category_exists">Категория с таким названием уже существует!</string>
+    <string name="label_default_category_help">Оставьте пустым, чтобы использовать \"По умолчанию\"</string>
     <string name="fifth_to_last">Пятая от прочитанной главы</string>
     <string name="file_select_backup">Выбрать файл резервной копии</string>
     <string name="file_select_cover">Выбрать обложку</string>

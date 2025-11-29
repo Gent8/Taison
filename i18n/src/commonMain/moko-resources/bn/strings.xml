@@ -193,6 +193,7 @@
     <string name="title">শিরোনাম</string>
     <string name="status">স্থিতি</string>
     <string name="error_category_exists">এই নামের একটি বিভাগ ইতিমধ্যে বিদ্যমান!</string>
+    <string name="label_default_category_help">\"সাধারণ\" ব্যবহার করতে খালি রাখুন</string>
     <string name="snack_categories_deleted">বিভাগগুলি মোছা হয়েছে</string>
     <string name="dialog_with_checkbox_remove_description">এটা এই অধ্যায়ের পড়ার সময়কাল সরিয়ে ফেলবে। আপনি নিশ্চিত?</string>
     <string name="dialog_with_checkbox_reset">এই মাংগার জন্য সব অধ্যায় পুনঃবিন্যাস করুন</string>

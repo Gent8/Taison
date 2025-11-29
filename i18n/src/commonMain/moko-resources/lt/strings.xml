@@ -600,6 +600,7 @@
     <string name="status">Būsena</string>
     <string name="score">Rezultatas</string>
     <string name="error_category_exists">Kategorija su šiuo pavadinimu jau egzistuoja!</string>
+    <string name="label_default_category_help">Palikite tuščią, kad naudotumėte \"Numatytąjį\"</string>
     <string name="snack_categories_deleted">Kategorijos ištrintos</string>
     <string name="custom_filter">Pasirinktinas filtras</string>
     <string name="picture_saved">Viršelis išsaugotas</string>

@@ -192,6 +192,7 @@
     <string name="title">العنوان</string>
     <string name="status">الحال</string>
     <string name="error_category_exists">توجد بالفعل فئة بهذا الاسم!</string>
+    <string name="label_default_category_help">اتركه فارغًا لاستخدام \"الافتراضي\"</string>
     <string name="snack_categories_deleted">تم حذف الفئات</string>
     <string name="dialog_with_checkbox_remove_description">سيؤدي هذا إلى إزالة تاريخ قراءة هذا الفصل. هل أنت متأكد؟</string>
     <string name="dialog_with_checkbox_reset">إعادة تعيين جميع الفصول لهذا الإدخال</string>

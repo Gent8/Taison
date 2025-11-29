@@ -250,6 +250,7 @@
     <string name="track_status">Tila</string>
     <string name="track_type">Tyyppi</string>
     <string name="error_category_exists">Tämän niminen kategoria on jo olemassa!</string>
+    <string name="label_default_category_help">Jätä tyhjäksi käyttääksesi \"Oletus\"</string>
     <string name="snack_categories_deleted">Kategoriat poistettu</string>
     <string name="pref_create_backup">Luo varmuuskopio</string>
     <string name="pref_restore_backup">Palauta varmuuskopio</string>

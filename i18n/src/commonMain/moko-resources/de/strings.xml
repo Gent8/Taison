@@ -185,6 +185,7 @@
     <string name="title">Titel</string>
     <string name="status">Status</string>
     <string name="error_category_exists">Eine Kategorie mit diesem Namen existiert bereits!</string>
+    <string name="label_default_category_help">Leer lassen, um \"Standard\" zu verwenden</string>
     <string name="snack_categories_deleted">Kategorien gelöscht</string>
     <string name="dialog_with_checkbox_remove_description">Das Lesedatum dieses Kapitels wird gelöscht. Bist du sicher?</string>
     <string name="dialog_with_checkbox_reset">Alle Kapitel dieses Eintrags zurücksetzen</string>

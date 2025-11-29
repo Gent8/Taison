@@ -559,6 +559,7 @@
     <string name="source_unsupported">A forrás nem támogatott</string>
     <string name="error_no_match">Nincs egyezés</string>
     <string name="error_category_exists">Ilyen nevű kategória már létezik!</string>
+    <string name="label_default_category_help">Hagyja üresen az \"Alapértelmezett\" használatához</string>
     <string name="dialog_with_checkbox_reset">Összes fejezet visszaállítása ebben az elemben</string>
     <string name="error_saving_picture">Hiba a kép mentése közben</string>
     <string name="on_hold_list">Szüneteltettek listája</string>

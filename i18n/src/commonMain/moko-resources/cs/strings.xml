@@ -256,6 +256,7 @@
     <string name="show_title">Název zdroje</string>
     <string name="show_chapter_number">Číslo kapitoly</string>
     <string name="error_category_exists">Kategorie s tímto jménem již existuje!</string>
+    <string name="label_default_category_help">Nechte prázdné pro použití \"Výchozí\"</string>
     <string name="dialog_with_checkbox_remove_description">Toto odstraní datum přečtení této kapitoly. Jste si jistý?</string>
     <string name="confirm_set_image_as_cover">Chcete tento obrázek nastavit jako obal?</string>
     <string name="transition_pages_error">Chyba při načítání stránek: %1$s</string>

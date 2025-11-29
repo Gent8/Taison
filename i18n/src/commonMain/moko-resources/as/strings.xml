@@ -681,6 +681,7 @@
     <string name="track_delete_text">এইটো স্থানীয়ভাৱে ট্রেকিং মচিব।</string>
     <string name="track_delete_remote_text">%s তো মচিব</string>
     <string name="error_category_exists">এই নামৰ এটা শ্রেণী ইতিমধ্যে আছে!</string>
+    <string name="label_default_category_help">\"পূৰ্বনির্ধাৰিত\" ব্যৱহাৰ কৰিবলৈ খালী ৰাখক</string>
     <string name="dialog_with_checkbox_remove_description">এইটো অধ্যায়ৰ পঢ়া তাৰিখ মচি দিব। আপুনি নিশ্চিতনে?</string>
     <string name="picture_saved">ছবি সংৰক্ষিত</string>
     <string name="error_saving_picture">ছবি সংৰক্ষণ কৰাত ভূল</string>

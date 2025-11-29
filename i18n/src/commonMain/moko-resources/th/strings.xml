@@ -231,6 +231,7 @@
     <string name="track_status">สถานะ</string>
     <string name="track_type">ประเภท</string>
     <string name="error_category_exists">หมวดหมู่ที่มีชื่อนี้มีอยู่แล้ว!</string>
+    <string name="label_default_category_help">ปล่อยว่างเพื่อใช้ \"ค่าเริ่มต้น\"</string>
     <string name="snack_categories_deleted">หมวดหมู่ถูกลบแล้ว</string>
     <string name="dialog_with_checkbox_remove_description">การดำเนินการนี้จะลบวันที่อ่านของตอนนี้ คุณแน่ใจไหม?</string>
     <string name="dialog_with_checkbox_reset">รีเซ็ตตอนทั้งหมดสำหรับรายการนี้</string>

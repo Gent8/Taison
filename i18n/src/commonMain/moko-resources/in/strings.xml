@@ -185,6 +185,7 @@
     <string name="title">Judul</string>
     <string name="status">Status</string>
     <string name="error_category_exists">Kategori dengan nama ini sudah ada!</string>
+    <string name="label_default_category_help">Biarkan kosong untuk menggunakan \"Bawaan\"</string>
     <string name="snack_categories_deleted">Kategori dihapus</string>
     <string name="dialog_with_checkbox_remove_description">Ini akan menghapus tanggal baca bab ini. Apakah Anda yakin?</string>
     <string name="dialog_with_checkbox_reset">Setel ulang semua bab untuk entri ini</string>

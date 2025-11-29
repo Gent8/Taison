@@ -42,6 +42,7 @@
     <string name="dialog_with_checkbox_remove_description">با این کار تاریخ خواندن این قسمت حذف می شود. مطمئنید؟</string>
     <string name="snack_categories_deleted">دسته بندی ها حذف شدند</string>
     <string name="error_category_exists">دسته بندی با این نام قبلا ساخته شده است!</string>
+    <string name="label_default_category_help">برای استفاده از \"پیش فرض\" خالی بگذارید</string>
     <string name="track_type">نوع</string>
     <string name="track_status">وضعیت</string>
     <string name="status">وضعیت</string>

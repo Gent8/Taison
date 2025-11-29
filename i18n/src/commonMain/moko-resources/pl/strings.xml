@@ -75,6 +75,7 @@
     <string name="score">Ocena</string>
     <string name="title">Tytuł</string>
     <string name="error_category_exists">Kategoria o takiej nazwie już istnieje!</string>
+    <string name="label_default_category_help">Pozostaw puste, aby użyć \"Domyślne\"</string>
     <string name="picture_saved">Obraz zapisany</string>
     <string name="set_as_cover">Ustaw jako okładkę</string>
     <string name="cover_updated">Okładka zaktualizowana</string>

@@ -222,6 +222,7 @@
     <string name="track_status">状态</string>
     <string name="track_type">类型</string>
     <string name="error_category_exists">已存在同名分类！</string>
+    <string name="label_default_category_help">留空以使用 \"默认\"</string>
     <string name="snack_categories_deleted">分类已删除</string>
     <string name="dialog_with_checkbox_remove_description">将会清除此章节的阅读日期，你确定吗？</string>
     <string name="dialog_with_checkbox_reset">重置此作品的所有章节</string>

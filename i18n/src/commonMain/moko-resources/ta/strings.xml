@@ -698,6 +698,7 @@
     <string name="track_delete_title">%s கண்காணிப்பை அகற்றவா?</string>
     <string name="track_delete_remote_text">%s இலிருந்து அகற்றவும்</string>
     <string name="error_category_exists">இந்த பெயருடன் ஒரு வகை ஏற்கனவே உள்ளது!</string>
+    <string name="label_default_category_help">\"இயல்புநிலை\" பயன்படுத்த வெறுமையாக விடவும்</string>
     <string name="snack_categories_deleted">வகைகள் நீக்கப்பட்டன</string>
     <string name="dialog_with_checkbox_remove_description">இது இந்த அத்தியாயத்தின் வாசிப்பு தேதியை அகற்றும். நீங்கள் உறுதியாக இருக்கிறீர்களா?</string>
     <string name="dialog_with_checkbox_reset">இந்த நுழைவுக்கான அனைத்து அத்தியாயங்களையும் மீட்டமைக்கவும்</string>

@@ -222,6 +222,7 @@
     <string name="track_status">Κατάσταση</string>
     <string name="track_type">Τύπος</string>
     <string name="error_category_exists">Μια κατηγορία με αυτό το όνομα υπάρχει ήδη!</string>
+    <string name="label_default_category_help">Αφήστε κενό για να χρησιμοποιήσετε το \"Προεπιλογή\"</string>
     <string name="snack_categories_deleted">Οι κατηγορίες διαγράφηκαν</string>
     <string name="dialog_with_checkbox_remove_description">Αυτό θα αφαιρέσει την ημερομηνία ανάγνωσης αυτού του κεφαλαίου. Είστε σίγουροι;</string>
     <string name="dialog_with_checkbox_reset">Επαναφορά όλων των κεφαλαίων για αυτήν την καταχώρηση</string>
