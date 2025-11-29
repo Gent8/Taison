@@ -27,6 +27,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -46,6 +47,7 @@ import tachiyomi.domain.history.interactor.RemoveHistory
 import tachiyomi.domain.history.model.HistoryWithRelations
 import tachiyomi.domain.library.service.LibraryPreferences
 import tachiyomi.domain.manga.interactor.GetDuplicateLibraryManga
+import tachiyomi.domain.manga.interactor.GetLibraryManga
 import tachiyomi.domain.manga.interactor.GetManga
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.domain.manga.model.MangaWithChapterCount
@@ -58,6 +60,7 @@ class HistoryScreenModel(
     private val getCategories: GetCategories = Injekt.get(),
     private val getDuplicateLibraryManga: GetDuplicateLibraryManga = Injekt.get(),
     private val getHistory: GetHistory = Injekt.get(),
+    private val getLibraryManga: GetLibraryManga = Injekt.get(),
     private val getManga: GetManga = Injekt.get(),
     private val getNextChapters: GetNextChapters = Injekt.get(),
     private val libraryPreferences: LibraryPreferences = Injekt.get(),
@@ -99,6 +102,13 @@ class HistoryScreenModel(
 
             val showHiddenCategoriesFlow = libraryPreferences.showHiddenCategories().changes().distinctUntilChanged()
 
+            val showDefaultCategoryFlow = getLibraryManga.subscribe()
+                .map { libraryManga ->
+                    libraryManga.any { it.categories.isEmpty() || it.categories.contains(Category.UNCATEGORIZED_ID) }
+                }
+                .onStart { emit(false) }
+                .distinctUntilChanged()
+
             @Suppress("UNCHECKED_CAST")
             val filterInputsFlow = combine(
                 showNonLibraryEntriesFlow,
@@ -107,6 +117,7 @@ class HistoryScreenModel(
                 categoriesFlow,
                 historyNavigationEnabledFlow,
                 showHiddenCategoriesFlow,
+                showDefaultCategoryFlow,
             ) { values ->
                 HistoryFilterInputs(
                     includeNonLibraryEntries = values[0] as Boolean,
@@ -115,6 +126,7 @@ class HistoryScreenModel(
                     categories = values[3] as List<Category>,
                     categoryNavigationEnabled = values[4] as Boolean,
                     showHiddenCategories = values[5] as Boolean,
+                    showDefaultCategory = values[6] as Boolean,
                 )
             }
 
@@ -130,6 +142,7 @@ class HistoryScreenModel(
                     categoryNavigationEnabled = inputs.categoryNavigationEnabled,
                     navigationMode = navigationMode,
                     showHiddenCategories = inputs.showHiddenCategories,
+                    showDefaultCategory = inputs.showDefaultCategory,
                 )
             }
 
@@ -141,15 +154,23 @@ class HistoryScreenModel(
             }
                 .map { (histories, config) ->
                     val resolvedCategoryId = config.resolvedCategoryId()
-                    val navigationCategories = buildCategoryNavigation(config.categories, config.showHiddenCategories)
+                    val allNavigationCategories =
+                        buildCategoryNavigation(config.categories, config.showHiddenCategories)
                     val categoryHistories = if (config.scopeEnabled) {
                         buildCategoryHistories(
                             history = histories,
-                            categories = navigationCategories,
+                            categories = allNavigationCategories,
                             includeNonLibraryEntries = config.includeNonLibraryEntries,
                         )
                     } else {
                         emptyMap()
+                    }
+                    val navigationCategories = if (config.scopeEnabled) {
+                        allNavigationCategories.filter { category ->
+                            category.id != Category.UNCATEGORIZED_ID || config.showDefaultCategory
+                        }
+                    } else {
+                        allNavigationCategories
                     }
                     val filteredHistory = when (resolvedCategoryId) {
                         null -> histories.toHistoryUiModels()
@@ -274,6 +295,7 @@ class HistoryScreenModel(
         val categories: List<Category>,
         val categoryNavigationEnabled: Boolean,
         val showHiddenCategories: Boolean,
+        val showDefaultCategory: Boolean,
     )
 
     private data class HistoryFilterConfig(
@@ -284,6 +306,7 @@ class HistoryScreenModel(
         val categoryNavigationEnabled: Boolean,
         val navigationMode: LibraryPreferences.CategoryNavigationMode,
         val showHiddenCategories: Boolean,
+        val showDefaultCategory: Boolean,
     ) {
         fun resolvedCategoryId(): Long? {
             if (!scopeEnabled) return null
