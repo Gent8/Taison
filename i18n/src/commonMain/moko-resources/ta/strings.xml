@@ -154,7 +154,7 @@
     <string name="action_next_chapter">அடுத்த அத்தியாயம்</string>
     <string name="action_retry">மீண்டும் முயற்சிக்கவும்</string>
     <string name="action_remove">அகற்று</string>
-    <string name="action_remove_everything">எல்லாவற்றையும் அகற்றவும்</string>
+    <string name="action_delete_everything">எல்லாவற்றையும் அகற்றவும்</string>
     <string name="action_copy_link">இணைப்பை நகலெடுக்கவும்</string>
     <string name="action_open_in_web_view">வெப்வியூவில் திறக்கவும்</string>
     <string name="action_display_show_tabs">வகை தாவல்களைக் காட்டு</string>

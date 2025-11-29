@@ -118,7 +118,7 @@
     <string name="action_cancel">မလုပ်ဆောင်ပါ</string>
     <string name="action_ok">အိုကေ</string>
     <string name="action_remove">ဖယ်ရှားပါ</string>
-    <string name="action_remove_everything">အားလုံးကို ဖယ်ရှားပါ</string>
+    <string name="action_delete_everything">အားလုံးကို ဖယ်ရှားပါ</string>
     <string name="action_resume">ပြန်စပါ</string>
     <string name="action_open_in_browser">ဘရောက်ဇာတွင် ဖွင့်ပါ</string>
     <string name="action_show_manga">စာအုပ်စင်ပြပါ</string>

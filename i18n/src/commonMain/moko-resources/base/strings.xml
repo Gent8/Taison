@@ -107,7 +107,7 @@
     <string name="action_next_chapter">Next chapter</string>
     <string name="action_retry">Retry</string>
     <string name="action_remove">Remove</string>
-    <string name="action_remove_everything">Remove everything</string>
+    <string name="action_delete_everything">Delete everything</string>
     <string name="action_start">Start</string>
     <string name="action_resume">Resume</string>
     <string name="action_open_in_browser">Open in browser</string>
@@ -876,7 +876,7 @@
     <string name="pref_clear_history">Clear history</string>
     <string name="history_delete_title">Delete history</string>
     <string name="history_delete_scope_message">Choose what to delete.</string>
-    <string name="history_delete_scope_everything">Remove everything</string>
+    <string name="history_delete_scope_everything">Delete everything</string>
     <string name="history_delete_scope_everything_description">Delete all history entries across all categories</string>
     <string name="history_delete_scope_active_title">Delete history for shown entries</string>
     <string name="history_delete_scope_active">%s</string>

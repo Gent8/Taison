@@ -555,7 +555,7 @@
     <string name="enhanced_tracking_info">Služby, ktoré poskytujú rozšírené funkcie pre konkrétne zdroje. Mangy sú automaticky sledované po pridaní do vašej knižnice.</string>
     <string name="pref_dual_page_split">Rozdelenie na dve strany</string>
     <string name="action_sort_last_manga_update">Posledná aktualizácia</string>
-    <string name="action_remove_everything">Odstrániť všetko</string>
+    <string name="action_delete_everything">Odstrániť všetko</string>
     <string name="internal_error">InternalError: Skontrolujte záznmy pre ďalšie informácie</string>
     <string name="ext_nsfw_short">18+</string>
     <string name="ext_nsfw_warning">Zdroje z tohto rozšírenia môžu obsahovať obsah pre dospleých (18+)</string>

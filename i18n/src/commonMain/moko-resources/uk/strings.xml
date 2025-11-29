@@ -608,7 +608,7 @@
     <string name="appwidget_updates_description">Переглянути нещодавно оновлені записи бібліотеки</string>
     <string name="appwidget_unavailable_locked">Віджет не доступний при ввімкненому блокуванні застосунку</string>
     <string name="pref_user_agent_string">Типовий user agent</string>
-    <string name="action_remove_everything">Видалити все</string>
+    <string name="action_delete_everything">Видалити все</string>
     <string name="pref_reset_user_agent_string">Скинути типовий user agent</string>
     <string name="multi_lang">Багатомовне</string>
     <string name="updates_last_update_info">Останнє оновлення бібліотеки: %s</string>

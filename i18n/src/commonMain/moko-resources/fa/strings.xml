@@ -556,7 +556,7 @@
     <string name="auto_download_while_reading">دانلود خودکار در حین خواندن</string>
     <string name="action_search_hint">جستجو…</string>
     <string name="action_open_random_manga">باز کردن ورودی تصادفی</string>
-    <string name="action_remove_everything">حذف همه‌چیز</string>
+    <string name="action_delete_everything">حذف همه‌چیز</string>
     <string name="internal_error">خطای داخلی: برای اطلاعات بیشتر گزارش خطا را بررسی کنید</string>
     <string name="pref_downloads_summary">دانلود خودکار، دانلود از قبل</string>
     <string name="pref_browse_summary">منابع، برنامه های افزودنی، جستجوی سراسری</string>

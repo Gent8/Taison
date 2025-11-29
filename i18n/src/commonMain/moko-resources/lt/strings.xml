@@ -411,7 +411,7 @@
     <string name="theme_lavender">Levandos</string>
     <string name="action_close">Uždaryti</string>
     <string name="pref_app_language">Programos kalba</string>
-    <string name="action_remove_everything">Ištrinti viską</string>
+    <string name="action_delete_everything">Ištrinti viską</string>
     <string name="internal_error">InternalError: Patikrinkite klaidų žurnalus, kad gautumėte daugiau informacijos</string>
     <string name="network_not_metered">Kai duomenys neapmokestinami</string>
     <string name="action_move_to_top_all_for_series">Perkelti seriją į viršų</string>

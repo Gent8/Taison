@@ -576,7 +576,7 @@
     <string name="internal_error">InternalError: Bekijk de crash logs voor meer informatie</string>
     <string name="theme_lavender">Lavendel</string>
     <string name="action_sort_last_manga_update">Laatst gecontroleerd op updates</string>
-    <string name="action_remove_everything">Alles verwijderen</string>
+    <string name="action_delete_everything">Alles verwijderen</string>
     <string name="delete_category_confirmation">Wenst u categorie \"%s\" te verwijderen?</string>
     <string name="delete_category">Categorie verwijderen</string>
     <string name="action_close">Sluiten</string>

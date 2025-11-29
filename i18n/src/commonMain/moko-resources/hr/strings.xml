@@ -589,7 +589,7 @@
     <string name="internal_error">Interna greška: Provjeri zapisnike o prekidu aplikacije za daljnje informacije</string>
     <string name="pref_app_language">Jezik aplikacije</string>
     <string name="action_close">Zatvori</string>
-    <string name="action_remove_everything">Ukloni sve</string>
+    <string name="action_delete_everything">Ukloni sve</string>
     <string name="theme_lavender">Lavanda</string>
     <string name="ext_info_language">Jezik</string>
     <string name="ext_info_version">Verzija</string>

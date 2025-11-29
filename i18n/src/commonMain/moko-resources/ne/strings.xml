@@ -574,7 +574,7 @@
     <string name="delete_category_confirmation">के तपाई \"%s\" वर्ग हटाउन चाहनु हुन्छ?</string>
     <string name="delete_category">वर्ग हटाउनुहोस्</string>
     <string name="action_search_hint">खोज्नुहोस्…</string>
-    <string name="action_remove_everything">सबै हटाउनुहोस्</string>
+    <string name="action_delete_everything">सबै हटाउनुहोस्</string>
     <string name="pref_reader_summary">पढ्ने मोड, प्रदर्शन, नेभिगेसन</string>
     <string name="pref_downloads_summary">स्वचालित डाउनलोड, अगाडि डाउनलोड गर्ने</string>
     <string name="pref_browse_summary">स्रोतहरू, एक्सटेन्शनहरू, ग्लोबल खोज</string>

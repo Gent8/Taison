@@ -149,7 +149,7 @@
     <string name="action_retry">আনুষ্ঠানিক প্ৰয়াস কৰক</string>
     <string name="action_remove">আঁতৰাওক</string>
     <string name="action_copy_to_clipboard">ক্লিপবোর্ডত কপি কৰক</string>
-    <string name="action_remove_everything">সকলো আঁতৰাওক</string>
+    <string name="action_delete_everything">সকলো আঁতৰাওক</string>
     <string name="action_start">আৰম্ভ কৰক</string>
     <string name="action_resume">পুনৰ আৰম্ভ কৰক</string>
     <string name="action_copy_link">লিংক কপি কৰক</string>

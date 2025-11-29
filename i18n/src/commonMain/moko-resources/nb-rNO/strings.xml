@@ -622,7 +622,7 @@
     <string name="pref_app_language">Appspråk</string>
     <string name="description_placeholder">Ingen beskrivelse</string>
     <string name="action_search_hint">Søk…</string>
-    <string name="action_remove_everything">Fjern alt</string>
+    <string name="action_delete_everything">Fjern alt</string>
     <string name="ext_info_version">Versjon</string>
     <string name="custom_cover">Egendefinert omslag</string>
     <string name="popular">Populært</string>

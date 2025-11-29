@@ -259,7 +259,7 @@
     <string name="internal_error">Ішкі қателік: Қосымша ақпарат алу үшін қателіктер тіркеуін тексеріңіз</string>
     <string name="theme_lavender">Лаванда</string>
     <string name="pref_skip_filtered_chapters">Сүзілген тарауларлы өткізіп жіберу</string>
-    <string name="action_remove_everything">Барлығын жою</string>
+    <string name="action_delete_everything">Барлығын жою</string>
     <string name="filter_mode_overlay">Қабаттасу</string>
     <string name="filter_mode_multiply">Көбейту</string>
     <string name="filter_mode_screen">Экран</string>

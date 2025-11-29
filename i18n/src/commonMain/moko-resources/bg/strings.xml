@@ -614,7 +614,7 @@
     <string name="webview_data_deleted">Данните на WebView изчистени</string>
     <string name="pref_reset_viewer_flags_error">Настройките на четеца не можаха да бъдат нулирани</string>
     <string name="source_filter_empty_screen">Не беше намерен инсталиран източник</string>
-    <string name="action_remove_everything">Премахни всичко</string>
+    <string name="action_delete_everything">Премахни всичко</string>
     <string name="ext_info_version">Версия</string>
     <string name="on_hiatus">В хиатус</string>
     <string name="custom_cover">Корица по избор</string>

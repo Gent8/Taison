@@ -576,7 +576,7 @@
     <string name="error_saving_picture">Eroare la salvarea imaginii</string>
     <string name="ext_update_all">Actualizează tot</string>
     <string name="disabled_nav">Deactivat</string>
-    <string name="action_remove_everything">Șterge tot</string>
+    <string name="action_delete_everything">Șterge tot</string>
     <string name="pref_reader_actions">Acțiuni</string>
     <string name="pref_create_folder_per_manga">Salvează pagini în dosare separate</string>
     <string name="description_placeholder">Fără descriere</string>

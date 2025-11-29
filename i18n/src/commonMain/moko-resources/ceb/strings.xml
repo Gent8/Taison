@@ -375,7 +375,7 @@
     <string name="internal_error">Internal nga Sayop: Susiha ang mga crash log para sa dugang nga impormasyon</string>
     <string name="pref_navigate_pan">Pag-navigate sa pan</string>
     <string name="theme_lavender">Lavender</string>
-    <string name="action_remove_everything">Kuhaa ang tanan</string>
+    <string name="action_delete_everything">Kuhaa ang tanan</string>
     <string name="pref_app_language">Pinulongan sa app</string>
     <string name="used_cache">Gigamit: %1$s</string>
     <string name="database_clean">Limpyo ang database</string>

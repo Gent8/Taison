@@ -573,7 +573,7 @@
     <string name="ext_info_language">Hizkuntza</string>
     <string name="action_search_hint">Bilatu…</string>
     <string name="delete_category_confirmation">\"%s\" kategoria ezabatu nahi duzu?</string>
-    <string name="action_remove_everything">Guztia kendu</string>
+    <string name="action_delete_everything">Guztia kendu</string>
     <string name="label_stats">Estatistikak</string>
     <string name="label_started">Hasia</string>
     <string name="label_local">Lokala</string>

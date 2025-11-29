@@ -224,7 +224,7 @@
     <string name="action_next_chapter">Kapitulli tjetër</string>
     <string name="action_retry">Provo sërish</string>
     <string name="action_remove">Hiq</string>
-    <string name="action_remove_everything">Hiqni gjithçka</string>
+    <string name="action_delete_everything">Hiqni gjithçka</string>
     <string name="action_start">Fillo</string>
     <string name="action_resume">Rifillo</string>
     <string name="action_show_manga">Shfaq hyrjen</string>

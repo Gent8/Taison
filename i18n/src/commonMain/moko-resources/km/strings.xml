@@ -200,7 +200,7 @@
     <string name="scanlator">អ្នកបកប្រែ</string>
     <string name="action_bar_up_description">រុករកទៅលើ</string>
     <string name="label_data_storage">ទិន្នន័យ និងអង្គផ្ទុក</string>
-    <string name="action_remove_everything">ដកអ្វីៗទាំងអស់ចេញ</string>
+    <string name="action_delete_everything">ដកអ្វីៗទាំងអស់ចេញ</string>
     <string name="action_open_random_manga">បើកត្លុកដោយចៃដន្យ</string>
     <string name="label_started">បានចាប់ផ្តើមហើយ</string>
     <string name="action_sort_unread_count">ចំនួនមិនទាន់អាន</string>

@@ -334,7 +334,7 @@
     <string name="action_move_to_top_all_for_series">Перамясціць у пачатак спісу</string>
     <string name="ext_installer_pref">Усталёўнік</string>
     <string name="ext_installer_legacy">па змаўчанні</string>
-    <string name="action_remove_everything">Выдаліць усё</string>
+    <string name="action_delete_everything">Выдаліць усё</string>
     <string name="update_72hour">Кожныя 3 дні</string>
     <string name="connected_to_wifi">Толькі па Wi-Fi</string>
     <string name="not_selected">Не выбрана</string>

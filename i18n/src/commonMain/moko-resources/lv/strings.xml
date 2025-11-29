@@ -639,7 +639,7 @@
     <string name="updates_last_update_info_just_now">Tikko</string>
     <string name="action_update_category">Atjaunināt kategoriju</string>
     <string name="action_open_random_manga">Atvērt nejaušu ierakstu</string>
-    <string name="action_remove_everything">Noņemt visu</string>
+    <string name="action_delete_everything">Noņemt visu</string>
     <string name="action_display_show_continue_reading_button">Turpināt lasīt poga</string>
     <string name="auto_download_while_reading">Automātiska lejupielāde lasīšanas laikā</string>
     <string name="enhanced_services_not_installed">Pieejams, bet avots nav instalēts: %s</string>

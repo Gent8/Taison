@@ -318,7 +318,7 @@
     <string name="action_sort_random">mawut</string>
     <string name="action_update_category">Mbaharui kategori</string>
     <string name="action_open_random_manga">Bikak entri acak</string>
-    <string name="action_remove_everything">Busek sedaya</string>
+    <string name="action_delete_everything">Busek sedaya</string>
     <string name="action_copy_to_clipboard">Santun dhateng blabak klip</string>
     <string name="action_copy_link">Santun link</string>
     <string name="action_display_unread_badge">Bab durung diwaca</string>

@@ -652,7 +652,7 @@
     <string name="action_sort_last_manga_update">Последња провера ажурирања</string>
     <string name="delete_category">Обриши категорију</string>
     <string name="delete_category_confirmation">Желиш ли обрисати категорију \"%s\"?</string>
-    <string name="action_remove_everything">Уклони све</string>
+    <string name="action_delete_everything">Уклони све</string>
     <string name="crash_screen_title">Упс!</string>
     <string name="crash_screen_restart_application">Поново покрени апликацију</string>
     <string name="cant_open_last_read_chapter">Није могуће отворити последње прочитано поглавље</string>

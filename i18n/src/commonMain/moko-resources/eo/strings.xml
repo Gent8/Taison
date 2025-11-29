@@ -470,7 +470,7 @@
     <string name="action_revert_to_default">Restarigi la defaŭltojn</string>
     <string name="action_close">Fermi</string>
     <string name="action_ok">Bone</string>
-    <string name="action_remove_everything">Forigi ĉion</string>
+    <string name="action_delete_everything">Forigi ĉion</string>
     <string name="onboarding_heading">Bonvenon!</string>
     <string name="onboarding_action_skip">Preterpasi</string>
     <string name="selected">Elektitaj</string>

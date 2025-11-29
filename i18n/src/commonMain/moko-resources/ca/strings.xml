@@ -606,7 +606,7 @@
     <string name="pref_reset_user_agent_string">Restableix la cadena d’agent d’usuari per defecte</string>
     <string name="appwidget_unavailable_locked">El widget no està disponible quan hi ha activat el blocatge de l’aplicació</string>
     <string name="appwidget_updates_description">Vegeu els elements de la biblioteca actualitzats recentment</string>
-    <string name="action_remove_everything">Elimina-ho tot</string>
+    <string name="action_delete_everything">Elimina-ho tot</string>
     <string name="update_already_running">Ja s’està executant una actualització</string>
     <string name="theme_tidalwave">Tsunami</string>
     <string name="error_user_agent_string_blank">La cadena de l’agent d’usuari no pot estar buida</string>

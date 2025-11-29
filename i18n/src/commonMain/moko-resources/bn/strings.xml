@@ -564,7 +564,7 @@
     <string name="appwidget_updates_description">সম্প্রতি আপনার হালনাগাদকৃত মাঙ্গা দেখুন</string>
     <string name="are_you_sure">আপনি কি নিশ্চিত?</string>
     <string name="action_sort_unread_count">অপঠিত সংখ্যা</string>
-    <string name="action_remove_everything">সবকিছু মুছুন</string>
+    <string name="action_delete_everything">সবকিছু মুছুন</string>
     <string name="action_show_manga">লেখা দেখান</string>
     <string name="delete_category">বিভাগ মুছুন</string>
     <string name="theme_lavender">ল্যাভেণ্ডার</string>

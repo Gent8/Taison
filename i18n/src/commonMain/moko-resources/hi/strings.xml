@@ -611,7 +611,7 @@
     <string name="pref_user_agent_string">चूक यूजर एजेंट स्ट्रिंग (User agent string)</string>
     <string name="download_ahead">आगे डाउनलोड करें</string>
     <string name="auto_download_while_reading">पढ़ते समय ऑटो डाउनलोड करे</string>
-    <string name="action_remove_everything">सब कुछ हटा दें</string>
+    <string name="action_delete_everything">सब कुछ हटा दें</string>
     <string name="popular">लोकप्रिय</string>
     <string name="theme_tidalwave">टाइडल वेव्ह</string>
     <string name="error_user_agent_string_blank">यूजर एजेंट स्ट्रिंग (User Agent String) खाली नहीं रखा जा सकता</string>
