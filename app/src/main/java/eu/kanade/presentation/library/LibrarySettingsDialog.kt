@@ -390,7 +390,7 @@ private fun ColumnScope.GroupPage(
     screenModel: LibrarySettingsScreenModel,
     hasCategories: Boolean,
 ) {
-    val groups = remember(hasCategories, screenModel.grouping) {
+    val groups = remember(hasCategories) {
         buildGroupModes(hasCategories, screenModel.grouping)
     }
 
