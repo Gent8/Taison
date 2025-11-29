@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -14,6 +13,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.window.DialogWindowProvider
 import eu.kanade.presentation.components.TabbedDialog
 import eu.kanade.presentation.components.TabbedDialogPaddings
+import eu.kanade.presentation.components.rememberTabbedDialogState
 import eu.kanade.tachiyomi.ui.reader.setting.ReaderSettingsScreenModel
 import kotlinx.collections.immutable.persistentListOf
 import tachiyomi.i18n.MR
@@ -31,7 +31,7 @@ fun ReaderSettingsDialog(
         stringResource(MR.strings.pref_category_general),
         stringResource(MR.strings.custom_filter),
     )
-    val pagerState = rememberPagerState { tabTitles.size }
+    val tabState = rememberTabbedDialogState()
 
     BoxWithConstraints {
         TabbedDialog(
@@ -41,12 +41,12 @@ fun ReaderSettingsDialog(
                 onShowMenus()
             },
             tabTitles = tabTitles,
-            pagerState = pagerState,
+            tabState = tabState,
         ) { page ->
             val window = (LocalView.current.parent as? DialogWindowProvider)?.window
 
-            LaunchedEffect(pagerState.currentPage) {
-                if (pagerState.currentPage == 2) {
+            LaunchedEffect(tabState.intValue) {
+                if (tabState.intValue == 2) {
                     window?.setDimAmount(0f)
                     onHideMenus()
                 } else {
