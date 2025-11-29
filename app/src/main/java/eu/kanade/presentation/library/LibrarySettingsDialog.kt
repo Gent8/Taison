@@ -343,6 +343,7 @@ private fun ColumnScope.DisplayPage(
     )
 }
 
+private data class GroupMode(
     val int: Int,
     val nameRes: StringResource,
     val drawableRes: Int,
