@@ -158,7 +158,12 @@ class LibraryScreenModel(
                 libraryPreferences.groupLibraryBy().changes(),
             ) { data, groupType ->
                 data.favorites
-                    .applyGrouping(data.categories, groupType, data.showHiddenCategories)
+                    .applyGrouping(
+                        categories = data.categories,
+                        groupType = groupType,
+                        showHiddenCategories = data.showHiddenCategories,
+                        showSystemCategory = data.showSystemCategory,
+                    )
                     .applySort(data.favoritesById, data.tracksMap, data.loggedInTrackerIds)
             }
                 .collectLatest { grouped ->
@@ -324,16 +329,13 @@ class LibraryScreenModel(
         categories: List<Category>,
         groupType: Int,
         showHiddenCategories: Boolean,
+        showSystemCategory: Boolean,
     ): Map<Category, List</* LibraryItem */ Long>> {
         return when (groupType) {
             LibraryGroup.BY_DEFAULT -> {
-                var showSystemCategory = false
                 val groupCache = mutableMapOf</* Category.id */ Long, MutableList</* LibraryItem */ Long>>()
                 forEach { item ->
                     item.libraryManga.categories.forEach { categoryId ->
-                        if (categoryId == UNCATEGORIZED_ID) {
-                            showSystemCategory = true
-                        }
                         groupCache.getOrPut(categoryId) { mutableListOf() }.add(item.id)
                     }
                 }
