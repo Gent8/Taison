@@ -89,6 +89,11 @@ class LibraryPreferences(
         TriState.DISABLED,
     )
 
+    fun filterMature() = preferenceStore.getEnum(
+        "pref_filter_library_mature_v2",
+        TriState.DISABLED,
+    )
+
     fun filterTracking(id: Int) = preferenceStore.getEnum(
         "pref_filter_library_tracked_${id}_v2",
         TriState.DISABLED,
@@ -144,6 +149,8 @@ class LibraryPreferences(
     fun categoryNumberOfItems() = preferenceStore.getBoolean("display_number_of_items", false)
 
     fun categorizedDisplaySettings() = preferenceStore.getBoolean("categorized_display", false)
+
+    fun showHiddenCategories() = preferenceStore.getBoolean("hide_hidden_categories", false)
 
     fun updateCategories() = preferenceStore.getStringSet(LIBRARY_UPDATE_CATEGORIES_PREF_KEY, emptySet())
 

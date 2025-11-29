@@ -97,19 +97,24 @@ class HistoryScreenModel(
                         .flowOn(Dispatchers.IO)
                 }
 
+            val showHiddenCategoriesFlow = libraryPreferences.showHiddenCategories().changes().distinctUntilChanged()
+
+            @Suppress("UNCHECKED_CAST")
             val filterInputsFlow = combine(
                 showNonLibraryEntriesFlow,
                 scopeEnabledFlow,
                 activeCategoryIdFlow,
                 categoriesFlow,
                 historyNavigationEnabledFlow,
-            ) { includeNonLibraryEntries, scopeEnabled, categoryId, categories, categoryNavigationEnabled ->
+                showHiddenCategoriesFlow,
+            ) { values ->
                 HistoryFilterInputs(
-                    includeNonLibraryEntries = includeNonLibraryEntries,
-                    scopeEnabled = scopeEnabled,
-                    activeCategoryId = categoryId,
-                    categories = categories,
-                    categoryNavigationEnabled = categoryNavigationEnabled,
+                    includeNonLibraryEntries = values[0] as Boolean,
+                    scopeEnabled = values[1] as Boolean,
+                    activeCategoryId = values[2] as Long,
+                    categories = values[3] as List<Category>,
+                    categoryNavigationEnabled = values[4] as Boolean,
+                    showHiddenCategories = values[5] as Boolean,
                 )
             }
 
@@ -124,6 +129,7 @@ class HistoryScreenModel(
                     categories = inputs.categories,
                     categoryNavigationEnabled = inputs.categoryNavigationEnabled,
                     navigationMode = navigationMode,
+                    showHiddenCategories = inputs.showHiddenCategories,
                 )
             }
 
@@ -135,7 +141,7 @@ class HistoryScreenModel(
             }
                 .map { (histories, config) ->
                     val resolvedCategoryId = config.resolvedCategoryId()
-                    val navigationCategories = buildCategoryNavigation(config.categories)
+                    val navigationCategories = buildCategoryNavigation(config.categories, config.showHiddenCategories)
                     val categoryHistories = if (config.scopeEnabled) {
                         buildCategoryHistories(
                             history = histories,
@@ -156,6 +162,7 @@ class HistoryScreenModel(
                                 name = "",
                                 order = 0,
                                 flags = 0,
+                                hidden = false,
                             )
                             else -> navigationCategories.firstOrNull { it.id == id }
                         }
@@ -193,14 +200,18 @@ class HistoryScreenModel(
         }
     }
 
-    private fun buildCategoryNavigation(categories: List<Category>): List<Category> {
+    private fun buildCategoryNavigation(categories: List<Category>, showHiddenCategories: Boolean): List<Category> {
         val defaultCategory = Category(
             id = Category.UNCATEGORIZED_ID,
             name = "",
             order = 0,
             flags = 0,
+            hidden = false,
         )
-        val filtered = categories.filter { it.id != Category.UNCATEGORIZED_ID }
+        val filtered = categories.filter {
+            it.id != Category.UNCATEGORIZED_ID &&
+                (showHiddenCategories || !it.hidden)
+        }
         return listOf(defaultCategory) + filtered
     }
 
@@ -262,6 +273,7 @@ class HistoryScreenModel(
         val activeCategoryId: Long,
         val categories: List<Category>,
         val categoryNavigationEnabled: Boolean,
+        val showHiddenCategories: Boolean,
     )
 
     private data class HistoryFilterConfig(
@@ -271,6 +283,7 @@ class HistoryScreenModel(
         val categories: List<Category>,
         val categoryNavigationEnabled: Boolean,
         val navigationMode: LibraryPreferences.CategoryNavigationMode,
+        val showHiddenCategories: Boolean,
     ) {
         fun resolvedCategoryId(): Long? {
             if (!scopeEnabled) return null

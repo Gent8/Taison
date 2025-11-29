@@ -23,6 +23,7 @@ import eu.kanade.tachiyomi.source.model.SManga
 import eu.kanade.tachiyomi.source.online.HttpSource
 import eu.kanade.tachiyomi.util.category.LastUsedCategoryState
 import eu.kanade.tachiyomi.util.chapter.getNextUnread
+import eu.kanade.tachiyomi.util.isMature
 import eu.kanade.tachiyomi.util.removeCovers
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
@@ -92,13 +93,24 @@ class LibraryScreenModel(
             state.copy(activeCategoryIndex = libraryPreferences.lastUsedCategory().get())
         }
         screenModelScope.launchIO {
+            @Suppress("UNCHECKED_CAST")
             combine(
                 state.map { it.searchQuery }.distinctUntilChanged().debounce(SEARCH_DEBOUNCE_MILLIS),
                 getCategories.subscribe(),
                 getFavoritesFlow(),
                 combine(getTracksPerManga.subscribe(), getTrackingFiltersFlow(), ::Pair),
                 getLibraryItemPreferencesFlow(),
-            ) { searchQuery, categories, favorites, (tracksMap, trackingFilters), itemPreferences ->
+                libraryPreferences.showHiddenCategories().changes(),
+            ) { values ->
+                val searchQuery = values[0] as String?
+                val categories = values[1] as List<Category>
+                val favorites = values[2] as List<LibraryItem>
+                val tracksPair = values[3] as Pair<Map<Long, List<Track>>, Map<Long, TriState>>
+                val tracksMap = tracksPair.first
+                val trackingFilters = tracksPair.second
+                val itemPreferences = values[4] as ItemPreferences
+                val showHiddenCategories = values[5] as Boolean
+
                 val showSystemCategory = favorites.any { it.libraryManga.categories.contains(0) }
                 val filteredFavorites = favorites
                     .applyFilters(tracksMap, trackingFilters, itemPreferences)
@@ -111,6 +123,7 @@ class LibraryScreenModel(
                     favorites = filteredFavorites,
                     tracksMap = tracksMap,
                     loggedInTrackerIds = trackingFilters.keys,
+                    showHiddenCategories = showHiddenCategories,
                 )
             }
                 .distinctUntilChanged()
@@ -128,7 +141,7 @@ class LibraryScreenModel(
                 .distinctUntilChanged()
                 .map { data ->
                     data.favorites
-                        .applyGrouping(data.categories, data.showSystemCategory)
+                        .applyGrouping(data.categories, data.showSystemCategory, data.showHiddenCategories)
                         .applySort(data.favoritesById, data.tracksMap, data.loggedInTrackerIds)
                 }
                 .collectLatest { grouped ->
@@ -194,6 +207,7 @@ class LibraryScreenModel(
                 prefs.filterBookmarked,
                 prefs.filterCompleted,
                 prefs.filterIntervalCustom,
+                prefs.filterMature,
                 *trackFilters.values.toTypedArray(),
             )
                 .any { it != TriState.DISABLED }
@@ -220,6 +234,7 @@ class LibraryScreenModel(
         val filterBookmarked = preferences.filterBookmarked
         val filterCompleted = preferences.filterCompleted
         val filterIntervalCustom = preferences.filterIntervalCustom
+        val filterMature = preferences.filterMature
 
         val isNotLoggedInAnyTrack = trackingFilter.isEmpty()
 
@@ -259,6 +274,10 @@ class LibraryScreenModel(
             }
         }
 
+        val filterFnMature: (LibraryItem) -> Boolean = {
+            applyFilter(filterMature) { it.libraryManga.manga.isMature() }
+        }
+
         val filterFnTracking: (LibraryItem) -> Boolean = tracking@{ item ->
             if (isNotLoggedInAnyTrack || trackFiltersIsIgnored) return@tracking true
 
@@ -279,6 +298,7 @@ class LibraryScreenModel(
                 filterFnBookmarked(it) &&
                 filterFnCompleted(it) &&
                 filterFnIntervalCustom(it) &&
+                filterFnMature(it) &&
                 filterFnTracking(it)
         }
     }
@@ -286,6 +306,7 @@ class LibraryScreenModel(
     private fun List<LibraryItem>.applyGrouping(
         categories: List<Category>,
         showSystemCategory: Boolean,
+        showHiddenCategories: Boolean,
     ): Map<Category, List</* LibraryItem */ Long>> {
         val groupCache = mutableMapOf</* Category */ Long, MutableList</* LibraryItem */ Long>>()
         forEach { item ->
@@ -293,7 +314,10 @@ class LibraryScreenModel(
                 groupCache.getOrPut(categoryId) { mutableListOf() }.add(item.id)
             }
         }
-        return categories.filter { showSystemCategory || !it.isSystemCategory }
+        return categories.filter {
+            (showSystemCategory || !it.isSystemCategory) &&
+                (showHiddenCategories || !it.hidden)
+        }
             .associateWith { groupCache[it.id]?.toList().orEmpty() }
     }
 
@@ -393,6 +417,7 @@ class LibraryScreenModel(
             libraryPreferences.filterBookmarked().changes(),
             libraryPreferences.filterCompleted().changes(),
             libraryPreferences.filterIntervalCustom().changes(),
+            libraryPreferences.filterMature().changes(),
         ) {
             ItemPreferences(
                 downloadBadge = it[0] as Boolean,
@@ -407,6 +432,7 @@ class LibraryScreenModel(
                 filterBookmarked = it[9] as TriState,
                 filterCompleted = it[10] as TriState,
                 filterIntervalCustom = it[11] as TriState,
+                filterMature = it[12] as TriState,
             )
         }
     }
@@ -751,6 +777,7 @@ class LibraryScreenModel(
         val filterBookmarked: TriState,
         val filterCompleted: TriState,
         val filterIntervalCustom: TriState,
+        val filterMature: TriState,
     )
 
     @Immutable
@@ -761,6 +788,7 @@ class LibraryScreenModel(
         val favorites: List<LibraryItem> = emptyList(),
         val tracksMap: Map</* Manga */ Long, List<Track>> = emptyMap(),
         val loggedInTrackerIds: Set<Long> = emptySet(),
+        val showHiddenCategories: Boolean = false,
     ) {
         val favoritesById by lazy { favorites.associateBy { it.id } }
     }

@@ -125,6 +125,12 @@ private fun ColumnScope.FilterPage(
             onClick = { screenModel.toggleFilter(LibraryPreferences::filterIntervalCustom) },
         )
     }
+    val filterMature by screenModel.libraryPreferences.filterMature().collectAsState()
+    TriStateItem(
+        label = stringResource(MR.strings.mature),
+        state = filterMature,
+        onClick = { screenModel.toggleFilter(LibraryPreferences::filterMature) },
+    )
 
     val trackers by screenModel.trackersFlow.collectAsState()
     when (trackers.size) {
@@ -316,5 +322,9 @@ private fun ColumnScope.DisplayPage(
     CheckboxItem(
         label = stringResource(MR.strings.action_display_show_number_of_items),
         pref = screenModel.libraryPreferences.categoryNumberOfItems(),
+    )
+    CheckboxItem(
+        label = stringResource(MR.strings.action_show_hidden_categories),
+        pref = screenModel.libraryPreferences.showHiddenCategories(),
     )
 }

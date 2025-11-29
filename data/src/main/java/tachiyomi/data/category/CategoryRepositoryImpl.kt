@@ -41,6 +41,7 @@ class CategoryRepositoryImpl(
                 name = category.name,
                 order = category.order,
                 flags = category.flags,
+                hidden = if (category.hidden) 1 else 0,
             )
         }
     }
@@ -64,6 +65,7 @@ class CategoryRepositoryImpl(
             name = update.name,
             order = update.order,
             flags = update.flags,
+            hidden = update.hidden?.let { if (it) 1 else 0 },
             categoryId = update.id,
         )
     }
@@ -87,12 +89,14 @@ class CategoryRepositoryImpl(
         name: String,
         order: Long,
         flags: Long,
+        hidden: Long,
     ): Category {
         return Category(
             id = id,
             name = name,
             order = order,
             flags = flags,
+            hidden = hidden != 0L,
         )
     }
 }

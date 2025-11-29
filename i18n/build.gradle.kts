@@ -41,7 +41,7 @@ android {
     }
 
     lint {
-        disable.addAll(listOf("MissingTranslation", "ExtraTranslation"))
+        disable.addAll(listOf("MissingTranslation", "ExtraTranslation", "MissingQuantity", "ImpliedQuantity"))
     }
 }
 

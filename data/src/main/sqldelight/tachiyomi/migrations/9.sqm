@@ -1,0 +1,3 @@
+-- Add hidden column to categories table
+ALTER TABLE categories ADD COLUMN hidden INTEGER NOT NULL DEFAULT 0;
+
