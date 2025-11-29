@@ -13,6 +13,7 @@ import eu.kanade.presentation.category.CategoryScreen
 import eu.kanade.presentation.category.components.CategoryCreateDialog
 import eu.kanade.presentation.category.components.CategoryDeleteDialog
 import eu.kanade.presentation.category.components.CategoryRenameDialog
+import eu.kanade.presentation.category.visualName
 import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.util.system.toast
 import kotlinx.collections.immutable.toImmutableList
@@ -56,11 +57,13 @@ class CategoryScreen : Screen() {
                 )
             }
             is CategoryDialog.Rename -> {
+                val isSystemCategory = dialog.category.isSystemCategory
                 CategoryRenameDialog(
                     onDismissRequest = screenModel::dismissDialog,
                     onRename = { screenModel.renameCategory(dialog.category, it) },
                     categories = successState.categories.fastMap { it.name }.toImmutableList(),
-                    category = dialog.category.name,
+                    category = dialog.category.visualName(context),
+                    isSystemCategory = isSystemCategory,
                 )
             }
             is CategoryDialog.Delete -> {

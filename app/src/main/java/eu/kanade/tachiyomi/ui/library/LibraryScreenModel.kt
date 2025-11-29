@@ -111,7 +111,17 @@ class LibraryScreenModel(
                 val itemPreferences = values[4] as ItemPreferences
                 val showHiddenCategories = values[5] as Boolean
 
-                val showSystemCategory = favorites.any { it.libraryManga.categories.contains(0) }
+                val systemCategory = categories.find { it.isSystemCategory }
+                val hasMangaInDefault = favorites.any {
+                    it.libraryManga.categories.isEmpty() ||
+                        it.libraryManga.categories.contains(Category.UNCATEGORIZED_ID)
+                }
+                val hasCustomName = systemCategory?.name?.isNotBlank() == true
+                val systemCategoryHasContent = hasCustomName || hasMangaInDefault
+                val showSystemCategory = systemCategory != null &&
+                    systemCategoryHasContent &&
+                    (showHiddenCategories || !systemCategory.hidden)
+
                 val filteredFavorites = favorites
                     .applyFilters(tracksMap, trackingFilters, itemPreferences)
                     .let { if (searchQuery == null) it else it.filter { m -> m.matches(searchQuery) } }

@@ -40,6 +40,7 @@ class CategoryScreenModel(
                 .collectLatest { categories ->
                     mutableState.update {
                         CategoryScreenState.Success(
+                            systemCategory = categories.find(Category::isSystemCategory),
                             categories = categories
                                 .filterNot(Category::isSystemCategory)
                                 .toImmutableList(),
@@ -131,6 +132,7 @@ sealed interface CategoryScreenState {
 
     @Immutable
     data class Success(
+        val systemCategory: Category?,
         val categories: ImmutableList<Category>,
         val dialog: CategoryDialog? = null,
     ) : CategoryScreenState {

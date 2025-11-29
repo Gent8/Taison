@@ -102,10 +102,21 @@ class HistoryScreenModel(
 
             val showHiddenCategoriesFlow = libraryPreferences.showHiddenCategories().changes().distinctUntilChanged()
 
-            val showDefaultCategoryFlow = getLibraryManga.subscribe()
-                .map { libraryManga ->
-                    libraryManga.any { it.categories.isEmpty() || it.categories.contains(Category.UNCATEGORIZED_ID) }
+            val showDefaultCategoryFlow = combine(
+                getLibraryManga.subscribe(),
+                categoriesFlow,
+                showHiddenCategoriesFlow,
+            ) { libraryManga, categories, showHiddenCategories ->
+                val systemCategory = categories.find { it.isSystemCategory }
+                val hasMangaInDefault = libraryManga.any {
+                    it.categories.isEmpty() || it.categories.contains(Category.UNCATEGORIZED_ID)
                 }
+                val hasCustomName = systemCategory?.name?.isNotBlank() == true
+                val systemCategoryHasContent = hasCustomName || hasMangaInDefault
+                systemCategory != null &&
+                    systemCategoryHasContent &&
+                    (showHiddenCategories || !systemCategory.hidden)
+            }
                 .onStart { emit(false) }
                 .distinctUntilChanged()
 
@@ -177,16 +188,8 @@ class HistoryScreenModel(
                         else -> categoryHistories[resolvedCategoryId].orEmpty().toHistoryUiModels()
                     }
                     val activeCategory = resolvedCategoryId?.let { id ->
-                        when (id) {
-                            Category.UNCATEGORIZED_ID -> Category(
-                                id = Category.UNCATEGORIZED_ID,
-                                name = "",
-                                order = 0,
-                                flags = 0,
-                                hidden = false,
-                            )
-                            else -> navigationCategories.firstOrNull { it.id == id }
-                        }
+                        navigationCategories.firstOrNull { it.id == id }
+                            ?: config.categories.firstOrNull { it.id == id }
                     }
                     HistoryFilterResult(
                         uiModels = filteredHistory.toImmutableList(),
@@ -222,18 +225,15 @@ class HistoryScreenModel(
     }
 
     private fun buildCategoryNavigation(categories: List<Category>, showHiddenCategories: Boolean): List<Category> {
-        val defaultCategory = Category(
-            id = Category.UNCATEGORIZED_ID,
-            name = "",
-            order = 0,
-            flags = 0,
-            hidden = false,
-        )
-        val filtered = categories.filter {
-            it.id != Category.UNCATEGORIZED_ID &&
-                (showHiddenCategories || !it.hidden)
+        val systemCategory = categories.find { it.isSystemCategory }
+        val userCategories = categories.filter {
+            !it.isSystemCategory && (showHiddenCategories || !it.hidden)
         }
-        return listOf(defaultCategory) + filtered
+        return if (systemCategory != null) {
+            listOf(systemCategory) + userCategories
+        } else {
+            userCategories
+        }
     }
 
     private fun buildCategoryHistories(

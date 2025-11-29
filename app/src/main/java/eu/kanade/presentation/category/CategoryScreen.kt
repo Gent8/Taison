@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -55,15 +56,8 @@ fun CategoryScreen(
             )
         },
     ) { paddingValues ->
-        if (state.isEmpty) {
-            EmptyScreen(
-                stringRes = MR.strings.information_empty_category,
-                modifier = Modifier.padding(paddingValues),
-            )
-            return@Scaffold
-        }
-
         CategoryContent(
+            systemCategory = state.systemCategory,
             categories = state.categories,
             lazyListState = lazyListState,
             paddingValues = paddingValues,
@@ -77,6 +71,7 @@ fun CategoryScreen(
 
 @Composable
 private fun CategoryContent(
+    systemCategory: Category?,
     categories: List<Category>,
     lazyListState: LazyListState,
     paddingValues: PaddingValues,
@@ -86,10 +81,26 @@ private fun CategoryContent(
     onChangeOrder: (Category, Int) -> Unit,
 ) {
     val categoriesState = remember { categories.toMutableStateList() }
+
+    val reorderOffset = if (systemCategory != null &&
+        categories.isNotEmpty()
+    ) {
+        2
+    } else if (systemCategory != null) {
+        1
+    } else {
+        0
+    }
+
     val reorderableState = rememberReorderableLazyListState(lazyListState, paddingValues) { from, to ->
-        val item = categoriesState.removeAt(from.index)
-        categoriesState.add(to.index, item)
-        onChangeOrder(item, to.index)
+        val fromIndex = from.index - reorderOffset
+        val toIndex = to.index - reorderOffset
+
+        if (fromIndex >= 0 && toIndex >= 0 && fromIndex < categoriesState.size && toIndex < categoriesState.size) {
+            val item = categoriesState.removeAt(fromIndex)
+            categoriesState.add(toIndex, item)
+            onChangeOrder(item, toIndex)
+        }
     }
 
     LaunchedEffect(categories) {
@@ -107,6 +118,30 @@ private fun CategoryContent(
             PaddingValues(horizontal = MaterialTheme.padding.medium),
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
     ) {
+        systemCategory?.let { category ->
+            item(key = SYSTEM_CATEGORY_KEY) {
+                ReorderableItem(reorderableState, SYSTEM_CATEGORY_KEY) {
+                    CategoryListItem(
+                        modifier = Modifier.animateItem(),
+                        category = category,
+                        onRename = { onClickRename(category) },
+                        onDelete = { },
+                        onHide = { onClickHide(category) },
+                        canReorder = false,
+                        canDelete = false,
+                    )
+                }
+            }
+
+            if (categories.isNotEmpty()) {
+                item(key = DIVIDER_KEY) {
+                    HorizontalDivider(
+                        modifier = Modifier.padding(vertical = MaterialTheme.padding.small),
+                    )
+                }
+            }
+        }
+
         items(
             items = categoriesState,
             key = { category -> category.key },
@@ -118,10 +153,14 @@ private fun CategoryContent(
                     onRename = { onClickRename(category) },
                     onDelete = { onClickDelete(category) },
                     onHide = { onClickHide(category) },
+                    canReorder = true,
+                    canDelete = true,
                 )
             }
         }
     }
 }
 
+private const val SYSTEM_CATEGORY_KEY = "system-category"
+private const val DIVIDER_KEY = "category-divider"
 private val Category.key inline get() = "category-$id"

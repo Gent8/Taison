@@ -105,18 +105,26 @@ fun CategoryRenameDialog(
     onRename: (String) -> Unit,
     categories: ImmutableList<String>,
     category: String,
+    isSystemCategory: Boolean = false,
 ) {
     var name by remember { mutableStateOf(category) }
-    var valueHasChanged by remember { mutableStateOf(false) }
 
     val focusRequester = remember { FocusRequester() }
-    val nameAlreadyExists = remember(name) { categories.contains(name) }
+    val nameAlreadyExists = remember(name) { name.isNotEmpty() && categories.contains(name) }
+
+    val valueHasChanged = name != category
+
+    val isValidName = if (isSystemCategory) {
+        !nameAlreadyExists
+    } else {
+        name.isNotEmpty() && !nameAlreadyExists
+    }
 
     AlertDialog(
         onDismissRequest = onDismissRequest,
         confirmButton = {
             TextButton(
-                enabled = valueHasChanged && !nameAlreadyExists,
+                enabled = valueHasChanged && isValidName,
                 onClick = {
                     onRename(name)
                     onDismissRequest()
@@ -137,16 +145,13 @@ fun CategoryRenameDialog(
             OutlinedTextField(
                 modifier = Modifier.focusRequester(focusRequester),
                 value = name,
-                onValueChange = {
-                    valueHasChanged = name != it
-                    name = it
-                },
+                onValueChange = { name = it },
                 label = { Text(text = stringResource(MR.strings.name)) },
                 supportingText = {
-                    val msgRes = if (valueHasChanged && nameAlreadyExists) {
-                        MR.strings.error_category_exists
-                    } else {
-                        MR.strings.information_required_plain
+                    val msgRes = when {
+                        valueHasChanged && nameAlreadyExists -> MR.strings.error_category_exists
+                        isSystemCategory -> MR.strings.label_default_category_help
+                        else -> MR.strings.information_required_plain
                     }
                     Text(text = stringResource(msgRes))
                 },

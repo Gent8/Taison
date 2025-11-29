@@ -10,12 +10,14 @@ import tachiyomi.presentation.core.i18n.stringResource
 val Category.visualName: String
     @Composable
     get() = when {
-        isSystemCategory -> stringResource(MR.strings.label_default)
+        isSystemCategory && name.isBlank() -> stringResource(MR.strings.label_default)
+        isSystemCategory -> name
         else -> name
     }
 
 fun Category.visualName(context: Context): String =
     when {
-        isSystemCategory -> context.stringResource(MR.strings.label_default)
+        isSystemCategory && name.isBlank() -> context.stringResource(MR.strings.label_default)
+        isSystemCategory -> name
         else -> name
     }

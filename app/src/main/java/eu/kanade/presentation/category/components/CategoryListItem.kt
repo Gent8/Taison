@@ -2,12 +2,15 @@ package eu.kanade.presentation.category.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.DragHandle
 import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.Label
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
@@ -20,6 +23,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.dp
+import eu.kanade.presentation.category.visualName
 import sh.calvin.reorderable.ReorderableCollectionItemScope
 import tachiyomi.domain.category.model.Category
 import tachiyomi.i18n.MR
@@ -32,6 +37,8 @@ fun ReorderableCollectionItemScope.CategoryListItem(
     onRename: () -> Unit,
     onDelete: () -> Unit,
     onHide: () -> Unit,
+    canReorder: Boolean = true,
+    canDelete: Boolean = true,
     modifier: Modifier = Modifier,
 ) {
     ElevatedCard(modifier = modifier) {
@@ -46,15 +53,23 @@ fun ReorderableCollectionItemScope.CategoryListItem(
                 ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Icon(
-                imageVector = Icons.Outlined.DragHandle,
-                contentDescription = null,
-                modifier = Modifier
-                    .padding(MaterialTheme.padding.medium)
-                    .draggableHandle(),
-            )
+            if (canReorder) {
+                Icon(
+                    imageVector = Icons.Outlined.DragHandle,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .padding(MaterialTheme.padding.medium)
+                        .draggableHandle(),
+                )
+            } else {
+                Icon(
+                    imageVector = Icons.Outlined.Label,
+                    contentDescription = null,
+                    modifier = Modifier.padding(MaterialTheme.padding.medium),
+                )
+            }
             Text(
-                text = category.name,
+                text = category.visualName,
                 modifier = Modifier.weight(1f),
                 color = if (category.hidden) {
                     MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
@@ -82,11 +97,13 @@ fun ReorderableCollectionItemScope.CategoryListItem(
                     contentDescription = stringResource(MR.strings.action_rename_category),
                 )
             }
-            IconButton(onClick = onDelete) {
-                Icon(
-                    imageVector = Icons.Outlined.Delete,
-                    contentDescription = stringResource(MR.strings.action_delete),
-                )
+            if (canDelete) {
+                IconButton(onClick = onDelete) {
+                    Icon(
+                        imageVector = Icons.Outlined.Delete,
+                        contentDescription = stringResource(MR.strings.action_delete),
+                    )
+                }
             }
         }
     }
