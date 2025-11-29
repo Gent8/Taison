@@ -156,7 +156,8 @@ class LibraryScreenModel(
                     .map { it.libraryData }
                     .distinctUntilChanged(),
                 libraryPreferences.groupLibraryBy().changes(),
-            ) { data, groupType ->
+                libraryPreferences.sortingMode().changes(),
+            ) { data, groupType, globalSort ->
                 data.favorites
                     .applyGrouping(
                         categories = data.categories,
@@ -164,7 +165,12 @@ class LibraryScreenModel(
                         showHiddenCategories = data.showHiddenCategories,
                         showSystemCategory = data.showSystemCategory,
                     )
-                    .applySort(data.favoritesById, data.tracksMap, data.loggedInTrackerIds)
+                    .applySort(
+                        data.favoritesById,
+                        data.tracksMap,
+                        data.loggedInTrackerIds,
+                        groupSort = globalSort.takeIf { groupType != LibraryGroup.BY_DEFAULT },
+                    )
             }
                 .collectLatest { grouped ->
                     val categories = grouped.keys.toList()
@@ -428,6 +434,7 @@ class LibraryScreenModel(
         favoritesById: Map<Long, LibraryItem>,
         trackMap: Map<Long, List<Track>>,
         loggedInTrackerIds: Set<Long>,
+        groupSort: LibrarySort? = null,
     ): Map<Category, List</* LibraryItem */ Long>> {
         val sortAlphabetically: (LibraryItem, LibraryItem) -> Int = { manga1, manga2 ->
             val title1 = manga1.libraryManga.manga.title.lowercase()
@@ -449,8 +456,8 @@ class LibraryScreenModel(
             }
         }
 
-        fun LibrarySort.comparator(): Comparator<LibraryItem> = Comparator { manga1, manga2 ->
-            when (this.type) {
+        fun comparatorFor(sort: LibrarySort): Comparator<LibraryItem> = Comparator { manga1, manga2 ->
+            when (sort.type) {
                 LibrarySort.Type.Alphabetical -> {
                     sortAlphabetically(manga1, manga2)
                 }
@@ -463,8 +470,8 @@ class LibraryScreenModel(
                 LibrarySort.Type.UnreadCount -> when {
                     // Ensure unread content comes first
                     manga1.libraryManga.unreadCount == manga2.libraryManga.unreadCount -> 0
-                    manga1.libraryManga.unreadCount == 0L -> if (this.isAscending) 1 else -1
-                    manga2.libraryManga.unreadCount == 0L -> if (this.isAscending) -1 else 1
+                    manga1.libraryManga.unreadCount == 0L -> if (sort.isAscending) 1 else -1
+                    manga2.libraryManga.unreadCount == 0L -> if (sort.isAscending) -1 else 1
                     else -> manga1.libraryManga.unreadCount.compareTo(manga2.libraryManga.unreadCount)
                 }
                 LibrarySort.Type.TotalChapters -> {
@@ -491,14 +498,15 @@ class LibraryScreenModel(
         }
 
         return mapValues { (key, value) ->
-            if (key.sort.type == LibrarySort.Type.Random) {
+            val appliedSort = groupSort ?: key.sort
+            if (appliedSort.type == LibrarySort.Type.Random) {
                 return@mapValues value.shuffled(Random(libraryPreferences.randomSortSeed().get()))
             }
 
             val manga = value.mapNotNull { favoritesById[it] }
 
-            val comparator = key.sort.comparator()
-                .let { if (key.sort.isAscending) it else it.reversed() }
+            val comparator = comparatorFor(appliedSort)
+                .let { if (appliedSort.isAscending) it else it.reversed() }
                 .thenComparator(sortAlphabetically)
 
             manga.sortedWith(comparator).map { it.id }

@@ -54,6 +54,7 @@ private val TabStateSaver: Saver<MutableIntState, Int> = Saver(
     restore = { value -> mutableIntStateOf(value) },
 )
 
+@Composable
 fun rememberTabbedDialogState(initialPage: Int = 0): MutableIntState {
     return rememberSaveable(saver = TabStateSaver) {
         mutableIntStateOf(initialPage.coerceAtLeast(0))

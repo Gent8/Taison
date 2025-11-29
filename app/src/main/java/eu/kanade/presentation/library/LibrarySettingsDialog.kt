@@ -180,8 +180,14 @@ private fun ColumnScope.SortPage(
     screenModel: LibrarySettingsScreenModel,
 ) {
     val trackers by screenModel.trackersFlow.collectAsState()
-    val sortingMode = category.sort.type
-    val sortDescending = !category.sort.isAscending
+    val globalSortMode by screenModel.libraryPreferences.sortingMode().collectAsState()
+    val isCategoryGrouping = screenModel.grouping == LibraryGroup.BY_DEFAULT
+    val activeSort = when {
+        isCategoryGrouping && category != null -> category.sort
+        else -> globalSortMode
+    }
+    val sortingMode = activeSort.type
+    val sortDescending = !activeSort.isAscending
 
     val options = remember(trackers.isEmpty()) {
         val trackerMeanPair = if (trackers.isNotEmpty()) {
@@ -210,7 +216,8 @@ private fun ColumnScope.SortPage(
                 icon = Icons.Default.Refresh
                     .takeIf { sortingMode == LibrarySort.Type.Random },
                 onClick = {
-                    screenModel.setSort(category, mode, LibrarySort.Direction.Ascending)
+                    val targetCategory = category.takeIf { isCategoryGrouping }
+                    screenModel.setSort(targetCategory, mode, LibrarySort.Direction.Ascending)
                 },
             )
             return@map
@@ -232,7 +239,8 @@ private fun ColumnScope.SortPage(
                         LibrarySort.Direction.Ascending
                     }
                 }
-                screenModel.setSort(category, mode, direction)
+                val targetCategory = category.takeIf { isCategoryGrouping }
+                screenModel.setSort(targetCategory, mode, direction)
             },
         )
     }
