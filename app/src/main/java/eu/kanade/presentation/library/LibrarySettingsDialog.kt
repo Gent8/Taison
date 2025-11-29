@@ -17,14 +17,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.util.fastForEach
+import dev.icerock.moko.resources.StringResource
 import eu.kanade.presentation.components.TabbedDialog
 import eu.kanade.presentation.components.TabbedDialogPaddings
+import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.ui.library.LibrarySettingsScreenModel
 import eu.kanade.tachiyomi.util.system.isReleaseBuildType
+import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
 import tachiyomi.core.common.preference.TriState
 import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.library.model.LibraryDisplayMode
+import tachiyomi.domain.library.model.LibraryGroup
 import tachiyomi.domain.library.model.LibrarySort
 import tachiyomi.domain.library.model.sort
 import tachiyomi.domain.library.service.LibraryPreferences
@@ -32,6 +39,7 @@ import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.BaseSortItem
 import tachiyomi.presentation.core.components.CheckboxItem
 import tachiyomi.presentation.core.components.HeadingItem
+import tachiyomi.presentation.core.components.IconItem
 import tachiyomi.presentation.core.components.SettingsChipRow
 import tachiyomi.presentation.core.components.SliderItem
 import tachiyomi.presentation.core.components.SortItem
@@ -44,6 +52,7 @@ fun LibrarySettingsDialog(
     onDismissRequest: () -> Unit,
     screenModel: LibrarySettingsScreenModel,
     category: Category?,
+    hasCategories: Boolean,
 ) {
     TabbedDialog(
         onDismissRequest = onDismissRequest,
@@ -51,6 +60,7 @@ fun LibrarySettingsDialog(
             stringResource(MR.strings.action_filter),
             stringResource(MR.strings.action_sort),
             stringResource(MR.strings.action_display),
+            stringResource(MR.strings.group),
         ),
     ) { page ->
         Column(
@@ -68,6 +78,10 @@ fun LibrarySettingsDialog(
                 )
                 2 -> DisplayPage(
                     screenModel = screenModel,
+                )
+                3 -> GroupPage(
+                    screenModel = screenModel,
+                    hasCategories = hasCategories,
                 )
             }
         }
@@ -327,4 +341,66 @@ private fun ColumnScope.DisplayPage(
         label = stringResource(MR.strings.action_show_hidden_categories),
         pref = screenModel.libraryPreferences.showHiddenCategories(),
     )
+}
+
+    val int: Int,
+    val nameRes: StringResource,
+    val drawableRes: Int,
+)
+
+private fun groupTypeStringRes(type: Int): StringResource {
+    return when (type) {
+        LibraryGroup.BY_STATUS -> MR.strings.status
+        LibraryGroup.BY_SOURCE -> MR.strings.label_sources
+        LibraryGroup.BY_TRACK_STATUS -> MR.strings.tracking_status
+        LibraryGroup.UNGROUPED -> MR.strings.ungrouped
+        else -> MR.strings.categories
+    }
+}
+
+private fun groupTypeDrawableRes(type: Int): Int {
+    return when (type) {
+        LibraryGroup.BY_STATUS -> R.drawable.ic_progress_clock_24dp
+        LibraryGroup.BY_SOURCE -> R.drawable.ic_browse_filled_24dp
+        LibraryGroup.UNGROUPED -> R.drawable.ic_ungroup_24dp
+        else -> R.drawable.ic_label_24dp
+    }
+}
+
+private fun buildGroupModes(hasCategories: Boolean, currentGrouping: Int): ImmutableList<GroupMode> {
+    return buildList {
+        add(LibraryGroup.BY_DEFAULT)
+        add(LibraryGroup.BY_SOURCE)
+        add(LibraryGroup.BY_STATUS)
+        if (hasCategories || currentGrouping == LibraryGroup.UNGROUPED) {
+            add(LibraryGroup.UNGROUPED)
+        }
+    }.map { groupType ->
+        GroupMode(
+            int = groupType,
+            nameRes = groupTypeStringRes(groupType),
+            drawableRes = groupTypeDrawableRes(groupType),
+        )
+    }.toImmutableList()
+}
+
+@Composable
+private fun ColumnScope.GroupPage(
+    screenModel: LibrarySettingsScreenModel,
+    hasCategories: Boolean,
+) {
+    val groups = remember(hasCategories, screenModel.grouping) {
+        buildGroupModes(hasCategories, screenModel.grouping)
+    }
+
+    groups.fastForEach { groupMode ->
+        IconItem(
+            label = stringResource(groupMode.nameRes),
+            icon = painterResource(groupMode.drawableRes),
+            selected = groupMode.int == screenModel.grouping,
+            onClick = {
+                screenModel.setGrouping(groupMode.int)
+            },
+        )
+    }
 }

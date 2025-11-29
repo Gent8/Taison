@@ -20,6 +20,7 @@ import eu.kanade.tachiyomi.data.download.DownloadCache
 import eu.kanade.tachiyomi.data.download.DownloadManager
 import eu.kanade.tachiyomi.data.track.TrackerManager
 import eu.kanade.tachiyomi.source.model.SManga
+import tachiyomi.source.local.LocalSource
 import eu.kanade.tachiyomi.source.online.HttpSource
 import eu.kanade.tachiyomi.util.category.LastUsedCategoryState
 import eu.kanade.tachiyomi.util.chapter.getNextUnread
@@ -41,6 +42,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.updateAndGet
 import mihon.core.common.utils.mutate
+import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.preference.CheckboxState
 import tachiyomi.core.common.preference.TriState
 import tachiyomi.core.common.util.lang.compareToWithCollator
@@ -49,10 +51,12 @@ import tachiyomi.core.common.util.lang.launchNonCancellable
 import tachiyomi.domain.category.interactor.GetCategories
 import tachiyomi.domain.category.interactor.SetMangaCategories
 import tachiyomi.domain.category.model.Category
+import tachiyomi.domain.category.model.Category.Companion.UNCATEGORIZED_ID
 import tachiyomi.domain.chapter.interactor.GetChaptersByMangaId
 import tachiyomi.domain.chapter.model.Chapter
 import tachiyomi.domain.history.interactor.GetNextChapters
 import tachiyomi.domain.library.model.LibraryDisplayMode
+import tachiyomi.domain.library.model.LibraryGroup
 import tachiyomi.domain.library.model.LibraryManga
 import tachiyomi.domain.library.model.LibrarySort
 import tachiyomi.domain.library.model.sort
@@ -64,6 +68,7 @@ import tachiyomi.domain.manga.model.applyFilter
 import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.domain.track.interactor.GetTracksPerManga
 import tachiyomi.domain.track.model.Track
+import tachiyomi.i18n.MR
 import tachiyomi.source.local.isLocal
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
@@ -145,15 +150,17 @@ class LibraryScreenModel(
         }
 
         screenModelScope.launchIO {
-            state
-                .dropWhile { !it.libraryData.isInitialized }
-                .map { it.libraryData }
-                .distinctUntilChanged()
-                .map { data ->
-                    data.favorites
-                        .applyGrouping(data.categories, data.showSystemCategory, data.showHiddenCategories)
-                        .applySort(data.favoritesById, data.tracksMap, data.loggedInTrackerIds)
-                }
+            combine(
+                state
+                    .dropWhile { !it.libraryData.isInitialized }
+                    .map { it.libraryData }
+                    .distinctUntilChanged(),
+                libraryPreferences.groupLibraryBy().changes(),
+            ) { data, groupType ->
+                data.favorites
+                    .applyGrouping(data.categories, groupType, data.showHiddenCategories)
+                    .applySort(data.favoritesById, data.tracksMap, data.loggedInTrackerIds)
+            }
                 .collectLatest { grouped ->
                     val categories = grouped.keys.toList()
                     val preferredIndex = resolveActiveCategoryIndex(categories, state.value.activeCategoryIndex)
@@ -315,21 +322,105 @@ class LibraryScreenModel(
 
     private fun List<LibraryItem>.applyGrouping(
         categories: List<Category>,
-        showSystemCategory: Boolean,
+        groupType: Int,
         showHiddenCategories: Boolean,
     ): Map<Category, List</* LibraryItem */ Long>> {
-        val groupCache = mutableMapOf</* Category */ Long, MutableList</* LibraryItem */ Long>>()
-        forEach { item ->
-            item.libraryManga.categories.forEach { categoryId ->
-                groupCache.getOrPut(categoryId) { mutableListOf() }.add(item.id)
+        return when (groupType) {
+            LibraryGroup.BY_DEFAULT -> {
+                var showSystemCategory = false
+                val groupCache = mutableMapOf</* Category.id */ Long, MutableList</* LibraryItem */ Long>>()
+                forEach { item ->
+                    item.libraryManga.categories.forEach { categoryId ->
+                        if (categoryId == UNCATEGORIZED_ID) {
+                            showSystemCategory = true
+                        }
+                        groupCache.getOrPut(categoryId) { mutableListOf() }.add(item.id)
+                    }
+                }
+                categories.fastFilter {
+                    (showSystemCategory || !it.isSystemCategory) &&
+                        (showHiddenCategories || !it.hidden)
+                }
+                    .associateWith {
+                        groupCache[it.id]?.toList()
+                            ?.distinct()
+                            .orEmpty()
+                    }
+            }
+            LibraryGroup.UNGROUPED -> {
+                mapOf(
+                    Category(
+                        id = 0,
+                        name = preferences.context.stringResource(MR.strings.ungrouped),
+                        order = 0,
+                        flags = 0,
+                        hidden = false,
+                    ) to map { it.id },
+                )
+            }
+            else -> {
+                getGroupedMangaItems(groupType = groupType)
             }
         }
-        return categories.filter {
-            (showSystemCategory || !it.isSystemCategory) &&
-                (showHiddenCategories || !it.hidden)
-        }
-            .associateWith { groupCache[it.id]?.toList().orEmpty() }
     }
+
+    private fun List<LibraryItem>.getGroupedMangaItems(
+        groupType: Int,
+    ): Map<Category, List</* LibraryItem */ Long>> {
+        val context = preferences.context
+        return when (groupType) {
+            LibraryGroup.BY_SOURCE -> {
+                val groupCache = mutableMapOf</* Source.id */ Long, MutableList</* LibraryItem */ Long>>()
+                forEach { item ->
+                    groupCache.getOrPut(item.libraryManga.manga.source) { mutableListOf() }.add(item.id)
+                }
+                val sources = groupCache.keys
+                    .map { sourceManager.getOrStub(it) }
+                    .sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name.ifBlank { it.id.toString() } })
+                val sourceOrderMap = sources.withIndex().associate { (index, source) -> source.id to index.toLong() }
+
+                sources.associate { source ->
+                    val category = Category(
+                        id = source.id,
+                        name = if (source.id == LocalSource.ID) {
+                            context.stringResource(MR.strings.local_source)
+                        } else {
+                            source.name.ifBlank { source.id.toString() }
+                        },
+                        order = sourceOrderMap[source.id] ?: Long.MAX_VALUE,
+                        flags = 0,
+                        hidden = false,
+                    )
+                    category to groupCache[source.id].orEmpty()
+                }
+            }
+            LibraryGroup.BY_STATUS -> {
+                groupBy { item ->
+                    item.libraryManga.manga.status
+                }.mapKeys { (status, _) ->
+                    val (nameRes, order) = statusMap[status] ?: (MR.strings.unknown to 7L)
+                    Category(
+                        id = status + 1,
+                        name = context.stringResource(nameRes),
+                        order = order,
+                        flags = 0,
+                        hidden = false,
+                    )
+                }
+                    .mapValues { (_, libraryItems) -> libraryItems.fastMap { it.id } }
+            }
+            else -> emptyMap()
+        }.toSortedMap(compareBy { it.order })
+    }
+
+    private val statusMap = mapOf(
+        SManga.ONGOING.toLong() to (MR.strings.ongoing to 1L),
+        SManga.COMPLETED.toLong() to (MR.strings.completed to 2L),
+        SManga.PUBLISHING_FINISHED.toLong() to (MR.strings.publishing_finished to 3L),
+        SManga.LICENSED.toLong() to (MR.strings.licensed to 4L),
+        SManga.ON_HIATUS.toLong() to (MR.strings.on_hiatus to 5L),
+        SManga.CANCELLED.toLong() to (MR.strings.cancelled to 6L),
+    )
 
     private fun Map<Category, List</* LibraryItem */ Long>>.applySort(
         favoritesById: Map<Long, LibraryItem>,

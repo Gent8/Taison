@@ -696,6 +696,12 @@
     <string name="overlay_header">Overlay</string>
     <string name="tabs_header">Tabs</string>
 
+    <!-- Library Group Feature -->
+    <string name="group">Group</string>
+    <string name="ungrouped">Ungrouped</string>
+    <string name="tracking_status">Tracking status</string>
+    <string name="not_tracked">Not tracked</string>
+
     <!-- Browse source -->
     <!-- missing prompt after Compose rewrite #7901 -->
     <string name="no_more_results">No more results</string>
