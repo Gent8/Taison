@@ -685,6 +685,11 @@
     <string name="action_update_category">Perbarui kategori</string>
     <string name="split_tall_images">Potong gambar tinggi</string>
     <string name="overlay_header">Lapisan awal</string>
+    <!-- Library Group Feature -->
+    <string name="group">Grup</string>
+    <string name="ungrouped">Tidak dikelompokkan</string>
+    <string name="tracking_status">Status pelacakan</string>
+    <string name="not_tracked">Tidak dilacak</string>
     <string name="pref_page_rotate">Memutar halaman lebar agar pas</string>
     <string name="pref_page_rotate_invert">Orientasi balik halaman lebar yang diputar</string>
     <string name="pref_debug_info">Info debug</string>

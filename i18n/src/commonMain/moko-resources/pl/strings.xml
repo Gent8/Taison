@@ -689,6 +689,11 @@
     <string name="action_update_category">Aktualizuj kategorię</string>
     <string name="split_tall_images">Dziel długie obrazy</string>
     <string name="overlay_header">Nakładka</string>
+    <!-- Library Group Feature -->
+    <string name="group">Grupa</string>
+    <string name="ungrouped">Niezgrupowane</string>
+    <string name="tracking_status">Status śledzenia</string>
+    <string name="not_tracked">Nie śledzone</string>
     <string name="pref_page_rotate">Dopasuj szerokie strony</string>
     <string name="pref_page_rotate_invert">Zmień orientację obróconych obrazów</string>
     <string name="pref_debug_info">Informacje debugowania</string>

@@ -683,6 +683,11 @@
     <string name="pref_page_rotate">Quay những trang rộng để vừa màn hình</string>
     <string name="pref_page_rotate_invert">Lật hướng của các trang rộng đã xoay</string>
     <string name="overlay_header">Phủ lên</string>
+    <!-- Library Group Feature -->
+    <string name="group">Nhóm</string>
+    <string name="ungrouped">Chưa nhóm</string>
+    <string name="tracking_status">Trạng thái theo dõi</string>
+    <string name="not_tracked">Chưa theo dõi</string>
     <string name="track_remove_date_conf_title">Loại bỏ ngày?</string>
     <string name="track_error">%1$s Lỗi: %2$s</string>
     <string name="not_applicable">N/A</string>

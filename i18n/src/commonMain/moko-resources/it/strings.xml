@@ -685,6 +685,11 @@
     <string name="action_update_category">Aggiorna categoria</string>
     <string name="split_tall_images">Dividi immagini alte</string>
     <string name="overlay_header">Sovrimpressione</string>
+    <!-- Library Group Feature -->
+    <string name="group">Gruppo</string>
+    <string name="ungrouped">Non raggruppato</string>
+    <string name="tracking_status">Stato del tracciamento</string>
+    <string name="not_tracked">Non tracciato</string>
     <string name="pref_page_rotate">Ruota le pagine larghe per adattarle allo schermo</string>
     <string name="pref_page_rotate_invert">Capovolgi l\'orientamento delle pagine larghe ruotate</string>
     <string name="pref_debug_info">Informazioni di debug</string>

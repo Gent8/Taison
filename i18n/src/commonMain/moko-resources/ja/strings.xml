@@ -685,6 +685,11 @@
     <string name="action_update_category">カテゴリを更新</string>
     <string name="split_tall_images">長い画像を分割</string>
     <string name="overlay_header">オーバーレイ</string>
+    <!-- Library Group Feature -->
+    <string name="group">グループ</string>
+    <string name="ungrouped">グループ化されていない</string>
+    <string name="tracking_status">追跡ステータス</string>
+    <string name="not_tracked">追跡されていません</string>
     <string name="pref_page_rotate">画面に合わせるように幅広いページを回転</string>
     <string name="pref_page_rotate_invert">回転した幅広いページの向きを反転</string>
     <string name="pref_debug_info">デバッグ情報</string>

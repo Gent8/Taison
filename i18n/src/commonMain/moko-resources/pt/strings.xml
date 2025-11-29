@@ -683,6 +683,11 @@
     <string name="action_update_category">Atualizar categoria</string>
     <string name="split_tall_images">Dividir Imagens altas</string>
     <string name="overlay_header">Sobreposição</string>
+    <!-- Library Group Feature -->
+    <string name="group">Grupo</string>
+    <string name="ungrouped">Não agrupado</string>
+    <string name="tracking_status">Status de rastreamento</string>
+    <string name="not_tracked">Não rastreado</string>
     <string name="pref_page_rotate">Girar páginas largas para caber</string>
     <string name="pref_page_rotate_invert">Virar a orientação de páginas largas giradas</string>
     <string name="pref_chapter_swipe_start">Capítulo ao deslizar para a esquerda</string>

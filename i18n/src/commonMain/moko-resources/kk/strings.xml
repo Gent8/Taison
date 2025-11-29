@@ -689,6 +689,11 @@
     <string name="pref_hide_in_library_items">Кітапханада бар туындыларды жасыру</string>
     <string name="split_tall_images">Ұзын суреттерді бөлу</string>
     <string name="overlay_header">Қабаттасу</string>
+    <!-- Library Group Feature -->
+    <string name="group">Топ</string>
+    <string name="ungrouped">Топталмаған</string>
+    <string name="tracking_status">Бақылау күйі</string>
+    <string name="not_tracked">Бақыланбайды</string>
     <string name="pref_page_rotate">Кең беттерді сыйғызу үшін бұрыңыз</string>
     <string name="pref_page_rotate_invert">Бұрылған кең беттерді аудару бағдары</string>
     <string name="pref_debug_info">Дебаг туралы ақпарат</string>

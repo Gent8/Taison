@@ -767,6 +767,11 @@
     <string name="invalid_backup_file_error">Teljes hiba:</string>
     <string name="onboarding_description">Kezdetnek állítsunk be néhány dolgot. Ezeket később bármikor módosíthatja a beállításokban.</string>
     <string name="overlay_header">Felület</string>
+    <!-- Library Group Feature -->
+    <string name="group">Csoport</string>
+    <string name="ungrouped">Nincs csoportosítva</string>
+    <string name="tracking_status">Követési állapot</string>
+    <string name="not_tracked">Nincs követve</string>
     <string name="track_delete_remote_text">Törlés a(z) %s szolgáltatásból</string>
     <string name="track_delete_text">Ezzel leállítja a helyi nyilvántartást.</string>
     <string name="not_applicable">N/A</string>

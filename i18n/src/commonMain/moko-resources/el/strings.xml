@@ -685,6 +685,11 @@
     <string name="action_update_category">Ενημέρωση κατηγορίας</string>
     <string name="split_tall_images">Διαχωρισμός ψηλών εικόνων</string>
     <string name="overlay_header">Επικάλυψη</string>
+    <!-- Library Group Feature -->
+    <string name="group">Ομάδα</string>
+    <string name="ungrouped">Μη ομαδοποιημένο</string>
+    <string name="tracking_status">Κατάσταση παρακολούθησης</string>
+    <string name="not_tracked">Δεν παρακολουθείται</string>
     <string name="pref_page_rotate">Περιστροφή πλατιών σελίδων για να χωρέσουν</string>
     <string name="pref_page_rotate_invert">Αναστροφή του προσανατολισμού των πλατιών σελίδων που έχουν περιστραφεί</string>
     <string name="pref_debug_info">Πληροφορίες εντοπισμού σφαλμάτων</string>

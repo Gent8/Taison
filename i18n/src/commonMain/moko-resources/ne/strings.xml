@@ -683,6 +683,11 @@
     <string name="action_update_category">वर्ग अपडेट गर्नुहोस्</string>
     <string name="split_tall_images">अग्लो छविहरू विभाजित गर्नुहोस्</string>
     <string name="overlay_header">ओभरले</string>
+    <!-- Library Group Feature -->
+    <string name="group">समूह</string>
+    <string name="ungrouped">समूहबद्ध नभएको</string>
+    <string name="tracking_status">ट्र्याकिङ स्थिति</string>
+    <string name="not_tracked">ट्र्याक नभएको</string>
     <string name="pref_page_rotate">फिट गर्न चौडा पृष्ठहरू घुमाउनुहोस्</string>
     <string name="pref_page_rotate_invert">घुमाइएका चौडा पृष्ठहरूको अभिमुखीकरण फ्लिप गर्नुहोस्</string>
     <string name="pref_debug_info">Debug जानकारी</string>

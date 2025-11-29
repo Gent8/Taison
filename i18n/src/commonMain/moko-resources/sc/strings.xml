@@ -683,6 +683,11 @@
     <string name="action_update_category">Agiorna sa categoria</string>
     <string name="split_tall_images">Partzi sas immàgines artas</string>
     <string name="overlay_header">Istratu superiore</string>
+    <!-- Library Group Feature -->
+    <string name="group">Grupu</string>
+    <string name="ungrouped">Non agrupadu</string>
+    <string name="tracking_status">Istadu de sighimentu</string>
+    <string name="not_tracked">Non sighidu</string>
     <string name="pref_page_rotate">Gira sas pàginas largas pro las adatare</string>
     <string name="pref_page_rotate_invert">Fùrria s\'orientamentu de sas pàginas largas giradas</string>
     <string name="pref_double_tap_zoom">Tocu dòpiu pro ismanniare</string>

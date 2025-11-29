@@ -685,6 +685,11 @@
     <string name="action_update_category">Aktualiziraj katogoriju</string>
     <string name="split_tall_images">Rastavi visoke slike</string>
     <string name="overlay_header">Oznake</string>
+    <!-- Library Group Feature -->
+    <string name="group">Grupa</string>
+    <string name="ungrouped">Nije grupirano</string>
+    <string name="tracking_status">Status praćenja</string>
+    <string name="not_tracked">Nije praćeno</string>
     <string name="pref_page_rotate">Prilagodi prikaz širokih stranica okretanjem</string>
     <string name="pref_page_rotate_invert">Preokreni položaj širokih stranica</string>
     <string name="pref_debug_info">Informacije o otklanjanju grešaka</string>

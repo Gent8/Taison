@@ -574,6 +574,11 @@
     <string name="intervals_header">অন্তৰালসমূহ</string>
     <string name="unknown_error">অজ্ঞাত ত্ৰুটি</string>
     <string name="overlay_header">অৱলম্বন</string>
+    <!-- Library Group Feature -->
+    <string name="group">গোট</string>
+    <string name="ungrouped">গোটবদ্ধ নহয়</string>
+    <string name="tracking_status">ট্ৰেকিং স্থিতি</string>
+    <string name="not_tracked">ট্ৰেক কৰা হোৱা নাই</string>
     <string name="updating_category">শ্ৰেণী আপডেট কৰা</string>
     <string name="manga_from_library">লাইব্ৰেৰীৰ পৰা</string>
     <string name="tabs_header">টেব</string>

@@ -616,6 +616,11 @@
     <string name="pref_verbose_logging">לוג מפורט</string>
     <string name="pref_verbose_logging_summary">הדפס דוחות שגיאה מפורטים ליומן המערכת (מוריד ביצועים לאפליקציה)</string>
     <string name="overlay_header">שכבת על</string>
+    <!-- Library Group Feature -->
+    <string name="group">קבוצה</string>
+    <string name="ungrouped">לא מקובץ</string>
+    <string name="tracking_status">סטטוס מעקב</string>
+    <string name="not_tracked">לא במעקב</string>
     <string name="day_short">%d ימים</string>
     <string name="update_check_open">פתח ב-GitHub</string>
     <string name="pref_chapter_swipe_end">פרק בהחלקה ימינה</string>

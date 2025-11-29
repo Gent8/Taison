@@ -685,6 +685,11 @@
     <string name="action_update_category">تحديث الفئة</string>
     <string name="split_tall_images">افصل الصور الطويلة</string>
     <string name="overlay_header">التراكب</string>
+    <!-- Library Group Feature -->
+    <string name="group">مجموعة</string>
+    <string name="ungrouped">غير مجمعة</string>
+    <string name="tracking_status">حالة التتبع</string>
+    <string name="not_tracked">غير متتبع</string>
     <string name="pref_page_rotate">دوِّر الصفحات العريضة لتلائم الشاشة</string>
     <string name="pref_page_rotate_invert">اعكس اتِّجاه الصفحات العريضة المدوَّرة</string>
     <string name="pref_debug_info">معلومات التنقيح</string>

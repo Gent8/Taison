@@ -685,6 +685,11 @@
     <string name="action_update_category">อัปเดตหมวดหมู่</string>
     <string name="split_tall_images">แยกภาพสูงยาว</string>
     <string name="overlay_header">โอเวอร์เลย์</string>
+    <!-- Library Group Feature -->
+    <string name="group">กลุ่ม</string>
+    <string name="ungrouped">ไม่ได้จัดกลุ่ม</string>
+    <string name="tracking_status">สถานะการติดตาม</string>
+    <string name="not_tracked">ไม่ได้ติดตาม</string>
     <string name="pref_page_rotate">หมุนหน้ากว้างให้พอดี</string>
     <string name="pref_page_rotate_invert">พลิกการวางแนวของหน้ากว้างที่หมุน</string>
     <string name="pref_debug_info">ข้อมูลดีบัก</string>

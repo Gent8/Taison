@@ -685,6 +685,11 @@
     <string name="action_update_category">Mettre à jour la catégorie</string>
     <string name="split_tall_images">Diviser les grandes images</string>
     <string name="overlay_header">Superposition</string>
+    <!-- Library Group Feature -->
+    <string name="group">Groupe</string>
+    <string name="ungrouped">Non groupé</string>
+    <string name="tracking_status">Statut de suivi</string>
+    <string name="not_tracked">Non suivi</string>
     <string name="pref_page_rotate_invert">Inverser l\'orientation des pages larges retournées</string>
     <string name="pref_page_rotate">Tourner les pages larges pour qu\'elles rentrent</string>
     <string name="pref_debug_info">Informations de débogage</string>

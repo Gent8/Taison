@@ -685,6 +685,11 @@
     <string name="action_update_category">카테고리 업데이트</string>
     <string name="split_tall_images">긴 이미지 분할</string>
     <string name="overlay_header">오버레이</string>
+    <!-- Library Group Feature -->
+    <string name="group">그룹</string>
+    <string name="ungrouped">그룹화되지 않음</string>
+    <string name="tracking_status">추적 상태</string>
+    <string name="not_tracked">추적되지 않음</string>
     <string name="pref_page_rotate">화면에 맞게 넓은 페이지 회전</string>
     <string name="pref_page_rotate_invert">회전된 넓은 페이지의 회전 방향</string>
     <string name="pref_debug_info">디버그 정보</string>

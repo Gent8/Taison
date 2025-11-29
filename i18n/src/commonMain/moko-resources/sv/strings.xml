@@ -661,6 +661,11 @@
     <string name="pref_hide_in_library_items">Dölja poster som redan finns i biblioteket</string>
     <string name="download_notifier_cache_renewal">Kontrollerar nedladdningar</string>
     <string name="overlay_header">Överlägg</string>
+    <!-- Library Group Feature -->
+    <string name="group">Grupp</string>
+    <string name="ungrouped">Ogrupierad</string>
+    <string name="tracking_status">Spårningsstatus</string>
+    <string name="not_tracked">Inte spårad</string>
     <string name="pref_page_rotate">Rotera breda sidor så att de passar</string>
     <string name="pref_page_rotate_invert">Vänd orientering av roterade breda sidor</string>
     <string name="information_required_plain">*krävs</string>

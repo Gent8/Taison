@@ -685,6 +685,11 @@
     <string name="action_update_category">Aktualizovat kategorii</string>
     <string name="split_tall_images">Rozdělit vysoké obrázky</string>
     <string name="overlay_header">Překrytí</string>
+    <!-- Library Group Feature -->
+    <string name="group">Skupina</string>
+    <string name="ungrouped">Neseskupené</string>
+    <string name="tracking_status">Stav sledování</string>
+    <string name="not_tracked">Nesledováno</string>
     <string name="pref_page_rotate_invert">Překlopení orientace otočených širokých stránek</string>
     <string name="pref_page_rotate">Otočení širokých stránek tak, aby se vešly</string>
     <string name="pref_debug_info">Ladící informace</string>

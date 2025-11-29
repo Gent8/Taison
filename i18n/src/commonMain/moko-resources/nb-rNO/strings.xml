@@ -685,6 +685,11 @@
     <string name="action_update_category">Oppdater kategori</string>
     <string name="split_tall_images">Del opp høye bilder</string>
     <string name="overlay_header">Elementer</string>
+    <!-- Library Group Feature -->
+    <string name="group">Gruppe</string>
+    <string name="ungrouped">Ugruppert</string>
+    <string name="tracking_status">Sporingsstatus</string>
+    <string name="not_tracked">Ikke spores</string>
     <string name="pref_page_rotate_invert">Vend orienteringen av roterte brede sider</string>
     <string name="pref_page_rotate">Roter brede sider slik at de passer</string>
     <string name="pref_debug_info">Debug info</string>

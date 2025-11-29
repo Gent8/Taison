@@ -684,7 +684,12 @@
     <string name="pref_chapter_swipe_start">Acció en lliscar cap a l’esquerra</string>
     <string name="pref_double_tap_zoom">Toca dues vegades per a ampliar</string>
     <string name="overlay_header">Superposició</string>
-    <string name="pref_page_rotate_invert">Inverteix l’orientació de les pàgines amples rotades</string>
+    <!-- Library Group Feature -->
+    <string name="group">Grup</string>
+    <string name="ungrouped">Sense agrupar</string>
+    <string name="tracking_status">Estat de seguiment</string>
+    <string name="not_tracked">No seguit</string>
+    <string name="pref_page_rotate_invert">Inverteix l'orientació de les pàgines amples rotades</string>
     <string name="pref_page_rotate">Rota les pàgines amples perquè s’ajustin a la pantalla</string>
     <string name="pref_debug_info">Informació de depuració</string>
     <string name="action_set_interval">Estableix l’interval</string>

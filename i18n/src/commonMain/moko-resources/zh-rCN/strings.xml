@@ -685,6 +685,11 @@
     <string name="action_update_category">更新分类</string>
     <string name="split_tall_images">分割长图</string>
     <string name="overlay_header">标记和按钮</string>
+    <!-- Library Group Feature -->
+    <string name="group">分组</string>
+    <string name="ungrouped">未分组</string>
+    <string name="tracking_status">追踪状态</string>
+    <string name="not_tracked">未追踪</string>
     <string name="pref_page_rotate">旋转横向图片</string>
     <string name="pref_page_rotate_invert">旋转横向图片时反转方向</string>
     <string name="pref_debug_info">调试信息</string>

@@ -685,6 +685,11 @@
     <string name="action_update_category">Kategoriyi güncelle</string>
     <string name="split_tall_images">Uzun görselleri böl</string>
     <string name="overlay_header">Üstünde göster</string>
+    <!-- Library Group Feature -->
+    <string name="group">Grup</string>
+    <string name="ungrouped">Gruplanmamış</string>
+    <string name="tracking_status">Takip durumu</string>
+    <string name="not_tracked">Takip edilmiyor</string>
     <string name="pref_page_rotate">Geniş sayfaları sığdırmak için döndür</string>
     <string name="pref_page_rotate_invert">Döndürülen geniş sayfaların yönünü ters çevir</string>
     <string name="pref_debug_info">Hata ayıklama bilgisi</string>

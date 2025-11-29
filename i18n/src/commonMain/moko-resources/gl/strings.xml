@@ -687,6 +687,11 @@
     <string name="pref_page_rotate">Xirar as páxinas anchas para adaptalas á pantalla</string>
     <string name="pref_page_rotate_invert">Voltear a orientación das páxinas anchas xiradas</string>
     <string name="overlay_header">Superposición</string>
+    <!-- Library Group Feature -->
+    <string name="group">Grupo</string>
+    <string name="ungrouped">Sen agrupar</string>
+    <string name="tracking_status">Estado de seguimento</string>
+    <string name="not_tracked">Non seguido</string>
     <string name="pref_chapter_swipe_start">Acción de arrastrar á esquerda</string>
     <string name="pref_double_tap_zoom">Amplía dando dous toques na pantalla</string>
     <string name="pref_chapter_swipe_end">Acción de arrastrar á dereita</string>

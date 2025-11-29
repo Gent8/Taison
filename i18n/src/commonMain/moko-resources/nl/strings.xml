@@ -673,6 +673,11 @@
     <string name="track_delete_text">Dit zal de tracking lokaal verwijderen.</string>
     <string name="track_delete_remote_text">Haal ook weg van %s</string>
     <string name="overlay_header">Overlay</string>
+    <!-- Library Group Feature -->
+    <string name="group">Groep</string>
+    <string name="ungrouped">Niet gegroepeerd</string>
+    <string name="tracking_status">Trackingstatus</string>
+    <string name="not_tracked">Niet getrackt</string>
     <string name="label_overview_section">Overzicht</string>
     <string name="label_read_duration">Leesduur</string>
     <string name="manga_display_interval_title">Schat elke</string>

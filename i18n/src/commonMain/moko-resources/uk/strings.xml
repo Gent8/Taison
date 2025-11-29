@@ -685,6 +685,11 @@
     <string name="action_update_category">Оновити категорію</string>
     <string name="split_tall_images">Розділяти довгі зображення</string>
     <string name="overlay_header">Оверлей</string>
+    <!-- Library Group Feature -->
+    <string name="group">Група</string>
+    <string name="ungrouped">Не згруповано</string>
+    <string name="tracking_status">Статус відстеження</string>
+    <string name="not_tracked">Не відстежується</string>
     <string name="pref_page_rotate">Повернути широкі сторінки за розміром</string>
     <string name="pref_page_rotate_invert">Перевернути орієнтацію обернутих широких сторінок</string>
     <string name="pref_debug_info">Інформація для відлагодження</string>

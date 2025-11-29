@@ -686,6 +686,11 @@
     <string name="pref_page_rotate">I-rotate ang malalawak na pahina upang magkasya</string>
     <string name="pref_page_rotate_invert">I-flip ang oryentasyon ng mga pinaikot na malalawak na pahina</string>
     <string name="overlay_header">Nakapatong (Overlay)</string>
+    <!-- Library Group Feature -->
+    <string name="group">Grupo</string>
+    <string name="ungrouped">Hindi nakagrupo</string>
+    <string name="tracking_status">Estado ng pagsubaybay</string>
+    <string name="not_tracked">Hindi nasusubaybayan</string>
     <string name="split_tall_images">Hatiin ang mga matataas na larawan</string>
     <string name="pref_debug_info">Impormasyon sa pag-debug</string>
     <string name="pref_chapter_swipe_start">Kabanata sa pag-swipe pakaliwa</string>

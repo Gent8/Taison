@@ -681,6 +681,11 @@
     <string name="action_update_category">更新類別</string>
     <string name="split_tall_images">分割過高的圖片</string>
     <string name="overlay_header">封面附加元素</string>
+    <!-- Library Group Feature -->
+    <string name="group">分組</string>
+    <string name="ungrouped">未分組</string>
+    <string name="tracking_status">追蹤狀態</string>
+    <string name="not_tracked">未追蹤</string>
     <string name="pref_page_rotate">旋轉寬頁以符合螢幕</string>
     <string name="pref_page_rotate_invert">調換旋轉寬頁方向</string>
     <string name="pref_debug_info">偵錯資訊</string>

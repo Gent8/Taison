@@ -747,6 +747,11 @@
     <string name="logging_in">Ensalutado…</string>
     <string name="intervals_header">Intervaloj</string>
     <string name="overlay_header">Plustavolo</string>
+    <!-- Library Group Feature -->
+    <string name="group">Grupo</string>
+    <string name="ungrouped">Ne grupigita</string>
+    <string name="tracking_status">Spura statuso</string>
+    <string name="not_tracked">Ne spurebla</string>
     <string name="local_source_help_guide">Gvidilo pri lokaj fontoj</string>
     <string name="author">Aŭtoro</string>
     <string name="artist">Artisto</string>

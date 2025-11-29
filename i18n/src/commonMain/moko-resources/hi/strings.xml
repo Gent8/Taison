@@ -799,6 +799,11 @@
     <string name="pref_incognito_mode_extension_summary">एक्सटेंशन के लिए पढ़ने के इतिहास को रोकें</string>
     <string name="logging_in">लॉगिन हो रहा है…</string>
     <string name="overlay_header">ओवरले</string>
+    <!-- Library Group Feature -->
+    <string name="group">समूह</string>
+    <string name="ungrouped">असमूहीकृत</string>
+    <string name="tracking_status">ट्रैकिंग स्थिति</string>
+    <string name="not_tracked">ट्रैक नहीं किया गया</string>
     <string name="has_results">परिणाम हैं</string>
     <string name="author">लेखक</string>
     <string name="artist">कलाकार</string>

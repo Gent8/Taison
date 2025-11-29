@@ -600,6 +600,11 @@
     <string name="downloaded_chapters">பதிவிறக்கம் செய்யப்பட்ட அத்தியாயங்கள்</string>
     <string name="intervals_header">இடைவெளிகள்</string>
     <string name="overlay_header">மேலடுக்கு</string>
+    <!-- Library Group Feature -->
+    <string name="group">குழு</string>
+    <string name="ungrouped">குழுவாக்கப்படாத</string>
+    <string name="tracking_status">கண்காணிப்பு நிலை</string>
+    <string name="not_tracked">கண்காணிக்கப்படவில்லை</string>
     <string name="tabs_header">தாவல்கள்</string>
     <string name="no_more_results">இனி முடிவுகள் இல்லை</string>
     <string name="no_results_found">முடிவுகள் எதுவும் கிடைக்கவில்லை</string>
