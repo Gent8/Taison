@@ -958,8 +958,9 @@ class LibraryScreenModel(
             page: Int,
         ): LibraryToolbarTitle {
             val category = displayedCategories.getOrNull(page) ?: return LibraryToolbarTitle(defaultTitle)
-            val categoryName = category.let {
-                if (it.isSystemCategory) defaultCategoryTitle else it.name
+            val categoryName = when {
+                category.isSystemCategory && category.name.isBlank() -> defaultCategoryTitle
+                else -> category.name
             }
             val title = if (showCategoryTabs) defaultTitle else categoryName
             val count = when {
