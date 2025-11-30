@@ -158,7 +158,7 @@ class LibraryScreenModel(
                 libraryPreferences.groupLibraryBy().changes(),
                 libraryPreferences.sortingMode().changes(),
             ) { data, groupType, globalSort ->
-                data.favorites
+                val grouped = data.favorites
                     .applyGrouping(
                         categories = data.categories,
                         groupType = groupType,
@@ -171,15 +171,17 @@ class LibraryScreenModel(
                         data.loggedInTrackerIds,
                         groupSort = globalSort.takeIf { groupType != LibraryGroup.BY_DEFAULT },
                     )
+                groupType to grouped
             }
-                .collectLatest { grouped ->
+                .collectLatest { (groupType, grouped) ->
                     mutableState.update { state ->
-                        val mergedCategories = (grouped.keys + state.displayedCategories)
+                        val isSameGrouping = state.groupType == groupType
+                        val categories = (if (isSameGrouping) grouped.keys + state.displayedCategories else grouped.keys)
                             .distinctBy { it.id }
                             .sortedWith(compareBy<Category> { it.order }.thenBy { it.id })
 
                         val mergedGroupedFavorites = linkedMapOf<Category, List</* LibraryItem */ Long>>().apply {
-                            mergedCategories.forEach { category ->
+                            categories.forEach { category ->
                                 put(category, grouped[category].orEmpty())
                             }
                         }
@@ -188,12 +190,13 @@ class LibraryScreenModel(
                             return@update state.copy(
                                 isLoading = false,
                                 groupedFavorites = mergedGroupedFavorites,
+                                groupType = groupType,
                             )
                         }
 
-                        val preferredIndex = resolveActiveCategoryIndex(mergedCategories, state.activeCategoryIndex)
-                        val newIndex = preferredIndex.coerceIn(minimumValue = 0, maximumValue = mergedCategories.lastIndex)
-                        val currentCategoryId = mergedCategories.getOrNull(newIndex)?.id ?: -1L
+                        val preferredIndex = resolveActiveCategoryIndex(categories, state.activeCategoryIndex)
+                        val newIndex = preferredIndex.coerceIn(minimumValue = 0, maximumValue = categories.lastIndex)
+                        val currentCategoryId = categories.getOrNull(newIndex)?.id ?: -1L
                         if (currentCategoryId != -1L && lastUsedCategoryState.current != currentCategoryId) {
                             lastUsedCategoryState.set(currentCategoryId)
                         }
@@ -201,6 +204,7 @@ class LibraryScreenModel(
                             isLoading = false,
                             groupedFavorites = mergedGroupedFavorites,
                             activeCategoryIndex = newIndex,
+                            groupType = groupType,
                         )
                     }
                 }
@@ -931,6 +935,7 @@ class LibraryScreenModel(
         val dialog: Dialog? = null,
         val libraryData: LibraryData = LibraryData(),
         val activeCategoryIndex: Int = 0,
+        val groupType: Int = LibraryGroup.BY_DEFAULT,
         private val groupedFavorites: Map<Category, List</* LibraryItem */ Long>> = emptyMap(),
     ) {
         val showCategoryTabs: Boolean
