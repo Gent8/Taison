@@ -119,7 +119,7 @@ class HistoryScreenModelStateProvider : PreviewParameterProvider<HistoryScreenMo
                             url = "https://example.com/cover.png",
                             lastModified = Random.nextLong(),
                         ),
-                        status = 1L, 
+                        status = 1L,
                     ),
                 ),
             )
