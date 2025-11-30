@@ -174,23 +174,32 @@ class LibraryScreenModel(
             }
                 .collectLatest { grouped ->
                     mutableState.update { state ->
-                        val categories = grouped.keys.toList()
-                        if (categories.isEmpty()) {
+                        val mergedCategories = (grouped.keys + state.displayedCategories)
+                            .distinctBy { it.id }
+                            .sortedWith(compareBy<Category> { it.order }.thenBy { it.id })
+
+                        val mergedGroupedFavorites = linkedMapOf<Category, List</* LibraryItem */ Long>>().apply {
+                            mergedCategories.forEach { category ->
+                                put(category, grouped[category].orEmpty())
+                            }
+                        }
+
+                        if (mergedGroupedFavorites.isEmpty()) {
                             return@update state.copy(
                                 isLoading = false,
-                                groupedFavorites = grouped,
+                                groupedFavorites = mergedGroupedFavorites,
                             )
                         }
 
-                        val preferredIndex = resolveActiveCategoryIndex(categories, state.activeCategoryIndex)
-                        val newIndex = preferredIndex.coerceIn(minimumValue = 0, maximumValue = categories.lastIndex)
-                        val currentCategoryId = categories[newIndex].id
-                        if (lastUsedCategoryState.current != currentCategoryId) {
+                        val preferredIndex = resolveActiveCategoryIndex(mergedCategories, state.activeCategoryIndex)
+                        val newIndex = preferredIndex.coerceIn(minimumValue = 0, maximumValue = mergedCategories.lastIndex)
+                        val currentCategoryId = mergedCategories.getOrNull(newIndex)?.id ?: -1L
+                        if (currentCategoryId != -1L && lastUsedCategoryState.current != currentCategoryId) {
                             lastUsedCategoryState.set(currentCategoryId)
                         }
                         state.copy(
                             isLoading = false,
-                            groupedFavorites = grouped,
+                            groupedFavorites = mergedGroupedFavorites,
                             activeCategoryIndex = newIndex,
                         )
                     }
