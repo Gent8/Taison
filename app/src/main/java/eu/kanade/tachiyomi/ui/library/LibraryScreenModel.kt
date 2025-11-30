@@ -173,17 +173,21 @@ class LibraryScreenModel(
                     )
             }
                 .collectLatest { grouped ->
-                    val categories = grouped.keys.toList()
-                    val preferredIndex = resolveActiveCategoryIndex(categories, state.value.activeCategoryIndex)
-                    val currentCategoryId = categories.getOrNull(preferredIndex)?.id ?: -1L
-                    if (lastUsedCategoryState.current != currentCategoryId) {
-                        lastUsedCategoryState.set(currentCategoryId)
-                    }
                     mutableState.update { state ->
-                        val newIndex = preferredIndex.coerceIn(
-                            minimumValue = 0,
-                            maximumValue = categories.lastIndex.coerceAtLeast(0),
-                        )
+                        val categories = grouped.keys.toList()
+                        if (categories.isEmpty()) {
+                            return@update state.copy(
+                                isLoading = false,
+                                groupedFavorites = grouped,
+                            )
+                        }
+
+                        val preferredIndex = resolveActiveCategoryIndex(categories, state.activeCategoryIndex)
+                        val newIndex = preferredIndex.coerceIn(minimumValue = 0, maximumValue = categories.lastIndex)
+                        val currentCategoryId = categories[newIndex].id
+                        if (lastUsedCategoryState.current != currentCategoryId) {
+                            lastUsedCategoryState.set(currentCategoryId)
+                        }
                         state.copy(
                             isLoading = false,
                             groupedFavorites = grouped,
