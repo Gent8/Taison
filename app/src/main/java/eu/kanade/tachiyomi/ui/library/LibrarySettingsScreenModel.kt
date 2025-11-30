@@ -15,6 +15,7 @@ import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.domain.category.interactor.SetDisplayMode
 import tachiyomi.domain.category.interactor.SetSortModeForCategory
 import tachiyomi.domain.category.model.Category
+import tachiyomi.domain.library.model.HistoryScopeMode
 import tachiyomi.domain.library.model.LibraryDisplayMode
 import tachiyomi.domain.library.model.LibrarySort
 import tachiyomi.domain.library.service.LibraryPreferences
@@ -62,6 +63,9 @@ class LibrarySettingsScreenModel(
     fun setGrouping(grouping: Int) {
         screenModelScope.launchIO {
             libraryPreferences.groupLibraryBy().set(grouping)
+            libraryPreferences.historyScopeMode().set(
+                HistoryScopeMode.fromLibraryGroup(grouping),
+            )
         }
     }
 }

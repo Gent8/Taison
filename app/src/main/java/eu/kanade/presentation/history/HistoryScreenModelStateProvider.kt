@@ -6,6 +6,7 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
 import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.history.model.HistoryWithRelations
+import tachiyomi.domain.library.model.HistoryScopeMode
 import tachiyomi.domain.library.service.LibraryPreferences
 import tachiyomi.domain.manga.model.MangaCover
 import java.time.Instant
@@ -28,15 +29,16 @@ class HistoryScreenModelStateProvider : PreviewParameterProvider<HistoryScreenMo
             .toPersistentList(),
         dialog = null,
         historyScopeEnabled = true,
-        activeCategory = Category(id = Category.UNCATEGORIZED_ID, name = "", order = 0, flags = 0, hidden = false),
-        activeCategoryId = Category.UNCATEGORIZED_ID,
-        categories = persistentListOf(
-            Category(id = Category.UNCATEGORIZED_ID, name = "", order = 0, flags = 0, hidden = false),
-            Category(id = 1L, name = "Action", order = 1, flags = 0, hidden = false),
-            Category(id = 2L, name = "Drama", order = 2, flags = 0, hidden = false),
+        activeSection = HistoryScreenModel.HistorySection(id = Category.UNCATEGORIZED_ID, name = "Default", order = 0),
+        activeSectionId = Category.UNCATEGORIZED_ID,
+        sections = persistentListOf(
+            HistoryScreenModel.HistorySection(id = Category.UNCATEGORIZED_ID, name = "Default", order = 0),
+            HistoryScreenModel.HistorySection(id = 1L, name = "Action", order = 1),
+            HistoryScreenModel.HistorySection(id = 2L, name = "Drama", order = 2),
         ),
-        categoryNavigationEnabled = true,
-        categoryNavigationMode = LibraryPreferences.CategoryNavigationMode.TABS,
+        sectionNavigationEnabled = true,
+        navigationMode = LibraryPreferences.CategoryNavigationMode.TABS,
+        scopeMode = HistoryScopeMode.BY_CATEGORY,
     )
 
     private val shortRecent = HistoryScreenModel.State(
@@ -117,6 +119,7 @@ class HistoryScreenModelStateProvider : PreviewParameterProvider<HistoryScreenMo
                             url = "https://example.com/cover.png",
                             lastModified = Random.nextLong(),
                         ),
+                        status = 1L, 
                     ),
                 ),
             )

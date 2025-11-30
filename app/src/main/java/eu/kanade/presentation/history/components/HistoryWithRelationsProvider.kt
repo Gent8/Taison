@@ -22,6 +22,7 @@ internal class HistoryWithRelationsProvider : PreviewParameterProvider<HistoryWi
             url = "https://example.com/cover.png",
             lastModified = 5L,
         ),
+        status = 1L,
     )
 
     private val historyWithoutReadAt = HistoryWithRelations(
@@ -40,6 +41,7 @@ internal class HistoryWithRelationsProvider : PreviewParameterProvider<HistoryWi
             url = "https://example.com/cover.png",
             lastModified = 5L,
         ),
+        status = 1L,
     )
 
     private val historyWithNegativeChapterNumber = HistoryWithRelations(
@@ -58,6 +60,7 @@ internal class HistoryWithRelationsProvider : PreviewParameterProvider<HistoryWi
             url = "https://example.com/cover.png",
             lastModified = 5L,
         ),
+        status = 1L,
     )
 
     override val values: Sequence<HistoryWithRelations>

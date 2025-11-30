@@ -50,8 +50,6 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import dev.icerock.moko.resources.StringResource
-import eu.kanade.presentation.category.visualName
-import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.components.AppBarTitle
 import eu.kanade.presentation.components.SearchToolbar
 import eu.kanade.presentation.components.relativeDateText
@@ -61,7 +59,6 @@ import eu.kanade.presentation.util.animateItemFastScroll
 import eu.kanade.tachiyomi.ui.history.HistoryScreenModel
 import eu.kanade.tachiyomi.ui.history.toHistoryUiModels
 import kotlinx.coroutines.launch
-import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.history.model.HistoryWithRelations
 import tachiyomi.domain.library.service.LibraryPreferences
 import tachiyomi.i18n.MR
@@ -79,17 +76,17 @@ fun HistoryScreen(
     snackbarHostState: SnackbarHostState,
     onSearchQueryChange: (String?) -> Unit,
     onToggleNonLibraryEntries: () -> Unit,
-    onSelectCategory: (Long) -> Unit,
+    onSelectSection: (Long) -> Unit,
     onClickCover: (mangaId: Long) -> Unit,
     onClickResume: (mangaId: Long, chapterId: Long) -> Unit,
     onClickFavorite: (mangaId: Long) -> Unit,
     onDialogChange: (HistoryScreenModel.Dialog?) -> Unit,
 ) {
     val showToolbarDropdown = state.historyScopeEnabled &&
-        state.categoryNavigationEnabled &&
-        state.categoryNavigationMode == LibraryPreferences.CategoryNavigationMode.DROPDOWN &&
-        state.categories.size > 1
-    var toolbarDropdownExpanded by remember(showToolbarDropdown, state.categories) { mutableStateOf(false) }
+        state.sectionNavigationEnabled &&
+        state.navigationMode == LibraryPreferences.CategoryNavigationMode.DROPDOWN &&
+        state.sections.size > 1
+    var toolbarDropdownExpanded by remember(showToolbarDropdown, state.sections) { mutableStateOf(false) }
 
     Scaffold(
         topBar = { scrollBehavior ->
@@ -98,18 +95,18 @@ fun HistoryScreen(
                     titleContent = {
                         val showSubtitle = state.historyScopeEnabled &&
                             !(
-                                state.categoryNavigationEnabled &&
-                                    state.categoryNavigationMode == LibraryPreferences.CategoryNavigationMode.TABS
+                                state.sectionNavigationEnabled &&
+                                    state.navigationMode == LibraryPreferences.CategoryNavigationMode.TABS
                                 )
                         if (showToolbarDropdown) {
                             HistoryToolbarTitle(
                                 title = stringResource(MR.strings.history),
-                                label = state.activeCategory?.visualName ?: stringResource(MR.strings.label_default),
+                                label = state.activeSection?.name ?: stringResource(MR.strings.label_default),
                                 onExpandedChange = { toolbarDropdownExpanded = it },
                                 expanded = toolbarDropdownExpanded,
                             )
                         } else {
-                            val subtitle = if (showSubtitle) state.activeCategory?.visualName else null
+                            val subtitle = if (showSubtitle) state.activeSection?.name else null
                             AppBarTitle(
                                 title = stringResource(MR.strings.history),
                                 subtitle = subtitle,
@@ -153,7 +150,7 @@ fun HistoryScreen(
                             state = rememberTooltipState(),
                             focusable = false,
                         ) {
-                            val defaultScope = if (state.historyScopeEnabled && state.activeCategoryId != null) {
+                            val defaultScope = if (state.historyScopeEnabled && state.activeSectionId != null) {
                                 HistoryScreenModel.HistoryDeletionScope.ACTIVE_SCOPE
                             } else {
                                 HistoryScreenModel.HistoryDeletionScope.EVERYTHING
@@ -180,14 +177,14 @@ fun HistoryScreen(
                     expanded = toolbarDropdownExpanded,
                     onDismissRequest = { toolbarDropdownExpanded = false },
                 ) {
-                    state.categories.forEach { category ->
+                    state.sections.forEach { section ->
                         DropdownMenuItem(
-                            text = { Text(category.visualName) },
+                            text = { Text(section.name) },
                             onClick = {
                                 toolbarDropdownExpanded = false
-                                onSelectCategory(category.id)
+                                onSelectSection(section.id)
                             },
-                            trailingIcon = if (category.id == state.activeCategoryId) {
+                            trailingIcon = if (section.id == state.activeSectionId) {
                                 {
                                     Icon(
                                         imageVector = Icons.Outlined.Check,
@@ -218,32 +215,32 @@ fun HistoryScreen(
                         .padding(contentPadding)
                         .fillMaxSize(),
                 ) {
-                    val enableCategoryPager = state.historyScopeEnabled &&
-                        state.categoryNavigationEnabled &&
-                        state.categories.size > 1
-                    val showCategoryTabs = enableCategoryPager &&
-                        state.categoryNavigationMode == LibraryPreferences.CategoryNavigationMode.TABS
-                    val selectedIndex = state.categories.indexOfFirst { category ->
-                        category.id == state.activeCategoryId
+                    val enableSectionPager = state.historyScopeEnabled &&
+                        state.sectionNavigationEnabled &&
+                        state.sections.size > 1
+                    val showSectionTabs = enableSectionPager &&
+                        state.navigationMode == LibraryPreferences.CategoryNavigationMode.TABS
+                    val selectedIndex = state.sections.indexOfFirst { section ->
+                        section.id == state.activeSectionId
                     }.takeIf { index -> index >= 0 } ?: 0
-                    val pagerState = if (enableCategoryPager) {
+                    val pagerState = if (enableSectionPager) {
                         rememberPagerState(initialPage = selectedIndex) {
-                            state.categories.size
+                            state.sections.size
                         }
                     } else {
                         null
                     }
                     val coroutineScope = rememberCoroutineScope()
 
-                    if (enableCategoryPager && pagerState != null) {
+                    if (enableSectionPager && pagerState != null) {
                         var pagerSelectionInProgress by remember(pagerState) { mutableStateOf(false) }
 
-                        LaunchedEffect(state.activeCategoryId, state.categories) {
-                            if (state.categories.isEmpty()) {
+                        LaunchedEffect(state.activeSectionId, state.sections) {
+                            if (state.sections.isEmpty()) {
                                 pagerSelectionInProgress = false
                                 return@LaunchedEffect
                             }
-                            val targetIndex = state.categories.indexOfFirst { it.id == state.activeCategoryId }
+                            val targetIndex = state.sections.indexOfFirst { it.id == state.activeSectionId }
                                 .takeIf { it >= 0 } ?: 0
                             val lastIndex = pagerState.pageCount - 1
                             if (lastIndex < 0) return@LaunchedEffect
@@ -261,27 +258,27 @@ fun HistoryScreen(
 
                         LaunchedEffect(pagerState.currentPage, pagerState.isScrollInProgress) {
                             if (pagerState.isScrollInProgress) return@LaunchedEffect
-                            if (state.categories.isEmpty()) return@LaunchedEffect
+                            if (state.sections.isEmpty()) return@LaunchedEffect
                             val currentPage = pagerState.currentPage.coerceIn(
                                 0,
-                                state.categories.lastIndex,
+                                state.sections.lastIndex,
                             )
-                            val categoryId = state.categories[currentPage].id
-                            if (categoryId != state.activeCategoryId) {
+                            val sectionId = state.sections[currentPage].id
+                            if (sectionId != state.activeSectionId) {
                                 pagerSelectionInProgress = true
-                                onSelectCategory(categoryId)
+                                onSelectSection(sectionId)
                             }
                         }
 
-                        if (showCategoryTabs) {
-                            HistoryCategoryTabs(
-                                categories = state.categories,
+                        if (showSectionTabs) {
+                            HistorySectionTabs(
+                                sections = state.sections,
                                 pagerState = pagerState,
                                 onTabItemClick = tab@{ index ->
                                     if (index == pagerState.currentPage) return@tab
-                                    val targetCategoryId = state.categories.getOrNull(index)?.id ?: return@tab
+                                    val targetSectionId = state.sections.getOrNull(index)?.id ?: return@tab
                                     pagerSelectionInProgress = true
-                                    onSelectCategory(targetCategoryId)
+                                    onSelectSection(targetSectionId)
                                     coroutineScope.launch {
                                         pagerState.animateScrollToPage(index)
                                     }
@@ -294,19 +291,19 @@ fun HistoryScreen(
                             state = pagerState,
                             verticalAlignment = Alignment.Top,
                         ) { page ->
-                            val categoryId = state.categories.getOrNull(page)?.id
-                            val categoryEntries = categoryId?.let { state.categoryHistories[it] }
-                            val categoryHistory by remember(categoryEntries, historyList) {
+                            val sectionId = state.sections.getOrNull(page)?.id
+                            val sectionEntries = sectionId?.let { state.sectionHistories[it] }
+                            val sectionHistory by remember(sectionEntries, historyList) {
                                 derivedStateOf {
-                                    if (categoryEntries != null) {
-                                        categoryEntries.toHistoryUiModels()
+                                    if (sectionEntries != null) {
+                                        sectionEntries.toHistoryUiModels()
                                     } else {
                                         historyList
                                     }
                                 }
                             }
                             HistoryListOrEmpty(
-                                history = categoryHistory,
+                                history = sectionHistory,
                                 emptyMessage = emptyMessage,
                                 onClickCover = { historyItem -> onClickCover(historyItem.mangaId) },
                                 onClickResume = { historyItem ->
@@ -337,24 +334,24 @@ fun HistoryScreen(
 }
 
 @Composable
-private fun HistoryCategoryTabs(
-    categories: List<Category>,
+private fun HistorySectionTabs(
+    sections: List<HistoryScreenModel.HistorySection>,
     pagerState: PagerState,
     onTabItemClick: (Int) -> Unit,
 ) {
-    if (categories.isEmpty()) return
-    val selectedIndex = pagerState.currentPage.coerceAtMost(categories.lastIndex)
+    if (sections.isEmpty()) return
+    val selectedIndex = pagerState.currentPage.coerceAtMost(sections.lastIndex)
     Column {
         PrimaryScrollableTabRow(
             selectedTabIndex = selectedIndex,
             edgePadding = 0.dp,
             divider = {},
         ) {
-            categories.forEachIndexed { index, category ->
+            sections.forEachIndexed { index, section ->
                 Tab(
                     selected = selectedIndex == index,
                     onClick = { onTabItemClick(index) },
-                    text = { Text(category.visualName) },
+                    text = { Text(section.name) },
                     unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
@@ -484,7 +481,7 @@ internal fun HistoryScreenPreviews(
             snackbarHostState = SnackbarHostState(),
             onSearchQueryChange = {},
             onToggleNonLibraryEntries = {},
-            onSelectCategory = {},
+            onSelectSection = {},
             onClickCover = {},
             onClickResume = { _, _ -> run {} },
             onDialogChange = {},

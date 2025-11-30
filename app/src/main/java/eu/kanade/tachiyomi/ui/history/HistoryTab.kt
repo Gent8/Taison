@@ -17,7 +17,6 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import eu.kanade.presentation.category.components.ChangeCategoryDialog
-import eu.kanade.presentation.category.visualName
 import eu.kanade.presentation.history.HistoryScreen
 import eu.kanade.presentation.history.components.HistoryDeleteAllDialog
 import eu.kanade.presentation.history.components.HistoryDeleteDialog
@@ -71,7 +70,7 @@ data object HistoryTab : Tab {
             snackbarHostState = snackbarHostState,
             onSearchQueryChange = screenModel::updateSearchQuery,
             onToggleNonLibraryEntries = screenModel::toggleNonLibraryEntries,
-            onSelectCategory = screenModel::updateActiveCategory,
+            onSelectSection = screenModel::updateActiveSection,
             onClickCover = { navigator.push(MangaScreen(it)) },
             onClickResume = screenModel::getNextChapterForManga,
             onDialogChange = screenModel::setDialog,
@@ -93,11 +92,11 @@ data object HistoryTab : Tab {
                 )
             }
             is HistoryScreenModel.Dialog.DeleteAll -> {
-                val canDeleteActiveScope = state.historyScopeEnabled && state.activeCategoryId != null
-                val activeCategoryLabel = state.activeCategory?.visualName ?: stringResource(MR.strings.label_default)
+                val canDeleteActiveScope = state.historyScopeEnabled && state.activeSectionId != null
+                val activeSectionLabel = state.activeSection?.name ?: stringResource(MR.strings.label_default)
                 HistoryDeleteAllDialog(
                     canTargetActiveScope = canDeleteActiveScope,
-                    activeScopeLabel = activeCategoryLabel,
+                    activeScopeLabel = activeSectionLabel,
                     includeNonLibraryLabel = state.showNonLibraryEntries,
                     selection = dialog.scope,
                     onSelectionChange = { scope ->

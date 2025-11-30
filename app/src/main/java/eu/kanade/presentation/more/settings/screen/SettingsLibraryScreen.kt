@@ -72,8 +72,6 @@ object SettingsLibraryScreen : SearchableSettings {
     ): Preference.PreferenceGroup {
         val scope = rememberCoroutineScope()
         val userCategoriesCount = allCategories.filterNot(Category::isSystemCategory).size
-        val historyScopePreference = libraryPreferences.historyScopeByCategory()
-        val historyScopeEnabled by historyScopePreference.collectAsState()
 
         // For default category
         val ids = listOf(libraryPreferences.defaultCategory().defaultValue()) +
@@ -128,18 +126,10 @@ object SettingsLibraryScreen : SearchableSettings {
             )
             add(
                 Preference.PreferenceItem.SwitchPreference(
-                    preference = historyScopePreference,
-                    title = stringResource(MR.strings.pref_history_scope_active_category),
+                    preference = libraryPreferences.historySectionNavigation(),
+                    title = stringResource(MR.strings.pref_history_section_navigation),
                 ),
             )
-            if (historyScopeEnabled) {
-                add(
-                    Preference.PreferenceItem.SwitchPreference(
-                        preference = libraryPreferences.historyCategoryNavigation(),
-                        title = stringResource(MR.strings.pref_history_category_navigation),
-                    ),
-                )
-            }
         }.toPersistentList()
 
         return Preference.PreferenceGroup(

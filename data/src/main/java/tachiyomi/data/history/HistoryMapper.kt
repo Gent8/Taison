@@ -27,6 +27,7 @@ object HistoryMapper {
         sourceId: Long,
         isFavorite: Boolean,
         coverLastModified: Long,
+        status: Long,
         chapterNumber: Double,
         readAt: Date?,
         readDuration: Long,
@@ -47,6 +48,7 @@ object HistoryMapper {
             url = thumbnailUrl,
             lastModified = coverLastModified,
         ),
+        status = status,
     )
 
     private fun parseCategoryIds(raw: String?): List<Long> {

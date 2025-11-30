@@ -4,6 +4,7 @@ import tachiyomi.core.common.preference.Preference
 import tachiyomi.core.common.preference.PreferenceStore
 import tachiyomi.core.common.preference.TriState
 import tachiyomi.core.common.preference.getEnum
+import tachiyomi.domain.library.model.HistoryScopeMode
 import tachiyomi.domain.library.model.LibraryDisplayMode
 import tachiyomi.domain.library.model.LibraryGroup
 import tachiyomi.domain.library.model.LibrarySort
@@ -143,9 +144,37 @@ class LibraryPreferences(
         return preference
     }
 
+    @Deprecated("Use historyScopeMode() instead", ReplaceWith("historyScopeMode()"))
     fun historyScopeByCategory() = preferenceStore.getBoolean("history_scope_by_category", true)
 
+    fun historyScopeMode(): Preference<HistoryScopeMode> {
+        val preference = preferenceStore.getEnum(
+            "history_scope_mode",
+            HistoryScopeMode.BY_CATEGORY,
+        )
+        if (!preference.isSet()) {
+            val legacyPreference = preferenceStore.getBoolean("history_scope_by_category", true)
+            preference.set(HistoryScopeMode.fromLegacyBoolean(legacyPreference.get()))
+        }
+        return preference
+    }
+
+    @Deprecated("Use historySectionNavigation() instead", ReplaceWith("historySectionNavigation()"))
     fun historyCategoryNavigation() = preferenceStore.getBoolean("history_category_navigation", false)
+
+    fun historySectionNavigation(): Preference<Boolean> {
+        val preference = preferenceStore.getBoolean("history_section_navigation", false)
+        if (!preference.isSet()) {
+            val legacyPreference = preferenceStore.getBoolean("history_category_navigation", false)
+            preference.set(legacyPreference.get())
+        }
+        return preference
+    }
+
+    fun lastUsedHistorySectionId() = preferenceStore.getLong(
+        Preference.appStateKey("last_used_history_section_id"),
+        -1L,
+    )
 
     fun categoryNumberOfItems() = preferenceStore.getBoolean("display_number_of_items", false)
 
