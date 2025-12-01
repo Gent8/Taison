@@ -176,7 +176,13 @@ class LibraryScreenModel(
                 .collectLatest { (groupType, grouped) ->
                     mutableState.update { state ->
                         val isSameGrouping = state.groupType == groupType
-                        val categories = (if (isSameGrouping) grouped.keys + state.displayedCategories else grouped.keys)
+                        val categories = (
+                            if (isSameGrouping) {
+                                grouped.keys + state.displayedCategories
+                            } else {
+                                grouped.keys
+                            }
+                            )
                             .distinctBy { it.id }
                             .sortedWith(compareBy<Category> { it.order }.thenBy { it.id })
 
