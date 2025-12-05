@@ -98,10 +98,13 @@ class HistoryScreenModel(
                 scopeModeFlow,
                 lastUsedHistorySectionIdFlow,
                 lastUsedCategoryState.state,
-            ) { scopeMode, historySectionId, categoryId ->
+            ) { scopeMode, _, categoryId ->
                 when (scopeMode) {
-                    HistoryScopeMode.BY_CATEGORY -> categoryId
-                    else -> if (historySectionId >= 0) historySectionId else 0L
+                    HistoryScopeMode.BY_CATEGORY,
+                    HistoryScopeMode.BY_SOURCE,
+                    HistoryScopeMode.BY_STATUS,
+                    -> categoryId
+                    HistoryScopeMode.UNGROUPED -> 0L
                 }
             }.distinctUntilChanged()
             val categoriesFlow = getCategories.subscribe().distinctUntilChanged()
@@ -533,8 +536,11 @@ class HistoryScreenModel(
         }
         screenModelScope.launchIO {
             libraryPreferences.lastUsedHistorySectionId().set(sectionId)
-            if (state.value.scopeMode == HistoryScopeMode.BY_CATEGORY) {
+            val scopeMode = state.value.scopeMode
+            if (scopeMode != HistoryScopeMode.UNGROUPED) {
                 lastUsedCategoryState.set(sectionId)
+            }
+            if (scopeMode == HistoryScopeMode.BY_CATEGORY) {
                 val sections = state.value.sections
                 val index = sections.indexOfFirst { it.id == sectionId }.let { found ->
                     if (found >= 0) found else 0
