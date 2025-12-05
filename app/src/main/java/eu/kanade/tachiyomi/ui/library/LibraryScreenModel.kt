@@ -176,15 +176,19 @@ class LibraryScreenModel(
                 .collectLatest { (groupType, grouped) ->
                     mutableState.update { state ->
                         val isSameGrouping = state.groupType == groupType
-                        val categories = (
-                            if (isSameGrouping) {
-                                grouped.keys + state.displayedCategories
-                            } else {
+                        val shouldPreserveCategories = isSameGrouping &&
+                            grouped.isEmpty() &&
+                            state.displayedCategories.isNotEmpty()
+
+                        val categories = when {
+                            shouldPreserveCategories -> state.displayedCategories
+                            isSameGrouping -> (grouped.keys + state.displayedCategories)
+                                .distinctBy { it.id }
+                                .sortedWith(compareBy<Category> { it.order }.thenBy { it.id })
+                            else ->
                                 grouped.keys
-                            }
-                            )
-                            .distinctBy { it.id }
-                            .sortedWith(compareBy<Category> { it.order }.thenBy { it.id })
+                                    .sortedWith(compareBy<Category> { it.order }.thenBy { it.id })
+                        }
 
                         val mergedGroupedFavorites = linkedMapOf<Category, List</* LibraryItem */ Long>>().apply {
                             categories.forEach { category ->
@@ -192,7 +196,7 @@ class LibraryScreenModel(
                             }
                         }
 
-                        if (mergedGroupedFavorites.isEmpty()) {
+                        if (mergedGroupedFavorites.isEmpty() && !shouldPreserveCategories) {
                             return@update state.copy(
                                 isLoading = false,
                                 groupedFavorites = mergedGroupedFavorites,
@@ -201,7 +205,10 @@ class LibraryScreenModel(
                         }
 
                         val preferredIndex = resolveActiveCategoryIndex(categories, state.activeCategoryIndex)
-                        val newIndex = preferredIndex.coerceIn(minimumValue = 0, maximumValue = categories.lastIndex)
+                        val newIndex = preferredIndex.coerceIn(
+                            minimumValue = 0,
+                            maximumValue = categories.lastIndex.coerceAtLeast(0),
+                        )
                         val currentCategoryId = categories.getOrNull(newIndex)?.id ?: -1L
                         if (currentCategoryId != -1L && lastUsedCategoryState.current != currentCategoryId) {
                             lastUsedCategoryState.set(currentCategoryId)
