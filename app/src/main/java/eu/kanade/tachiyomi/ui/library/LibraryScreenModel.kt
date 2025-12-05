@@ -213,6 +213,11 @@ class LibraryScreenModel(
                         if (currentCategoryId != -1L && lastUsedCategoryState.current != currentCategoryId) {
                             lastUsedCategoryState.set(currentCategoryId)
                         }
+                        if (currentCategoryId != -1L &&
+                            (groupType == LibraryGroup.BY_SOURCE || groupType == LibraryGroup.BY_STATUS)
+                        ) {
+                            libraryPreferences.lastUsedHistorySectionId().set(currentCategoryId)
+                        }
                         state.copy(
                             isLoading = false,
                             groupedFavorites = mergedGroupedFavorites,
@@ -438,7 +443,7 @@ class LibraryScreenModel(
                 }.mapKeys { (status, _) ->
                     val (nameRes, order) = statusMap[status] ?: (MR.strings.unknown to 7L)
                     Category(
-                        id = status + 1,
+                        id = status,
                         name = context.stringResource(nameRes),
                         order = order,
                         flags = 0,
@@ -859,6 +864,11 @@ class LibraryScreenModel(
         libraryPreferences.lastUsedCategory().set(coercedIndex)
         val activeCategoryId = newState.displayedCategories.getOrNull(coercedIndex)?.id ?: -1L
         lastUsedCategoryState.set(activeCategoryId)
+
+        val groupType = newState.groupType
+        if (groupType == LibraryGroup.BY_SOURCE || groupType == LibraryGroup.BY_STATUS) {
+            libraryPreferences.lastUsedHistorySectionId().set(activeCategoryId)
+        }
     }
 
     fun openChangeCategoryDialog() {

@@ -315,7 +315,6 @@ private fun ColumnScope.DisplayPage(
         pref = screenModel.libraryPreferences.showContinueReadingButton(),
     )
 
-    HeadingItem(MR.strings.tabs_header)
     val categoryNavigationPref = remember { screenModel.libraryPreferences.categoryNavigationMode() }
     val categoryNavigationMode by categoryNavigationPref.collectAsState()
     SettingsChipRow(MR.strings.pref_category_navigation_type) {
