@@ -424,6 +424,8 @@
     <string name="pref_clear_history">Geschiedenis wissen</string>
     <string name="clear_history_confirmation">Weet je dit zeker? Alle geschiedenis zal verloren gaan.</string>
     <string name="clear_history_completed">Geschiedenis verwijderd</string>
+    <string name="pref_history_scope_mode">Geschiedenisbereik</string>
+    <string name="pref_history_section_navigation">Sectienavigatie in geschiedenis inschakelen</string>
     <string name="spen_next_page">Volgende pagina</string>
     <string name="spen_previous_page">Vorige pagina</string>
     <string name="migration_help_guide">Bronmigratiegids</string>

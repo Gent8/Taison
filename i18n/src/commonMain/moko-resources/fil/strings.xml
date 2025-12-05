@@ -425,6 +425,8 @@
     <string name="pref_incognito_mode">Incognito na mode</string>
     <string name="pref_clear_history">Linisin ang kasaysayan</string>
     <string name="clear_history_completed">Nabura ang kasaysayan</string>
+    <string name="pref_history_scope_mode">Saklaw ng kasaysayan</string>
+    <string name="pref_history_section_navigation">Paganahin ang pag-navigate ng seksyon sa kasaysayan</string>
     <string name="clear_history_confirmation">Sigurado ka ba talaga? Mawawala ang buong kasaysayan.</string>
     <string name="migration_help_guide">Gabay sa Paglipat ng source</string>
     <string name="spen_next_page">Susunod na pahina</string>

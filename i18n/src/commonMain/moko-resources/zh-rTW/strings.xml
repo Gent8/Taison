@@ -416,6 +416,8 @@
     <string name="no_chapters_error">沒有章節</string>
     <string name="set_chapter_settings_as_default">儲存為預設值</string>
     <string name="clear_history_completed">已刪除記錄</string>
+    <string name="pref_history_scope_mode">記錄範圍</string>
+    <string name="pref_history_section_navigation">在記錄中啟用區段導航</string>
     <string name="clear_history_confirmation">你確定嗎？所有的閱讀記錄將會遺失</string>
     <string name="pref_clear_history">清除閱讀記錄</string>
     <string name="pref_incognito_mode_summary">暫停閱讀記錄</string>

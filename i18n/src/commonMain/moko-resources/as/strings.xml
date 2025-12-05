@@ -723,6 +723,8 @@
     <string name="recent_manga_time">চ. %1$s - %2$s</string>
     <string name="pref_clear_history">ইতিহাস সাফ কৰক</string>
     <string name="clear_history_completed">ইতিহাস মচি পেলোৱা হৈছে</string>
+    <string name="pref_history_scope_mode">ইতিহাসৰ পৰিসৰ</string>
+    <string name="pref_history_section_navigation">ইতিহাসত বিভাগ নেভিগেচন সক্ৰিয় কৰক</string>
     <string name="clear_history_confirmation">আপুনি নিশ্চিত? সকলো ইতিহাস হেৰুৱাই যাব।</string>
     <string name="source_empty_screen">কোনো মূলে পোৱা নগ\'ল</string>
     <string name="migrate">স্থানান্তৰ কৰক</string>

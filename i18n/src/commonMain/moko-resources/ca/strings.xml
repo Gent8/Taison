@@ -422,7 +422,9 @@
     <string name="pref_incognito_mode_summary">Pausa l’historial de lectura</string>
     <string name="pref_incognito_mode">Mode d’incògnit</string>
     <string name="pref_clear_history">Suprimeix l’historial</string>
-    <string name="clear_history_completed">S’ha buidat l’historial</string>
+    <string name="clear_history_completed">S'ha buidat l'historial</string>
+    <string name="pref_history_scope_mode">Abast de l'historial</string>
+    <string name="pref_history_section_navigation">Habilitar la navegació per seccions a l'historial</string>
     <string name="spen_next_page">Pàgina següent</string>
     <string name="spen_previous_page">Pàgina anterior</string>
     <string name="migration_help_guide">Guia de migració de fonts</string>

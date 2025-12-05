@@ -462,6 +462,8 @@
     <string name="page_list_empty_error">कुनै पृष्ठहरू फेला परेनन्</string>
     <string name="loader_not_implemented_error">स्रोत भेटिएन</string>
     <string name="clear_history_completed">इतिहास हटाइयो</string>
+    <string name="pref_history_scope_mode">इतिहासको दायरा</string>
+    <string name="pref_history_section_navigation">इतिहासमा खण्ड नेभिगेसन सक्षम गर्नुहोस्</string>
     <string name="clear_history_confirmation">के तपाईँ निश्चित हुनुहुन्छ? सबै इतिहास हराउनेछ।</string>
     <string name="transition_pages_error">पृष्ठहरू लोड हुन असफल भयो: %1$s</string>
     <string name="source_not_installed">स्रोत स्थापना गरिएको छैन: %1$s</string>

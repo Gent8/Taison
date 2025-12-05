@@ -422,6 +422,8 @@
     <string name="pref_incognito_mode_summary">Вулани кун-ҫула чарса лартать</string>
     <string name="pref_clear_history">Кун-ҫул тасат</string>
     <string name="clear_history_completed">Кун-ҫула катертнӗ</string>
+    <string name="pref_history_scope_mode">Кун-ҫулӗн виҫӗмӗ</string>
+    <string name="pref_history_section_navigation">Кун-ҫулӗнче пай навигацийӗн ӗҫлеме кӗрт</string>
     <string name="pref_incognito_mode">Вӑрттӑнлӑх тытӑмӗ</string>
     <string name="clear_history_confirmation">Чӑнах катертесшӗн-и? Веҫ кун-ҫулӗ ҫухалӗ.</string>
     <string name="spen_next_page">Маллали сыпӑк</string>

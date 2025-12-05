@@ -221,6 +221,8 @@
     <string name="migrate">Migri</string>
     <string name="clear_history_confirmation">Ĉu vi certas? La tuta historio estos forigota.</string>
     <string name="clear_history_completed">Historio viŝita</string>
+    <string name="pref_history_scope_mode">Historio amplekso</string>
+    <string name="pref_history_section_navigation">Ebligi sekcian navigadon en historio</string>
     <string name="pref_clear_history">Viŝi historion</string>
     <string name="recent_manga_time">Ĉap. %1$s - %2$s</string>
     <string name="updating_library">Ĝisdatigas bibliotekon</string>

@@ -423,6 +423,8 @@
     <string name="pref_clear_history">ইতিহাস সাফ করুন</string>
     <string name="clear_history_confirmation">আপনি নিশ্চিত? সব ইতিহাস মুছে যাবে।</string>
     <string name="clear_history_completed">ইতিহাস মুছে ফেলা হয়েছে</string>
+    <string name="pref_history_scope_mode">ইতিহাসের পরিসর</string>
+    <string name="pref_history_section_navigation">ইতিহাসে বিভাগ নেভিগেশন সক্রিয় করুন</string>
     <string name="battery_optimization_setting_activity_not_found">যন্ত্রের সেটিংস খোলা সম্ভব হয়নি</string>
     <string name="battery_optimization_disabled">ব্যাটারি অপ্টিমাইজেশন ইতিমধ্যে অক্ষম করা আছে</string>
     <string name="pref_disable_battery_optimization_summary">পিছেনে লাইব্রেরী হালনাগাদ ও ব্যাকআপে সাহায্য করে</string>

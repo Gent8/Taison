@@ -604,6 +604,8 @@
     <string name="transition_finished">Аяқталған:</string>
     <string name="transition_previous">Алдыңғы:</string>
     <string name="clear_history_completed">Тарих жойылды</string>
+    <string name="pref_history_scope_mode">Тарих ауқымы</string>
+    <string name="pref_history_section_navigation">Тарихта бөлім навигациясын қосу</string>
     <string name="migrate">Көшу</string>
     <string name="migration_selection_prompt">Қай жерден көшетін деректі таңдаңыз</string>
     <string name="copy">Көшіру</string>

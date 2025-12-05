@@ -389,6 +389,8 @@
     <string name="error_user_agent_string_blank">Reťazec User-Agent nemôže byť prázdny</string>
     <string name="pref_reset_viewer_flags">Obnovenie nastavení čítačky pre jednotlivé série</string>
     <string name="clear_history_completed">História bola odstránená</string>
+    <string name="pref_history_scope_mode">Rozsah histórie</string>
+    <string name="pref_history_section_navigation">Povoliť navigáciu podľa sekcií v histórii</string>
     <string name="clear_history_confirmation">Ste si istý? Celá história sa stratí.</string>
     <string name="confirm_set_chapter_settings">Naozaj chcete tieto nastavenia uložiť ako predvolené?</string>
     <string name="add_to_library">Pridať do knižnice</string>

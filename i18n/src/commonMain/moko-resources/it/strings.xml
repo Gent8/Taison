@@ -426,6 +426,8 @@
     <string name="pref_clear_history">Svuota cronologia</string>
     <string name="clear_history_confirmation">Sei sicuro? Tutta la cronologia verrà persa.</string>
     <string name="clear_history_completed">Cronologia cancellata</string>
+    <string name="pref_history_scope_mode">Ambito cronologia</string>
+    <string name="pref_history_section_navigation">Abilita navigazione per sezione nella cronologia</string>
     <string name="spen_next_page">Pagina successiva</string>
     <string name="spen_previous_page">Pagina precedente</string>
     <string name="migration_help_guide">Guida alla migrazione delle fonti</string>

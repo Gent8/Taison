@@ -425,6 +425,8 @@
     <string name="pref_clear_history">Rensa historik</string>
     <string name="clear_history_confirmation">Är du säker? All historik kommer att försvinna.</string>
     <string name="clear_history_completed">Historiken har tagits bort</string>
+    <string name="pref_history_scope_mode">Historikomfattning</string>
+    <string name="pref_history_section_navigation">Aktivera sektionsnavigering i historiken</string>
     <string name="action_search_settings">Sök inställningar</string>
     <string name="spen_next_page">Nästa sida</string>
     <string name="spen_previous_page">Föregående sida</string>

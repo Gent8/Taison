@@ -605,6 +605,8 @@
     <string name="updates_last_update_info_just_now">Vetëm tani</string>
     <string name="recent_manga_time">Ch. %1$s - %2$s</string>
     <string name="clear_history_completed">Historia u fshi</string>
+    <string name="pref_history_scope_mode">Shtrirja e historisë</string>
+    <string name="pref_history_section_navigation">Aktivizo navigimin sipas seksioneve në histori</string>
     <string name="source_empty_screen">Nuk u gjet asnjë burim</string>
     <string name="source_filter_empty_screen">Nuk u gjet asnjë burim i instaluar</string>
     <string name="migration_help_guide">Udhëzuesi i migrimit të burimit</string>

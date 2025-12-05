@@ -454,6 +454,8 @@
     <string name="chapter_progress">पुटः - %1$d</string>
     <string name="viewer">पठनदशा</string>
     <string name="clear_history_completed">चरित्रं नाशितम्</string>
+    <string name="pref_history_scope_mode">चरित्रस्य विस्तारः</string>
+    <string name="pref_history_section_navigation">चरित्रे विभागनिर्देशनं सक्रियं कुरु</string>
     <string name="notification_chapters_single">अध्यायः %1$s</string>
     <string name="notification_chapters_multiple">अध्यायाः %1$s</string>
     <string name="update_check_notification_download_error">अवारोपणदोषः</string>

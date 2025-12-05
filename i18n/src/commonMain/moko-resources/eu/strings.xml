@@ -422,6 +422,8 @@
     <string name="other_source">Besteak</string>
     <string name="action_global_search_hint">Bilaketa globala…</string>
     <string name="clear_history_completed">Historia ezabatu da</string>
+    <string name="pref_history_scope_mode">Historiaren eremua</string>
+    <string name="pref_history_section_navigation">Gaitu atal-nabigazioa historian</string>
     <string name="clear_history_confirmation">Ziur zaude? Historia guztia galduko da.</string>
     <string name="migration_help_guide">Iturrien migrazio gida</string>
     <string name="migration_dialog_what_to_include">Hautatu sartu nahi dituzun datuak</string>

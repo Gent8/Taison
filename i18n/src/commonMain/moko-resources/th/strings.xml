@@ -389,6 +389,8 @@
     <string name="migration_help_guide">คู่มือการโยกย้ายแหล่งที่มา</string>
     <string name="clear_history_confirmation">แน่ใจไหม? ประวัติทั้งหมดจะหายไป</string>
     <string name="clear_history_completed">ลบประวัติแล้ว</string>
+    <string name="pref_history_scope_mode">ขอบเขตประวัติ</string>
+    <string name="pref_history_section_navigation">เปิดใช้งานการนำทางตามส่วนในประวัติ</string>
     <string name="pref_clear_history">ล้างประวัติ</string>
     <string name="recent_manga_time">ตอน %1$s - %2$s</string>
     <string name="updating_library">กำลังอัปเดตคลัง</string>

@@ -424,6 +424,8 @@
     <string name="pref_clear_history">Borrar historial</string>
     <string name="clear_history_confirmation">¿Estás seguro? Perderás todo el historial.</string>
     <string name="clear_history_completed">Historial eliminado</string>
+    <string name="pref_history_scope_mode">Alcance del historial</string>
+    <string name="pref_history_section_navigation">Habilitar navegación por secciones en el historial</string>
     <string name="spen_next_page">Siguiente página</string>
     <string name="spen_previous_page">Página anterior</string>
     <string name="migration_help_guide">Guía de migración de fuentes</string>

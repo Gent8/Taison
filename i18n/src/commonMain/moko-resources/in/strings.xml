@@ -424,6 +424,8 @@
     <string name="pref_clear_history">Hapus riwayat</string>
     <string name="clear_history_confirmation">Apakah anda yakin? Semua riwayat akan terhapus.</string>
     <string name="clear_history_completed">Riwayat telah dihapus</string>
+    <string name="pref_history_scope_mode">Cakupan riwayat</string>
+    <string name="pref_history_section_navigation">Aktifkan navigasi bagian di riwayat</string>
     <string name="pref_category_nsfw_content">Sumber NSFW (18+)</string>
     <string name="spen_next_page">Halaman selanjutnya</string>
     <string name="spen_previous_page">Halaman sebelumnya</string>

@@ -732,6 +732,8 @@
     <string name="loader_not_implemented_error">சான்று கிடைக்கவில்லை</string>
     <string name="cant_open_last_read_chapter">கடைசி வாசிப்பு அத்தியாயத்தைத் திறக்க முடியவில்லை</string>
     <string name="clear_history_completed">வரலாறு நீக்கப்பட்டது</string>
+    <string name="pref_history_scope_mode">வரலாற்றின் வரம்பு</string>
+    <string name="pref_history_section_navigation">வரலாற்றில் பிரிவு வழிசெலுத்தலை இயக்கு</string>
     <string name="updating_library">நூலகம் புதுப்பித்தல்</string>
     <string name="update_already_running">ஒரு புதுப்பிப்பு ஏற்கனவே இயங்குகிறது</string>
     <string name="clear_history_confirmation">நீங்கள் உறுதியாக இருக்கிறீர்களா? எல்லா வரலாற்றும் இழக்கப்படும்.</string>

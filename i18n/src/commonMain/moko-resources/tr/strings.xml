@@ -426,6 +426,8 @@
     <string name="pref_clear_history">Geçmişi temizle</string>
     <string name="clear_history_confirmation">Emin misiniz? Tüm geçmiş kaybolacak.</string>
     <string name="clear_history_completed">Geçmiş temizlendi</string>
+    <string name="pref_history_scope_mode">Geçmiş kapsamı</string>
+    <string name="pref_history_section_navigation">Geçmişte bölüm gezintisini etkinleştir</string>
     <string name="spen_next_page">Sonraki sayfa</string>
     <string name="spen_previous_page">Önceki sayfa</string>
     <string name="migration_help_guide">Kaynak taşıma kılavuzu</string>

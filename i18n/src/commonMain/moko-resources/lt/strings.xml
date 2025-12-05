@@ -340,6 +340,8 @@
     <string name="information_webview_outdated">Atnaujinkite „WebView“ programą dėl geresnio suderinamumo</string>
     <string name="notification_chapters_single">Skyrius %1$s</string>
     <string name="clear_history_completed">Istorija ištrinta</string>
+    <string name="pref_history_scope_mode">Istorijos apimtis</string>
+    <string name="pref_history_section_navigation">Įjungti sekcijų navigaciją istorijoje</string>
     <string name="decode_image_error">Nepavyko pakrauti paveikslėlio</string>
     <string name="page_list_empty_error">Puslapių nerasta</string>
     <string name="clear_history_confirmation">Ar tu tuo tikras? Visa istorija bus prarasta.</string>

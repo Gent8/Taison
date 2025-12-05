@@ -426,6 +426,8 @@
     <string name="pref_clear_history">Очистити історію</string>
     <string name="clear_history_confirmation">Ви впевнені? Всю історію буде втрачено.</string>
     <string name="clear_history_completed">Історію видалено</string>
+    <string name="pref_history_scope_mode">Область історії</string>
+    <string name="pref_history_section_navigation">Увімкнути навігацію за розділами в історії</string>
     <string name="spen_next_page">Наступна сторінка</string>
     <string name="spen_previous_page">Попередня сторінка</string>
     <string name="migration_help_guide">Гайд по міграції джерел</string>

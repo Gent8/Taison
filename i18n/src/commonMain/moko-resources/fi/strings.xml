@@ -426,6 +426,8 @@
     <string name="pref_clear_history">Tyhjennä historia</string>
     <string name="clear_history_confirmation">Oletko varma? Koko historia menetetään.</string>
     <string name="clear_history_completed">Historia poistettu</string>
+    <string name="pref_history_scope_mode">Historian laajuus</string>
+    <string name="pref_history_section_navigation">Ota käyttöön osionavigointi historiassa</string>
     <string name="spen_next_page">Seuraava sivu</string>
     <string name="spen_previous_page">Edellinen sivu</string>
     <string name="migration_help_guide">Lähteen siirto-opas</string>

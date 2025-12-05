@@ -517,6 +517,8 @@
     <string name="track_started_reading_date">Дата на започване</string>
     <string name="pref_clear_history">Изчисти историята</string>
     <string name="clear_history_completed">Историята изтрита</string>
+    <string name="pref_history_scope_mode">Обхват на историята</string>
+    <string name="pref_history_section_navigation">Активиране на навигация по секции в историята</string>
     <string name="clear_history_confirmation">Напълно ли сте сигурен? Всичката ви история ще бъде загубена.</string>
     <string name="migration_help_guide">Наръчник за мигриране между източници</string>
     <string name="notification_size_warning">Предупреждение: големите актуализации вредят на източниците и могат да доведат до по-бавни актуализации, както и до повишено използване на батерията. Натиснете тук, за да научите повече.</string>

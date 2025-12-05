@@ -371,6 +371,8 @@
     <string name="l_nav">Dạng chữ L</string>
     <string name="pref_viewer_nav">Khu vực nhấn</string>
     <string name="clear_history_completed">Lịch sử đã được xoá</string>
+    <string name="pref_history_scope_mode">Phạm vi lịch sử</string>
+    <string name="pref_history_section_navigation">Bật điều hướng theo phần trong lịch sử</string>
     <string name="pref_clear_history">Xoá lịch sử</string>
     <string name="myanimelist_relogin">Xin hãy đăng nhập lại MAL</string>
     <string name="track_started_reading_date">Ngày bắt đầu</string>

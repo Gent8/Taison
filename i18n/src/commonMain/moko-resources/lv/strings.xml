@@ -518,6 +518,8 @@
     <string name="copy">Kopēt</string>
     <string name="score">Vērtējums</string>
     <string name="clear_history_completed">Vēsture izdzēsta</string>
+    <string name="pref_history_scope_mode">Vēstures apjoms</string>
+    <string name="pref_history_section_navigation">Iespējot sekciju navigāciju vēsturē</string>
     <string name="theme_lavender">Lavanda</string>
     <string name="local_invalid_format">Nederīgs nodaļas formāts</string>
     <string name="local_filter_order_by">Kārtot pēc</string>

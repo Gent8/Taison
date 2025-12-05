@@ -426,6 +426,8 @@
     <string name="pref_clear_history">Διαγραφή ιστορικού</string>
     <string name="clear_history_confirmation">Είστε σίγουροι; Όλο το ιστορικό θα χαθεί.</string>
     <string name="clear_history_completed">Το ιστορικό διαγράφηκε</string>
+    <string name="pref_history_scope_mode">Εύρος ιστορικού</string>
+    <string name="pref_history_section_navigation">Ενεργοποίηση πλοήγησης ανά ενότητα στο ιστορικό</string>
     <string name="spen_next_page">Επόμενη σελίδα</string>
     <string name="spen_previous_page">Προηγούμενη σελίδα</string>
     <string name="migration_help_guide">Οδηγός μεταφοράς πηγής</string>

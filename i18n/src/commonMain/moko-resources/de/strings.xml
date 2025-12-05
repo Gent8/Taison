@@ -426,6 +426,8 @@
     <string name="pref_clear_history">Verlauf löschen</string>
     <string name="clear_history_confirmation">Bist du sicher? Der gesamte Verlauf wird gelöscht.</string>
     <string name="clear_history_completed">Verlauf gelöscht</string>
+    <string name="pref_history_scope_mode">Verlaufsbereich</string>
+    <string name="pref_history_section_navigation">Abschnittsnavigation im Verlauf aktivieren</string>
     <string name="spen_next_page">Nächste Seite</string>
     <string name="spen_previous_page">Vorherige Seite</string>
     <string name="migration_help_guide">Quellenmigration</string>

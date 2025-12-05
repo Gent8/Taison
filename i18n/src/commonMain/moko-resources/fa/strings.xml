@@ -408,6 +408,8 @@
     <string name="pref_incognito_mode">حالت ناشناس</string>
     <string name="clear_history_confirmation">آیا مطمئن هستید؟ تمام سابقه از دست خواهد رفت.</string>
     <string name="clear_history_completed">سابقه پاک شد</string>
+    <string name="pref_history_scope_mode">محدوده تاریخچه</string>
+    <string name="pref_history_section_navigation">فعال‌سازی پیمایش بخش در تاریخچه</string>
     <string name="ext_nsfw_short">18+</string>
     <string name="pref_category_nsfw_content">منابع محتوای جنسی (+18)</string>
     <string name="parental_controls_info">این کار از نمایش محتوای 18+ (محتوای نامناسب) توسط افزونه‌های غیررسمی یا اشتباه برچسب‌خورده جلوگیری نمی‌کند.</string>

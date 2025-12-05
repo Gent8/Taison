@@ -426,6 +426,8 @@
     <string name="pref_clear_history">Padamkan sejarah</string>
     <string name="clear_history_confirmation">Anda pasti? Semua sejarah akan hilang.</string>
     <string name="clear_history_completed">Sejarah dipadamkan</string>
+    <string name="pref_history_scope_mode">Skop sejarah</string>
+    <string name="pref_history_section_navigation">Dayakan navigasi bahagian dalam sejarah</string>
     <string name="spen_next_page">Muka surat seterusnya</string>
     <string name="spen_previous_page">Muka surat terdahulu</string>
     <string name="migration_help_guide">Panduan memindahkan sumber</string>

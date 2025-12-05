@@ -502,6 +502,8 @@
     <string name="page_list_empty_error">לא נמצאו עמודים</string>
     <string name="loader_not_implemented_error">מקור לא נמצא</string>
     <string name="clear_history_completed">ההיסטוריה נמחקה</string>
+    <string name="pref_history_scope_mode">היקף ההיסטוריה</string>
+    <string name="pref_history_section_navigation">הפעל ניווט לפי קטעים בהיסטוריה</string>
     <string name="ext_installer_pref">מתקין</string>
     <string name="channel_progress">התקדמות</string>
     <string name="channel_complete">הושלם</string>
