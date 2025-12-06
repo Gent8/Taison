@@ -36,6 +36,7 @@
     <string name="action_pin">पिन</string>
     <string name="action_disable">असक्षम गर्नुहोस्</string>
     <string name="action_display_show_number_of_items">वस्तुहरूको संख्या देखाउनुहोस्</string>
+    <string name="pref_history_scope_active_category">इतिहासलाई सम्बन्धित समूहमा सीमित गर्नुहोस्</string>
     <string name="action_display_show_tabs">वर्ग ट्याबहरू देखाउनुहोस्</string>
     <string name="action_display_download_badge">डाउनलोड गरिएका अध्यायहरू</string>
     <string name="action_display_comfortable_grid">आरामदायक ग्रिड</string>
@@ -462,6 +463,7 @@
     <string name="page_list_empty_error">कुनै पृष्ठहरू फेला परेनन्</string>
     <string name="loader_not_implemented_error">स्रोत भेटिएन</string>
     <string name="clear_history_completed">इतिहास हटाइयो</string>
+    <string name="history_delete_scope_everything_description">सबै इतिहास प्रविष्टिहरू मेटाउनुहोस्</string>
     <string name="pref_history_scope_mode">इतिहासको दायरा</string>
     <string name="pref_history_section_navigation">इतिहासमा खण्ड नेभिगेसन सक्षम गर्नुहोस्</string>
     <string name="clear_history_confirmation">के तपाईँ निश्चित हुनुहुन्छ? सबै इतिहास हराउनेछ।</string>

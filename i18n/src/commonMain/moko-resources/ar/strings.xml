@@ -423,6 +423,7 @@
     <string name="manga_from_library">من المكتبة</string>
     <string name="clear_history_confirmation">أمتأكِّد؟ سوف يُحذف التاريخ.</string>
     <string name="clear_history_completed">حُذف التاريخ</string>
+    <string name="history_delete_scope_everything_description">حذف جميع إدخالات التاريخ</string>
     <string name="pref_history_scope_mode">نطاق التاريخ</string>
     <string name="pref_history_section_navigation">تمكين التنقل بين الأقسام في التاريخ</string>
     <string name="pref_incognito_mode_summary">إيقاف سجل القراءة</string>
@@ -441,6 +442,7 @@
     <string name="kindlish_nav">كأنه كِندِل</string>
     <string name="action_filter_tracked">مُتتبَعة</string>
     <string name="action_display_show_number_of_items">إظهار عدد العناصر</string>
+    <string name="pref_history_scope_active_category">تحديد التاريخ للمجموعة المعنية</string>
     <string name="track_finished_reading_date">تاريخ انهاء القراءة</string>
     <string name="track_started_reading_date">تاريخ بدء القراءة</string>
     <string name="pref_dump_crash_logs_summary">يحفظ سجلات الأخطاء في ملف للمشاركة مع المطورين</string>

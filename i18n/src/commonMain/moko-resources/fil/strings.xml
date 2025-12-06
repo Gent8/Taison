@@ -425,6 +425,7 @@
     <string name="pref_incognito_mode">Incognito na mode</string>
     <string name="pref_clear_history">Linisin ang kasaysayan</string>
     <string name="clear_history_completed">Nabura ang kasaysayan</string>
+    <string name="history_delete_scope_everything_description">Tanggalin ang lahat ng entry sa kasaysayan</string>
     <string name="pref_history_scope_mode">Saklaw ng kasaysayan</string>
     <string name="pref_history_section_navigation">Paganahin ang pag-navigate ng seksyon sa kasaysayan</string>
     <string name="clear_history_confirmation">Sigurado ka ba talaga? Mawawala ang buong kasaysayan.</string>
@@ -451,6 +452,7 @@
     <string name="right_and_left_nav">Kaliwa at Kanan</string>
     <string name="pref_dual_page_split">Hatiin ang mga malalapad na pahina</string>
     <string name="action_display_show_number_of_items">Ipakita ang bilang ng mga aytem</string>
+    <string name="pref_history_scope_active_category">Limitahan ang kasaysayan sa kaukulang grupo</string>
     <string name="pref_dual_page_invert_summary">Kung sakaling hindi sumasakto sa direksyon ng pagbabasa ang paghahati sa malalapad na pahina</string>
     <string name="pref_dual_page_invert">Baligtarin ang paghahati sa pahina</string>
     <string name="backup_restore_content_full">Kailangan mong i-install muli ang mga nawawalang extension at mag-login muli sa mga tracker pagkatapos para magamit ang mga ito.</string>

@@ -91,6 +91,7 @@
     <string name="action_display_comfortable_grid">सुसुखा ग्रिड्-शैली</string>
     <string name="action_display_language_badge">भाषा</string>
     <string name="action_display_show_number_of_items">वस्तूनां सङ्ख्यां दर्शयतु</string>
+    <string name="pref_history_scope_active_category">चरित्रं सम्बद्धसमूहाय सीमितं कुरु</string>
     <string name="cancel_all_for_series">अस्य धारावाहिकस्य कृते सर्वाणि लुम्पतु</string>
     <string name="action_order_by_upload_date">उपारोपणदिनाङ्केन</string>
     <string name="action_oldest">ज्येष्ठतमम्</string>
@@ -454,6 +455,7 @@
     <string name="chapter_progress">पुटः - %1$d</string>
     <string name="viewer">पठनदशा</string>
     <string name="clear_history_completed">चरित्रं नाशितम्</string>
+    <string name="history_delete_scope_everything_description">सर्वाणि चरित्रप्रविष्टानि नाशयतु</string>
     <string name="pref_history_scope_mode">चरित्रस्य विस्तारः</string>
     <string name="pref_history_section_navigation">चरित्रे विभागनिर्देशनं सक्रियं कुरु</string>
     <string name="notification_chapters_single">अध्यायः %1$s</string>

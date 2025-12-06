@@ -326,6 +326,7 @@
     <string name="action_display_list">Zerrendatu</string>
     <string name="action_display_download_badge">Deskargatutako kapituluak</string>
     <string name="action_display_show_number_of_items">Erakutsi elementu kantitatea</string>
+    <string name="pref_history_scope_active_category">Mugatu historia talde egokiari</string>
     <string name="action_display_show_tabs">Erakutsi kategorien fitxak</string>
     <string name="pref_category_about">Honi buruz</string>
     <string name="pref_category_theme">Gaia</string>
@@ -422,6 +423,7 @@
     <string name="other_source">Besteak</string>
     <string name="action_global_search_hint">Bilaketa globala…</string>
     <string name="clear_history_completed">Historia ezabatu da</string>
+    <string name="history_delete_scope_everything_description">Ezabatu historialeko sarrera guztiak</string>
     <string name="pref_history_scope_mode">Historiaren eremua</string>
     <string name="pref_history_section_navigation">Gaitu atal-nabigazioa historian</string>
     <string name="clear_history_confirmation">Ziur zaude? Historia guztia galduko da.</string>

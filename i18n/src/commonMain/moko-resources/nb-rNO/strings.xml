@@ -425,6 +425,7 @@
     <string name="migration_help_guide">Veiledning for kilde-flytting</string>
     <string name="clear_history_confirmation">Er du sikker? All historikk vil gå tapt.</string>
     <string name="clear_history_completed">Historikken er slettet</string>
+    <string name="history_delete_scope_everything_description">Slett alle historikkposter</string>
     <string name="pref_history_scope_mode">Historikkomfang</string>
     <string name="pref_history_section_navigation">Aktiver seksjonsnavigering i historikken</string>
     <string name="pref_clear_history">Slett historikk</string>
@@ -462,6 +463,7 @@
     <string name="nav_zone_prev">Forrige</string>
     <string name="right_and_left_nav">Høyre og Venstre</string>
     <string name="action_display_show_number_of_items">Vis antall gjenstander</string>
+    <string name="pref_history_scope_active_category">Begrens historikk til respektive gruppe</string>
     <string name="exclude">Eksluder: %s</string>
     <string name="include">Inkluder: %s</string>
     <string name="action_sort_chapter_fetch_date">Dato hentet</string>

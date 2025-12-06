@@ -361,6 +361,7 @@
     <string name="action_pin">ตรึง</string>
     <string name="action_disable">ปิดการใช้งาน</string>
     <string name="action_display_show_number_of_items">แสดงจำนวน</string>
+    <string name="pref_history_scope_active_category">จำกัดประวัติให้อยู่ในกลุ่มที่เกี่ยวข้อง</string>
     <string name="action_display_show_tabs">แสดงแท็บหมวดหมู่</string>
     <string name="action_display_comfortable_grid">ตารางแบบเต็มที</string>
     <string name="action_migrate">โยกย้าย</string>
@@ -389,6 +390,7 @@
     <string name="migration_help_guide">คู่มือการโยกย้ายแหล่งที่มา</string>
     <string name="clear_history_confirmation">แน่ใจไหม? ประวัติทั้งหมดจะหายไป</string>
     <string name="clear_history_completed">ลบประวัติแล้ว</string>
+    <string name="history_delete_scope_everything_description">ลบรายการประวัติทั้งหมด</string>
     <string name="pref_history_scope_mode">ขอบเขตประวัติ</string>
     <string name="pref_history_section_navigation">เปิดใช้งานการนำทางตามส่วนในประวัติ</string>
     <string name="pref_clear_history">ล้างประวัติ</string>

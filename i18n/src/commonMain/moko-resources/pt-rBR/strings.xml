@@ -426,6 +426,7 @@
     <string name="pref_clear_history">Limpar o histórico</string>
     <string name="clear_history_confirmation">Você tem certeza? Todo o histórico será perdido.</string>
     <string name="clear_history_completed">Histórico excluído</string>
+    <string name="history_delete_scope_everything_description">Excluir todas as entradas do histórico</string>
     <string name="pref_history_scope_mode">Escopo do histórico</string>
     <string name="pref_history_section_navigation">Habilitar navegação por seção no histórico</string>
     <string name="spen_next_page">Próxima página</string>
@@ -449,6 +450,7 @@
     <string name="action_order_by_upload_date">Pela data de envio</string>
     <string name="action_filter_tracked">Monitorado</string>
     <string name="action_display_show_number_of_items">Mostrar o número de itens</string>
+    <string name="pref_history_scope_active_category">Limitar histórico ao grupo respectivo</string>
     <string name="right_and_left_nav">Direita e Esquerda</string>
     <string name="pref_dual_page_split">Dividir as páginas longas</string>
     <string name="pref_dual_page_invert_summary">Se a posição das páginas longas divididas não se adequar ao modo de leitura</string>

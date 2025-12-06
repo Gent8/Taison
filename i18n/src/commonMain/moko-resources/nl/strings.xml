@@ -424,6 +424,7 @@
     <string name="pref_clear_history">Geschiedenis wissen</string>
     <string name="clear_history_confirmation">Weet je dit zeker? Alle geschiedenis zal verloren gaan.</string>
     <string name="clear_history_completed">Geschiedenis verwijderd</string>
+    <string name="history_delete_scope_everything_description">Alle geschiedenisvermeldingen verwijderen</string>
     <string name="pref_history_scope_mode">Geschiedenisbereik</string>
     <string name="pref_history_section_navigation">Sectienavigatie in geschiedenis inschakelen</string>
     <string name="spen_next_page">Volgende pagina</string>
@@ -446,6 +447,7 @@
     <string name="action_order_by_chapter_number">Op hoofdstuknummer</string>
     <string name="action_order_by_upload_date">Op uploaddatum</string>
     <string name="action_display_show_number_of_items">Aantal items tonen</string>
+    <string name="pref_history_scope_active_category">Geschiedenis beperken tot respectieve groep</string>
     <string name="action_filter_tracked">Getracked</string>
     <string name="right_and_left_nav">Rechts en links</string>
     <string name="pref_dual_page_split">Brede pagina\'s opsplitsen</string>

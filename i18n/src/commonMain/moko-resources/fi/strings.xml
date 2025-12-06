@@ -426,6 +426,7 @@
     <string name="pref_clear_history">Tyhjennä historia</string>
     <string name="clear_history_confirmation">Oletko varma? Koko historia menetetään.</string>
     <string name="clear_history_completed">Historia poistettu</string>
+    <string name="history_delete_scope_everything_description">Poista kaikki historiamerkinnät</string>
     <string name="pref_history_scope_mode">Historian laajuus</string>
     <string name="pref_history_section_navigation">Ota käyttöön osionavigointi historiassa</string>
     <string name="spen_next_page">Seuraava sivu</string>
@@ -449,6 +450,7 @@
     <string name="action_order_by_upload_date">Lisäyspäivämäärän mukaan</string>
     <string name="action_filter_tracked">Seuratut</string>
     <string name="action_display_show_number_of_items">Näytä kohteiden määrä</string>
+    <string name="pref_history_scope_active_category">Rajoita historia vastaavaan ryhmään</string>
     <string name="right_and_left_nav">Oikea ja vasen</string>
     <string name="pref_dual_page_split">Jaa leveät sivut</string>
     <string name="pref_dual_page_invert_summary">Jos jaettujen leveiden sivujen sijoittelu ei vastaa lukusuuntaa</string>

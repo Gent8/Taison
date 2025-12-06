@@ -426,6 +426,7 @@
     <string name="pref_clear_history">Verlauf löschen</string>
     <string name="clear_history_confirmation">Bist du sicher? Der gesamte Verlauf wird gelöscht.</string>
     <string name="clear_history_completed">Verlauf gelöscht</string>
+    <string name="history_delete_scope_everything_description">Alle Verlaufseinträge löschen</string>
     <string name="pref_history_scope_mode">Verlaufsbereich</string>
     <string name="pref_history_section_navigation">Abschnittsnavigation im Verlauf aktivieren</string>
     <string name="spen_next_page">Nächste Seite</string>
@@ -449,6 +450,7 @@
     <string name="action_order_by_upload_date">Nach Upload-Datum</string>
     <string name="action_filter_tracked">Getrackt</string>
     <string name="action_display_show_number_of_items">Anzahl der Elemente anzeigen</string>
+    <string name="pref_history_scope_active_category">Verlauf auf jeweilige Gruppe beschränken</string>
     <string name="right_and_left_nav">Rechts und Links</string>
     <string name="pref_dual_page_split">Breite Seiten aufteilen</string>
     <string name="pref_dual_page_invert_summary">Falls die Platzierung der aufgeteilten Seiten nicht mit der Leserichtung übereinstimmt</string>

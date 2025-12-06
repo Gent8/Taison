@@ -470,6 +470,7 @@
     <string name="pref_category_appearance">Aparencia</string>
     <string name="action_display_show_continue_reading_button">Botón de seguir lendo</string>
     <string name="action_display_show_number_of_items">Mostrar o número de elementos</string>
+    <string name="pref_history_scope_active_category">Limitar o historial ao grupo respectivo</string>
     <string name="cancel_all_for_series">Cancelar todo para esta serie</string>
     <string name="action_order_by_upload_date">Por data de subida</string>
     <string name="action_show_errors">Preme para ver os detalles do erro</string>
@@ -632,6 +633,7 @@
     <string name="add_tracking">Engadir seguimento</string>
     <string name="pref_clear_history">Eliminar o historial</string>
     <string name="clear_history_completed">Eliminouse o historial</string>
+    <string name="history_delete_scope_everything_description">Eliminar todas as entradas do historial</string>
     <string name="pref_history_scope_mode">Alcance do historial</string>
     <string name="pref_history_section_navigation">Activar a navegación por seccións no historial</string>
     <string name="source_empty_screen">Non se atopou ningunha fonte</string>

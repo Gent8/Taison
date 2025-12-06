@@ -152,6 +152,7 @@
     <string name="action_asc">Augoši</string>
     <string name="action_order_by_chapter_number">Pēc nodaļas numura</string>
     <string name="action_display_show_number_of_items">Parādīt lietu skaitu</string>
+    <string name="pref_history_scope_active_category">Ierobežot vēsturi attiecīgajai grupai</string>
     <string name="updating_library">Atjauninās bibliotēka</string>
     <string name="action_filter_tracked">Izsekots</string>
     <string name="default_category">Noklusētā kategorija</string>
@@ -518,6 +519,7 @@
     <string name="copy">Kopēt</string>
     <string name="score">Vērtējums</string>
     <string name="clear_history_completed">Vēsture izdzēsta</string>
+    <string name="history_delete_scope_everything_description">Dzēst visus vēstures ierakstus</string>
     <string name="pref_history_scope_mode">Vēstures apjoms</string>
     <string name="pref_history_section_navigation">Iespējot sekciju navigāciju vēsturē</string>
     <string name="theme_lavender">Lavanda</string>

@@ -419,6 +419,7 @@
     <string name="action_order_by_chapter_number">По брой на главите</string>
     <string name="action_order_by_upload_date">По дата на качване</string>
     <string name="action_display_show_number_of_items">Покажи номера на предметите</string>
+    <string name="pref_history_scope_active_category">Ограничи историята до съответната група</string>
     <string name="action_search_settings">Настройки за търсене</string>
     <string name="action_filter_tracked">Следени</string>
     <string name="edge_nav">Край</string>
@@ -517,6 +518,7 @@
     <string name="track_started_reading_date">Дата на започване</string>
     <string name="pref_clear_history">Изчисти историята</string>
     <string name="clear_history_completed">Историята изтрита</string>
+    <string name="history_delete_scope_everything_description">Изтриване на всички записи в историята</string>
     <string name="pref_history_scope_mode">Обхват на историята</string>
     <string name="pref_history_section_navigation">Активиране на навигация по секции в историята</string>
     <string name="clear_history_confirmation">Напълно ли сте сигурен? Всичката ви история ще бъде загубена.</string>

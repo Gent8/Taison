@@ -295,6 +295,7 @@
     <string name="action_pin">Kitűzés</string>
     <string name="action_disable">Kikapcsolás</string>
     <string name="action_display_show_number_of_items">Tárgyak számának mutatása</string>
+    <string name="pref_history_scope_active_category">Előzmények korlátozása a megfelelő csoportra</string>
     <string name="action_display_show_tabs">Kategória fülek mutatása</string>
     <string name="action_display_comfortable_grid">Kényelmes rács</string>
     <string name="action_sort_chapter_fetch_date">Lekérési dátum</string>
@@ -490,6 +491,7 @@
     <string name="also_set_chapter_settings_for_library">Könyvtárban lévő tartalmakra is</string>
     <string name="pref_clear_history">Előzmények törlése</string>
     <string name="clear_history_completed">Előzmények törölve</string>
+    <string name="history_delete_scope_everything_description">Összes előzmény bejegyzés törlése</string>
     <string name="pref_history_scope_mode">Előzmények hatóköre</string>
     <string name="pref_history_section_navigation">Szakasznavigáció engedélyezése az előzményekben</string>
     <string name="source_empty_screen">Nincs forrás</string>

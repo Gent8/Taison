@@ -408,6 +408,7 @@
     <string name="pref_incognito_mode">حالت ناشناس</string>
     <string name="clear_history_confirmation">آیا مطمئن هستید؟ تمام سابقه از دست خواهد رفت.</string>
     <string name="clear_history_completed">سابقه پاک شد</string>
+    <string name="history_delete_scope_everything_description">حذف تمام ورودی‌های تاریخچه</string>
     <string name="pref_history_scope_mode">محدوده تاریخچه</string>
     <string name="pref_history_section_navigation">فعال‌سازی پیمایش بخش در تاریخچه</string>
     <string name="ext_nsfw_short">18+</string>
@@ -465,6 +466,7 @@
     <string name="skipped_reason_completed">به دلیل کامل‌بودن سری، رد شد</string>
     <string name="action_display_local_badge">منبع محلی</string>
     <string name="action_display_show_number_of_items">نمایش تعداد موارد</string>
+    <string name="pref_history_scope_active_category">محدود کردن تاریخچه به گروه مربوطه</string>
     <string name="action_desc">نزولی</string>
     <string name="pref_category_appearance">ظاهر</string>
     <string name="action_sort_chapter_fetch_date">تاریخ گرفتن قسمت</string>

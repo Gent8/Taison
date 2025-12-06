@@ -131,6 +131,7 @@
     <string name="action_display_language_badge">Тіл</string>
     <string name="action_display_show_tabs">Санат қойындыларын көрсету</string>
     <string name="action_display_show_number_of_items">Элементтер санын көрсету</string>
+    <string name="pref_history_scope_active_category">Тарихты сәйкес топқа шектеу</string>
     <string name="action_disable">Өшіру</string>
     <string name="action_pin">Бекіту</string>
     <string name="action_unpin">Ажырату</string>
@@ -604,6 +605,7 @@
     <string name="transition_finished">Аяқталған:</string>
     <string name="transition_previous">Алдыңғы:</string>
     <string name="clear_history_completed">Тарих жойылды</string>
+    <string name="history_delete_scope_everything_description">Барлық тарих жазбаларын жою</string>
     <string name="pref_history_scope_mode">Тарих ауқымы</string>
     <string name="pref_history_section_navigation">Тарихта бөлім навигациясын қосу</string>
     <string name="migrate">Көшу</string>

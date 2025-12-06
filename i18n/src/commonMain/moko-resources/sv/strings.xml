@@ -425,6 +425,7 @@
     <string name="pref_clear_history">Rensa historik</string>
     <string name="clear_history_confirmation">Är du säker? All historik kommer att försvinna.</string>
     <string name="clear_history_completed">Historiken har tagits bort</string>
+    <string name="history_delete_scope_everything_description">Ta bort alla historikposter</string>
     <string name="pref_history_scope_mode">Historikomfattning</string>
     <string name="pref_history_section_navigation">Aktivera sektionsnavigering i historiken</string>
     <string name="action_search_settings">Sök inställningar</string>
@@ -450,6 +451,7 @@
     <string name="action_filter_tracked">Spåras</string>
     <string name="right_and_left_nav">Höger och Vänster</string>
     <string name="action_display_show_number_of_items">Visa antal objekt</string>
+    <string name="pref_history_scope_active_category">Begränsa historik till respektive grupp</string>
     <string name="pref_dual_page_split">Delning av breda sidor</string>
     <string name="backup_restore_content_full">Du måste installera eventuella tillägg som saknas och logga in på spårningstjänster efteråt för att kunna använda dem.</string>
     <string name="nav_zone_right">Höger</string>

@@ -395,6 +395,7 @@
     <string name="action_pin">Připnout</string>
     <string name="action_disable">Zakázat</string>
     <string name="action_display_show_number_of_items">Zobrazovat počet položek</string>
+    <string name="pref_history_scope_active_category">Omezit historii na příslušnou skupinu</string>
     <string name="action_start">Začít</string>
     <string name="channel_ext_updates">Aktualizace rozšíření</string>
     <string name="channel_new_chapters">Aktualizace kapitol</string>
@@ -413,6 +414,7 @@
     <string name="clear_history_confirmation">Jste si jistý/á? Všechna historie bude navždy ztracena.</string>
     <string name="pref_clear_history">Vymazat historii</string>
     <string name="clear_history_completed">Historie vymazána</string>
+    <string name="history_delete_scope_everything_description">Smazat všechny položky historie</string>
     <string name="pref_history_scope_mode">Rozsah historie</string>
     <string name="pref_history_section_navigation">Povolit navigaci podle sekcí v historii</string>
     <string name="recent_manga_time">Kap. %1$s - %2$s</string>

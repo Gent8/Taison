@@ -324,6 +324,7 @@
     <string name="action_display_language_badge">שפה</string>
     <string name="action_display_show_tabs">הצג קטגורית כרטיסיות</string>
     <string name="action_display_show_number_of_items">הצג מספר של פריטים</string>
+    <string name="pref_history_scope_active_category">הגבל היסטוריה לקבוצה המתאימה</string>
     <string name="action_disable">השבת</string>
     <string name="action_unpin">הסר נעיצה</string>
     <string name="cancel_all_for_series">בטל הכל לסדרה זו</string>
@@ -502,6 +503,7 @@
     <string name="page_list_empty_error">לא נמצאו עמודים</string>
     <string name="loader_not_implemented_error">מקור לא נמצא</string>
     <string name="clear_history_completed">ההיסטוריה נמחקה</string>
+    <string name="history_delete_scope_everything_description">מחק את כל רשומות ההיסטוריה</string>
     <string name="pref_history_scope_mode">היקף ההיסטוריה</string>
     <string name="pref_history_section_navigation">הפעל ניווט לפי קטעים בהיסטוריה</string>
     <string name="ext_installer_pref">מתקין</string>

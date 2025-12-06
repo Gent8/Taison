@@ -382,6 +382,7 @@
     <string name="label_default">Подразумевано</string>
     <string name="action_start_downloading_now">Покрени преузимање одмах</string>
     <string name="action_display_show_number_of_items">Прикажи број ставки</string>
+    <string name="pref_history_scope_active_category">Ограничи историју на одговарајућу групу</string>
     <string name="cancel_all_for_series">Откажи све за овај наслов</string>
     <string name="action_desc">Опадајуће</string>
     <string name="action_show_errors">Прикажи детаље</string>
@@ -545,6 +546,7 @@
     <string name="loader_not_implemented_error">Извор није пронађен</string>
     <string name="pref_clear_history">Избриши историју</string>
     <string name="clear_history_completed">Историја је избрисана</string>
+    <string name="history_delete_scope_everything_description">Обриши све уносе историје</string>
     <string name="pref_history_scope_mode">Обим историје</string>
     <string name="pref_history_section_navigation">Омогући навигацију по секцијама у историји</string>
     <string name="clear_history_confirmation">Да ли сте сигурни? Цела историја ће бити изгубљена.</string>

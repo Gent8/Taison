@@ -424,6 +424,7 @@
     <string name="pref_clear_history">Hapus riwayat</string>
     <string name="clear_history_confirmation">Apakah anda yakin? Semua riwayat akan terhapus.</string>
     <string name="clear_history_completed">Riwayat telah dihapus</string>
+    <string name="history_delete_scope_everything_description">Hapus semua entri riwayat</string>
     <string name="pref_history_scope_mode">Cakupan riwayat</string>
     <string name="pref_history_section_navigation">Aktifkan navigasi bagian di riwayat</string>
     <string name="pref_category_nsfw_content">Sumber NSFW (18+)</string>
@@ -447,6 +448,7 @@
     <string name="pref_viewer_nav">Zona ketuk</string>
     <string name="right_and_left_nav">Kanan dan Kiri</string>
     <string name="action_display_show_number_of_items">Tampilkan jumlah item</string>
+    <string name="pref_history_scope_active_category">Batasi riwayat ke grup masing-masing</string>
     <string name="none">Kosong</string>
     <string name="action_show_errors">Ketuk untuk melihat detail</string>
     <string name="action_sort_chapter_fetch_date">Tanggal bab dimasukkan</string>

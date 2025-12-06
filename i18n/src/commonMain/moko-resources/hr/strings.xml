@@ -426,6 +426,7 @@
     <string name="pref_clear_history">Izbriši povijest</string>
     <string name="clear_history_confirmation">Sigurno? Izgubit ćeš svu povijest.</string>
     <string name="clear_history_completed">Povijest je izbrisana</string>
+    <string name="history_delete_scope_everything_description">Obriši sve unose povijesti</string>
     <string name="pref_history_scope_mode">Opseg povijesti</string>
     <string name="pref_history_section_navigation">Omogući navigaciju po sekcijama u povijesti</string>
     <string name="spen_next_page">Sljedeća stranica</string>
@@ -450,6 +451,7 @@
     <string name="action_filter_tracked">Praćeno</string>
     <string name="right_and_left_nav">Desno i lijevo</string>
     <string name="action_display_show_number_of_items">Prikaži broj elemenata</string>
+    <string name="pref_history_scope_active_category">Ograniči povijest na odgovarajuću grupu</string>
     <string name="backup_restore_content_full">Možda ćeš morati instalirati sva nedostajuća proširenja i naknadno se prijaviti na usluge praćenja za njihovo korištenje.</string>
     <string name="pref_dual_page_invert_summary">Ako se položaj rastavljenih širokih stranica ne podudara sa smjerom čitanja</string>
     <string name="pref_dual_page_invert">Obrni položaj rastavljene stranice</string>

@@ -112,6 +112,7 @@
     <string name="action_pin">Prisegti</string>
     <string name="action_disable">Išjungti</string>
     <string name="action_display_show_number_of_items">Rodyti įrašų skaičių</string>
+    <string name="pref_history_scope_active_category">Apriboti istoriją atitinkamai grupei</string>
     <string name="action_display_show_tabs">Rodyti kategorijų korteles</string>
     <string name="action_display_local_badge">Vietinis šaltinis</string>
     <string name="action_display_download_badge">Atsisiųsti skyriai</string>
@@ -340,6 +341,7 @@
     <string name="information_webview_outdated">Atnaujinkite „WebView“ programą dėl geresnio suderinamumo</string>
     <string name="notification_chapters_single">Skyrius %1$s</string>
     <string name="clear_history_completed">Istorija ištrinta</string>
+    <string name="history_delete_scope_everything_description">Ištrinti visus istorijos įrašus</string>
     <string name="pref_history_scope_mode">Istorijos apimtis</string>
     <string name="pref_history_section_navigation">Įjungti sekcijų navigaciją istorijoje</string>
     <string name="decode_image_error">Nepavyko pakrauti paveikslėlio</string>

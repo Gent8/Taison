@@ -168,6 +168,7 @@
     <string name="action_display_language_badge">ভাষা</string>
     <string name="action_display_show_tabs">শ্ৰেণীৰ ট্যাব দেখুৱাওক</string>
     <string name="action_display_show_number_of_items">পদাৰ্থৰ সংখ্যা দেখুৱাওক</string>
+    <string name="pref_history_scope_active_category">ইতিহাসক সংশ্লিষ্ট গোটলৈ সীমাবদ্ধ কৰক</string>
     <string name="action_display_show_continue_reading_button">পঢ়া অব্যাহত থকাক বোতাম</string>
     <string name="action_disable">নিষ্ক্ৰিয় কৰক</string>
     <string name="action_pin">পিন কৰক</string>
@@ -723,6 +724,7 @@
     <string name="recent_manga_time">চ. %1$s - %2$s</string>
     <string name="pref_clear_history">ইতিহাস সাফ কৰক</string>
     <string name="clear_history_completed">ইতিহাস মচি পেলোৱা হৈছে</string>
+    <string name="history_delete_scope_everything_description">সকলো ইতিহাসৰ এন্ট্ৰি মচক</string>
     <string name="pref_history_scope_mode">ইতিহাসৰ পৰিসৰ</string>
     <string name="pref_history_section_navigation">ইতিহাসত বিভাগ নেভিগেচন সক্ৰিয় কৰক</string>
     <string name="clear_history_confirmation">আপুনি নিশ্চিত? সকলো ইতিহাস হেৰুৱাই যাব।</string>
