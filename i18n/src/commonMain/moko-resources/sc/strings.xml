@@ -424,7 +424,9 @@
     <string name="pref_clear_history">Isbòida sa cronologia</string>
     <string name="clear_history_confirmation">Seguru ses? As a pèrdere totu sa cronologia.</string>
     <string name="clear_history_completed">Cronologia iscantzellada</string>
+    <string name="pref_history_scope_active_category">Limita sa cronologia a su grupu currispondente</string>
     <string name="pref_history_scope_mode">Amparu de sa cronologia</string>
+    <string name="history_delete_scope_everything_description">Iscantzella totu is registratziones de sa cronologia</string>
     <string name="pref_history_section_navigation">Ativa sa navigatzione pro sezione in sa cronologia</string>
     <string name="spen_next_page">Pàgina imbeniente</string>
     <string name="spen_previous_page">Pàgina anteposta</string>

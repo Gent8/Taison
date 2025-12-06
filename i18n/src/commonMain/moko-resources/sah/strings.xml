@@ -387,7 +387,9 @@
     <string name="pref_clear_history">Остуоруйаны сотторуу</string>
     <string name="clear_history_confirmation">Эрэллээххин дуо? Остуоруйа барыта сотторуллуоҕа.</string>
     <string name="clear_history_completed">Остуоруйа сотторулунна</string>
+    <string name="pref_history_scope_active_category">Scope history to respective group</string>
     <string name="pref_history_scope_mode">Остуоруйа кээмэйэ</string>
+    <string name="history_delete_scope_everything_description">Delete all history entries</string>
     <string name="pref_history_section_navigation">Остуоруйаҕа сиэктэр навигациятын холбоо</string>
     <string name="action_search_settings">Көрдөөһүн түстэлэ</string>
     <string name="migration_dialog_what_to_include">Киллэрэр дааннайдары талыы</string>
