@@ -511,7 +511,10 @@
     <string name="no_results_found">검색 결과가 없습니다</string>
     <string name="pref_dual_page_invert_summary">넓은 페이지 분할 시 배치가 읽는 방향과 다를 경우</string>
     <string name="ext_nsfw_short">성인 컨텐츠</string>
-    <string name="action_display_show_tabs">카테고리 탭 보이기</string>
+    <string name="action_display_show_tabs">그룹 탭을 상단에 표시</string>
+    <string name="pref_group_navigation_type">탐색 유형</string>
+    <string name="group_navigation_tabs">탭</string>
+    <string name="group_navigation_dropdown">드롭다운</string>
     <string name="action_sort_chapter_fetch_date">챕터를 가져온 날짜순</string>
     <string name="action_sort_count">전체 항목 개수순</string>
     <string name="action_webview_back">뒤로</string>

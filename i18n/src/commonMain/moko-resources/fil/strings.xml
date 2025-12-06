@@ -20,7 +20,10 @@
     <string name="action_unpin">I-unpin</string>
     <string name="action_pin">I-pin</string>
     <string name="action_disable">Isara</string>
-    <string name="action_display_show_tabs">Ipakita ang mga tab ng kategorya</string>
+    <string name="action_display_show_tabs">Ipakita ang mga tab ng grupo sa itaas</string>
+    <string name="pref_group_navigation_type">Uri ng nabigasyon</string>
+    <string name="group_navigation_tabs">Mga tab</string>
+    <string name="group_navigation_dropdown">Dropdown</string>
     <string name="action_display_download_badge">Bilang ng kabanatang na-download</string>
     <string name="action_display_comfortable_grid">Kumportableng grid</string>
     <string name="action_display_list">Listahan</string>

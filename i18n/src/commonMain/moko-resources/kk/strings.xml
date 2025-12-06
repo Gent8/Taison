@@ -129,7 +129,10 @@
     <string name="action_display_mode">Бейнебет режимі</string>
     <string name="action_display_local_badge">Локалды дереккөз</string>
     <string name="action_display_language_badge">Тіл</string>
-    <string name="action_display_show_tabs">Санат қойындыларын көрсету</string>
+    <string name="action_display_show_tabs">Топ қойындыларын жоғарыда көрсету</string>
+    <string name="pref_group_navigation_type">Навигация түрі</string>
+    <string name="group_navigation_tabs">Қойындылар</string>
+    <string name="group_navigation_dropdown">Ашылмалы мәзір</string>
     <string name="action_display_show_number_of_items">Элементтер санын көрсету</string>
     <string name="pref_history_scope_active_group">Тарихты сәйкес топқа шектеу</string>
     <string name="action_disable">Өшіру</string>

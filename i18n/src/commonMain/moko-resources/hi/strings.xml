@@ -377,7 +377,10 @@
     <string name="pref_library_update_refresh_metadata">मेटाडेटा को स्वचालित रूप से ताज़ा करें</string>
     <string name="action_migrate">प्रवास</string>
     <string name="tabs_header">टैब</string>
-    <string name="action_display_show_tabs">श्रेणी टैब दिखाएं</string>
+    <string name="action_display_show_tabs">समूह टैब शीर्ष पर दिखाएं</string>
+    <string name="pref_group_navigation_type">नेविगेशन प्रकार</string>
+    <string name="group_navigation_tabs">टैब</string>
+    <string name="group_navigation_dropdown">ड्रॉपडाउन</string>
     <string name="action_display_comfortable_grid">आरामदायक ग्रिड</string>
     <string name="page_list_empty_error">कोई पृष्ठ नहीं मिला</string>
     <string name="action_disable_all">सभी को अक्षम करें</string>

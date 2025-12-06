@@ -52,7 +52,10 @@
     <string name="action_display_comfortable_grid">Komfortabelt rutenett</string>
     <string name="action_display_local_badge">Lokal manga</string>
     <string name="action_display_language_badge">Språk</string>
-    <string name="action_display_show_tabs">Vis kategorifaner</string>
+    <string name="action_display_show_tabs">Vis gruppefaner øverst</string>
+    <string name="pref_group_navigation_type">Navigasjonstype</string>
+    <string name="group_navigation_tabs">Faner</string>
+    <string name="group_navigation_dropdown">Rullemeny</string>
     <string name="action_display_show_number_of_items">Vis talet på gjenstandar</string>
     <string name="action_cancel">Avbryt</string>
     <string name="action_cancel_all">Avbryt alle</string>

@@ -166,7 +166,10 @@
     <string name="action_display_download_badge">ডাউনলোড কৰা অধ্যায়</string>
     <string name="action_display_local_badge">স্থানীয় উৎস</string>
     <string name="action_display_language_badge">ভাষা</string>
-    <string name="action_display_show_tabs">শ্ৰেণীৰ ট্যাব দেখুৱাওক</string>
+    <string name="action_display_show_tabs">গোটৰ ট্যাব শীৰ্ষত দেখুৱাওক</string>
+    <string name="pref_group_navigation_type">নেভিগেছন প্ৰকাৰ</string>
+    <string name="group_navigation_tabs">ট্যাব</string>
+    <string name="group_navigation_dropdown">ড্ৰপডাউন</string>
     <string name="action_display_show_number_of_items">পদাৰ্থৰ সংখ্যা দেখুৱাওক</string>
     <string name="pref_history_scope_active_group">ইতিহাসক সংশ্লিষ্ট গোটলৈ সীমাবদ্ধ কৰক</string>
     <string name="action_display_show_continue_reading_button">পঢ়া অব্যাহত থকাক বোতাম</string>

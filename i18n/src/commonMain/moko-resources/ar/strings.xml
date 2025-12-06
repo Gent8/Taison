@@ -376,7 +376,10 @@
     <string name="pref_refresh_library_covers">حدّث صور اغلفة المكتبة</string>
     <string name="action_display_comfortable_grid">شبكة مريحة</string>
     <string name="tabs_header">قوائم</string>
-    <string name="action_display_show_tabs">إظهار قوائم الفئة</string>
+    <string name="action_display_show_tabs">إظهار قوائم المجموعة في الأعلى</string>
+    <string name="pref_group_navigation_type">نوع التنقل</string>
+    <string name="group_navigation_tabs">القوائم</string>
+    <string name="group_navigation_dropdown">القائمة المنسدلة</string>
     <string name="page_list_empty_error">لم يتم العثور على أيّة صفحات</string>
     <string name="action_enable_all">تفعيل الكل</string>
     <string name="action_disable_all">تعطيل الكل</string>

@@ -162,7 +162,10 @@
     <string name="action_unpin">Quitar de fixados</string>
     <string name="action_pin">Fixar</string>
     <string name="action_disable">Deshabilitar</string>
-    <string name="action_display_show_tabs">Amosar laretas de categorías</string>
+    <string name="action_display_show_tabs">Amosar laretas de grupos na parte superior</string>
+    <string name="pref_group_navigation_type">Tipo de navegación</string>
+    <string name="group_navigation_tabs">Laretas</string>
+    <string name="group_navigation_dropdown">Menú despregable</string>
     <string name="action_display_download_badge">Capítulos descargados</string>
     <string name="action_display_comfortable_grid">Cuadrícula ampla</string>
     <string name="action_display_list">Lista</string>

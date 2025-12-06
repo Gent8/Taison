@@ -376,7 +376,10 @@
     <string name="action_migrate">Migrieren</string>
     <string name="action_display_comfortable_grid">Komfortable Kacheln</string>
     <string name="tabs_header">Registerkarten</string>
-    <string name="action_display_show_tabs">Kategorienreiter anzeigen</string>
+    <string name="action_display_show_tabs">Gruppenreiter oben anzeigen</string>
+    <string name="pref_group_navigation_type">Navigationsart</string>
+    <string name="group_navigation_tabs">Reiter</string>
+    <string name="group_navigation_dropdown">Dropdown</string>
     <string name="page_list_empty_error">Keine Seiten gefunden</string>
     <string name="action_disable_all">Alles deaktivieren</string>
     <string name="action_enable_all">Alles aktivieren</string>

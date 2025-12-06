@@ -296,7 +296,10 @@
     <string name="action_disable">Kikapcsolás</string>
     <string name="action_display_show_number_of_items">Tárgyak számának mutatása</string>
     <string name="pref_history_scope_active_group">Előzmények korlátozása a megfelelő csoportra</string>
-    <string name="action_display_show_tabs">Kategória fülek mutatása</string>
+    <string name="action_display_show_tabs">Csoport fülek mutatása felül</string>
+    <string name="pref_group_navigation_type">Navigációs típus</string>
+    <string name="group_navigation_tabs">Fülek</string>
+    <string name="group_navigation_dropdown">Legördülő menü</string>
     <string name="action_display_comfortable_grid">Kényelmes rács</string>
     <string name="action_sort_chapter_fetch_date">Lekérési dátum</string>
     <string name="restrictions">Korlátozások: %s</string>

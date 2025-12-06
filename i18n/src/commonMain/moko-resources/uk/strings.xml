@@ -372,7 +372,10 @@
     <string name="invalid_backup_file_missing_manga">Бекап не містить жодних записів бібліотеки.</string>
     <string name="invalid_backup_file">Невірний файл резервної копії:</string>
     <string name="tracking_info">Одностороння синхронізація для оновлення прогресу розділу у зовнішніх сервісах стеження. Налаштуйте відстеження окремих записів за допомогою кнопки відстеження.</string>
-    <string name="action_display_show_tabs">Показувати вкладки категорій</string>
+    <string name="action_display_show_tabs">Показувати вкладки груп зверху</string>
+    <string name="pref_group_navigation_type">Тип навігації</string>
+    <string name="group_navigation_tabs">Вкладки</string>
+    <string name="group_navigation_dropdown">Випадаюче меню</string>
     <string name="action_display_comfortable_grid">Зручна сітка</string>
     <string name="recent_manga_time">Розд. %1$s - %2$s</string>
     <string name="viewer">Режим читання</string>

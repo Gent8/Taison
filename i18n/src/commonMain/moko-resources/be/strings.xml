@@ -15,7 +15,10 @@
     <string name="action_pin">Замацаваць</string>
     <string name="action_disable">Адключыць</string>
     <string name="action_display_show_number_of_items">Паказаць колькасць прадметаў</string>
-    <string name="action_display_show_tabs">Паказаць укладкі катэгорый</string>
+    <string name="action_display_show_tabs">Паказаць укладкі груп зверху</string>
+    <string name="pref_group_navigation_type">Тып навігацыі</string>
+    <string name="group_navigation_tabs">Укладкі</string>
+    <string name="group_navigation_dropdown">Выпадальнае меню</string>
     <string name="action_display_local_badge">Значкі лакальных</string>
     <string name="action_display_download_badge">Значкі загружаных</string>
     <string name="action_display_list">Спіс</string>

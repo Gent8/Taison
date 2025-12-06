@@ -352,7 +352,10 @@
     <string name="notification_cover_update_failed">Ажурирање омота није успјело</string>
     <string name="pref_category_theme">Тема</string>
     <string name="action_disable">Онемогући</string>
-    <string name="action_display_show_tabs">Прикажи наслове категорија</string>
+    <string name="action_display_show_tabs">Прикажи наслове група на врху</string>
+    <string name="pref_group_navigation_type">Тип навигације</string>
+    <string name="group_navigation_tabs">Наслови</string>
+    <string name="group_navigation_dropdown">Падајући мени</string>
     <string name="action_display_comfortable_grid">Шира мрежа</string>
     <string name="action_migrate">Мигрирај</string>
     <string name="action_start">Почни</string>

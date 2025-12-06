@@ -128,7 +128,10 @@
     <string name="action_cancel">Bekor qilish</string>
     <string name="theme_dark">Yoniq</string>
     <string name="action_retry">Takrorlash</string>
-    <string name="action_display_show_tabs">Toifa yorliqlarini ko\'rish</string>
+    <string name="action_display_show_tabs">Guruh yorliqlarini yuqorida ko\'rish</string>
+    <string name="pref_group_navigation_type">Navigatsiya turi</string>
+    <string name="group_navigation_tabs">Yorliqlar</string>
+    <string name="group_navigation_dropdown">Ochiladigan menyu</string>
     <string name="action_webview_refresh">Yangilash</string>
     <string name="pref_downloads_summary">Avto yuklash, oldindan yuklash</string>
     <string name="pref_advanced_summary">Xatolar ro\'yhatini yuklash, quvvat sarfini optimizatsiyalash</string>

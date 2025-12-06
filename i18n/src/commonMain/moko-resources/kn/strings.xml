@@ -380,7 +380,10 @@
     <string name="tabs_header">ಟ್ಯಾಬ್‌ಗಳು</string>
     <string name="pref_show_reading_mode_summary">ರೀಡರ್ ತೆರೆದಾಗ ಪ್ರಸ್ತುತ ಮೋಡ್ ಅನ್ನು ಸಂಕ್ಷಿಪ್ತವಾಗಿ ತೋರಿಸಿ</string>
     <string name="pref_show_reading_mode">ಓದುವ ರೀತಿ ತೋರಿಸಿ</string>
-    <string name="action_display_show_tabs">ವರ್ಗ ಟ್ಯಾಬ್‌ಗಳನ್ನು ತೋರಿಸಿ</string>
+    <string name="action_display_show_tabs">ಗುಂಪು ಟ್ಯಾಬ್‌ಗಳನ್ನು ಮೇಲ್ಭಾಗದಲ್ಲಿ ತೋರಿಸಿ</string>
+    <string name="pref_group_navigation_type">ನ್ಯಾವಿಗೇಷನ್ ಪ್ರಕಾರ</string>
+    <string name="group_navigation_tabs">ಟ್ಯಾಬ್‌ಗಳು</string>
+    <string name="group_navigation_dropdown">ಡ್ರಾಪ್‌ಡೌನ್ ಮೆನು</string>
     <string name="action_display_comfortable_grid">ಆರಾಮದಾಯಕ ಗ್ರಿಡ್</string>
     <string name="action_disable_all">ಎಲ್ಲವನ್ನೂ ನಿಷ್ಕ್ರಿಯೆಗೊಳಿಸಿ</string>
     <string name="action_enable_all">ಎಲ್ಲವನ್ನೂ ಸಕ್ರಿಯಗೊಳಿಸಿ</string>

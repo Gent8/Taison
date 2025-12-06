@@ -377,7 +377,10 @@
     <string name="invalid_backup_file">Fișier de rezervă invalid:</string>
     <string name="page_list_empty_error">Nu s-au găsit pagini</string>
     <string name="tabs_header">Tab-uri</string>
-    <string name="action_display_show_tabs">Afișează filele categoriei</string>
+    <string name="action_display_show_tabs">Afișează filele grupului în partea de sus</string>
+    <string name="pref_group_navigation_type">Tipul de navigare</string>
+    <string name="group_navigation_tabs">File</string>
+    <string name="group_navigation_dropdown">Meniu derulant</string>
     <string name="action_disable_all">Dezactivați toate</string>
     <string name="action_enable_all">Activează toate</string>
     <string name="pref_show_reading_mode_summary">Afișați scurt modul curent când este deschis cititorul</string>

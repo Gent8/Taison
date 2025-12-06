@@ -373,8 +373,11 @@
     <string name="action_display_comfortable_grid">Graella confortable</string>
     <string name="action_migrate">Migra</string>
     <string name="tabs_header">Pestanyes</string>
-    <string name="action_display_show_tabs">Mostra les pestanyes de les categories</string>
-    <string name="page_list_empty_error">No s’ha trobat cap pàgina</string>
+    <string name="action_display_show_tabs">Mostra les pestanyes dels grups a la part superior</string>
+    <string name="pref_group_navigation_type">Tipus de navegació</string>
+    <string name="group_navigation_tabs">Pestanyes</string>
+    <string name="group_navigation_dropdown">Menú desplegable</string>
+    <string name="page_list_empty_error">No s'ha trobat cap pàgina</string>
     <string name="action_disable_all">Desactiva-ho tot</string>
     <string name="action_enable_all">Activa-ho tot</string>
     <string name="tapping_inverted_both">En totes dues direccions</string>

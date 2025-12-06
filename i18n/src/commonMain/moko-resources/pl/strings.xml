@@ -379,7 +379,10 @@
     <string name="action_migrate">Migracja</string>
     <string name="page_list_empty_error">Nie znaleziono żadnych stron</string>
     <string name="tabs_header">Karty</string>
-    <string name="action_display_show_tabs">Pokaż karty kategorii</string>
+    <string name="action_display_show_tabs">Pokaż karty grup u góry</string>
+    <string name="pref_group_navigation_type">Typ nawigacji</string>
+    <string name="group_navigation_tabs">Karty</string>
+    <string name="group_navigation_dropdown">Menu rozwijane</string>
     <string name="action_disable_all">Wyłącz wszystkie</string>
     <string name="action_enable_all">Włącz wszystkie</string>
     <string name="pref_show_reading_mode_summary">Po otwarciu aplikacji pokaż aktualny tryb czytania</string>

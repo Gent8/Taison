@@ -120,7 +120,10 @@
     <string name="action_display_cover_only_grid">ചിത്രം മാത്രമുള്ള ഗ്രിഡ്</string>
     <string name="action_reset">പുനഃസജ്ജമാക്കുക</string>
     <string name="action_move_to_top_all_for_series">പരമ്പര മുകളിലേക്ക് നീക്കുക</string>
-    <string name="action_display_show_tabs">വിഭാഗം ടാബുകൾ കാണിക്കുക</string>
+    <string name="action_display_show_tabs">ഗ്രൂപ്പ് ടാബുകൾ മുകളിൽ കാണിക്കുക</string>
+    <string name="pref_group_navigation_type">നാവിഗേഷൻ തരം</string>
+    <string name="group_navigation_tabs">ടാബുകൾ</string>
+    <string name="group_navigation_dropdown">ഡ്രോപ്പ്‌ഡൗൺ മെനു</string>
     <string name="action_unpin">അൺപിൻ ചെയ്യുക</string>
     <string name="action_order_by_upload_date">അപ്‌ലോഡ് തീയതി പ്രകാരം</string>
     <string name="action_asc">ആരോഹണം</string>

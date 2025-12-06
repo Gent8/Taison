@@ -306,7 +306,10 @@
     <string name="hide_notification_content">隱藏通知內容</string>
     <string name="pref_manage_notifications">管理通知設定</string>
     <string name="channel_ext_updates">擴充套件更新</string>
-    <string name="action_display_show_tabs">類別索引</string>
+    <string name="action_display_show_tabs">在頂部顯示組標籤</string>
+    <string name="pref_group_navigation_type">導航類型</string>
+    <string name="group_navigation_tabs">標籤</string>
+    <string name="group_navigation_dropdown">下拉選單</string>
     <string name="tabs_header">頁籤</string>
     <string name="gray_background">灰色</string>
     <string name="pref_category_display">檢視</string>

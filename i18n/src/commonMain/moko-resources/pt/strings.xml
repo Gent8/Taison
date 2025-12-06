@@ -375,7 +375,10 @@
     <string name="pref_show_reading_mode">Mostrar modo de leitura</string>
     <string name="pref_library_update_refresh_metadata_summary">Procurar nova capa e detalhes quando a biblioteca atualizar</string>
     <string name="pref_library_update_refresh_metadata">Atualizar automaticamente os metadados</string>
-    <string name="action_display_show_tabs">Mostrar separadores de categoria</string>
+    <string name="action_display_show_tabs">Mostrar separadores de grupo no topo</string>
+    <string name="pref_group_navigation_type">Tipo de navegação</string>
+    <string name="group_navigation_tabs">Separadores</string>
+    <string name="group_navigation_dropdown">Menu suspenso</string>
     <string name="action_display_comfortable_grid">Grelha confortável</string>
     <string name="action_migrate">Migrar</string>
     <string name="action_disable_all">Desativar todas</string>
