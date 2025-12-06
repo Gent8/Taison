@@ -466,7 +466,7 @@
     <string name="skipped_reason_completed">به دلیل کامل‌بودن سری، رد شد</string>
     <string name="action_display_local_badge">منبع محلی</string>
     <string name="action_display_show_number_of_items">نمایش تعداد موارد</string>
-    <string name="pref_history_scope_active_category">محدود کردن تاریخچه به گروه مربوطه</string>
+    <string name="pref_history_scope_active_group">محدود کردن تاریخچه به گروه مربوطه</string>
     <string name="action_desc">نزولی</string>
     <string name="pref_category_appearance">ظاهر</string>
     <string name="action_sort_chapter_fetch_date">تاریخ گرفتن قسمت</string>

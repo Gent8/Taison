@@ -446,7 +446,7 @@
     <string name="action_asc">遞增</string>
     <string name="action_order_by_chapter_number">依章節編號</string>
     <string name="action_display_show_number_of_items">顯示藏書數目</string>
-    <string name="pref_history_scope_active_category">將記錄限定到相應分組</string>
+    <string name="pref_history_scope_active_group">將記錄限定到相應分組</string>
     <string name="manga_from_library">書櫃上的作品</string>
     <string name="downloaded_chapters">已下載的章節</string>
     <string name="pref_dual_page_split">分割寬頁</string>

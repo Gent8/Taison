@@ -450,7 +450,7 @@
     <string name="action_order_by_upload_date">За датою завантаження</string>
     <string name="action_filter_tracked">Відстежуване</string>
     <string name="action_display_show_number_of_items">Показати кількість об\'єктів</string>
-    <string name="pref_history_scope_active_category">Обмежити історію відповідною групою</string>
+    <string name="pref_history_scope_active_group">Обмежити історію відповідною групою</string>
     <string name="right_and_left_nav">Праворуч та ліворуч</string>
     <string name="pref_dual_page_split">Розділення широких сторінок</string>
     <string name="pref_dual_page_invert_summary">Якщо розділення широких сторінок, не відповідає напрямку читання</string>

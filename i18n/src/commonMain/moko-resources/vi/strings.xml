@@ -472,7 +472,7 @@
     <string name="include">Bao gồm: %s</string>
     <string name="none">Không có</string>
     <string name="action_display_show_number_of_items">Hiện số truyện</string>
-    <string name="pref_history_scope_active_category">Giới hạn lịch sử theo nhóm tương ứng</string>
+    <string name="pref_history_scope_active_group">Giới hạn lịch sử theo nhóm tương ứng</string>
     <string name="pref_category_nsfw_content">Nguồn NSFW (18+)</string>
     <string name="pref_show_nsfw_source">Hiển thị trong các danh sách nguồn và tiện ích mở rộng</string>
     <string name="action_show_errors">Chạm để xem toàn bộ chi tiết</string>

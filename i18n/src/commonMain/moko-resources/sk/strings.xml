@@ -326,7 +326,7 @@
     <string name="action_display_comfortable_grid">Komfortná mriežka</string>
     <string name="action_display_show_tabs">Zobraziť karty kategórií</string>
     <string name="action_display_show_number_of_items">Zobraziť počet položiek</string>
-    <string name="pref_history_scope_active_category">Obmedziť históriu na príslušnú skupinu</string>
+    <string name="pref_history_scope_active_group">Obmedziť históriu na príslušnú skupinu</string>
     <string name="action_order_by_upload_date">Podľa dátumu nahratia</string>
     <string name="action_start">Začať</string>
     <string name="action_display_cover_only_grid">Mriežka len s obalmi</string>

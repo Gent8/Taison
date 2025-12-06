@@ -450,7 +450,7 @@
     <string name="action_order_by_upload_date">Par date de téléversement</string>
     <string name="action_filter_tracked">Suivis</string>
     <string name="action_display_show_number_of_items">Afficher le nombre d'entrées</string>
-    <string name="pref_history_scope_active_category">Limiter l'historique au groupe respectif</string>
+    <string name="pref_history_scope_active_group">Limiter l'historique au groupe respectif</string>
     <string name="right_and_left_nav">Droite et gauche</string>
     <string name="pref_dual_page_split">Diviser les pages larges</string>
     <string name="pref_dual_page_invert_summary">Si l\'emplacement des pages larges divisées ne correspond pas au sens de lecture</string>

@@ -166,7 +166,7 @@
     <string name="action_cancel">ரத்துசெய்</string>
     <string name="action_ok">சரி</string>
     <string name="action_display_show_number_of_items">பொருட்களின் எண்ணிக்கையைக் காட்டு</string>
-    <string name="pref_history_scope_active_category">வரலாற்றை தொடர்புடைய குழுவிற்கு வரையறு</string>
+    <string name="pref_history_scope_active_group">வரலாற்றை தொடர்புடைய குழுவிற்கு வரையறு</string>
     <string name="action_cancel_all">அனைத்தையும் ரத்துசெய்</string>
     <string name="cancel_all_for_series">இந்த தொடருக்கு அனைத்தையும் ரத்துசெய்</string>
     <string name="action_sort">வரிசைப்படுத்து</string>

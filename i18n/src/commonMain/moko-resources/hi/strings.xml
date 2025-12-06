@@ -452,7 +452,7 @@
     <string name="action_order_by_chapter_number">अध्याय संख्या से</string>
     <string name="action_order_by_upload_date">अपलोड तिथि से</string>
     <string name="action_display_show_number_of_items">वस्तुओं की संख्या दिखाएं</string>
-    <string name="pref_history_scope_active_category">इतिहास को संबंधित समूह तक सीमित करें</string>
+    <string name="pref_history_scope_active_group">इतिहास को संबंधित समूह तक सीमित करें</string>
     <string name="action_filter_tracked">ट्रैक किए गए</string>
     <string name="backup_restore_content_full">आपको किसी भी गायब एक्सटेंशनों को स्थापित करने की आवश्यकता हो सकती है और उन्हें उपयोग करने के लिए बाद में ट्रैकिंग सेवाओं में लॉग इन करना पड़ सकता है।</string>
     <string name="pref_dual_page_invert_summary">यदि स्प्लिट वाइड पेजों का प्लेसमेंट पढ़ने की दिशा से मेल नहीं खाता है</string>

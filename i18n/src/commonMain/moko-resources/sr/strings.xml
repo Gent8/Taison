@@ -382,7 +382,7 @@
     <string name="label_default">Подразумевано</string>
     <string name="action_start_downloading_now">Покрени преузимање одмах</string>
     <string name="action_display_show_number_of_items">Прикажи број ставки</string>
-    <string name="pref_history_scope_active_category">Ограничи историју на одговарајућу групу</string>
+    <string name="pref_history_scope_active_group">Ограничи историју на одговарајућу групу</string>
     <string name="cancel_all_for_series">Откажи све за овај наслов</string>
     <string name="action_desc">Опадајуће</string>
     <string name="action_show_errors">Прикажи детаље</string>

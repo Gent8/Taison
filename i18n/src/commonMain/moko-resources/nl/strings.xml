@@ -447,7 +447,7 @@
     <string name="action_order_by_chapter_number">Op hoofdstuknummer</string>
     <string name="action_order_by_upload_date">Op uploaddatum</string>
     <string name="action_display_show_number_of_items">Aantal items tonen</string>
-    <string name="pref_history_scope_active_category">Geschiedenis beperken tot respectieve groep</string>
+    <string name="pref_history_scope_active_group">Geschiedenis beperken tot respectieve groep</string>
     <string name="action_filter_tracked">Getracked</string>
     <string name="right_and_left_nav">Rechts en links</string>
     <string name="pref_dual_page_split">Brede pagina\'s opsplitsen</string>

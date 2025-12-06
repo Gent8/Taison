@@ -119,17 +119,17 @@ object SettingsLibraryScreen : SearchableSettings {
                     preference = libraryPreferences.categoryNavigationMode(),
                     entries = persistentMapOf(
                         LibraryPreferences.CategoryNavigationMode.DROPDOWN to
-                            stringResource(MR.strings.category_navigation_dropdown),
+                            stringResource(MR.strings.group_navigation_dropdown),
                         LibraryPreferences.CategoryNavigationMode.TABS to
-                            stringResource(MR.strings.category_navigation_tabs),
+                            stringResource(MR.strings.group_navigation_tabs),
                     ),
-                    title = stringResource(MR.strings.pref_category_navigation_type),
+                    title = stringResource(MR.strings.pref_group_navigation_type),
                 ),
             )
             add(
                 Preference.PreferenceItem.SwitchPreference(
                     preference = historyScopePreference,
-                    title = stringResource(MR.strings.pref_history_scope_active_category),
+                    title = stringResource(MR.strings.pref_history_scope_active_group),
                 ),
             )
             if (historyScopeEnabled) {

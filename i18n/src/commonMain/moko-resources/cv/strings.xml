@@ -452,7 +452,7 @@
     <string name="pref_dual_page_invert">Анлӑ елсене тепӗр майлӑ пайлани</string>
     <string name="pref_dual_page_split">Анлӑ елсене пайлани</string>
     <string name="action_display_show_number_of_items">Хайлавсен шутне кӑтарт</string>
-    <string name="pref_history_scope_active_category">Кун-ҫула тӗрлӗ ушкӑна пайла</string>
+    <string name="pref_history_scope_active_group">Кун-ҫула тӗрлӗ ушкӑна пайла</string>
     <string name="nav_zone_right">Сылтӑм</string>
     <string name="nav_zone_left">Сулахай</string>
     <string name="nav_zone_next">Хыҫҫӑнхи</string>

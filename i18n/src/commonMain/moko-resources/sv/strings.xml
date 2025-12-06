@@ -451,7 +451,7 @@
     <string name="action_filter_tracked">Spåras</string>
     <string name="right_and_left_nav">Höger och Vänster</string>
     <string name="action_display_show_number_of_items">Visa antal objekt</string>
-    <string name="pref_history_scope_active_category">Begränsa historik till respektive grupp</string>
+    <string name="pref_history_scope_active_group">Begränsa historik till respektive grupp</string>
     <string name="pref_dual_page_split">Delning av breda sidor</string>
     <string name="backup_restore_content_full">Du måste installera eventuella tillägg som saknas och logga in på spårningstjänster efteråt för att kunna använda dem.</string>
     <string name="nav_zone_right">Höger</string>

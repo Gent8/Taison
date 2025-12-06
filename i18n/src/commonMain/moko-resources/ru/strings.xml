@@ -450,7 +450,7 @@
     <string name="action_order_by_upload_date">Дата загрузки</string>
     <string name="action_filter_tracked">Отслеживается</string>
     <string name="action_display_show_number_of_items">Показывать количество серий</string>
-    <string name="pref_history_scope_active_category">Ограничить историю соответствующей группой</string>
+    <string name="pref_history_scope_active_group">Ограничить историю соответствующей группой</string>
     <string name="right_and_left_nav">Справа и слева</string>
     <string name="pref_dual_page_split">Разделение широких страниц</string>
     <string name="pref_dual_page_invert">Разделение широких страниц наоборот</string>

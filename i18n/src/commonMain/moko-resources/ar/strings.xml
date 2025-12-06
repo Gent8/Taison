@@ -442,7 +442,7 @@
     <string name="kindlish_nav">كأنه كِندِل</string>
     <string name="action_filter_tracked">مُتتبَعة</string>
     <string name="action_display_show_number_of_items">إظهار عدد العناصر</string>
-    <string name="pref_history_scope_active_category">تحديد التاريخ للمجموعة المعنية</string>
+    <string name="pref_history_scope_active_group">تحديد التاريخ للمجموعة المعنية</string>
     <string name="track_finished_reading_date">تاريخ انهاء القراءة</string>
     <string name="track_started_reading_date">تاريخ بدء القراءة</string>
     <string name="pref_dump_crash_logs_summary">يحفظ سجلات الأخطاء في ملف للمشاركة مع المطورين</string>

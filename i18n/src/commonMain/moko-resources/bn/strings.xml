@@ -436,7 +436,7 @@
     <string name="action_filter_tracked">ট্র্যাক করা হয়েছে</string>
     <string name="pref_viewer_nav">ন্যাভিগেশন নকশা</string>
     <string name="action_display_show_number_of_items">আইটেমের সংখ্যা প্রদর্শন করুন</string>
-    <string name="pref_history_scope_active_category">ইতিহাসকে সংশ্লিষ্ট গ্রুপে সীমাবদ্ধ করুন</string>
+    <string name="pref_history_scope_active_group">ইতিহাসকে সংশ্লিষ্ট গ্রুপে সীমাবদ্ধ করুন</string>
     <string name="spen_next_page">পরের পৃষ্ঠা</string>
     <string name="spen_previous_page">আগের পৃষ্ঠা</string>
     <string name="file_picker_error">কোনো ফাইল বাছাইকারী অ্যাপ পাওয়া যায় নি</string>

@@ -91,7 +91,7 @@
     <string name="action_display_comfortable_grid">सुसुखा ग्रिड्-शैली</string>
     <string name="action_display_language_badge">भाषा</string>
     <string name="action_display_show_number_of_items">वस्तूनां सङ्ख्यां दर्शयतु</string>
-    <string name="pref_history_scope_active_category">चरित्रं सम्बद्धसमूहाय सीमितं कुरु</string>
+    <string name="pref_history_scope_active_group">चरित्रं सम्बद्धसमूहाय सीमितं कुरु</string>
     <string name="cancel_all_for_series">अस्य धारावाहिकस्य कृते सर्वाणि लुम्पतु</string>
     <string name="action_order_by_upload_date">उपारोपणदिनाङ्केन</string>
     <string name="action_oldest">ज्येष्ठतमम्</string>

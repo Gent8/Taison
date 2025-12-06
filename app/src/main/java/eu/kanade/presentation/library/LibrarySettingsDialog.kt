@@ -317,15 +317,15 @@ private fun ColumnScope.DisplayPage(
 
     val categoryNavigationPref = remember { screenModel.libraryPreferences.categoryNavigationMode() }
     val categoryNavigationMode by categoryNavigationPref.collectAsState()
-    SettingsChipRow(MR.strings.pref_category_navigation_type) {
+    SettingsChipRow(MR.strings.pref_group_navigation_type) {
         LibraryPreferences.CategoryNavigationMode.entries.forEach { mode ->
             FilterChip(
                 selected = categoryNavigationMode == mode,
                 onClick = { categoryNavigationPref.set(mode) },
                 label = {
                     val labelRes = when (mode) {
-                        LibraryPreferences.CategoryNavigationMode.TABS -> MR.strings.category_navigation_tabs
-                        LibraryPreferences.CategoryNavigationMode.DROPDOWN -> MR.strings.category_navigation_dropdown
+                        LibraryPreferences.CategoryNavigationMode.TABS -> MR.strings.group_navigation_tabs
+                        LibraryPreferences.CategoryNavigationMode.DROPDOWN -> MR.strings.group_navigation_dropdown
                     }
                     Text(stringResource(labelRes))
                 },
