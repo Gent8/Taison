@@ -182,9 +182,12 @@ class LibraryScreenModel(
 
                         val categories = when {
                             shouldPreserveCategories -> state.displayedCategories
-                            isSameGrouping -> (grouped.keys + state.displayedCategories)
-                                .distinctBy { it.id }
-                                .sortedWith(compareBy<Category> { it.order }.thenBy { it.id })
+                            isSameGrouping -> {
+                                val currentCategoryIds = grouped.keys.map { it.id }.toSet()
+                                (grouped.keys + state.displayedCategories.filter { it.id in currentCategoryIds })
+                                    .distinctBy { it.id }
+                                    .sortedWith(compareBy<Category> { it.order }.thenBy { it.id })
+                            }
                             else ->
                                 grouped.keys
                                     .sortedWith(compareBy<Category> { it.order }.thenBy { it.id })
