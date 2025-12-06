@@ -93,6 +93,7 @@ class HistoryScreenModel(
                 .changes()
                 .map { HistoryScopeMode.fromLibraryGroup(it) }
                 .distinctUntilChanged()
+            val scopeEnabledFlow = libraryPreferences.historyGroupScope().changes().distinctUntilChanged()
             val lastUsedHistorySectionIdFlow = libraryPreferences.lastUsedHistorySectionId().changes()
             val activeSectionIdFlow = combine(
                 scopeModeFlow,
@@ -109,7 +110,7 @@ class HistoryScreenModel(
             }.distinctUntilChanged()
             val categoriesFlow = getCategories.subscribe().distinctUntilChanged()
             val historyNavigationEnabledFlow = libraryPreferences
-                .historySectionNavigation()
+                .historyGroupNavigation()
                 .changes()
                 .distinctUntilChanged()
             val navigationModeFlow = libraryPreferences.categoryNavigationMode().changes().distinctUntilChanged()
@@ -150,6 +151,7 @@ class HistoryScreenModel(
             val filterInputsFlow = combine(
                 showNonLibraryEntriesFlow,
                 scopeModeFlow,
+                scopeEnabledFlow,
                 activeSectionIdFlow,
                 categoriesFlow,
                 historyNavigationEnabledFlow,
@@ -159,11 +161,12 @@ class HistoryScreenModel(
                 HistoryFilterInputs(
                     includeNonLibraryEntries = values[0] as Boolean,
                     scopeMode = values[1] as HistoryScopeMode,
-                    activeSectionId = values[2] as Long,
-                    categories = values[3] as List<Category>,
-                    sectionNavigationEnabled = values[4] as Boolean,
-                    showHiddenCategories = values[5] as Boolean,
-                    showDefaultCategory = values[6] as Boolean,
+                    scopeEnabled = values[2] as Boolean,
+                    activeSectionId = values[3] as Long,
+                    categories = values[4] as List<Category>,
+                    sectionNavigationEnabled = values[5] as Boolean,
+                    showHiddenCategories = values[6] as Boolean,
+                    showDefaultCategory = values[7] as Boolean,
                 )
             }
 
@@ -177,6 +180,7 @@ class HistoryScreenModel(
                 HistoryFilterConfig(
                     includeNonLibraryEntries = inputs.includeNonLibraryEntries,
                     scopeMode = inputs.scopeMode,
+                    scopeEnabled = inputs.scopeEnabled,
                     activeSectionId = inputs.activeSectionId,
                     categories = inputs.categories,
                     sectionNavigationEnabled = inputs.sectionNavigationEnabled,
@@ -195,8 +199,8 @@ class HistoryScreenModel(
             }
                 .map { (histories, config) ->
                     val scopeMode = config.scopeMode
-                    val isScoped = scopeMode != HistoryScopeMode.UNGROUPED &&
-                        config.sectionNavigationEnabled
+                    val isScoped = config.scopeEnabled &&
+                        scopeMode != HistoryScopeMode.UNGROUPED
 
                     val sections = when (scopeMode) {
                         HistoryScopeMode.BY_CATEGORY -> buildCategorySections(
@@ -237,7 +241,7 @@ class HistoryScreenModel(
                         scopeActive = isScoped && resolvedSectionId != null,
                         hasNonLibraryEntries = histories.any { !it.coverData.isMangaFavorite },
                         sections = sections.toImmutableList(),
-                        sectionNavigationEnabled = config.sectionNavigationEnabled,
+                        sectionNavigationEnabled = config.sectionNavigationEnabled && config.scopeEnabled,
                         navigationMode = config.navigationMode,
                         activeSectionId = resolvedSectionId,
                         sectionHistories = sectionHistories
@@ -428,6 +432,7 @@ class HistoryScreenModel(
     private data class HistoryFilterInputs(
         val includeNonLibraryEntries: Boolean,
         val scopeMode: HistoryScopeMode,
+        val scopeEnabled: Boolean,
         val activeSectionId: Long,
         val categories: List<Category>,
         val sectionNavigationEnabled: Boolean,
@@ -438,6 +443,7 @@ class HistoryScreenModel(
     private data class HistoryFilterConfig(
         val includeNonLibraryEntries: Boolean,
         val scopeMode: HistoryScopeMode,
+        val scopeEnabled: Boolean,
         val activeSectionId: Long,
         val categories: List<Category>,
         val sectionNavigationEnabled: Boolean,
@@ -447,7 +453,7 @@ class HistoryScreenModel(
         val libraryManga: List<LibraryManga>,
     ) {
         fun resolvedSectionId(sections: List<HistorySection>): Long? {
-            if (scopeMode == HistoryScopeMode.UNGROUPED) return null
+            if (!scopeEnabled || scopeMode == HistoryScopeMode.UNGROUPED) return null
             if (activeSectionId < 0) return null
             if (sections.isEmpty()) return null
 

@@ -144,8 +144,12 @@ class LibraryPreferences(
         return preference
     }
 
-    @Deprecated("Use historyScopeMode() instead", ReplaceWith("historyScopeMode()"))
-    fun historyScopeByCategory() = preferenceStore.getBoolean("history_scope_by_category", true)
+    @Deprecated("Use historyGroupScope() instead", ReplaceWith("historyGroupScope()"))
+    fun historyScopeByCategory() = historyGroupScope()
+
+    fun historyGroupScope(): Preference<Boolean> {
+        return preferenceStore.getBoolean("history_scope_by_category", true)
+    }
 
     fun historyScopeMode(): Preference<HistoryScopeMode> {
         val preference = preferenceStore.getEnum(
@@ -159,10 +163,10 @@ class LibraryPreferences(
         return preference
     }
 
-    @Deprecated("Use historySectionNavigation() instead", ReplaceWith("historySectionNavigation()"))
+    @Deprecated("Use historyGroupNavigation() instead", ReplaceWith("historyGroupNavigation()"))
     fun historyCategoryNavigation() = preferenceStore.getBoolean("history_category_navigation", false)
 
-    fun historySectionNavigation(): Preference<Boolean> {
+    fun historyGroupNavigation(): Preference<Boolean> {
         val preference = preferenceStore.getBoolean("history_section_navigation", false)
         if (!preference.isSet()) {
             val legacyPreference = preferenceStore.getBoolean("history_category_navigation", false)
@@ -170,6 +174,9 @@ class LibraryPreferences(
         }
         return preference
     }
+
+    @Deprecated("Use historyGroupNavigation() instead", ReplaceWith("historyGroupNavigation()"))
+    fun historySectionNavigation(): Preference<Boolean> = historyGroupNavigation()
 
     fun lastUsedHistorySectionId() = preferenceStore.getLong(
         Preference.appStateKey("last_used_history_section_id"),

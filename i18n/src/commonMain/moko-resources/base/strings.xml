@@ -134,7 +134,7 @@
     <string name="category_navigation_dropdown">Dropdown</string>
     <string name="action_display_show_number_of_items">Show number of items</string>
     <string name="action_show_hidden_categories">Show hidden categories</string>
-    <string name="pref_history_scope_active_category" translatable="false">Scope history to respective category</string>
+    <string name="pref_history_scope_active_category" translatable="false">Scope history to respective group</string>
     <string name="action_display_show_continue_reading_button">Continue reading button</string>
     <string name="action_disable">Disable</string>
     <string name="action_pin">Pin</string>
@@ -893,7 +893,7 @@
     <string name="history_show_non_library_entries">Show non-library entries</string>
     <string name="history_hide_non_library_entries">Hide non-library entries</string>
     <string name="pref_history_scope_mode">History scope</string>
-    <string name="pref_history_section_navigation">Enable section navigation in History</string>
+    <string name="pref_history_section_navigation">Enable group navigation in history</string>
 
     <!-- Source Screen -->
     <string name="source_empty_screen">No source found</string>
