@@ -884,7 +884,7 @@
     <string name="history_delete_title">Delete history</string>
     <string name="history_delete_scope_message">Choose what to delete.</string>
     <string name="history_delete_scope_everything">Delete everything</string>
-    <string name="history_delete_scope_everything_description">Delete all history entries across all categories</string>
+    <string name="history_delete_scope_everything_description">Delete all history entries</string>
     <string name="history_delete_scope_active_title">Delete history for shown entries</string>
     <string name="history_delete_scope_active">%s</string>
     <string name="history_delete_scope_active_with_nonlibrary">%s and non-library entries</string>
