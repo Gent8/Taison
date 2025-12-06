@@ -25,13 +25,15 @@ class SetupDefaultCategoryHiddenMigration : Migration {
             manga.categories.isEmpty() || manga.categories.contains(Category.UNCATEGORIZED_ID)
         }
 
-        val shouldBeHidden = !hasMangaInDefault
+        val hasCustomName = defaultCategory.name.isNotBlank()
+        val shouldHideSystemCategory = !hasMangaInDefault && !hasCustomName
 
-        if (shouldBeHidden && !defaultCategory.hidden) {
+        val desiredHiddenState = shouldHideSystemCategory
+        if (defaultCategory.hidden != desiredHiddenState) {
             categoryRepository.updatePartial(
                 CategoryUpdate(
                     id = Category.UNCATEGORIZED_ID,
-                    hidden = true,
+                    hidden = desiredHiddenState,
                 ),
             )
         }
