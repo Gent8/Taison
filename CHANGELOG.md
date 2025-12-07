@@ -16,6 +16,25 @@ The format is a modified version of [Keep a Changelog](https://keepachangelog.co
 
 ---
 
+## [Taison v1.2.0] - 2025-12-07
+This section tracks changes unique to the Taison fork so they don't conflict with upstream Mihon release notes.
+
+### Added
+- Group-aware filtering for categories, sources, status, and ungrouped items, plus a mature-content filter in Library ([@Gent8](https://github.com/Gent8)).
+- Category visibility toggle and editable default category name with hide option ([@Gent8](https://github.com/Gent8)).
+- Trust all extensions action available from Browse ([@Gent8](https://github.com/Gent8)).
+- Graphic banner for the Taison theme in Settings ([@Gent8](https://github.com/Gent8)).
+
+### Changed
+- Category navigation setting renamed to "Navigation type" and clarified ([@Gent8](https://github.com/Gent8)).
+- Category input fields now focus the end of text on create or edit ([@Gent8](https://github.com/Gent8)).
+- Removed the Navigation type option from Library › Filter › Display ([@Gent8](https://github.com/Gent8)).
+
+### Improved
+- Drawer transitions now use AnimatedContent instead of HorizontalPager for smoother motion ([@Gent8](https://github.com/Gent8)).
+
+---
+
 ## [Taison v1.1.0] - 2025-11-23
 This section tracks changes unique to the Taison fork so they don't conflict with upstream Mihon release notes.
 
