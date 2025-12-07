@@ -81,6 +81,10 @@ private fun buildDebugInfo(): String {
     } else {
         "unknown"
     }
-    return "Debug • ${BuildConfig.BUILD_TYPE} • v${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE}) • $commitLabel"
+    return listOf(
+        "Debug",
+        BuildConfig.BUILD_TYPE,
+        "v${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
+        commitLabel,
+    ).joinToString(separator = " • ")
 }
-
