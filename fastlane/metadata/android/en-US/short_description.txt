@@ -1,1 +1,1 @@
-Manga reader fork with quality-of-life upgrades
+Manga reader for organization and clear oversight
