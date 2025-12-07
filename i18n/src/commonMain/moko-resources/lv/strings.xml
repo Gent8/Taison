@@ -265,6 +265,9 @@
     <string name="ext_updates_pending">Gaida atjauninājumu</string>
     <string name="ext_installed">Instalēts</string>
     <string name="ext_trust">Uzticams</string>
+    <string name="ext_trust_all">Uzticēties visiem</string>
+    <string name="ext_trust_all_confirm_title">Uzticēties visiem instalētajiem paplašinājumiem?</string>
+    <string name="ext_trust_all_confirm_message">Visiem neuzticamiem instalētajiem paplašinājumiem tiks uzticēts. Turpiniet tikai tad, ja uzticaties to avotiem.</string>
     <string name="ext_untrusted">Neuzticams</string>
     <string name="obsolete_extension_message">Šis paplašinājums vairs nav pieejams. Tas var nedarboties pareizi un var radīt problēmas ar lietotni. Ieteicams to atinstalēt.</string>
     <string name="pref_dual_page_split">Sadalīt platas lapas</string>

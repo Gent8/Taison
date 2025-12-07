@@ -250,6 +250,9 @@
     <string name="label_extension_info">Szczegóły rozszerzenia</string>
     <string name="ext_update">Aktualizuj</string>
     <string name="ext_trust">Ufaj</string>
+    <string name="ext_trust_all">Ufaj wszystkim</string>
+    <string name="ext_trust_all_confirm_title">Ufać wszystkim zainstalowanym rozszerzeniom?</string>
+    <string name="ext_trust_all_confirm_message">Wszystkim niezaufanym zainstalowanym rozszerzeniom zostanie udzielone zaufanie. Kontynuuj tylko, jeśli ufasz ich źródłom.</string>
     <string name="ext_untrusted">Niezaufane</string>
     <string name="untrusted_extension">Niezaufane rozszerzenie</string>
     <string name="untrusted_extension_message">To rozszerzenie było podpisane niezaufanym certyfikatem i nie zostało aktywowane.

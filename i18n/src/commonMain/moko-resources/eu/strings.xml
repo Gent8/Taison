@@ -507,6 +507,9 @@
     <string name="update_24hour">Egunero</string>
     <string name="update_48hour">2 egunean behin</string>
     <string name="ext_trust">Fidagarritzat jo</string>
+    <string name="ext_trust_all">Guztiei fidatu</string>
+    <string name="ext_trust_all_confirm_title">Instalatutako hedapen guztiei fidatu?</string>
+    <string name="ext_trust_all_confirm_message">Fidagarriak ez diren instalatutako hedapen guztiei fidatuko zaie. Jarraitu soilik haien iturrietan fidatzen bazara.</string>
     <string name="tapping_inverted_both">Biak</string>
     <string name="pref_reader_actions">Ekintzak</string>
     <string name="pref_read_with_long_tap">Erakutsi sakaketa luzean</string>

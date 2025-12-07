@@ -138,6 +138,9 @@
     <string name="ext_installing">Asennetaan</string>
     <string name="ext_installed">Asennettu</string>
     <string name="ext_trust">Luota</string>
+    <string name="ext_trust_all">Luota kaikkiin</string>
+    <string name="ext_trust_all_confirm_title">Luota kaikkiin asennettuihin laajennoksiin?</string>
+    <string name="ext_trust_all_confirm_message">Kaikkiin luottamattomiin asennettuihin laajennoksiin luotetaan. Jatka vain, jos luotat niiden lähteisiin.</string>
     <string name="ext_untrusted">Luottamaton</string>
     <string name="ext_uninstall">Poista asennus</string>
     <string name="untrusted_extension">Luottamattomat laajennokset</string>

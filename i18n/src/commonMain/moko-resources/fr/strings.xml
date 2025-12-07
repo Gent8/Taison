@@ -257,6 +257,9 @@
     <string name="label_migration">Migrer</string>
     <string name="label_extension_info">Informations sur l\'extension</string>
     <string name="ext_trust">Fiable</string>
+    <string name="ext_trust_all">Tout faire confiance</string>
+    <string name="ext_trust_all_confirm_title">Faire confiance à toutes les extensions installées ?</string>
+    <string name="ext_trust_all_confirm_message">Toutes les extensions installées non fiables seront approuvées. Continuez uniquement si vous faites confiance à leurs sources.</string>
     <string name="ext_untrusted">Non fiable</string>
     <string name="pager_viewer">Pages</string>
     <string name="repeating">Relecture</string>

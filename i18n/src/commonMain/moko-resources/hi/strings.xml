@@ -240,6 +240,9 @@
     <string name="ext_installing">स्थापना</string>
     <string name="ext_installed">स्थापित</string>
     <string name="ext_trust">भरोसा</string>
+    <string name="ext_trust_all">सभी पर भरोसा करें</string>
+    <string name="ext_trust_all_confirm_title">सभी इंस्टॉल किए गए एक्सटेंशन पर भरोसा करें?</string>
+    <string name="ext_trust_all_confirm_message">सभी अविश्वस्त इंस्टॉल किए गए एक्सटेंशन पर भरोसा किया जाएगा। केवल तभी आगे बढ़ें यदि आप उनके स्रोतों पर भरोसा करते हैं।</string>
     <string name="ext_untrusted">अविश्वस्त</string>
     <string name="ext_uninstall">स्थापना रद्द करें</string>
     <string name="untrusted_extension">अविश्वस्त एक्सटेंशन</string>

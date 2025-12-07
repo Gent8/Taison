@@ -94,6 +94,9 @@
     <string name="ext_installing">安装中</string>
     <string name="ext_installed">已安装</string>
     <string name="ext_trust">信任</string>
+    <string name="ext_trust_all">信任全部</string>
+    <string name="ext_trust_all_confirm_title">信任所有已安装的插件？</string>
+    <string name="ext_trust_all_confirm_message">所有未信任的已安装插件将被信任。只有在您信任其来源的情况下才继续。</string>
     <string name="ext_untrusted">未信任</string>
     <string name="ext_uninstall">卸载</string>
     <string name="untrusted_extension">插件未受信任</string>

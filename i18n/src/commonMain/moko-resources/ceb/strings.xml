@@ -190,6 +190,9 @@
     <string name="ext_installing">Pag-instalar</string>
     <string name="ext_installed">Gi-install</string>
     <string name="ext_trust">Pagsalig</string>
+    <string name="ext_trust_all">Pagsalig sa tanan</string>
+    <string name="ext_trust_all_confirm_title">Pagsalig sa tanan nga na-install nga extension?</string>
+    <string name="ext_trust_all_confirm_message">Ang tanan nga dili kasaligan nga na-install nga extension pagasaligan. Padayon lang kung mosalig ka sa ilang mga gigikanan.</string>
     <string name="ext_untrusted">Dili kasaligan</string>
     <string name="ext_uninstall">I-uninstall</string>
     <string name="untrusted_extension">Dili kasaligan nga extension</string>

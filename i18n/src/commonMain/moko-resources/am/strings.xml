@@ -10,6 +10,9 @@
     <string name="ext_uninstall">ማራገፍ</string>
     <string name="ext_untrusted">የማይታመን</string>
     <string name="ext_trust">አደራ</string>
+    <string name="ext_trust_all">ሁሉንም አድር</string>
+    <string name="ext_trust_all_confirm_title">የተጭኑ ሁሉንም ማስፋፊያዎችን አድር?</string>
+    <string name="ext_trust_all_confirm_message">ሁሉም ያልታመኑ የተጭኑ ማስፋፊያዎች ይታመናሉ። ምንጮቻቸውን ካመኑ ብቻ ይቀጥሉ።</string>
     <string name="ext_installed">ተጭኗል</string>
     <string name="ext_installing">በመጫን ላይ</string>
     <string name="ext_downloading">በማውረድ ላይ</string>

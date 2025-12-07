@@ -240,6 +240,9 @@
     <string name="ext_installing">Aan het installeren</string>
     <string name="ext_installed">Geïnstalleerd</string>
     <string name="ext_trust">Vertrouwen</string>
+    <string name="ext_trust_all">Alles vertrouwen</string>
+    <string name="ext_trust_all_confirm_title">Alle geïnstalleerde extensies vertrouwen?</string>
+    <string name="ext_trust_all_confirm_message">Alle niet-vertrouwde geïnstalleerde extensies worden vertrouwd. Ga alleen door als je hun bronnen vertrouwt.</string>
     <string name="ext_untrusted">Niet vertrouwd</string>
     <string name="ext_uninstall">Verwijderen</string>
     <string name="untrusted_extension">Niet vertrouwde extensie</string>

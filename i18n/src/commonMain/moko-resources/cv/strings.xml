@@ -182,6 +182,9 @@
     <string name="pref_category_about">Ап ҫинчен</string>
     <string name="ext_untrusted">Шанчӑклӑ мар</string>
     <string name="ext_trust">Шанчӑклӑ</string>
+    <string name="ext_trust_all">Пурне те шанчӑк</string>
+    <string name="ext_trust_all_confirm_title">Пур инсталяциленнӗ хушӑмсене те шанчӑк?</string>
+    <string name="ext_trust_all_confirm_message">Пур шанчӑклӑ мар инсталяциленнӗ хушӑмсене шанчӑк пулас. Вӗсен пуҫламӑшӗсене шанчӑк пулсан ҫеҫ малалла пыр.</string>
     <string name="ext_pending">Кӗтет</string>
     <string name="backup_restore_missing_sources">Ҫук ҫӑл куҫсем:</string>
     <string name="tracking_info">Йӗрлев сервисӗсенче сыпӑкӑн ӳсӗмне ҫӗнетме пӗр йенлӗ килӗшӗвӗ. «Йӗрлев» пускӑч урлӑ йӗрлев ӗнерле.</string>

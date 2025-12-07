@@ -286,6 +286,9 @@
     <string name="default_category">မူရင်းကဏ္ဍ</string>
     <string name="ext_obsolete">အသုံးပြု၍မရ</string>
     <string name="ext_trust">ယုံကြည်ရန်</string>
+    <string name="ext_trust_all">အားလုံးကို ယုံကြည်ရန်</string>
+    <string name="ext_trust_all_confirm_title">ထည့်သွင်းထားသော extension အားလုံးကို ယုံကြည်မလား?</string>
+    <string name="ext_trust_all_confirm_message">ယုံကြည်စိတ်မချရသော extension အားလုံးကို ယုံကြည်လိမ့်မည်။ ၎င်းတို့၏ အရင်းအမြစ်များကို သင်ယုံကြည်ပါက ဆက်လုပ်ပါ။</string>
     <string name="untrusted_extension">မယုံကြည်ရသေးသော အစိတ်အပိုင်းများ</string>
     <string name="label_add_repo_input">စုစည်းမှုများ၏ URL</string>
     <string name="label_extension_repos">Extension စုစည်းရာ</string>

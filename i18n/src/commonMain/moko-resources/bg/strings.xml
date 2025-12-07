@@ -240,6 +240,9 @@
     <string name="ext_installing">Инсталира се</string>
     <string name="ext_installed">Инсталирани</string>
     <string name="ext_trust">Потвърдени</string>
+    <string name="ext_trust_all">Доверяване на всички</string>
+    <string name="ext_trust_all_confirm_title">Доверяване на всички инсталирани разширения?</string>
+    <string name="ext_trust_all_confirm_message">Всички ненадеждни инсталирани разширения ще бъдат одобрени. Продължете само ако се доверявате на техните източници.</string>
     <string name="ext_untrusted">Непотвърдени</string>
     <string name="ext_uninstall">Деинсталирай</string>
     <string name="untrusted_extension">Непотвърдено разширение</string>

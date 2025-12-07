@@ -240,6 +240,9 @@
     <string name="ext_installing">Memasang</string>
     <string name="ext_installed">Dipasang</string>
     <string name="ext_trust">Dipercayai</string>
+    <string name="ext_trust_all">Percayai semua</string>
+    <string name="ext_trust_all_confirm_title">Percayai semua sambungan yang dipasang?</string>
+    <string name="ext_trust_all_confirm_message">Semua sambungan dipasang yang tidak dipercayai akan dipercayai. Teruskan hanya jika anda mempercayai sumbernya.</string>
     <string name="ext_untrusted">Tidak dipercayai</string>
     <string name="ext_uninstall">Nyahpasang</string>
     <string name="untrusted_extension">Sambungan tak dipercayai</string>

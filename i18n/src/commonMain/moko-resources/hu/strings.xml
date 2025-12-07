@@ -274,6 +274,9 @@
 \n
 \nHa megbízik ebben a bővítményben, elfogadja ezeket a kockázatokat.</string>
     <string name="ext_trust">Bizalom</string>
+    <string name="ext_trust_all">Bízz mindben</string>
+    <string name="ext_trust_all_confirm_title">Bízz minden telepített bővítményben?</string>
+    <string name="ext_trust_all_confirm_message">Minden nem megbízható telepített bővítmény megbízhatóvá válik. Csak akkor folytassa, ha megbízik a forrásaikban.</string>
     <string name="exclude">Tiltott: %s</string>
     <string name="include">Kedvelt: %s</string>
     <string name="none">Semmi</string>

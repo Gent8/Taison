@@ -13,7 +13,12 @@ class TrustExtension(
 
     suspend fun isTrusted(pkgInfo: PackageInfo, fingerprints: List<String>): Boolean {
         val trustedFingerprints = extensionRepoRepository.getAll().map { it.signingKeyFingerprint }.toHashSet()
-        val key = "${pkgInfo.packageName}:${PackageInfoCompat.getLongVersionCode(pkgInfo)}:${fingerprints.last()}"
+        val versionCode = PackageInfoCompat.getLongVersionCode(pkgInfo)
+        val signatureHash = fingerprints.last()
+        val key = key(pkgInfo.packageName, versionCode, signatureHash)
+        if (key in preferences.pendingExtensionsToTrust().get()) {
+            return false
+        }
         return trustedFingerprints.any { fingerprints.contains(it) } || key in preferences.trustedExtensions().get()
     }
 
@@ -24,9 +29,27 @@ class TrustExtension(
 
             removed.also { it += "$pkgName:$versionCode:$signatureHash" }
         }
+        clearPending(pkgName)
+    }
+
+    fun markPending(pkgName: String, versionCode: Long, signatureHash: String) {
+        preferences.pendingExtensionsToTrust().getAndSet { pending ->
+            pending + key(pkgName, versionCode, signatureHash)
+        }
+    }
+
+    fun clearPending(pkgName: String) {
+        preferences.pendingExtensionsToTrust().getAndSet { pending ->
+            pending.filterNot { it.startsWith("$pkgName:") }.toSet()
+        }
     }
 
     fun revokeAll() {
         preferences.trustedExtensions().delete()
+        preferences.pendingExtensionsToTrust().delete()
+    }
+
+    private fun key(pkgName: String, versionCode: Long, signatureHash: String): String {
+        return "$pkgName:$versionCode:$signatureHash"
     }
 }

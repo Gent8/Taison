@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Close
@@ -23,6 +25,7 @@ import androidx.compose.material.icons.outlined.VerifiedUser
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
@@ -84,6 +87,9 @@ fun ExtensionScreen(
     onTrustExtension: (Extension.Untrusted) -> Unit,
     onOpenExtension: (Extension.Installed) -> Unit,
     onClickUpdateAll: () -> Unit,
+    onTrustAllExtensions: () -> Unit,
+    isTrustAllInProgress: Boolean,
+    untrustedCount: Int,
     onRefresh: () -> Unit,
 ) {
     val navigator = LocalNavigator.currentOrThrow
@@ -126,6 +132,9 @@ fun ExtensionScreen(
                     onTrustExtension = onTrustExtension,
                     onOpenExtension = onOpenExtension,
                     onClickUpdateAll = onClickUpdateAll,
+                    onTrustAllExtensions = onTrustAllExtensions,
+                    isTrustAllInProgress = isTrustAllInProgress,
+                    untrustedCount = untrustedCount,
                 )
             }
         }
@@ -145,9 +154,13 @@ private fun ExtensionContent(
     onTrustExtension: (Extension.Untrusted) -> Unit,
     onOpenExtension: (Extension.Installed) -> Unit,
     onClickUpdateAll: () -> Unit,
+    onTrustAllExtensions: () -> Unit,
+    isTrustAllInProgress: Boolean,
+    untrustedCount: Int,
 ) {
     val context = LocalContext.current
     var trustState by remember { mutableStateOf<Extension.Untrusted?>(null) }
+    var showTrustAllDialog by remember { mutableStateOf(false) }
     val installGranted = rememberRequestPackageInstallsPermissionState(initialValue = true)
 
     FastScrollLazyColumn(
@@ -171,8 +184,8 @@ private fun ExtensionContent(
             ) {
                 when (header) {
                     is ExtensionUiModel.Header.Resource -> {
-                        val action: @Composable RowScope.() -> Unit =
-                            if (header.textRes == MR.strings.ext_updates_pending) {
+                        val action: @Composable RowScope.() -> Unit = when (header.textRes) {
+                            MR.strings.ext_updates_pending -> {
                                 {
                                     Button(onClick = { onClickUpdateAll() }) {
                                         Text(
@@ -183,9 +196,24 @@ private fun ExtensionContent(
                                         )
                                     }
                                 }
-                            } else {
+                            }
+                            MR.strings.ext_installed -> {
+                                if (untrustedCount > 0) {
+                                    {
+                                        CompactPrimaryButton(
+                                            text = stringResource(MR.strings.ext_trust_all),
+                                            onClick = { showTrustAllDialog = true },
+                                            enabled = !isTrustAllInProgress,
+                                        )
+                                    }
+                                } else {
+                                    {}
+                                }
+                            }
+                            else -> {
                                 {}
                             }
+                        }
                         ExtensionHeader(
                             textRes = header.textRes,
                             modifier = Modifier.animateItemFastScroll(),
@@ -265,6 +293,15 @@ private fun ExtensionContent(
             onDismissRequest = {
                 trustState = null
             },
+        )
+    }
+    if (showTrustAllDialog) {
+        ExtensionTrustAllDialog(
+            onClickConfirm = {
+                onTrustAllExtensions()
+                showTrustAllDialog = false
+            },
+            onDismissRequest = { showTrustAllDialog = false },
         )
     }
 }
@@ -493,6 +530,29 @@ private fun ExtensionItemActions(
 }
 
 @Composable
+private fun CompactPrimaryButton(
+    text: String,
+    onClick: () -> Unit,
+    enabled: Boolean,
+    modifier: Modifier = Modifier,
+) {
+    FilledTonalButton(
+        modifier = modifier
+            .defaultMinSize(minHeight = 0.dp)
+            .heightIn(min = 0.dp),
+        onClick = onClick,
+        enabled = enabled,
+        shape = MaterialTheme.shapes.small,
+        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),
+    ) {
+        Text(
+            text = text,
+            style = MaterialTheme.typography.labelLarge,
+        )
+    }
+}
+
+@Composable
 private fun ExtensionHeader(
     textRes: StringResource,
     modifier: Modifier = Modifier,
@@ -547,6 +607,32 @@ private fun ExtensionTrustDialog(
         dismissButton = {
             TextButton(onClick = onClickDismiss) {
                 Text(text = stringResource(MR.strings.ext_uninstall))
+            }
+        },
+        onDismissRequest = onDismissRequest,
+    )
+}
+
+@Composable
+private fun ExtensionTrustAllDialog(
+    onClickConfirm: () -> Unit,
+    onDismissRequest: () -> Unit,
+) {
+    AlertDialog(
+        title = {
+            Text(text = stringResource(MR.strings.ext_trust_all_confirm_title))
+        },
+        text = {
+            Text(text = stringResource(MR.strings.ext_trust_all_confirm_message))
+        },
+        confirmButton = {
+            TextButton(onClick = onClickConfirm) {
+                Text(text = stringResource(MR.strings.ext_trust_all))
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismissRequest) {
+                Text(text = stringResource(MR.strings.action_cancel))
             }
         },
         onDismissRequest = onDismissRequest,

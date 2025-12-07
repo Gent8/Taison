@@ -83,6 +83,9 @@ fun extensionsTab(
                 onTrustExtension = { extensionsScreenModel.trustExtension(it) },
                 onUninstallExtension = { extensionsScreenModel.uninstallExtension(it) },
                 onUpdateExtension = extensionsScreenModel::updateExtension,
+                onTrustAllExtensions = extensionsScreenModel::trustAllExtensions,
+                isTrustAllInProgress = state.isTrustAllInProgress,
+                untrustedCount = state.untrustedCount,
                 onRefresh = extensionsScreenModel::findAvailableExtensions,
             )
 

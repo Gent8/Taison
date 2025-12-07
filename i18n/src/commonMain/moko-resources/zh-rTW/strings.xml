@@ -255,6 +255,9 @@
     <string name="pref_category_tracking">歷程</string>
     <string name="pref_auto_update_manga_sync">閱後自動更新章節進度</string>
     <string name="ext_trust">信任</string>
+    <string name="ext_trust_all">信任全部</string>
+    <string name="ext_trust_all_confirm_title">信任所有已安裝的擴充套件？</string>
+    <string name="ext_trust_all_confirm_message">所有未信任的已安裝擴充套件將被信任。只有在您信任其來源的情況下才繼續。</string>
     <string name="ext_untrusted">未信任</string>
     <string name="untrusted_extension">未受信任的擴充套件</string>
     <string name="untrusted_extension_message">惡意的擴充套件可能會讀取任何已儲存的登入認證或執行任意的程式碼\n\n若選擇信任該擴充套件，即表示你願意承擔上述風險</string>

@@ -217,6 +217,9 @@
     <string name="ext_uninstall">حذف نصب</string>
     <string name="ext_untrusted">نامطمئن</string>
     <string name="ext_trust">مورد اعتماد</string>
+    <string name="ext_trust_all">اعتماد به همه</string>
+    <string name="ext_trust_all_confirm_title">اعتماد به همه افزونه‌های نصب شده؟</string>
+    <string name="ext_trust_all_confirm_message">به همه افزونه‌های نصب شده غیرقابل اعتماد اعتماد خواهد شد. فقط در صورتی ادامه دهید که به منابع آنها اعتماد دارید.</string>
     <string name="ext_installed">نصب شده</string>
     <string name="ext_installing">در حال نصب</string>
     <string name="ext_downloading">در حال بارگیری</string>

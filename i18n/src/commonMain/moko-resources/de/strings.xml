@@ -253,6 +253,9 @@
     <string name="migrate">Migrieren</string>
     <string name="copy">Kopieren</string>
     <string name="ext_trust">Vertrauen</string>
+    <string name="ext_trust_all">Allen vertrauen</string>
+    <string name="ext_trust_all_confirm_title">Allen installierten Erweiterungen vertrauen?</string>
+    <string name="ext_trust_all_confirm_message">Allen nicht vertrauenswürdigen installierten Erweiterungen wird vertraut. Nur fortfahren, wenn Sie ihren Quellen vertrauen.</string>
     <string name="ext_untrusted">Nicht vertrauenswürdig</string>
     <string name="untrusted_extension">Nicht vertrauenswürdige Erweiterung</string>
     <string name="pref_double_tap_anim_speed">Animationsgeschwindigkeit beim Doppeltippen</string>

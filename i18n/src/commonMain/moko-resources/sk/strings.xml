@@ -96,6 +96,9 @@
     <string name="ext_installing">Inštalujem</string>
     <string name="ext_installed">Nainštalovaný</string>
     <string name="ext_trust">Dôverovať</string>
+    <string name="ext_trust_all">Dôverovať všetkým</string>
+    <string name="ext_trust_all_confirm_title">Dôverovať všetkým nainštalovaným rozšíreniam?</string>
+    <string name="ext_trust_all_confirm_message">Všetkým nedôveryhodným nainštalovaným rozšíreniam bude dôverované. Pokračujte len vtedy, ak dôverujete ich zdrojom.</string>
     <string name="ext_untrusted">Odobrať dôveru</string>
     <string name="ext_uninstall">Odinštalovať</string>
     <string name="untrusted_extension">Nedôveryhodné rozšírenie</string>

@@ -95,6 +95,9 @@
     <string name="ext_installing">Инсталира се</string>
     <string name="ext_installed">Инсталирано</string>
     <string name="ext_trust">Веруј</string>
+    <string name="ext_trust_all">Веруј свима</string>
+    <string name="ext_trust_all_confirm_title">Веровати свим инсталираним додацима?</string>
+    <string name="ext_trust_all_confirm_message">Свим неповерљивим инсталираним додацима ће бити пружено поверење. Наставите само ако верујете њиховим изворима.</string>
     <string name="ext_untrusted">Неповерљиво</string>
     <string name="ext_uninstall">Обриши</string>
     <string name="untrusted_extension">Неповерљив додатак</string>

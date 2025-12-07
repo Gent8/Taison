@@ -240,6 +240,9 @@
     <string name="ext_installing">ইন্সটল হচ্ছে</string>
     <string name="ext_installed">ইন্সটল হয়েছে</string>
     <string name="ext_trust">বিশ্বাস</string>
+    <string name="ext_trust_all">সবকিছুতে বিশ্বাস</string>
+    <string name="ext_trust_all_confirm_title">সমস্ত ইনস্টল করা এক্সটেনশনে বিশ্বাস করবেন?</string>
+    <string name="ext_trust_all_confirm_message">সমস্ত অবিশ্বস্ত ইনস্টল করা এক্সটেনশনে বিশ্বাস করা হবে। শুধুমাত্র তাদের উৎসে বিশ্বাস করলে এগিয়ে যান।</string>
     <string name="ext_untrusted">অনির্ভরযোগ্য</string>
     <string name="ext_uninstall">আন ইন্সটল</string>
     <string name="untrusted_extension">অনির্ভর‍যোগ্য এক্সটেনশন</string>

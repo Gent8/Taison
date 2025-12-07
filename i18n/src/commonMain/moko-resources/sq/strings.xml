@@ -288,6 +288,9 @@
     <string name="tapping_inverted_both">te dyja</string>
     <string name="ext_installed">Instaluar</string>
     <string name="ext_trust">Besim</string>
+    <string name="ext_trust_all">Besoj të gjithëve</string>
+    <string name="ext_trust_all_confirm_title">Besoj të gjitha zgjerimet e instaluara?</string>
+    <string name="ext_trust_all_confirm_message">Të gjitha zgjerimet e instaluara që nuk besohen do të besohen. Vazhdoni vetëm nëse besoni burimet e tyre.</string>
     <string name="ext_downloading">Po shkarkohet</string>
     <string name="ext_uninstall">Çinstaloni</string>
     <string name="ext_installer_legacy">Trashëgimia</string>

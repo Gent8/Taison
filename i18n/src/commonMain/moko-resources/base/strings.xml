@@ -345,6 +345,9 @@
     <string name="ext_installing">Installing</string>
     <string name="ext_installed">Installed</string>
     <string name="ext_trust">Trust</string>
+    <string name="ext_trust_all">Trust all</string>
+    <string name="ext_trust_all_confirm_title">Trust all installed extensions?</string>
+    <string name="ext_trust_all_confirm_message">All untrusted installed extensions will be trusted. Only continue if you trust their sources.</string>
     <string name="ext_untrusted">Untrusted</string>
     <string name="ext_uninstall">Uninstall</string>
     <string name="ext_remove">Remove</string>

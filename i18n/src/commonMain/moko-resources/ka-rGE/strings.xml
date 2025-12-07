@@ -349,6 +349,9 @@
     <string name="ext_updates_pending">განახლებები მოლოდინის რეჟიმშია</string>
     <string name="ext_obsolete">მოძველებული</string>
     <string name="ext_trust">ნდობა</string>
+    <string name="ext_trust_all">ყველას ნდობა</string>
+    <string name="ext_trust_all_confirm_title">ნდობა ყველა დაყენებულ გაფართოებას?</string>
+    <string name="ext_trust_all_confirm_message">ყველა არასანდო დაყენებულ გაფართოებას ენდობა. განაგრძეთ მხოლოდ იმ შემთხვევაში, თუ ენდობით მათ წყაროებს.</string>
     <string name="ext_untrusted">არასანდო</string>
     <string name="untrusted_extension">არასანდო დამატება</string>
     <string name="obsolete_extension_message">დამატება ხელმისაწვდომი აღარაა. მან შეიძლება არასწორად იმუშაოს და აპლიკაციას პრობლემები შეუქმნას. გირჩევთ, წაშალოთ ის.</string>

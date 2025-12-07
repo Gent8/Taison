@@ -224,6 +224,9 @@
     <string name="backup_choice">O que pretende fazer cópia de segurança?</string>
     <string name="action_display_download_badge">Capítulos transferidos</string>
     <string name="ext_trust">Confiar</string>
+    <string name="ext_trust_all">Confiar em todas</string>
+    <string name="ext_trust_all_confirm_title">Confiar em todas as extensões instaladas?</string>
+    <string name="ext_trust_all_confirm_message">Todas as extensões instaladas não confiáveis serão aprovadas. Continue apenas se confiar nas suas fontes.</string>
     <string name="ext_untrusted">Não confiável</string>
     <string name="pref_read_with_long_tap">Mostrar com toque longo</string>
     <string name="action_open_in_web_view">Abrir em WebView</string>

@@ -90,6 +90,9 @@
     <string name="ext_installing">설치 중</string>
     <string name="ext_installed">설치됨</string>
     <string name="ext_trust">신뢰</string>
+    <string name="ext_trust_all">모두 신뢰</string>
+    <string name="ext_trust_all_confirm_title">설치된 모든 확장 앱을 신뢰하시겠습니까?</string>
+    <string name="ext_trust_all_confirm_message">신뢰할 수 없는 모든 설치된 확장 앱이 신뢰됩니다. 해당 소스를 신뢰하는 경우에만 계속하세요.</string>
     <string name="ext_untrusted">신뢰되지않음</string>
     <string name="ext_uninstall">삭제</string>
     <string name="untrusted_extension">신뢰할 수 없는 확장 앱</string>

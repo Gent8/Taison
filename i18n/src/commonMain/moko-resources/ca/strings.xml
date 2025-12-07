@@ -94,6 +94,9 @@
     <string name="ext_installing">S’està instal·lant</string>
     <string name="ext_installed">Instal·lades</string>
     <string name="ext_trust">Confia-hi</string>
+    <string name="ext_trust_all">Confia en totes</string>
+    <string name="ext_trust_all_confirm_title">Confiar en totes les extensions instal·lades?</string>
+    <string name="ext_trust_all_confirm_message">Es confiarà en totes les extensions instal·lades que no són de confiança. Continueu només si confieu en les seves fonts.</string>
     <string name="ext_untrusted">No és de confiança</string>
     <string name="ext_uninstall">Desinstal·la</string>
     <string name="untrusted_extension">Extensió que no és de confiança</string>

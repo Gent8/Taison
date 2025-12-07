@@ -92,6 +92,9 @@
     <string name="ext_installing">În curs de instalare</string>
     <string name="ext_installed">Instalată</string>
     <string name="ext_trust">Ai încredere</string>
+    <string name="ext_trust_all">Ai încredere în toate</string>
+    <string name="ext_trust_all_confirm_title">Ai încredere în toate extensiile instalate?</string>
+    <string name="ext_trust_all_confirm_message">Toate extensiile instalate nesigure vor fi aprobate. Continuă doar dacă ai încredere în sursele lor.</string>
     <string name="ext_untrusted">Nesigură</string>
     <string name="ext_uninstall">Dezinstalează</string>
     <string name="untrusted_extension">Extensie nesigură</string>

@@ -58,6 +58,9 @@
     <string name="ext_installing">Instalování</string>
     <string name="ext_installed">Nainstalováno</string>
     <string name="ext_trust">Důvěryhodné</string>
+    <string name="ext_trust_all">Důvěřovat všem</string>
+    <string name="ext_trust_all_confirm_title">Důvěřovat všem nainstalovaným rozšířením?</string>
+    <string name="ext_trust_all_confirm_message">Všem nedůvěryhodným nainstalovaným rozšířením bude důvěřováno. Pokračujte pouze pokud důvěřujete jejich zdrojům.</string>
     <string name="ext_untrusted">Nedůvěryhodné</string>
     <string name="ext_uninstall">Odinstalovat</string>
     <string name="untrusted_extension">Nedůvěryhodné rozšíření</string>

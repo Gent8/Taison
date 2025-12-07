@@ -123,6 +123,9 @@
     <string name="ext_uninstall">विस्थापित करा</string>
     <string name="ext_untrusted">अविश्वासू</string>
     <string name="ext_trust">विश्वास</string>
+    <string name="ext_trust_all">सर्वांवर विश्वास</string>
+    <string name="ext_trust_all_confirm_title">सर्व स्थापित विस्तारांवर विश्वास ठेवायचा?</string>
+    <string name="ext_trust_all_confirm_message">सर्व अविश्वासू स्थापित विस्तारांवर विश्वास ठेवला जाईल. फक्त जर तुम्ही त्यांच्या स्रोतांवर विश्वास ठेवत असाल तरच पुढे जा.</string>
     <string name="ext_installed">स्थापित झाले</string>
     <string name="ext_installing">स्थापित होत आहे</string>
     <string name="ext_downloading">डाउनलोड होत आहेत</string>

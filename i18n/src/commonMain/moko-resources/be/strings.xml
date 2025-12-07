@@ -93,6 +93,9 @@
     <string name="ext_uninstall">Выдаліць</string>
     <string name="ext_untrusted">Ненадзейны</string>
     <string name="ext_trust">Надзейны</string>
+    <string name="ext_trust_all">Доверять всем</string>
+    <string name="ext_trust_all_confirm_title">Доверять всем установленным расширениям?</string>
+    <string name="ext_trust_all_confirm_message">Всем ненадёжным установленным расширениям будет оказано доверие. Продолжайте только если вы доверяете их источникам.</string>
     <string name="ext_installed">Усталяваны</string>
     <string name="ext_installing">Устаноўка</string>
     <string name="ext_downloading">Загрузка</string>

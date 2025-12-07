@@ -91,6 +91,9 @@
     <string name="ext_uninstall">Malinstali</string>
     <string name="ext_untrusted">Malfidinda</string>
     <string name="ext_trust">Fidi</string>
+    <string name="ext_trust_all">Fidu ĉiujn</string>
+    <string name="ext_trust_all_confirm_title">Fidi ĉiujn instalitajn etendaĵojn?</string>
+    <string name="ext_trust_all_confirm_message">Ĉiuj malfidindaj instalitaj etendaĵoj estos fiditaj. Daŭrigu nur se vi fidas iliajn fontojn.</string>
     <string name="ext_installed">Instalita</string>
     <string name="ext_installing">Instalata</string>
     <string name="ext_downloading">Elŝutata</string>

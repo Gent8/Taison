@@ -149,6 +149,9 @@
     <string name="action_open_log">ലോഗ് തുറക്കുക</string>
     <string name="ext_install">ഇൻസ്റ്റാൾ</string>
     <string name="ext_trust">വിശ്വസിക്കൂ</string>
+    <string name="ext_trust_all">എല്ലാം വിശ്വസിക്കൂ</string>
+    <string name="ext_trust_all_confirm_title">ഇൻസ്റ്റാൾ ചെയ്ത എല്ലാ എക്സ്റ്റെൻഷനുകളും വിശ്വസിക്കണോ?</string>
+    <string name="ext_trust_all_confirm_message">വിശ്വസിക്കാത്ത എല്ലാ ഇൻസ്റ്റാൾ ചെയ്ത എക്സ്റ്റെൻഷനുകളും വിശ്വസിക്കും. അവയുടെ സ്രോതസ്സുകളിൽ നിങ്ങൾ വിശ്വസിക്കുന്നുവെങ്കിൽ മാത്രം തുടരുക.</string>
     <string name="update_48hour">എല്ലാ 2 ദിവസവും</string>
     <string name="update_weekly">ആഴ്ചയിൽ ഒരിക്കൽ</string>
     <string name="update_24hour">എല്ലാ ദിവസവും</string>

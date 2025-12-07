@@ -128,6 +128,9 @@
     <string name="ext_installing">Installerer</string>
     <string name="ext_installed">Installert</string>
     <string name="ext_trust">Tiltru</string>
+    <string name="ext_trust_all">Stol på alle</string>
+    <string name="ext_trust_all_confirm_title">Stole på alle installerte utvidingar?</string>
+    <string name="ext_trust_all_confirm_message">Alle ikkje-trodde installerte utvidingar vil bli stolt på. Fortset berre viss du stolar på deira kjelder.</string>
     <string name="update_72hour">Kvar tredje dag</string>
     <string name="ext_untrusted">Ikkje-tiltrudd</string>
     <string name="ext_uninstall">Avinstaller</string>

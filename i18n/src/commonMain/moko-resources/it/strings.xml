@@ -233,6 +233,9 @@
     <string name="ext_installing">Installazione in corso</string>
     <string name="ext_installed">Installato</string>
     <string name="ext_trust">Attendibile</string>
+    <string name="ext_trust_all">Fidati di tutte</string>
+    <string name="ext_trust_all_confirm_title">Fidarsi di tutte le estensioni installate?</string>
+    <string name="ext_trust_all_confirm_message">Tutte le estensioni installate non attendibili saranno approvate. Continua solo se ti fidi delle loro fonti.</string>
     <string name="ext_untrusted">Non attendibile</string>
     <string name="ext_uninstall">Disinstalla</string>
     <string name="untrusted_extension">Estensione non attendibile</string>

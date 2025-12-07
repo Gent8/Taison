@@ -94,6 +94,9 @@
     <string name="ext_installing">Εγκατάσταση</string>
     <string name="ext_installed">Εγκαταστημένο</string>
     <string name="ext_trust">Εμπιστέψου</string>
+    <string name="ext_trust_all">Εμπιστεύσου όλα</string>
+    <string name="ext_trust_all_confirm_title">Εμπιστεύεσαι όλες τις εγκατεστημένες επεκτάσεις;</string>
+    <string name="ext_trust_all_confirm_message">Όλες οι μη αξιόπιστες εγκατεστημένες επεκτάσεις θα εμπιστευτούν. Συνεχίστε μόνο αν εμπιστεύεστε τις πηγές τους.</string>
     <string name="ext_untrusted">Μη αξιόπιστο</string>
     <string name="ext_uninstall">Απεγκατάσταση</string>
     <string name="untrusted_extension">Μη αξιόπιστη επέκταση</string>

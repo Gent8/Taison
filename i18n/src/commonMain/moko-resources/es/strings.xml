@@ -241,6 +241,9 @@
     <string name="ext_installing">Instalando</string>
     <string name="ext_installed">Instalado</string>
     <string name="ext_trust">Confiar</string>
+    <string name="ext_trust_all">Confiar en todas</string>
+    <string name="ext_trust_all_confirm_title">¿Confiar en todas las extensiones instaladas?</string>
+    <string name="ext_trust_all_confirm_message">Se confiará en todas las extensiones instaladas no fiables. Solo continúe si confía en sus fuentes.</string>
     <string name="ext_untrusted">No es fiable</string>
     <string name="ext_uninstall">Desinstalar</string>
     <string name="untrusted_extension">La extensión no es fiable</string>

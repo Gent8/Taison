@@ -11,6 +11,9 @@
     <string name="ext_uninstall">Deinstaliraj</string>
     <string name="ext_untrusted">Nepovjerljivo</string>
     <string name="ext_trust">Vjeruj</string>
+    <string name="ext_trust_all">Vjeruj svima</string>
+    <string name="ext_trust_all_confirm_title">Vjerovati svim instaliranim proširenjima?</string>
+    <string name="ext_trust_all_confirm_message">Svim nepovjerljivim instaliranim proširenjima će biti pruženo povjerenje. Nastavite samo ako vjerujete njihovim izvorima.</string>
     <string name="ext_installed">Instalirano</string>
     <string name="ext_installing">Instaliranje</string>
     <string name="ext_downloading">Preuzimanje</string>

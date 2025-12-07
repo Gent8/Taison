@@ -94,6 +94,9 @@
     <string name="ext_installing">Встановлюється</string>
     <string name="ext_installed">Встановлено</string>
     <string name="ext_trust">Довірений</string>
+    <string name="ext_trust_all">Довіряти всім</string>
+    <string name="ext_trust_all_confirm_title">Довіряти всім встановленим розширенням?</string>
+    <string name="ext_trust_all_confirm_message">Всім ненадійним встановленим розширенням буде надано довіру. Продовжуйте лише якщо ви довіряєте їх джерелам.</string>
     <string name="ext_untrusted">Ненадійне</string>
     <string name="ext_uninstall">Видалити</string>
     <string name="untrusted_extension">Ненадійне розширення</string>

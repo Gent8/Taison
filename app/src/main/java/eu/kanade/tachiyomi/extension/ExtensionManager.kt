@@ -288,6 +288,29 @@ class ExtensionManager(
     }
 
     /**
+     * Trusts all currently untrusted extensions and registers them after loading.
+     */
+    suspend fun trustAll() {
+        val currentUntrusted = untrustedExtensionMapFlow.value.values.toList()
+        if (currentUntrusted.isEmpty()) {
+            return
+        }
+
+        for (extension in currentUntrusted) {
+            if (!untrustedExtensionMapFlow.value.containsKey(extension.pkgName)) {
+                continue
+            }
+
+            trustExtension.trust(extension.pkgName, extension.versionCode, extension.signatureHash)
+            untrustedExtensionMapFlow.value -= extension.pkgName
+
+            ExtensionLoader.loadExtensionFromPkgName(context, extension.pkgName)
+                .let { it as? LoadResult.Success }
+                ?.let { registerNewExtension(it.extension) }
+        }
+    }
+
+    /**
      * Registers the given extension in this and the source managers.
      *
      * @param extension The extension to be registered.
@@ -315,6 +338,7 @@ class ExtensionManager(
     private fun unregisterExtension(pkgName: String) {
         installedExtensionMapFlow.value -= pkgName
         untrustedExtensionMapFlow.value -= pkgName
+        trustExtension.clearPending(pkgName)
     }
 
     /**

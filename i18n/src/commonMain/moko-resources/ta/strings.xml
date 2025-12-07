@@ -326,6 +326,9 @@
     <string name="ext_installing">நிறுவுகிறது</string>
     <string name="ext_installed">நிறுவப்பட்டது</string>
     <string name="ext_trust">நம்பிக்கை</string>
+    <string name="ext_trust_all">அனைத்தையும் நம்பு</string>
+    <string name="ext_trust_all_confirm_title">நிறுவப்பட்ட அனைத்து நீட்டிப்புகளையும் நம்பவா?</string>
+    <string name="ext_trust_all_confirm_message">நம்பத்தகாத அனைத்து நிறுவப்பட்ட நீட்டிப்புகளும் நம்பப்படும். அவற்றின் மூலங்களை நீங்கள் நம்பினால் மட்டுமே தொடரவும்.</string>
     <string name="ext_untrusted">நம்பத்தகாதது</string>
     <string name="ext_uninstall">நிறுவல் நீக்க</string>
     <string name="ext_remove">அகற்று</string>

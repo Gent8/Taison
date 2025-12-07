@@ -99,6 +99,9 @@
     <string name="pref_auto_update_manga_sync">อัปเดตความคืบหน้าหลังอ่าน</string>
     <string name="default_category">หมวดหมู่เริ่มต้น</string>
     <string name="ext_trust">เชื่อถือได้</string>
+    <string name="ext_trust_all">เชื่อถือทั้งหมด</string>
+    <string name="ext_trust_all_confirm_title">เชื่อถือส่วนขยายที่ติดตั้งทั้งหมดหรือไม่?</string>
+    <string name="ext_trust_all_confirm_message">ส่วนขยายที่ติดตั้งทั้งหมดที่ไม่น่าเชื่อถือจะถูกเชื่อถือ ต่อเฉพาะเมื่อคุณเชื่อถือแหล่งที่มาของพวกเขา</string>
     <string name="ext_untrusted">ไม่น่าเชื่อถือ</string>
     <string name="ext_uninstall">ถอนการติดตั้ง</string>
     <string name="untrusted_extension">ส่วนขยายที่ไม่น่าเชื่อถือ</string>

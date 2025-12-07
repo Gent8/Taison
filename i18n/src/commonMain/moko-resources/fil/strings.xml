@@ -186,6 +186,9 @@
     <string name="untrusted_extension">Di-pinagkakatiwalaang extension</string>
     <string name="ext_uninstall">I-uninstall</string>
     <string name="ext_trust">Itiwala</string>
+    <string name="ext_trust_all">Pagkatiwalaan ang lahat</string>
+    <string name="ext_trust_all_confirm_title">Pagkatiwalaan ang lahat ng naka-install na extension?</string>
+    <string name="ext_trust_all_confirm_message">Lahat ng hindi pinagkakatiwalaang naka-install na extension ay pagkakatiwalaan. Magpatuloy lamang kung pinagkakatiwalaan mo ang kanilang mga pinagmulan.</string>
     <string name="ext_untrusted">Di pinagkakatiwalaan</string>
     <string name="ext_installed">Naka-install</string>
     <string name="ext_installing">Ini-install</string>

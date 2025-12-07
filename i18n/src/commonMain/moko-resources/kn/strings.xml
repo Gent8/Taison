@@ -199,6 +199,9 @@
     <string name="ext_uninstall">ಅನ್ಇನ್ಸ್ಟಾಲ್</string>
     <string name="ext_untrusted">ವಿಶ್ವಾಸಾರ್ಹವಲ್ಲ</string>
     <string name="ext_trust">ನ೦ಬು</string>
+    <string name="ext_trust_all">ಎಲ್ಲವನ್ನೂ ನಂಬಿ</string>
+    <string name="ext_trust_all_confirm_title">ಇನ್ಸ್ಟಾಲ್ ಮಾಡಿದ ಎಲ್ಲಾ ವಿಸ್ತರಣೆಗಳನ್ನು ನಂಬುವುದೇ?</string>
+    <string name="ext_trust_all_confirm_message">ನಂಬಲಾಗದ ಎಲ್ಲಾ ಇನ್ಸ್ಟಾಲ್ ಮಾಡಿದ ವಿಸ್ತರಣೆಗಳನ್ನು ನಂಬಲಾಗುವುದು. ಅವುಗಳ ಮೂಲಗಳನ್ನು ನೀವು ನಂಬುವರೆಗೆ ಮಾತ್ರ ಮುಂದುವರಿಸಿ.</string>
     <string name="ext_installed">ಇನ್ಸ್ಟಾಲ್ಲ್ಡ್</string>
     <string name="ext_installing">ಇನ್ಸ್ಟಾಲಿಂಗ್</string>
     <string name="ext_downloading">ಡೌನ್‌ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ</string>

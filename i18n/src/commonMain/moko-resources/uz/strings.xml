@@ -225,6 +225,9 @@
     <string name="update_12hour">Har 12 soatda</string>
     <string name="ext_installer_shizuku_unavailable_dialog">Shizukudan kengaytma o\'rnatishda foydalanish uchun, Shizukuni o\'rnating va ishga tushuring.</string>
     <string name="ext_trust">Ishonchli</string>
+    <string name="ext_trust_all">Barchasiga ishonish</string>
+    <string name="ext_trust_all_confirm_title">O\'rnatilgan barcha kengaytmalarga ishonish kerakmi?</string>
+    <string name="ext_trust_all_confirm_message">Ishonchsiz barcha o\'rnatilgan kengaytmalarga ishonch beriladi. Faqat ularning manbalariga ishonadigan bo\'lsangiz davom eting.</string>
     <string name="update_weekly">Har hafta</string>
     <string name="update_72hour">HAr 3 kunda</string>
     <string name="charging">Quvvatlanayotganda</string>

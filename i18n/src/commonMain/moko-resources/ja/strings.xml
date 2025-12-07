@@ -84,6 +84,9 @@
     <string name="ext_installing">インストール</string>
     <string name="ext_installed">インストール済み</string>
     <string name="ext_trust">信用する</string>
+    <string name="ext_trust_all">すべてを信用する</string>
+    <string name="ext_trust_all_confirm_title">インストール済みのすべての拡張機能を信用しますか？</string>
+    <string name="ext_trust_all_confirm_message">信用されていないインストール済みのすべての拡張機能が信用されます。ソースを信用する場合のみ続行してください。</string>
     <string name="ext_untrusted">信用できない</string>
     <string name="ext_uninstall">アンインストール</string>
     <string name="untrusted_extension">信頼できない拡張</string>

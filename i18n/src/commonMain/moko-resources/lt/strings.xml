@@ -197,6 +197,9 @@
     <string name="ext_app_info">Aplikacijos informacija</string>
     <string name="ext_uninstall">Šalinti</string>
     <string name="ext_trust">Patikimas</string>
+    <string name="ext_trust_all">Patikėti visais</string>
+    <string name="ext_trust_all_confirm_title">Patikėti visais įdiegtais plėtiniais?</string>
+    <string name="ext_trust_all_confirm_message">Visi nepatikimi įdiegti plėtiniai bus patikėti. Tęskite tik jei pasitikite jų šaltiniais.</string>
     <string name="ext_untrusted">Nepatikimas</string>
     <string name="ext_installed">Įdiegtas</string>
     <string name="ext_installing">Diegiasi</string>

@@ -83,6 +83,9 @@
     <string name="ext_installing">Installerer</string>
     <string name="ext_installed">Installert</string>
     <string name="ext_trust">Tillit</string>
+    <string name="ext_trust_all">Stol på alle</string>
+    <string name="ext_trust_all_confirm_title">Stole på alle installerte utvidelser?</string>
+    <string name="ext_trust_all_confirm_message">Alle ikke-trodde installerte utvidelser vil bli stolt på. Fortsett bare hvis du stoler på deres kilder.</string>
     <string name="ext_untrusted">Ubetrodd</string>
     <string name="ext_uninstall">Avinstaller</string>
     <string name="untrusted_extension">Ubetrodd utvidelse</string>

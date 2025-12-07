@@ -116,13 +116,14 @@ class ExtensionsScreenModel(
                     itemsGroups.putAll(languagesWithExtensions)
                 }
 
-                itemsGroups
+                itemsGroups to _untrusted.size
             }
-                .collectLatest {
+                .collectLatest { (items, untrustedCount) ->
                     mutableState.update { state ->
                         state.copy(
                             isLoading = false,
-                            items = it,
+                            items = items,
+                            untrustedCount = untrustedCount,
                         )
                     }
                 }
@@ -209,6 +210,22 @@ class ExtensionsScreenModel(
         }
     }
 
+    fun trustAllExtensions() {
+        screenModelScope.launchIO {
+            mutableState.update { current ->
+                current.copy(isTrustAllInProgress = true)
+            }
+
+            try {
+                extensionManager.trustAll()
+            } finally {
+                mutableState.update { current ->
+                    current.copy(isTrustAllInProgress = false)
+                }
+            }
+        }
+    }
+
     @Immutable
     data class State(
         val isLoading: Boolean = true,
@@ -217,6 +234,8 @@ class ExtensionsScreenModel(
         val updates: Int = 0,
         val installer: BasePreferences.ExtensionInstaller? = null,
         val searchQuery: String? = null,
+        val untrustedCount: Int = 0,
+        val isTrustAllInProgress: Boolean = false,
     ) {
         val isEmpty = items.isEmpty()
     }

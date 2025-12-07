@@ -220,6 +220,9 @@
     <string name="ext_installing">Đang cài đặt</string>
     <string name="ext_installed">Đã cài đặt</string>
     <string name="ext_trust">Đáng tin cậy</string>
+    <string name="ext_trust_all">Tin tất cả</string>
+    <string name="ext_trust_all_confirm_title">Tin tất cả các tiện ích mở rộng đã cài đặt?</string>
+    <string name="ext_trust_all_confirm_message">Tất cả các tiện ích mở rộng đã cài đặt không đáng tin cậy sẽ được tin tưởng. Chỉ tiếp tục nếu bạn tin tưởng nguồn của chúng.</string>
     <string name="ext_untrusted">Không đáng tin cậy</string>
     <string name="ext_uninstall">Gỡ cài đặt</string>
     <string name="untrusted_extension">Tiện ích mở rộng không đáng tin cậy</string>

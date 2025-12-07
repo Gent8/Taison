@@ -216,6 +216,9 @@
     <string name="ext_installing">Орнатылуда</string>
     <string name="ext_installed">Орнатылды</string>
     <string name="ext_trust">Сенім</string>
+    <string name="ext_trust_all">Барлығына сену</string>
+    <string name="ext_trust_all_confirm_title">Орнатылған барлық кеңейтулерге сену керек пе?</string>
+    <string name="ext_trust_all_confirm_message">Сенімсіз барлық орнатылған кеңейтулерге сенім беріледі. Олардың көздеріне сенетін болсаңыз ғана жалғастырыңыз.</string>
     <string name="ext_untrusted">Сенімсіз</string>
     <string name="ext_installer_shizuku_unavailable_dialog">Shizuku-ны кеңейту орнатушысы ретінде пайдалану үшін Shizuku-ны орнатып іске қосыңыз.</string>
     <string name="pref_show_navigation_mode">Түрту аймақтарының қабаттасуын көрсету</string>

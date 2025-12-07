@@ -94,6 +94,9 @@
     <string name="ext_installing">Yükleniyor</string>
     <string name="ext_installed">Yüklendi</string>
     <string name="ext_trust">Güven</string>
+    <string name="ext_trust_all">Hepsine güven</string>
+    <string name="ext_trust_all_confirm_title">Yüklü tüm uzantılara güvenilsin mi?</string>
+    <string name="ext_trust_all_confirm_message">Güvenilmeyen tüm yüklü uzantılara güvenilecek. Yalnızca kaynaklarına güveniyorsanız devam edin.</string>
     <string name="ext_untrusted">Güvenilmeyen</string>
     <string name="ext_uninstall">Kaldır</string>
     <string name="untrusted_extension">Güvenilmeyen uzantı</string>

@@ -209,6 +209,9 @@
     <string name="ext_uninstall">Сотон кэбис</string>
     <string name="ext_untrusted">Эрэлэ суох</string>
     <string name="ext_trust">Эрэллээх</string>
+    <string name="ext_trust_all">Барытыгар эрэллээх</string>
+    <string name="ext_trust_all_confirm_title">Бары турдарыллыбыт кэҥэтиирэйдэргэ эрэллээх кэрэхтээх?</string>
+    <string name="ext_trust_all_confirm_message">Бары эрэлэ суох турдарыллыбыт кэҥэтиирэйдэргэ эрэл биэриллэр. Ол төрүттэригэр эрэллээх буоллаххына эрэ салгыы бар.</string>
     <string name="ext_installed">Турда</string>
     <string name="ext_installing">ТуруорааҺын</string>
     <string name="ext_downloading">Хачайдааһын</string>

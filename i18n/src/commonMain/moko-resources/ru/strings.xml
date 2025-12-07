@@ -257,6 +257,9 @@
     <string name="migrate">Перенести</string>
     <string name="copy">Копировать</string>
     <string name="ext_trust">Надёжное</string>
+    <string name="ext_trust_all">Доверять всем</string>
+    <string name="ext_trust_all_confirm_title">Доверять всем установленным расширениям?</string>
+    <string name="ext_trust_all_confirm_message">Всем ненадёжным установленным расширениям будет оказано доверие. Продолжайте только если вы доверяете их источникам.</string>
     <string name="pager_viewer">Постранично</string>
     <string name="source_not_installed">Источник не установлен: %1$s</string>
     <string name="repeating">Перечитываю</string>

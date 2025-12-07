@@ -253,14 +253,16 @@ internal object ExtensionLoader {
             logcat(LogPriority.WARN) { "Package $pkgName isn't signed" }
             return LoadResult.Error
         } else if (!trustExtension.isTrusted(pkgInfo, signatures)) {
+            val signatureHash = signatures.last()
             val extension = Extension.Untrusted(
                 extName,
                 pkgName,
                 versionName,
                 versionCode,
                 libVersion,
-                signatures.last(),
+                signatureHash,
             )
+            trustExtension.markPending(pkgName, versionCode, signatureHash)
             logcat(LogPriority.WARN) { "Extension $pkgName isn't trusted" }
             return LoadResult.Untrusted(extension)
         }

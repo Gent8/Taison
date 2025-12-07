@@ -238,6 +238,9 @@
     <string name="ext_installing">Memasang</string>
     <string name="ext_installed">Terpasang</string>
     <string name="ext_trust">Percaya</string>
+    <string name="ext_trust_all">Percayai semua</string>
+    <string name="ext_trust_all_confirm_title">Percayai semua ekstensi yang terpasang?</string>
+    <string name="ext_trust_all_confirm_message">Semua ekstensi terpasang yang tidak terpercaya akan dipercayai. Lanjutkan hanya jika Anda mempercayai sumbernya.</string>
     <string name="ext_untrusted">Tidak terpercaya</string>
     <string name="ext_uninstall">Lepas</string>
     <string name="untrusted_extension">Ekstensi tidak terpercaya</string>

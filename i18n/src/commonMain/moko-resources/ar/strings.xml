@@ -239,6 +239,9 @@
     <string name="ext_installing">جاري التثبيت</string>
     <string name="ext_installed">تم التثبيت</string>
     <string name="ext_trust">الثقة</string>
+    <string name="ext_trust_all">الثقة بالكل</string>
+    <string name="ext_trust_all_confirm_title">الثقة بجميع الإضافات المثبتة؟</string>
+    <string name="ext_trust_all_confirm_message">سيتم الوثوق بجميع الإضافات المثبتة غير الموثوقة. تابع فقط إذا كنت تثق بمصادرها.</string>
     <string name="ext_untrusted">غير موثوق فيه</string>
     <string name="ext_uninstall">إلغاء التثبيت</string>
     <string name="untrusted_extension">إضافة ذات ريبة</string>

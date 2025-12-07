@@ -310,6 +310,9 @@
     <string name="ext_installing">ইন্সটল কৰি আছে</string>
     <string name="ext_installed">ইন্সটল কৰা হৈছে</string>
     <string name="ext_trust">বিশ্বাস কৰক</string>
+    <string name="ext_trust_all">সকলোত বিশ্বাস কৰক</string>
+    <string name="ext_trust_all_confirm_title">ইন্সটল কৰা সকলো এক্সটেনশনত বিশ্বাস কৰিবনে?</string>
+    <string name="ext_trust_all_confirm_message">অবিশ্বাস্য সকলো ইন্সটল কৰা এক্সটেনশনত বিশ্বাস কৰা হ'ব। কেৱল তেওঁলোকৰ উৎসত বিশ্বাস কৰিলেহে আগবাঢ়ক।</string>
     <string name="ext_untrusted">অবিশ্বাস্য</string>
     <string name="ext_uninstall">আনইন্সটল কৰক</string>
     <string name="ext_app_info">এপৰ তথ্য</string>

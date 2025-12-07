@@ -94,6 +94,9 @@
     <string name="ext_installing">Installerar</string>
     <string name="ext_installed">Installerad</string>
     <string name="ext_trust">Förtroende</string>
+    <string name="ext_trust_all">Lita på alla</string>
+    <string name="ext_trust_all_confirm_title">Lita på alla installerade tillägg?</string>
+    <string name="ext_trust_all_confirm_message">Alla opålitliga installerade tillägg kommer att litas på. Fortsätt endast om du litar på deras källor.</string>
     <string name="ext_untrusted">Opålitlig</string>
     <string name="ext_uninstall">Avinstallera</string>
     <string name="untrusted_extension">Opålitlig extension</string>

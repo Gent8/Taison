@@ -53,6 +53,11 @@ class SourcePreferences(
         emptySet(),
     )
 
+    fun pendingExtensionsToTrust() = preferenceStore.getStringSet(
+        Preference.appStateKey("pending_trusted_extensions"),
+        emptySet(),
+    )
+
     fun globalSearchFilterState() = preferenceStore.getBoolean(
         Preference.appStateKey("has_filters_toggle_state"),
         false,
