@@ -315,23 +315,6 @@ private fun ColumnScope.DisplayPage(
         pref = screenModel.libraryPreferences.showContinueReadingButton(),
     )
 
-    val categoryNavigationPref = remember { screenModel.libraryPreferences.categoryNavigationMode() }
-    val categoryNavigationMode by categoryNavigationPref.collectAsState()
-    SettingsChipRow(MR.strings.pref_group_navigation_type) {
-        LibraryPreferences.CategoryNavigationMode.entries.forEach { mode ->
-            FilterChip(
-                selected = categoryNavigationMode == mode,
-                onClick = { categoryNavigationPref.set(mode) },
-                label = {
-                    val labelRes = when (mode) {
-                        LibraryPreferences.CategoryNavigationMode.TABS -> MR.strings.group_navigation_tabs
-                        LibraryPreferences.CategoryNavigationMode.DROPDOWN -> MR.strings.group_navigation_dropdown
-                    }
-                    Text(stringResource(labelRes))
-                },
-            )
-        }
-    }
     CheckboxItem(
         label = stringResource(MR.strings.action_display_show_number_of_items),
         pref = screenModel.libraryPreferences.categoryNumberOfItems(),
