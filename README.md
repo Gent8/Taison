@@ -42,9 +42,9 @@ _Requires Android 8.0 or higher._
 
 ## Taison Highlights
 
-- **Library navigation** – category tabs are hidden by default in favor of a quick toolbar dropdown.
-- **History scoping** – library entries are scoped to their respective categories. The History tab includes its own category navigation, and the active category stays in sync between Library and History.
-- **Taison look** – a distinct, warm palette unique to this fork.
+- **Flexible navigation** – choose tabs or dropdowns across multiple grouping options, including categories, sources, status, and ungrouped items.
+- **History scoping** – History mirrors library navigation, keeps the active group in sync, and supports scoped cleanup.
+- **Taison look** – a distinct, warm palette.
 
 ## Changelog
 
