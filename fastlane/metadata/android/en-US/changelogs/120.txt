@@ -1,0 +1,15 @@
+Added
+- Group library filtering for categories, sources, status, and ungrouped items.
+- Mature-content filter in Library.
+- Category visibility toggle (Settings › Categories) to hide or show categories.
+- Editable default category name, with the option to hide it.
+- Graphic banner for the Taison theme in Settings.
+
+Changed
+- Category input fields now place the cursor at the end on create or edit.
+- Renamed "Category navigation type" to "Navigation type" in Settings.
+- Updated several category-related strings for consistency.
+- Removed Navigation type option from Library › Filter › Display.
+
+Improved
+- Replaced HorizontalPager with AnimatedContent in the drawer for smoother transitions.
