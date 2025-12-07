@@ -3,6 +3,7 @@ Added
 - Mature-content filter in Library.
 - Category visibility toggle (Settings › Categories) to hide or show categories.
 - Editable default category name, with the option to hide it.
+- Added “Trust all extensions” action in Browse.
 - Graphic banner for the Taison theme in Settings.
 
 Changed
