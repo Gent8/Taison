@@ -1,0 +1,33 @@
+CREATE TABLE collections_categories(
+    _id INTEGER PRIMARY KEY,
+    collection_id INTEGER NOT NULL,
+    category_id INTEGER NOT NULL,
+    UNIQUE(collection_id, category_id) ON CONFLICT REPLACE,
+    FOREIGN KEY(collection_id) REFERENCES collections(_id) ON DELETE CASCADE,
+    FOREIGN KEY(category_id) REFERENCES categories(_id) ON DELETE CASCADE
+);
+
+CREATE INDEX collections_categories_collection_id_index ON collections_categories(collection_id);
+CREATE INDEX collections_categories_category_id_index ON collections_categories(category_id);
+
+selectByCollectionId:
+SELECT category_id
+FROM collections_categories
+WHERE collection_id = :collectionId;
+
+selectCollectionIdsByCategoryId:
+SELECT collection_id
+FROM collections_categories
+WHERE category_id = :categoryId;
+
+insert:
+INSERT INTO collections_categories(collection_id, category_id)
+VALUES (:collectionId, :categoryId);
+
+deleteByCollectionId:
+DELETE FROM collections_categories
+WHERE collection_id = :collectionId;
+
+deleteByCollectionAndCategory:
+DELETE FROM collections_categories
+WHERE collection_id = :collectionId AND category_id = :categoryId;

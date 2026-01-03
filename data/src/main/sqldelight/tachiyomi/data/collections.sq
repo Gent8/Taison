@@ -1,0 +1,55 @@
+CREATE TABLE collections(
+    _id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    description TEXT,
+    cover_manga_id INTEGER,
+    sort_order INTEGER NOT NULL DEFAULT 0,
+    created_at INTEGER NOT NULL,
+    updated_at INTEGER NOT NULL,
+    FOREIGN KEY(cover_manga_id) REFERENCES mangas(_id) ON DELETE SET NULL
+);
+
+CREATE INDEX collections_sort_order_index ON collections(sort_order);
+
+selectAll:
+SELECT *
+FROM collections
+ORDER BY sort_order ASC;
+
+selectById:
+SELECT *
+FROM collections
+WHERE _id = :id;
+
+selectByIds:
+SELECT *
+FROM collections
+WHERE _id IN :ids;
+
+insert:
+INSERT INTO collections(name, description, cover_manga_id, sort_order, created_at, updated_at)
+VALUES (:name, :description, :coverMangaId, :sortOrder, :createdAt, :updatedAt);
+
+update:
+UPDATE collections
+SET name = coalesce(:name, name),
+    description = coalesce(:description, description),
+    cover_manga_id = coalesce(:coverMangaId, cover_manga_id),
+    sort_order = coalesce(:sortOrder, sort_order),
+    updated_at = :updatedAt
+WHERE _id = :id;
+
+updateCoverMangaId:
+UPDATE collections
+SET cover_manga_id = :coverMangaId, updated_at = :updatedAt
+WHERE _id = :id;
+
+delete:
+DELETE FROM collections
+WHERE _id = :id;
+
+selectLastInsertedRowId:
+SELECT last_insert_rowid();
+
+getCount:
+SELECT count(*) FROM collections;

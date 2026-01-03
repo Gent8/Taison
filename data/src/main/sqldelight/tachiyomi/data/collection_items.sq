@@ -1,0 +1,77 @@
+CREATE TABLE collection_items(
+    _id INTEGER PRIMARY KEY,
+    collection_id INTEGER NOT NULL,
+    manga_id INTEGER NOT NULL,
+    sort_order INTEGER NOT NULL DEFAULT 0,
+    badge TEXT,
+    UNIQUE(collection_id, manga_id) ON CONFLICT REPLACE,
+    FOREIGN KEY(collection_id) REFERENCES collections(_id) ON DELETE CASCADE,
+    FOREIGN KEY(manga_id) REFERENCES mangas(_id) ON DELETE CASCADE
+);
+
+CREATE INDEX collection_items_collection_id_index ON collection_items(collection_id);
+CREATE INDEX collection_items_manga_id_index ON collection_items(manga_id);
+
+selectByCollectionId:
+SELECT *
+FROM collection_items
+WHERE collection_id = :collectionId
+ORDER BY sort_order ASC;
+
+selectByMangaId:
+SELECT *
+FROM collection_items
+WHERE manga_id = :mangaId;
+
+selectCollectionsByMangaId:
+SELECT C.*
+FROM collections C
+INNER JOIN collection_items CI ON C._id = CI.collection_id
+WHERE CI.manga_id = :mangaId
+ORDER BY C.sort_order ASC;
+
+selectWithMangaByCollectionId:
+SELECT CI.*, M.*
+FROM collection_items CI
+INNER JOIN mangas M ON CI.manga_id = M._id
+WHERE CI.collection_id = :collectionId
+ORDER BY CI.sort_order ASC;
+
+selectItemCountByCollectionId:
+SELECT count(*)
+FROM collection_items
+WHERE collection_id = :collectionId;
+
+insert:
+INSERT INTO collection_items(collection_id, manga_id, sort_order, badge)
+VALUES (:collectionId, :mangaId, :sortOrder, :badge);
+
+updateBadge:
+UPDATE collection_items
+SET badge = :badge
+WHERE _id = :id;
+
+updateSortOrder:
+UPDATE collection_items
+SET sort_order = :sortOrder
+WHERE _id = :id;
+
+delete:
+DELETE FROM collection_items
+WHERE _id = :id;
+
+deleteByCollectionAndManga:
+DELETE FROM collection_items
+WHERE collection_id = :collectionId AND manga_id = :mangaId;
+
+deleteByCollectionId:
+DELETE FROM collection_items
+WHERE collection_id = :collectionId;
+
+getMaxSortOrder:
+SELECT coalesce(max(sort_order), 0)
+FROM collection_items
+WHERE collection_id = :collectionId;
+
+selectLastInsertedRowId:
+SELECT last_insert_rowid();
