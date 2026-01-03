@@ -1076,4 +1076,23 @@
     <string name="migrationListScreen.migrateDialog.cancelLabel">Cancel</string>
     <string name="migrationListScreen.progressDialog.cancelLabel">Cancel</string>
     <string name="migrationListScreen.matchWithoutChapterToast">No chapters found, this entry cannot be used for migration</string>
+
+    <!-- Collections -->
+    <string name="action_add_to_collection">Add to collection</string>
+    <string name="action_create_collection">Create collection</string>
+    <string name="action_edit_collection">Edit collection</string>
+    <string name="action_delete_collection">Delete collection</string>
+    <string name="collection_name">Name</string>
+    <string name="collection_description">Description</string>
+    <string name="collection_description_optional">Description (optional)</string>
+    <string name="collection_badge">Badge</string>
+    <string name="collection_set_badge">Set Badge</string>
+    <string name="collection_badge_hint">e.g., Sequel, Prequel, Spin-off</string>
+    <string name="collection_badge_description">Enter a custom label for this entry</string>
+    <string name="collection_add_badge">Add badge</string>
+    <string name="collection_items_count">%d items</string>
+    <string name="collection_empty">No items in this collection</string>
+    <string name="collection_confirm_delete">Delete the collection \"%s\"? The manga entries will not be deleted.</string>
+    <string name="collection_remove_manga">Remove from collection</string>
+    <string name="collection_add_manga">Add manga</string>
 </resources>
