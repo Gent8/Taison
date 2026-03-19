@@ -42,4 +42,3 @@ LEFT JOIN (
     GROUP BY mangas_categories.manga_id
 ) AS manga_categories
 ON manga_categories.manga_id = mangas._id;
-

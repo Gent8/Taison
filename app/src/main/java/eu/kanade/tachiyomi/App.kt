@@ -17,6 +17,7 @@ import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import coil3.ImageLoader
 import coil3.SingletonImageLoader
+import coil3.memory.MemoryCache
 import coil3.network.okhttp.OkHttpNetworkFetcherFactory
 import coil3.request.allowRgb565
 import coil3.request.crossfade
@@ -157,8 +158,14 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
         // Updates widget update
         WidgetManager(Injekt.get(), Injekt.get()).apply { init(scope) }
 
-        if (!LogcatLogger.isInstalled && networkPreferences.verboseLogging().get()) {
-            LogcatLogger.install(AndroidLogcatLogger(LogPriority.VERBOSE))
+        if (!LogcatLogger.isInstalled) {
+            val minLogPriority = when {
+                networkPreferences.verboseLogging().get() -> LogPriority.VERBOSE
+                BuildConfig.DEBUG -> LogPriority.DEBUG
+                else -> LogPriority.INFO
+            }
+            LogcatLogger.install()
+            LogcatLogger.loggers += AndroidLogcatLogger(minLogPriority)
         }
 
         initializeMigrator()
@@ -195,6 +202,12 @@ class App : Application(), DefaultLifecycleObserver, SingletonImageLoader.Factor
                 add(MangaCoverKeyer())
                 add(MangaKeyer())
             }
+
+            memoryCache(
+                MemoryCache.Builder()
+                    .maxSizePercent(context)
+                    .build(),
+            )
 
             crossfade((300 * this@App.animatorDurationScale).toInt())
             allowRgb565(DeviceUtil.isLowRamDevice(this@App))

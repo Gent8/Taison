@@ -721,7 +721,7 @@
     <string name="has_results">Sonuç var</string>
     <string name="delete_downloaded">İndirilenleri sil</string>
     <string name="create_backup_file_error">Yedekleme dosyası oluşturulamadı</string>
-    <string name="download_cache_invalidated">İndirilenler dizini geçersiz kılındı</string>
+    <string name="download_cache_invalidated">İndirme dizini tekrar oluşturuluyor</string>
     <string name="information_cloudflare_help">Cloudflare ile ilgili yardım için buraya dokunun</string>
     <string name="exception_unknown_host">%s verisine erişilemedi</string>
     <string name="track_activity_name">İzleyici girişi</string>
@@ -866,7 +866,7 @@
     <string name="pref_mark_duplicate_read_chapter_read_new">Yeni bir bölüm geldiğinde</string>
     <string name="action_edit_notes">Notları düzenle</string>
     <string name="action_notes">Notlar</string>
-    <string name="notes_placeholder">…olduğu kısmı beğendim</string>
+    <string name="notes_placeholder">…olduğu kısmı beğendim.</string>
     <string name="possible_duplicates_title">Muhtemel yinelenenler</string>
     <string name="possible_duplicates_summary">Kitaplığınızda benzer isimli girdiler var.\n\nTaşımak için bir girdi seçin veya yine de ekleyin.</string>
     <string name="clear_database_history_warning">Kitaplıkta olmayan girdilerin okunmuş bölümleri ve ilerlemeleri kaybolacaktır</string>
@@ -925,4 +925,7 @@
     <string name="pref_download_concurrent_pages_summary">Her kaynak için aynı anda indirilen sayfa sayısı</string>
     <string name="pref_download_concurrent_sources">Tek seferde indirilen kaynak sayısı</string>
     <string name="action_webview_close_tab">Sekmeyi kapat</string>
+    <string name="action_filter_excluded_scanlators">Hariç tutulan Çevirenleri filtrele</string>
+    <string name="calculating">Hesaplanıyor…</string>
+    <string name="download_bookmarked">Yer imli</string>
 </resources>

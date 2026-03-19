@@ -1,0 +1,6 @@
+NEW in version 1.2.1
+
+- Synced Taison with Mihon v0.19.4.
+- Added bookmarked chapters to chapter download actions.
+- Added Updates filters and improved duplicate detection via trackers.
+- Fixed extension installs getting stuck at pending and several migration issues.

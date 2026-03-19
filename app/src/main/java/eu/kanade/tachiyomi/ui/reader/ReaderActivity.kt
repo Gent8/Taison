@@ -344,7 +344,9 @@ class ReaderActivity : BaseActivity() {
     }
 
     override fun onPause() {
-        viewModel.flushReadTimer()
+        lifecycleScope.launchNonCancellable {
+            viewModel.updateHistory()
+        }
         super.onPause()
     }
 
@@ -576,7 +578,7 @@ class ReaderActivity : BaseActivity() {
     private fun shareChapter() {
         assistUrl?.let {
             val intent = it.toUri().toShareIntent(this, type = "text/plain")
-            startActivity(Intent.createChooser(intent, stringResource(MR.strings.action_share)))
+            startActivity(intent)
         }
     }
 
@@ -725,7 +727,7 @@ class ReaderActivity : BaseActivity() {
             context = applicationContext,
             message = stringResource(MR.strings.share_page_info, manga.title, chapter.name, page.number),
         )
-        startActivity(Intent.createChooser(intent, stringResource(MR.strings.action_share)))
+        startActivity(intent)
     }
 
     private fun onCopyImageResult(uri: Uri) {
@@ -833,7 +835,7 @@ class ReaderActivity : BaseActivity() {
 
         private val grayBackgroundColor = Color.rgb(0x20, 0x21, 0x25)
 
-        /**
+        /*
          * Initializes the reader subscriptions.
          */
         init {
