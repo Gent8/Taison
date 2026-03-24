@@ -52,7 +52,7 @@ body:
       label: Taison version
       description: You can find your Taison version in **More → About**.
       placeholder: |
-        Example: "1.2.1"
+        Example: "1.2.2"
     validations:
       required: true
 

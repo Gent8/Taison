@@ -1,0 +1,4 @@
+- Synced Taison with Mihon v0.19.7.
+- Retry in reader now redownloads images.
+- Fixed duplicate-detection, MangaUpdates, and WebView dialog regressions introduced after v0.19.4.
+- Fixed extension repo/install session crashes, database lock issues, and some Android TV startup crashes.

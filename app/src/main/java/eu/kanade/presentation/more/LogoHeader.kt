@@ -34,8 +34,8 @@ import uy.kohesive.injekt.api.get
 @Composable
 fun LogoHeader() {
     val uiPreferences = remember { Injekt.get<UiPreferences>() }
-    val appTheme by uiPreferences.appTheme().changes()
-        .collectAsState(initial = uiPreferences.appTheme().get())
+    val appTheme by uiPreferences.appTheme.changes()
+        .collectAsState(initial = uiPreferences.appTheme.get())
     val isTaisonTheme = appTheme == AppTheme.DEFAULT
 
     if (isTaisonTheme) {

@@ -551,7 +551,7 @@ class HistoryScreenModel(
                 val index = sections.indexOfFirst { it.id == sectionId }.let { found ->
                     if (found >= 0) found else 0
                 }
-                libraryPreferences.lastUsedCategory().set(index)
+                libraryPreferences.lastUsedCategory.set(index)
             }
         }
     }
@@ -616,7 +616,7 @@ class HistoryScreenModel(
         screenModelScope.launchIO {
             // Move to default category if applicable
             val categories = getCategories()
-            val defaultCategoryId = libraryPreferences.defaultCategory().get().toLong()
+            val defaultCategoryId = libraryPreferences.defaultCategory.get().toLong()
             val defaultCategory = categories.find { it.id == defaultCategoryId }
 
             when {

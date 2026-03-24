@@ -92,9 +92,9 @@ fun LibrarySettingsDialog(
 private fun ColumnScope.FilterPage(
     screenModel: LibrarySettingsScreenModel,
 ) {
-    val filterDownloaded by screenModel.libraryPreferences.filterDownloaded().collectAsState()
-    val downloadedOnly by screenModel.preferences.downloadedOnly().collectAsState()
-    val autoUpdateMangaRestrictions by screenModel.libraryPreferences.autoUpdateMangaRestrictions().collectAsState()
+    val filterDownloaded by screenModel.libraryPreferences.filterDownloaded.collectAsState()
+    val downloadedOnly by screenModel.preferences.downloadedOnly.collectAsState()
+    val autoUpdateMangaRestrictions by screenModel.libraryPreferences.autoUpdateMangaRestrictions.collectAsState()
 
     TriStateItem(
         label = stringResource(MR.strings.label_downloaded),
@@ -106,25 +106,25 @@ private fun ColumnScope.FilterPage(
         enabled = !downloadedOnly,
         onClick = { screenModel.toggleFilter(LibraryPreferences::filterDownloaded) },
     )
-    val filterUnread by screenModel.libraryPreferences.filterUnread().collectAsState()
+    val filterUnread by screenModel.libraryPreferences.filterUnread.collectAsState()
     TriStateItem(
         label = stringResource(MR.strings.action_filter_unread),
         state = filterUnread,
         onClick = { screenModel.toggleFilter(LibraryPreferences::filterUnread) },
     )
-    val filterStarted by screenModel.libraryPreferences.filterStarted().collectAsState()
+    val filterStarted by screenModel.libraryPreferences.filterStarted.collectAsState()
     TriStateItem(
         label = stringResource(MR.strings.label_started),
         state = filterStarted,
         onClick = { screenModel.toggleFilter(LibraryPreferences::filterStarted) },
     )
-    val filterBookmarked by screenModel.libraryPreferences.filterBookmarked().collectAsState()
+    val filterBookmarked by screenModel.libraryPreferences.filterBookmarked.collectAsState()
     TriStateItem(
         label = stringResource(MR.strings.action_filter_bookmarked),
         state = filterBookmarked,
         onClick = { screenModel.toggleFilter(LibraryPreferences::filterBookmarked) },
     )
-    val filterCompleted by screenModel.libraryPreferences.filterCompleted().collectAsState()
+    val filterCompleted by screenModel.libraryPreferences.filterCompleted.collectAsState()
     TriStateItem(
         label = stringResource(MR.strings.completed),
         state = filterCompleted,
@@ -138,7 +138,7 @@ private fun ColumnScope.FilterPage(
     )
     // TODO: re-enable when custom intervals are ready for stable
     if ((!isReleaseBuildType) && LibraryPreferences.MANGA_OUTSIDE_RELEASE_PERIOD in autoUpdateMangaRestrictions) {
-        val filterIntervalCustom by screenModel.libraryPreferences.filterIntervalCustom().collectAsState()
+        val filterIntervalCustom by screenModel.libraryPreferences.filterIntervalCustom.collectAsState()
         TriStateItem(
             label = stringResource(MR.strings.action_filter_interval_custom),
             state = filterIntervalCustom,
@@ -180,7 +180,7 @@ private fun ColumnScope.SortPage(
     screenModel: LibrarySettingsScreenModel,
 ) {
     val trackers by screenModel.trackersFlow.collectAsState()
-    val globalSortMode by screenModel.libraryPreferences.sortingMode().collectAsState()
+    val globalSortMode by screenModel.libraryPreferences.sortingMode.collectAsState()
     val isCategoryGrouping = screenModel.grouping == LibraryGroup.BY_DEFAULT
     val activeSort = when {
         isCategoryGrouping && category != null -> category.sort
@@ -257,7 +257,7 @@ private val displayModes = listOf(
 private fun ColumnScope.DisplayPage(
     screenModel: LibrarySettingsScreenModel,
 ) {
-    val displayMode by screenModel.libraryPreferences.displayMode().collectAsState()
+    val displayMode by screenModel.libraryPreferences.displayMode.collectAsState()
     SettingsChipRow(MR.strings.action_display_mode) {
         displayModes.map { (titleRes, mode) ->
             FilterChip(
@@ -272,9 +272,9 @@ private fun ColumnScope.DisplayPage(
         val configuration = LocalConfiguration.current
         val columnPreference = remember {
             if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                screenModel.libraryPreferences.landscapeColumns()
+                screenModel.libraryPreferences.landscapeColumns
             } else {
-                screenModel.libraryPreferences.portraitColumns()
+                screenModel.libraryPreferences.portraitColumns
             }
         }
 
@@ -296,28 +296,28 @@ private fun ColumnScope.DisplayPage(
     HeadingItem(MR.strings.overlay_header)
     CheckboxItem(
         label = stringResource(MR.strings.action_display_download_badge),
-        pref = screenModel.libraryPreferences.downloadBadge(),
+        pref = screenModel.libraryPreferences.downloadBadge,
     )
     CheckboxItem(
         label = stringResource(MR.strings.action_display_unread_badge),
-        pref = screenModel.libraryPreferences.unreadBadge(),
+        pref = screenModel.libraryPreferences.unreadBadge,
     )
     CheckboxItem(
         label = stringResource(MR.strings.action_display_local_badge),
-        pref = screenModel.libraryPreferences.localBadge(),
+        pref = screenModel.libraryPreferences.localBadge,
     )
     CheckboxItem(
         label = stringResource(MR.strings.action_display_language_badge),
-        pref = screenModel.libraryPreferences.languageBadge(),
+        pref = screenModel.libraryPreferences.languageBadge,
     )
     CheckboxItem(
         label = stringResource(MR.strings.action_display_show_continue_reading_button),
-        pref = screenModel.libraryPreferences.showContinueReadingButton(),
+        pref = screenModel.libraryPreferences.showContinueReadingButton,
     )
 
     CheckboxItem(
         label = stringResource(MR.strings.action_display_show_number_of_items),
-        pref = screenModel.libraryPreferences.categoryNumberOfItems(),
+        pref = screenModel.libraryPreferences.categoryNumberOfItems,
     )
     CheckboxItem(
         label = stringResource(MR.strings.action_show_hidden_categories),

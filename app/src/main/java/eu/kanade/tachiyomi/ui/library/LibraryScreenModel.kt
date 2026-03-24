@@ -97,7 +97,7 @@ class LibraryScreenModel(
 
     init {
         mutableState.update { state ->
-            state.copy(activeCategoryIndex = libraryPreferences.lastUsedCategory().get())
+            state.copy(activeCategoryIndex = libraryPreferences.lastUsedCategory.get())
         }
         screenModelScope.launchIO {
             @Suppress("UNCHECKED_CAST")
@@ -158,7 +158,7 @@ class LibraryScreenModel(
                     .map { it.libraryData }
                     .distinctUntilChanged(),
                 libraryPreferences.groupLibraryBy().changes(),
-                libraryPreferences.sortingMode().changes(),
+                libraryPreferences.sortingMode.changes(),
             ) { data, groupType, globalSort ->
                 val grouped = data.favorites
                     .applyGrouping(
@@ -235,8 +235,8 @@ class LibraryScreenModel(
 
         combine(
             libraryPreferences.categoryNavigationMode().changes(),
-            libraryPreferences.categoryNumberOfItems().changes(),
-            libraryPreferences.showContinueReadingButton().changes(),
+            libraryPreferences.categoryNumberOfItems.changes(),
+            libraryPreferences.showContinueReadingButton.changes(),
         ) { navigationMode, showMangaCount, showMangaContinueButton ->
             Triple(navigationMode, showMangaCount, showMangaContinueButton)
         }
@@ -260,7 +260,7 @@ class LibraryScreenModel(
                 if (targetIndex == -1) return@onEach
                 if (state.value.activeCategoryIndex == targetIndex) return@onEach
                 mutableState.update { it.copy(activeCategoryIndex = targetIndex) }
-                libraryPreferences.lastUsedCategory().set(targetIndex)
+                libraryPreferences.lastUsedCategory.set(targetIndex)
             }
             .launchIn(screenModelScope)
 
@@ -538,7 +538,7 @@ class LibraryScreenModel(
         return mapValues { (key, value) ->
             val appliedSort = groupSort ?: key.sort
             if (appliedSort.type == LibrarySort.Type.Random) {
-                return@mapValues value.shuffled(Random(libraryPreferences.randomSortSeed().get()))
+                return@mapValues value.shuffled(Random(libraryPreferences.randomSortSeed.get()))
             }
 
             val manga = value.mapNotNull { favoritesById[it] }
@@ -553,19 +553,19 @@ class LibraryScreenModel(
 
     private fun getLibraryItemPreferencesFlow(): Flow<ItemPreferences> {
         return combine(
-            libraryPreferences.downloadBadge().changes(),
-            libraryPreferences.unreadBadge().changes(),
-            libraryPreferences.localBadge().changes(),
-            libraryPreferences.languageBadge().changes(),
-            libraryPreferences.autoUpdateMangaRestrictions().changes(),
+            libraryPreferences.downloadBadge.changes(),
+            libraryPreferences.unreadBadge.changes(),
+            libraryPreferences.localBadge.changes(),
+            libraryPreferences.languageBadge.changes(),
+            libraryPreferences.autoUpdateMangaRestrictions.changes(),
 
-            preferences.downloadedOnly().changes(),
-            libraryPreferences.filterDownloaded().changes(),
-            libraryPreferences.filterUnread().changes(),
-            libraryPreferences.filterStarted().changes(),
-            libraryPreferences.filterBookmarked().changes(),
-            libraryPreferences.filterCompleted().changes(),
-            libraryPreferences.filterIntervalCustom().changes(),
+            preferences.downloadedOnly.changes(),
+            libraryPreferences.filterDownloaded.changes(),
+            libraryPreferences.filterUnread.changes(),
+            libraryPreferences.filterStarted.changes(),
+            libraryPreferences.filterBookmarked.changes(),
+            libraryPreferences.filterCompleted.changes(),
+            libraryPreferences.filterIntervalCustom.changes(),
             libraryPreferences.filterMature().changes(),
         ) {
             ItemPreferences(
@@ -792,11 +792,11 @@ class LibraryScreenModel(
     }
 
     fun getDisplayMode(): PreferenceMutableState<LibraryDisplayMode> {
-        return libraryPreferences.displayMode().asState(screenModelScope)
+        return libraryPreferences.displayMode.asState(screenModelScope)
     }
 
     fun getColumnsForOrientation(isLandscape: Boolean): PreferenceMutableState<Int> {
-        return (if (isLandscape) libraryPreferences.landscapeColumns() else libraryPreferences.portraitColumns())
+        return (if (isLandscape) libraryPreferences.landscapeColumns else libraryPreferences.portraitColumns)
             .asState(screenModelScope)
     }
 
@@ -888,7 +888,7 @@ class LibraryScreenModel(
             state.copy(activeCategoryIndex = index)
         }
         val coercedIndex = newState.coercedActiveCategoryIndex
-        libraryPreferences.lastUsedCategory().set(coercedIndex)
+        libraryPreferences.lastUsedCategory.set(coercedIndex)
         val activeCategoryId = newState.displayedCategories.getOrNull(coercedIndex)?.id ?: -1L
         lastUsedCategoryState.set(activeCategoryId)
 
@@ -1048,7 +1048,7 @@ class LibraryScreenModel(
         if (categories.isEmpty()) return 0
 
         val storedCategoryId = lastUsedCategoryState.current
-        val storedIndex = libraryPreferences.lastUsedCategory().get()
+        val storedIndex = libraryPreferences.lastUsedCategory.get()
         val current = if (currentIndex in categories.indices) currentIndex else -1
         val indexFromId = if (storedCategoryId != -1L) {
             categories.indexOfFirst { it.id == storedCategoryId }
