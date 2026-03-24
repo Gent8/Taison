@@ -128,6 +128,9 @@ jobs:
     needs: [get_tag, build, build_foss]
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
       - name: Download all artifacts
         uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
         with:
@@ -141,23 +144,47 @@ jobs:
             taison
             taison-foss
 
+      - name: Generate release notes
+        run: |
+          set -euo pipefail
+
+          tag="${{ needs.get_tag.outputs.tag }}"
+          section_title="## [Taison ${tag}]"
+          body_file="release-notes.md"
+
+          {
+            echo "Check out the [past release notes](https://github.com/${{ github.repository }}/releases) if you're upgrading from an earlier version."
+            echo
+          } > "$body_file"
+
+          if awk -v section="$section_title" '
+            $0 == section { found=1 }
+            found && /^## \[/ && $0 != section { exit }
+            found { print }
+            END { if (!found) exit 1 }
+          ' CHANGELOG.md >> "$body_file"; then
+            echo >> "$body_file"
+          else
+            {
+              echo "## Release Notes"
+              echo
+              echo "- Changelog entry for ${tag} was not found in CHANGELOG.md."
+              echo
+            } >> "$body_file"
+          fi
+
+          cat <<EOF >> "$body_file"
+          > [!TIP]
+          >
+          > ### If you are unsure which version to download then go with \`taison-${tag}.apk\`
+          EOF
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe # v2.6.1
         with:
           tag_name: ${{ needs.get_tag.outputs.tag }}
           name: Taison ${{ needs.get_tag.outputs.tag }}
-          body: |
-            Check out the [past release notes](https://github.com/${{ github.repository }}/releases) if you're upgrading from an earlier version.
-
-            <!-->
-
-
-
-            <!-->
-
-            > [!TIP]
-            >
-            > ### If you are unsure which version to download then go with `taison-${{ needs.get_tag.outputs.tag }}.apk`
+          body_path: release-notes.md
           files: |
             taison-${{ needs.get_tag.outputs.tag }}.apk
             taison-${{ needs.get_tag.outputs.tag }}-foss.apk
