@@ -1,0 +1,19 @@
+CREATE TABLE collections(
+    _id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    sort INTEGER NOT NULL,
+    created_at INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE TABLE collection_entries(
+    _id INTEGER NOT NULL PRIMARY KEY,
+    collection_id INTEGER NOT NULL,
+    manga_id INTEGER NOT NULL,
+    position INTEGER NOT NULL,
+    label TEXT NOT NULL DEFAULT '',
+    FOREIGN KEY(collection_id) REFERENCES collections(_id) ON DELETE CASCADE,
+    FOREIGN KEY(manga_id) REFERENCES mangas(_id) ON DELETE CASCADE
+);
+
+CREATE INDEX idx_collection_entries_collection_id ON collection_entries(collection_id);
+CREATE INDEX idx_collection_entries_manga_id ON collection_entries(manga_id);

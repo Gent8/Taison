@@ -66,6 +66,7 @@ import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.lang.withUIContext
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.category.interactor.GetCategories
+import tachiyomi.domain.collection.model.CollectionWithLabel
 import tachiyomi.domain.category.interactor.SetMangaCategories
 import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.chapter.interactor.SetMangaDefaultChapterFlags
@@ -120,6 +121,7 @@ class MangaScreenModel(
     private val setMangaCategories: SetMangaCategories = Injekt.get(),
     private val mangaRepository: MangaRepository = Injekt.get(),
     private val filterChaptersForDownload: FilterChaptersForDownload = Injekt.get(),
+    private val getCollectionsWithLabelByMangaId: tachiyomi.domain.collection.interactor.GetCollectionsWithLabelByMangaId = Injekt.get(),
     val snackbarHostState: SnackbarHostState = SnackbarHostState(),
 ) : StateScreenModel<MangaScreenModel.State>(State.Loading) {
 
@@ -236,6 +238,7 @@ class MangaScreenModel(
 
             // Start observe tracking since it only needs mangaId
             observeTrackers()
+            observeCollections()
 
             // Fetch info-chapters when needed
             if (screenModelScope.isActive) {
@@ -1076,6 +1079,19 @@ class MangaScreenModel(
         }
     }
 
+    private fun observeCollections() {
+        screenModelScope.launchIO {
+            getCollectionsWithLabelByMangaId.subscribe(mangaId)
+                .flowWithLifecycle(lifecycle)
+                .distinctUntilChanged()
+                .collectLatest { collections ->
+                    updateSuccessState {
+                        it.copy(collections = collections.toImmutableList())
+                    }
+                }
+        }
+    }
+
     // Track sheet - end
 
     sealed interface Dialog {
@@ -1141,6 +1157,7 @@ class MangaScreenModel(
             val dialog: Dialog? = null,
             val hasPromptedToAddBefore: Boolean = false,
             val hideMissingChapters: Boolean = false,
+            val collections: ImmutableList<CollectionWithLabel> = kotlinx.collections.immutable.persistentListOf(),
         ) : State {
             val processedChapters by lazy {
                 chapters.applyFilters(manga).toList()

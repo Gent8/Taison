@@ -93,6 +93,9 @@ class LibraryScreenModel(
     private val downloadManager: DownloadManager = Injekt.get(),
     private val downloadCache: DownloadCache = Injekt.get(),
     private val trackerManager: TrackerManager = Injekt.get(),
+    private val getCollections: tachiyomi.domain.collection.interactor.GetCollections = Injekt.get(),
+    private val getCollectionCoverData: tachiyomi.domain.collection.interactor.GetCollectionCoverData = Injekt.get(),
+    private val collectionRepository: tachiyomi.domain.collection.repository.CollectionRepository = Injekt.get(),
 ) : StateScreenModel<LibraryScreenModel.State>(State()) {
 
     init {
@@ -287,6 +290,30 @@ class LibraryScreenModel(
                 }
             }
             .launchIn(screenModelScope)
+
+        // Subscribe to collections for library grid
+        screenModelScope.launchIO {
+            getCollections.subscribe()
+                .distinctUntilChanged()
+                .collectLatest { collections ->
+                    val collectionItems = collections.map { collection ->
+                        val coverData = getCollectionCoverData.await(collection.id)
+                        val entryCount = collectionRepository.getEntryCountForCollection(collection.id)
+                        LibraryCollectionItem(
+                            collection = collection,
+                            coverData = coverData,
+                            entryCount = entryCount,
+                        )
+                    }
+                    mutableState.update { state ->
+                        state.copy(
+                            libraryData = state.libraryData.copy(
+                                collectionItems = collectionItems,
+                            ),
+                        )
+                    }
+                }
+        }
     }
 
     private fun List<LibraryItem>.applyFilters(
@@ -964,6 +991,7 @@ class LibraryScreenModel(
         val showSystemCategory: Boolean = false,
         val categories: List<Category> = emptyList(),
         val favorites: List<LibraryItem> = emptyList(),
+        val collectionItems: List<LibraryCollectionItem> = emptyList(),
         val tracksMap: Map</* Manga */ Long, List<Track>> = emptyMap(),
         val loggedInTrackerIds: Set<Long> = emptySet(),
         val showHiddenCategories: Boolean = false,
@@ -1009,11 +1037,18 @@ class LibraryScreenModel(
         fun getItemsForCategoryId(categoryId: Long?): List<LibraryItem> {
             if (categoryId == null) return emptyList()
             val category = displayedCategories.find { it.id == categoryId } ?: return emptyList()
-            return getItemsForCategory(category)
+            return groupedFavorites[category].orEmpty().mapNotNull { libraryData.favoritesById[it] }
         }
 
-        fun getItemsForCategory(category: Category): List<LibraryItem> {
-            return groupedFavorites[category].orEmpty().mapNotNull { libraryData.favoritesById[it] }
+        fun getItemsForCategory(category: Category): List<LibraryGridItem> {
+            val mangaItems: List<LibraryGridItem> = groupedFavorites[category].orEmpty()
+                .mapNotNull { libraryData.favoritesById[it] }
+            val filteredCollections: List<LibraryGridItem> = if (searchQuery.isNullOrEmpty()) {
+                libraryData.collectionItems
+            } else {
+                libraryData.collectionItems.filter { it.matches(searchQuery) }
+            }
+            return mangaItems + filteredCollections
         }
 
         fun getItemCountForCategory(category: Category): Int? {

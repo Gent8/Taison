@@ -49,6 +49,7 @@ import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.data.library.LibraryUpdateJob
 import eu.kanade.tachiyomi.ui.browse.source.globalsearch.GlobalSearchScreen
 import eu.kanade.tachiyomi.ui.category.CategoryScreen
+import eu.kanade.tachiyomi.ui.collection.CollectionManagementScreen
 import eu.kanade.tachiyomi.ui.home.HomeScreen
 import eu.kanade.tachiyomi.ui.main.MainActivity
 import eu.kanade.tachiyomi.ui.manga.MangaScreen
@@ -160,6 +161,9 @@ data object LibraryTab : Tab {
                                 }
                             }
                         },
+                        onClickCollections = {
+                            navigator.push(CollectionManagementScreen())
+                        },
                         searchQuery = state.searchQuery,
                         onSearchQueryChange = screenModel::search,
                         // For scroll overlay when no tab
@@ -239,6 +243,7 @@ data object LibraryTab : Tab {
                         showPageTabs = state.showCategoryTabs || !state.searchQuery.isNullOrEmpty(),
                         onChangeCurrentPage = screenModel::updateActiveCategoryIndex,
                         onClickManga = { navigator.push(MangaScreen(it)) },
+                        onClickCollection = { navigator.push(eu.kanade.tachiyomi.ui.collection.CollectionScreen(it)) },
                         onContinueReadingClicked = { it: LibraryManga ->
                             scope.launchIO {
                                 val chapter = screenModel.getNextUnreadChapter(it.manga)

@@ -49,6 +49,7 @@ import androidx.compose.ui.util.fastMap
 import eu.kanade.presentation.components.relativeDateText
 import eu.kanade.presentation.manga.components.ChapterDownloadAction
 import eu.kanade.presentation.manga.components.ChapterHeader
+import eu.kanade.presentation.manga.components.CollectionBadges
 import eu.kanade.presentation.manga.components.ExpandableMangaDescription
 import eu.kanade.presentation.manga.components.MangaActionRow
 import eu.kanade.presentation.manga.components.MangaBottomActionMenu
@@ -111,6 +112,8 @@ fun MangaScreen(
     onEditFetchIntervalClicked: (() -> Unit)?,
     onMigrateClicked: (() -> Unit)?,
     onEditNotesClicked: () -> Unit,
+    onAddToCollectionClicked: (() -> Unit)?,
+    onClickCollection: (Long) -> Unit,
 
     // For bottom action menu
     onMultiBookmarkClicked: (List<Chapter>, bookmarked: Boolean) -> Unit,
@@ -160,6 +163,8 @@ fun MangaScreen(
             onEditIntervalClicked = onEditFetchIntervalClicked,
             onMigrateClicked = onMigrateClicked,
             onEditNotesClicked = onEditNotesClicked,
+            onAddToCollectionClicked = onAddToCollectionClicked,
+            onClickCollection = onClickCollection,
             onMultiBookmarkClicked = onMultiBookmarkClicked,
             onMultiMarkAsReadClicked = onMultiMarkAsReadClicked,
             onMarkPreviousAsReadClicked = onMarkPreviousAsReadClicked,
@@ -196,6 +201,8 @@ fun MangaScreen(
             onEditIntervalClicked = onEditFetchIntervalClicked,
             onMigrateClicked = onMigrateClicked,
             onEditNotesClicked = onEditNotesClicked,
+            onAddToCollectionClicked = onAddToCollectionClicked,
+            onClickCollection = onClickCollection,
             onMultiBookmarkClicked = onMultiBookmarkClicked,
             onMultiMarkAsReadClicked = onMultiMarkAsReadClicked,
             onMarkPreviousAsReadClicked = onMarkPreviousAsReadClicked,
@@ -242,6 +249,8 @@ private fun MangaScreenSmallImpl(
     onEditIntervalClicked: (() -> Unit)?,
     onMigrateClicked: (() -> Unit)?,
     onEditNotesClicked: () -> Unit,
+    onAddToCollectionClicked: (() -> Unit)? = null,
+    onClickCollection: (Long) -> Unit = {},
 
     // For bottom action menu
     onMultiBookmarkClicked: (List<Chapter>, bookmarked: Boolean) -> Unit,
@@ -301,6 +310,7 @@ private fun MangaScreenSmallImpl(
                 onClickRefresh = onRefresh,
                 onClickMigrate = onMigrateClicked,
                 onClickEditNotes = onEditNotesClicked,
+                onClickAddToCollection = onAddToCollectionClicked,
                 actionModeCounter = selectedChapterCount,
                 onCancelActionMode = { onAllChapterSelected(false) },
                 onSelectAll = { onAllChapterSelected(true) },
@@ -418,6 +428,18 @@ private fun MangaScreenSmallImpl(
                         )
                     }
 
+                    if (state.collections.isNotEmpty()) {
+                        item(
+                            key = MangaScreenItem.COLLECTION_BADGES,
+                            contentType = MangaScreenItem.COLLECTION_BADGES,
+                        ) {
+                            CollectionBadges(
+                                collections = state.collections,
+                                onClickCollection = onClickCollection,
+                            )
+                        }
+                    }
+
                     item(
                         key = MangaScreenItem.CHAPTER_HEADER,
                         contentType = MangaScreenItem.CHAPTER_HEADER,
@@ -484,6 +506,8 @@ fun MangaScreenLargeImpl(
     onEditIntervalClicked: (() -> Unit)?,
     onMigrateClicked: (() -> Unit)?,
     onEditNotesClicked: () -> Unit,
+    onAddToCollectionClicked: (() -> Unit)? = null,
+    onClickCollection: (Long) -> Unit = {},
 
     // For bottom action menu
     onMultiBookmarkClicked: (List<Chapter>, bookmarked: Boolean) -> Unit,
@@ -536,6 +560,7 @@ fun MangaScreenLargeImpl(
                 onClickRefresh = onRefresh,
                 onClickMigrate = onMigrateClicked,
                 onClickEditNotes = onEditNotesClicked,
+                onClickAddToCollection = onAddToCollectionClicked,
                 onCancelActionMode = { onAllChapterSelected(false) },
                 actionModeCounter = selectedChapterCount,
                 onSelectAll = { onAllChapterSelected(true) },
@@ -640,6 +665,12 @@ fun MangaScreenLargeImpl(
                             onCopyTagToClipboard = onCopyTagToClipboard,
                             onEditNotes = onEditNotesClicked,
                         )
+                        if (state.collections.isNotEmpty()) {
+                            CollectionBadges(
+                                collections = state.collections,
+                                onClickCollection = onClickCollection,
+                            )
+                        }
                     }
                 },
                 endContent = {

@@ -16,7 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import eu.kanade.core.preference.PreferenceMutableState
-import eu.kanade.tachiyomi.ui.library.LibraryItem
+import eu.kanade.tachiyomi.ui.library.LibraryGridItem
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import tachiyomi.domain.category.model.Category
@@ -36,6 +36,7 @@ fun LibraryContent(
     showPageTabs: Boolean,
     onChangeCurrentPage: (Int) -> Unit,
     onClickManga: (Long) -> Unit,
+    onClickCollection: (Long) -> Unit,
     onContinueReadingClicked: ((LibraryManga) -> Unit)?,
     onToggleSelection: (Category, LibraryManga) -> Unit,
     onToggleRangeSelection: (Category, LibraryManga) -> Unit,
@@ -44,7 +45,7 @@ fun LibraryContent(
     getItemCountForCategory: (Category) -> Int?,
     getDisplayMode: (Int) -> PreferenceMutableState<LibraryDisplayMode>,
     getColumnsForOrientation: (Boolean) -> PreferenceMutableState<Int>,
-    getItemsForCategory: (Category) -> List<LibraryItem>,
+    getItemsForCategory: (Category) -> List<LibraryGridItem>,
 ) {
     Column(
         modifier = Modifier.padding(
@@ -111,6 +112,7 @@ fun LibraryContent(
                 },
                 onLongClickManga = onToggleRangeSelection,
                 onClickContinueReading = onContinueReadingClicked,
+                onClickCollection = onClickCollection,
             )
         }
 

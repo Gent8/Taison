@@ -1,0 +1,195 @@
+CREATE TABLE collections(
+    _id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL DEFAULT '',
+    sort INTEGER NOT NULL,
+    created_at INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE TABLE collection_entries(
+    _id INTEGER NOT NULL PRIMARY KEY,
+    collection_id INTEGER NOT NULL,
+    manga_id INTEGER NOT NULL,
+    position INTEGER NOT NULL,
+    label TEXT NOT NULL DEFAULT '',
+    FOREIGN KEY(collection_id) REFERENCES collections(_id) ON DELETE CASCADE,
+    FOREIGN KEY(manga_id) REFERENCES mangas(_id) ON DELETE CASCADE
+);
+
+getCollections:
+SELECT
+_id AS id,
+name,
+description,
+sort AS `order`,
+created_at AS createdAt
+FROM collections
+ORDER BY sort;
+
+getCollectionById:
+SELECT
+_id AS id,
+name,
+description,
+sort AS `order`,
+created_at AS createdAt
+FROM collections
+WHERE _id = :id
+LIMIT 1;
+
+getCollectionsByMangaId:
+SELECT
+C._id AS id,
+C.name,
+C.description,
+C.sort AS `order`,
+C.created_at AS createdAt
+FROM collections C
+JOIN collection_entries CE
+ON C._id = CE.collection_id
+WHERE CE.manga_id = :mangaId
+ORDER BY C.sort;
+
+getCollectionsByMangaIdWithLabel:
+SELECT
+C._id AS id,
+C.name,
+C.description,
+C.sort AS `order`,
+C.created_at AS createdAt,
+CE.label
+FROM collections C
+JOIN collection_entries CE ON C._id = CE.collection_id
+WHERE CE.manga_id = :mangaId
+ORDER BY C.sort;
+
+getTopCoverMangaForCollection:
+SELECT
+M._id AS mangaId,
+M.source AS sourceId,
+M.thumbnail_url AS thumbnailUrl,
+M.cover_last_modified AS coverLastModified,
+M.favorite AS isFavorite
+FROM collection_entries CE
+JOIN mangas M ON CE.manga_id = M._id
+WHERE CE.collection_id = :collectionId
+ORDER BY CE.position
+LIMIT 3;
+
+getCollectionEntriesWithManga:
+SELECT
+CE._id AS entryId,
+CE.collection_id AS collectionId,
+CE.manga_id AS mangaId,
+CE.position,
+CE.label,
+M._id AS mId,
+M.source,
+M.url,
+M.artist,
+M.author,
+M.description,
+M.genre,
+M.title,
+M.status,
+M.thumbnail_url AS thumbnailUrl,
+M.favorite,
+M.last_update AS lastUpdate,
+M.next_update AS nextUpdate,
+M.initialized,
+M.viewer AS viewerFlags,
+M.chapter_flags AS chapterFlags,
+M.cover_last_modified AS coverLastModified,
+M.date_added AS dateAdded,
+M.update_strategy AS updateStrategy,
+M.calculate_interval AS fetchInterval,
+M.last_modified_at AS lastModifiedAt,
+M.favorite_modified_at AS favoriteModifiedAt,
+M.version,
+M.notes
+FROM collection_entries CE
+JOIN mangas M ON CE.manga_id = M._id
+WHERE CE.collection_id = :collectionId
+ORDER BY CE.position;
+
+getFirstMangaForCollection:
+SELECT
+M._id AS mId,
+M.source,
+M.url,
+M.artist,
+M.author,
+M.description,
+M.genre,
+M.title,
+M.status,
+M.thumbnail_url AS thumbnailUrl,
+M.favorite,
+M.last_update AS lastUpdate,
+M.next_update AS nextUpdate,
+M.initialized,
+M.viewer AS viewerFlags,
+M.chapter_flags AS chapterFlags,
+M.cover_last_modified AS coverLastModified,
+M.date_added AS dateAdded,
+M.update_strategy AS updateStrategy,
+M.calculate_interval AS fetchInterval,
+M.last_modified_at AS lastModifiedAt,
+M.favorite_modified_at AS favoriteModifiedAt,
+M.version,
+M.notes
+FROM collection_entries CE
+JOIN mangas M ON CE.manga_id = M._id
+WHERE CE.collection_id = :collectionId
+ORDER BY CE.position
+LIMIT 1;
+
+getEntryCountForCollection:
+SELECT COUNT(*) AS count
+FROM collection_entries
+WHERE collection_id = :collectionId;
+
+insertCollection:
+INSERT INTO collections(name, description, sort, created_at)
+VALUES (:name, :description, :order, :createdAt);
+
+updateCollection:
+UPDATE collections
+SET name = coalesce(:name, name),
+    description = coalesce(:description, description),
+    sort = coalesce(:order, sort)
+WHERE _id = :collectionId;
+
+deleteCollection:
+DELETE FROM collections
+WHERE _id = :collectionId;
+
+insertEntry:
+INSERT INTO collection_entries(collection_id, manga_id, position, label)
+VALUES (:collectionId, :mangaId, :position, :label);
+
+deleteEntry:
+DELETE FROM collection_entries
+WHERE _id = :entryId;
+
+deleteEntriesByCollectionId:
+DELETE FROM collection_entries
+WHERE collection_id = :collectionId;
+
+updateEntryPosition:
+UPDATE collection_entries
+SET position = :position
+WHERE _id = :entryId;
+
+updateEntryLabel:
+UPDATE collection_entries
+SET label = :label
+WHERE _id = :entryId;
+
+getMaxEntryPosition:
+SELECT MAX(position) AS maxPosition
+FROM collection_entries
+WHERE collection_id = :collectionId;
+
+selectLastInsertedRowId:
+SELECT last_insert_rowid();

@@ -38,6 +38,7 @@ fun MangaToolbar(
     onClickRefresh: () -> Unit,
     onClickMigrate: (() -> Unit)?,
     onClickEditNotes: () -> Unit,
+    onClickAddToCollection: (() -> Unit)? = null,
 
     // For action mode
     actionModeCounter: Int,
@@ -147,6 +148,14 @@ fun MangaToolbar(
                             onClick = onClickEditNotes,
                         ),
                     )
+                    if (onClickAddToCollection != null) {
+                        add(
+                            AppBar.OverflowAction(
+                                title = stringResource(MR.strings.action_add_to_collection),
+                                onClick = onClickAddToCollection,
+                            ),
+                        )
+                    }
                 }
                     .build(),
             )

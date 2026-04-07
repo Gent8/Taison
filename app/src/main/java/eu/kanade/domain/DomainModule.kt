@@ -38,6 +38,7 @@ import mihon.domain.extensionrepo.service.ExtensionRepoService
 import mihon.domain.migration.usecases.MigrateMangaUseCase
 import mihon.domain.upcoming.interactor.GetUpcomingManga
 import tachiyomi.data.category.CategoryRepositoryImpl
+import tachiyomi.data.collection.CollectionRepositoryImpl
 import tachiyomi.data.chapter.ChapterRepositoryImpl
 import tachiyomi.data.history.HistoryRepositoryImpl
 import tachiyomi.data.manga.MangaRepositoryImpl
@@ -58,6 +59,22 @@ import tachiyomi.domain.category.interactor.SetMangaCategories
 import tachiyomi.domain.category.interactor.SetSortModeForCategory
 import tachiyomi.domain.category.interactor.UpdateCategory
 import tachiyomi.domain.category.repository.CategoryRepository
+import tachiyomi.domain.collection.interactor.AddMangaToCollection
+import tachiyomi.domain.collection.interactor.CreateCollection
+import tachiyomi.domain.collection.interactor.DeleteCollection
+import tachiyomi.domain.collection.interactor.GetCollectionById
+import tachiyomi.domain.collection.interactor.GetCollectionEntries
+import tachiyomi.domain.collection.interactor.GetCollections
+import tachiyomi.domain.collection.interactor.GetCollectionsByMangaId
+import tachiyomi.domain.collection.interactor.RemoveMangaFromCollection
+import tachiyomi.domain.collection.interactor.RenameCollection
+import tachiyomi.domain.collection.interactor.ReorderCollection
+import tachiyomi.domain.collection.interactor.ReorderCollectionEntry
+import tachiyomi.domain.collection.interactor.UpdateCollectionEntryLabel
+import tachiyomi.domain.collection.interactor.UpdateCollectionDescription
+import tachiyomi.domain.collection.interactor.GetCollectionsWithLabelByMangaId
+import tachiyomi.domain.collection.interactor.GetCollectionCoverData
+import tachiyomi.domain.collection.repository.CollectionRepository
 import tachiyomi.domain.chapter.interactor.GetBookmarkedChaptersByMangaId
 import tachiyomi.domain.chapter.interactor.GetChapter
 import tachiyomi.domain.chapter.interactor.GetChapterByUrlAndMangaId
@@ -117,6 +134,23 @@ class DomainModule : InjektModule {
         addFactory { UpdateCategory(get()) }
         addFactory { DeleteCategory(get(), get(), get()) }
         addFactory { HideCategory(get()) }
+
+        addSingletonFactory<CollectionRepository> { CollectionRepositoryImpl(get()) }
+        addFactory { GetCollections(get()) }
+        addFactory { GetCollectionById(get()) }
+        addFactory { GetCollectionsByMangaId(get()) }
+        addFactory { GetCollectionEntries(get()) }
+        addFactory { CreateCollection(get()) }
+        addFactory { DeleteCollection(get()) }
+        addFactory { RenameCollection(get()) }
+        addFactory { ReorderCollection(get()) }
+        addFactory { AddMangaToCollection(get()) }
+        addFactory { RemoveMangaFromCollection(get()) }
+        addFactory { ReorderCollectionEntry(get()) }
+        addFactory { UpdateCollectionEntryLabel(get()) }
+        addFactory { UpdateCollectionDescription(get()) }
+        addFactory { GetCollectionsWithLabelByMangaId(get()) }
+        addFactory { GetCollectionCoverData(get()) }
 
         addSingletonFactory<MangaRepository> { MangaRepositoryImpl(get()) }
         addFactory { GetDuplicateLibraryManga(get()) }

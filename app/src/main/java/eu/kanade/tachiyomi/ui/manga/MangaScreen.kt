@@ -27,6 +27,7 @@ import eu.kanade.core.util.ifSourcesLoaded
 import eu.kanade.domain.manga.model.hasCustomCover
 import eu.kanade.domain.manga.model.toSManga
 import eu.kanade.presentation.category.components.ChangeCategoryDialog
+import eu.kanade.presentation.collection.components.AddToCollectionDialog
 import eu.kanade.presentation.components.NavigatorAdaptiveSheet
 import eu.kanade.presentation.manga.ChapterSettingsDialog
 import eu.kanade.presentation.manga.DuplicateMangaDialog
@@ -56,15 +57,21 @@ import eu.kanade.tachiyomi.util.system.copyToClipboard
 import eu.kanade.tachiyomi.util.system.toast
 import kotlinx.coroutines.launch
 import logcat.LogPriority
+import kotlinx.collections.immutable.toImmutableList
 import mihon.feature.migration.config.MigrationConfigScreen
 import mihon.feature.migration.dialog.MigrateMangaDialog
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.chapter.model.Chapter
+import tachiyomi.domain.collection.interactor.AddMangaToCollection
+import tachiyomi.domain.collection.interactor.CreateCollection
+import tachiyomi.domain.collection.interactor.GetCollections
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.screens.LoadingScreen
+import uy.kohesive.injekt.Injekt
+import uy.kohesive.injekt.api.get
 
 class MangaScreen(
     private val mangaId: Long,
@@ -112,6 +119,8 @@ class MangaScreen(
                 }
             }
         }
+
+        var showAddToCollectionDialog by remember { mutableStateOf(false) }
 
         MangaScreen(
             state = successState,
@@ -164,6 +173,12 @@ class MangaScreen(
                 navigator.push(MigrationConfigScreen(successState.manga.id))
             }.takeIf { successState.manga.favorite },
             onEditNotesClicked = { navigator.push(MangaNotesScreen(manga = successState.manga)) },
+            onAddToCollectionClicked = {
+                showAddToCollectionDialog = true
+            }.takeIf { successState.manga.favorite },
+            onClickCollection = { collectionId ->
+                navigator.push(eu.kanade.tachiyomi.ui.collection.CollectionScreen(collectionId))
+            },
             onMultiBookmarkClicked = screenModel::bookmarkChapters,
             onMultiMarkAsReadClicked = screenModel::markChaptersRead,
             onMarkPreviousAsReadClicked = screenModel::markPreviousChapterRead,
@@ -285,6 +300,28 @@ class MangaScreen(
                 excludedScanlators = successState.excludedScanlators,
                 onDismissRequest = { showScanlatorsDialog = false },
                 onConfirm = screenModel::setExcludedScanlators,
+            )
+        }
+
+        if (showAddToCollectionDialog) {
+            val getCollections: GetCollections = remember { Injekt.get() }
+            val createCollection: CreateCollection = remember { Injekt.get() }
+            val addMangaToCollection: AddMangaToCollection = remember { Injekt.get() }
+            val collections by getCollections.subscribe().collectAsState(initial = emptyList())
+
+            AddToCollectionDialog(
+                onDismissRequest = { showAddToCollectionDialog = false },
+                collections = collections.toImmutableList(),
+                onSelectCollection = { collectionId ->
+                    scope.launch {
+                        addMangaToCollection.await(collectionId, mangaId)
+                    }
+                },
+                onCreateCollection = { name ->
+                    scope.launch {
+                        createCollection.await(name)
+                    }
+                },
             )
         }
     }
