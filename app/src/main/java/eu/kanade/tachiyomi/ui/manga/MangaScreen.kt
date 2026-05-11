@@ -1,6 +1,7 @@
 package eu.kanade.tachiyomi.ui.manga
 
 import android.content.Context
+import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.systemBarsPadding
@@ -16,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.core.net.toUri
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.model.rememberScreenModel
@@ -45,6 +45,7 @@ import eu.kanade.tachiyomi.source.online.HttpSource
 import eu.kanade.tachiyomi.ui.browse.source.browse.BrowseSourceScreen
 import eu.kanade.tachiyomi.ui.browse.source.globalsearch.GlobalSearchScreen
 import eu.kanade.tachiyomi.ui.category.CategoryScreen
+import eu.kanade.tachiyomi.ui.deeplink.TaisonEntryLink
 import eu.kanade.tachiyomi.ui.home.HomeScreen
 import eu.kanade.tachiyomi.ui.manga.notes.MangaNotesScreen
 import eu.kanade.tachiyomi.ui.manga.track.TrackInfoDialogHomeScreen
@@ -52,16 +53,17 @@ import eu.kanade.tachiyomi.ui.reader.ReaderActivity
 import eu.kanade.tachiyomi.ui.setting.SettingsScreen
 import eu.kanade.tachiyomi.ui.webview.WebViewScreen
 import eu.kanade.tachiyomi.util.system.copyToClipboard
-import eu.kanade.tachiyomi.util.system.toShareIntent
 import eu.kanade.tachiyomi.util.system.toast
 import kotlinx.coroutines.launch
 import logcat.LogPriority
 import mihon.feature.migration.config.MigrationConfigScreen
 import mihon.feature.migration.dialog.MigrateMangaDialog
+import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.chapter.model.Chapter
 import tachiyomi.domain.manga.model.Manga
+import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.screens.LoadingScreen
 
 class MangaScreen(
@@ -320,10 +322,56 @@ class MangaScreen(
 
     private fun shareManga(context: Context, manga_: Manga?, source_: Source?) {
         try {
-            getMangaUrl(manga_, source_)?.let { url ->
-                val intent = url.toUri().toShareIntent(context, type = "text/plain")
-                context.startActivity(intent)
+            val manga = manga_ ?: return
+            val source = source_ as? HttpSource ?: return
+            val fullSourceUrl = try {
+                source.getMangaUrl(manga.toSManga())
+            } catch (_: Exception) {
+                null
             }
+
+            val message = if (fullSourceUrl == null) {
+                // Source can't construct a public URL — fall back to a title-only share so the
+                // user can still tell their friend what they're reading.
+                manga.title
+            } else {
+                val taisonLink = TaisonEntryLink(
+                    sourceId = source.id,
+                    sourceUrl = fullSourceUrl,
+                    title = manga.title,
+                    sourceName = source.name,
+                    sourceLang = source.lang,
+                    versionId = source.versionId,
+                    author = manga.author,
+                    genres = manga.genre?.joinToString(", "),
+                    status = manga.status.toInt().takeIf { it != 0 },
+                ).toAppLinkUri()
+
+                // Emit the source URL alongside the Taison link as a graceful-degradation
+                // fallback. Taison itself parses the rich link locally, so a downed
+                // taison.gent8.com domain doesn't affect recipients with the app installed —
+                // but recipients *without* Taison need a working URL when the landing page is
+                // unreachable. The plain source URL is the legacy Mihon share format and
+                // always at least points at the entry on its origin site.
+                buildString {
+                    appendLine(manga.title)
+                    appendLine(taisonLink)
+                    appendLine()
+                    append(fullSourceUrl)
+                }
+            }
+
+            val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT, message)
+            }
+            val chooser = Intent.createChooser(
+                shareIntent,
+                context.stringResource(MR.strings.action_share),
+            ).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+            context.startActivity(chooser)
         } catch (e: Exception) {
             context.toast(e.message)
         }

@@ -715,6 +715,7 @@
     <string name="pinned_sources">Pinned</string>
     <string name="action_global_search_hint">Global search…</string>
     <string name="action_global_search_query">Search for \"%1$s\" globally</string>
+    <string name="deep_link_source_not_installed">The source \"%1$s\" needed to open \"%2$s\" is not installed. Install the extension, or search globally by title.</string>
     <string name="latest">Latest</string>
     <string name="popular">Popular</string>
     <string name="browse">Browse</string>

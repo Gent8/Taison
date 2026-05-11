@@ -74,6 +74,7 @@ import eu.kanade.tachiyomi.ui.base.activity.BaseActivity
 import eu.kanade.tachiyomi.ui.browse.source.browse.BrowseSourceScreen
 import eu.kanade.tachiyomi.ui.browse.source.globalsearch.GlobalSearchScreen
 import eu.kanade.tachiyomi.ui.deeplink.DeepLinkScreen
+import eu.kanade.tachiyomi.ui.deeplink.TaisonEntryLink
 import eu.kanade.tachiyomi.ui.home.HomeScreen
 import eu.kanade.tachiyomi.ui.manga.MangaScreen
 import eu.kanade.tachiyomi.ui.more.NewUpdateScreen
@@ -434,17 +435,23 @@ class MainActivity : BaseActivity() {
                 null
             }
             Intent.ACTION_VIEW -> {
+                val data = intent.data
                 // Handling opening of backup files
                 if (intent.data.toString().endsWith(".tachibk")) {
                     navigator.popUntilRoot()
                     navigator.push(RestoreBackupScreen(intent.data.toString()))
                 }
                 // Deep link to add extension repo
-                else if (intent.scheme == "tachiyomi" && intent.data?.host == "add-repo") {
-                    intent.data?.getQueryParameter("url")?.let { repoUrl ->
+                else if (intent.scheme == "tachiyomi" && data?.host == "add-repo") {
+                    data.getQueryParameter("url")?.let { repoUrl ->
                         navigator.popUntilRoot()
                         navigator.push(ExtensionReposScreen(repoUrl))
                     }
+                }
+                // Direct sharing of entries between Taison users
+                else if (data != null && TaisonEntryLink.matches(data)) {
+                    navigator.popUntilRoot()
+                    navigator.push(DeepLinkScreen(data.toString()))
                 }
                 null
             }

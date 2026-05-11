@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.gent8.taison",
+      "sha256_cert_fingerprints": [
+        "D5:3A:66:00:0F:A3:B1:4F:F5:49:67:29:54:34:D5:1C:67:4F:29:1D:E8:E2:8B:0C:C1:A4:69:28:E0:21:A9:AC"
+      ]
+    }
+  }
+]

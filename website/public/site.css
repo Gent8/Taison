@@ -1,0 +1,119 @@
+:root {
+  color-scheme: dark;
+
+  --bg:               #1F1A12;
+  --bg-elev:          #2A2318;
+  --surface:          #261F15;
+  --surface-variant:  #504533;
+  --on-surface:       #EBE0CF;
+  --on-surface-quiet: #D5C2A6;
+  --on-surface-muted: #A6957A;
+  --primary:          #FFD166;
+  --on-primary:       #402C00;
+  --primary-inverse:  #EAB710;
+  --outline:          #3D3326;
+  --error:            #FFB4AB;
+
+  --status-ongoing:   #4CD8DD;
+  --status-completed: #9CCC65;
+  --status-hiatus:    #FFB4AB;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; min-height: 100%; }
+body {
+  font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  color: var(--on-surface);
+  background: var(--bg);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1536 / 700;
+  max-height: 32vh;
+  overflow: hidden;
+}
+.hero img.bg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.hero .logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(72px, 14vw, 112px);
+  height: auto;
+  border-radius: 22%;
+}
+
+main {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 22px 22px 40px;
+  flex: 1;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: 18px;
+  padding: 22px 22px 18px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--on-surface-muted);
+  margin: 0 0 8px;
+}
+
+.actions { display: flex; flex-direction: column; gap: 10px; }
+a.btn {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.05s ease-out, background 0.15s ease-out, border-color 0.15s ease-out;
+}
+a.btn:active { transform: scale(0.985); }
+a.btn.primary {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+a.btn.primary:hover { background: #FFC944; }
+a.btn.secondary {
+  background: var(--bg-elev);
+  color: var(--on-surface);
+  border-color: var(--outline);
+}
+a.btn.secondary:hover { border-color: var(--primary-inverse); }
+a.btn.ghost {
+  background: transparent;
+  color: var(--on-surface-quiet);
+  border-color: var(--outline);
+}
+a.btn.ghost:hover { color: var(--on-surface); border-color: var(--surface-variant); }
+
+.invalid { color: var(--error); }
+
+@media (max-width: 380px) {
+  main { padding: 18px 16px 32px; }
+}

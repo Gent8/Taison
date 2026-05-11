@@ -71,6 +71,36 @@
                 <data android:host="add-repo" />
             </intent-filter>
 
+            <!-- Direct sharing of entries between Taison users (custom scheme fallback) -->
+            <intent-filter android:label="@string/action_share">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="taison" />
+                <data android:host="entry" />
+            </intent-filter>
+
+            <!--
+              Direct sharing of entries between Taison users (App Link form).
+              Intentionally NOT auto-verified: tapping the bare https://taison.gent8.com/e/…
+              link in chat opens the landing page first so the recipient can preview the
+              entry. From the page, the "Open in Taison" button dispatches an intent://
+              URL that hands off to this app via this filter without the verified-link
+              fast-path. Removing autoVerify trades one tap for a preview screen.
+            -->
+            <intent-filter android:label="@string/action_share">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+                <data android:host="taison.gent8.com" />
+                <data android:pathPrefix="/e" />
+            </intent-filter>
+
             <!-- Open backup files -->
             <intent-filter android:label="@string/pref_restore_backup">
                 <action android:name="android.intent.action.VIEW" />

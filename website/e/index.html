@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Open shared manga in Taison</title>
+  <meta name="theme-color" content="#1F1A12" />
+  <meta name="referrer" content="no-referrer" />
+  <meta property="og:title" content="Open shared manga in Taison" />
+  <meta property="og:description" content="A shared manga entry. Tap to open it in Taison." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/png" href="/public/iconCropped.png" />
+  <link rel="apple-touch-icon" href="/public/iconCropped.png" />
+  <link rel="stylesheet" href="/public/site.css" />
+  <style>
+    .card { padding: 18px; }
+
+    h1.title {
+      margin: 0 0 6px;
+      font-size: clamp(1.15rem, 4vw, 1.4rem);
+      font-weight: 600;
+      line-height: 1.25;
+      word-break: break-word;
+      color: var(--on-surface);
+    }
+    .by {
+      margin: 0 0 6px;
+      color: var(--on-surface-quiet);
+      font-size: 0.92rem;
+      word-break: break-word;
+    }
+    .from {
+      margin: 0;
+      color: var(--on-surface-muted);
+      font-size: 0.85rem;
+    }
+    .from .source-name { color: var(--on-surface-quiet); font-weight: 600; }
+
+    .badges { margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1.4;
+      background: var(--bg-elev);
+      color: var(--on-surface-quiet);
+      border: 1px solid var(--outline);
+    }
+    .badge.status .icon {
+      width: 13px; height: 13px;
+      flex: 0 0 auto;
+      color: var(--on-surface-muted);
+    }
+    .badge.status .icon svg { display: block; width: 100%; height: 100%; }
+    .badge.status[data-status="1"] .icon { color: var(--status-ongoing); }
+    .badge.status[data-status="2"] .icon { color: var(--status-completed); }
+    .badge.status[data-status="4"] .icon { color: var(--status-completed); }
+    .badge.status[data-status="6"] .icon { color: var(--status-hiatus); }
+    .badge.status[data-status="5"] .icon { color: var(--error); }
+
+    .actions { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <img class="bg" src="/public/featureGraphic.png" alt="" aria-hidden="true" />
+    <img class="logo" src="/public/iconCropped.png" alt="Taison" />
+  </header>
+
+  <main>
+    <section class="card">
+      <h1 class="title" id="title">Opening in Taison…</h1>
+      <p class="by" id="by" hidden></p>
+      <p class="from">Shared from <span class="source-name" id="source-name">Unknown source</span></p>
+
+      <div class="badges" id="badges"></div>
+
+      <div class="actions">
+        <a class="btn primary" id="openBtn" href="#">Open in Taison</a>
+        <a class="btn ghost" id="sourceBtn" href="#" rel="noopener">Open original source page</a>
+        <a class="btn secondary" id="installBtn" href="https://github.com/Gent8/Taison/releases/latest" rel="noopener">Get Taison</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(location.search);
+      const sourceId   = params.get("s")  || "";
+      const sourceName = params.get("n")  || "";
+      const sourceLang = params.get("l")  || "";
+      const titleParam = params.get("t")  || "";
+      const encodedUrl = params.get("u")  || "";
+      const encodedCu  = params.get("cu") || "";
+      const author     = params.get("a")  || "";
+      const genres     = params.get("g")  || "";
+      const status     = params.get("st") || "";
+
+      const STATUS_LABELS = {
+        "0": "Unknown",
+        "1": "Ongoing",
+        "2": "Completed",
+        "3": "Licensed",
+        "4": "Publishing finished",
+        "5": "Cancelled",
+        "6": "On hiatus",
+      };
+
+      const STATUS_ICON_PATHS = {
+        "1": "M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z",
+        "2": "M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L1.83 12 .41 13.41z",
+        "3": "M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z",
+        "4": "M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z",
+        "5": "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z",
+        "6": "M6 19h4V5H6v14zm8-14v14h4V5h-4z",
+      };
+
+      function statusIconSvg(code) {
+        const path = STATUS_ICON_PATHS[code];
+        if (!path) return "";
+        return '<span class="icon" aria-hidden="true">' +
+          '<svg viewBox="0 0 24 24" fill="currentColor"><path d="' + path + '"/></svg>' +
+        '</span>';
+      }
+
+      const titleEl   = document.getElementById("title");
+      const byEl      = document.getElementById("by");
+      const srcNameEl = document.getElementById("source-name");
+      const badgesEl  = document.getElementById("badges");
+      const openBtn   = document.getElementById("openBtn");
+      const srcBtn    = document.getElementById("sourceBtn");
+
+      function b64urlDecode(s) {
+        if (!s) return "";
+        const pad = "=".repeat((4 - s.length % 4) % 4);
+        const b64 = (s + pad).replace(/-/g, "+").replace(/_/g, "/");
+        try { return decodeURIComponent(escape(atob(b64))); }
+        catch (e) { return ""; }
+      }
+      function esc(s) {
+        return String(s).replace(/[&<>"']/g, c => (
+          {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]
+        ));
+      }
+
+      const sourceUrl  = b64urlDecode(encodedUrl);
+      const chapterUrl = b64urlDecode(encodedCu);
+
+      titleEl.textContent = titleParam || "Shared manga entry";
+      if (!titleParam) titleEl.classList.add("invalid");
+
+      if (author) {
+        byEl.textContent = "by " + author;
+        byEl.hidden = false;
+      }
+
+      srcNameEl.textContent = sourceName
+        ? sourceName + (sourceLang ? " (" + sourceLang + ")" : "")
+        : "Unknown source";
+
+      const badges = [];
+      if (status && STATUS_LABELS[status]) {
+        badges.push(
+          '<span class="badge status" data-status="' + esc(status) + '">' +
+            statusIconSvg(status) + esc(STATUS_LABELS[status]) +
+          '</span>'
+        );
+      }
+      if (genres) {
+        genres.split(",").map(g => g.trim()).filter(Boolean).slice(0, 5).forEach(g => {
+          badges.push('<span class="badge">' + esc(g) + '</span>');
+        });
+      }
+      badgesEl.innerHTML = badges.join("");
+      if (badges.length === 0) badgesEl.style.display = "none";
+
+      const intentUrl = "intent://" + location.host + location.pathname + location.search +
+        "#Intent;scheme=https;package=com.gent8.taison;" +
+        "S.browser_fallback_url=" + encodeURIComponent("https://github.com/Gent8/Taison/releases/latest") +
+        ";end";
+
+      const isAndroid = /android/i.test(navigator.userAgent || "");
+      if (isAndroid) {
+        openBtn.href = intentUrl;
+      } else if (sourceUrl) {
+        openBtn.href = sourceUrl;
+        openBtn.textContent = "Open original source page";
+      } else {
+        openBtn.style.display = "none";
+      }
+
+      if (sourceUrl) {
+        srcBtn.href = sourceUrl;
+        if (!isAndroid) srcBtn.style.display = "none";
+      } else {
+        srcBtn.style.display = "none";
+      }
+
+      if (!sourceId || !titleParam) {
+        srcNameEl.textContent = "Missing required fields.";
+        srcNameEl.classList.add("invalid");
+        openBtn.style.display = "none";
+        srcBtn.style.display = "none";
+      }
+    })();
+  </script>
+</body>
+</html>
