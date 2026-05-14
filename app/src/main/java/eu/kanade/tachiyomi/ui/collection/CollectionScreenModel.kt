@@ -48,14 +48,21 @@ class CollectionScreenModel(
             getCollectionEntries.subscribe(collectionId)
                 .collectLatest { entries ->
                     val collection = getCollectionById.await(collectionId)
-                    mutableState.update {
-                        if (collection != null) {
-                            CollectionScreenState.Success(
-                                collection = collection,
-                                entries = entries.toImmutableList(),
-                            )
-                        } else {
+                    mutableState.update { current ->
+                        if (collection == null) {
                             CollectionScreenState.Loading
+                        } else {
+                            val newEntries = entries.toImmutableList()
+                            when (current) {
+                                is CollectionScreenState.Success -> current.copy(
+                                    collection = collection,
+                                    entries = newEntries,
+                                )
+                                else -> CollectionScreenState.Success(
+                                    collection = collection,
+                                    entries = newEntries,
+                                )
+                            }
                         }
                     }
                 }
@@ -75,7 +82,16 @@ class CollectionScreenModel(
         screenModelScope.launch {
             when (updateCollectionDescription.await(collectionId, description)) {
                 is UpdateCollectionDescription.Result.InternalError -> _events.send(CollectionEvent.InternalError)
-                else -> {}
+                else -> {
+                    mutableState.update { current ->
+                        when (current) {
+                            is CollectionScreenState.Success -> current.copy(
+                                collection = current.collection.copy(description = description),
+                            )
+                            else -> current
+                        }
+                    }
+                }
             }
         }
     }

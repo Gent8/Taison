@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,7 +16,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SmallFloatingActionButton
@@ -28,7 +26,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import eu.kanade.presentation.collection.components.CollectionEntryEditRow
 import eu.kanade.presentation.collection.components.CollectionEntryRow
@@ -43,6 +40,7 @@ import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.components.material.topSmallPaddingValues
+import tachiyomi.presentation.core.i18n.pluralStringResource
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.EmptyScreen
 import tachiyomi.presentation.core.util.plus
@@ -191,12 +189,11 @@ private fun CollectionViewContent(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = "$entryCount entries",
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    text = pluralStringResource(MR.plurals.collection_entry_count, entryCount, entryCount),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onBackground,
                 )
             }
-            HorizontalDivider()
         }
 
         // Entries
@@ -227,8 +224,8 @@ private fun CollectionEditContent(
     val entriesState = remember { entries.toMutableStateList() }
 
     val reorderableState = rememberReorderableLazyListState(lazyListState, paddingValues) { from, to ->
-        // Offset by header items (description + count header)
-        val headerCount = if (description.isNotEmpty()) 2 else 1
+        // Offset by header items (description placeholder always rendered + count header)
+        val headerCount = 2
         val fromIndex = from.index - headerCount
         val toIndex = to.index - headerCount
 
@@ -251,22 +248,35 @@ private fun CollectionEditContent(
         state = lazyListState,
         contentPadding = paddingValues + topSmallPaddingValues,
     ) {
-        // Description header (clickable to edit)
+        // Description header (clickable to edit, with pencil affordance)
         item(key = "description") {
-            Text(
-                text = description.ifEmpty { stringResource(MR.strings.collection_add_description) },
-                style = MaterialTheme.typography.bodyMedium,
-                color = if (description.isEmpty()) {
-                    MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
-                } else {
-                    MaterialTheme.colorScheme.onSurfaceVariant
-                },
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable(onClick = onClickEditDescription)
                     .padding(horizontal = MaterialTheme.padding.medium)
                     .padding(bottom = MaterialTheme.padding.small),
-            )
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    text = description.ifEmpty { stringResource(MR.strings.collection_add_description) },
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = if (description.isEmpty()) {
+                        MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+                    } else {
+                        MaterialTheme.colorScheme.onSurfaceVariant
+                    },
+                    modifier = Modifier.weight(1f),
+                )
+                Icon(
+                    imageVector = Icons.Filled.Edit,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier
+                        .padding(start = MaterialTheme.padding.small)
+                        .height(20.dp),
+                )
+            }
         }
 
         // Entry count header
@@ -281,12 +291,15 @@ private fun CollectionEditContent(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = "${entriesState.size} entries",
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    text = pluralStringResource(
+                        MR.plurals.collection_entry_count,
+                        entriesState.size,
+                        entriesState.size,
+                    ),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onBackground,
                 )
             }
-            HorizontalDivider()
         }
 
         // Reorderable entries

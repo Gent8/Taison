@@ -10,7 +10,7 @@ class CreateCollection(
     private val collectionRepository: CollectionRepository,
 ) {
 
-    suspend fun await(name: String): Result = withNonCancellableContext {
+    suspend fun await(name: String, categoryId: Long? = null): Result = withNonCancellableContext {
         val collections = collectionRepository.getAll()
         val nextOrder = collections.maxOfOrNull { it.order }?.plus(1) ?: 0
         val newCollection = Collection(
@@ -18,11 +18,12 @@ class CreateCollection(
             name = name,
             order = nextOrder,
             createdAt = System.currentTimeMillis(),
+            categoryId = categoryId,
         )
 
         try {
-            collectionRepository.insert(newCollection)
-            Result.Success
+            val id = collectionRepository.insert(newCollection)
+            Result.Success(id)
         } catch (e: Exception) {
             logcat(LogPriority.ERROR, e)
             Result.InternalError(e)
@@ -30,7 +31,7 @@ class CreateCollection(
     }
 
     sealed interface Result {
-        data object Success : Result
+        data class Success(val id: Long) : Result
         data class InternalError(val error: Throwable) : Result
     }
 }

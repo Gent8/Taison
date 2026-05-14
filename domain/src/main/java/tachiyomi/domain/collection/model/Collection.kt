@@ -8,4 +8,5 @@ data class Collection(
     val description: String = "",
     val order: Long,
     val createdAt: Long,
+    val categoryId: Long? = null,
 ) : Serializable

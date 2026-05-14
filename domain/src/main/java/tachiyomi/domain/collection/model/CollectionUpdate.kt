@@ -5,4 +5,5 @@ data class CollectionUpdate(
     val name: String? = null,
     val description: String? = null,
     val order: Long? = null,
+    val categoryId: Long? = null,
 )

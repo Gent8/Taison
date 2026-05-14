@@ -55,9 +55,9 @@ import eu.kanade.tachiyomi.ui.setting.SettingsScreen
 import eu.kanade.tachiyomi.ui.webview.WebViewScreen
 import eu.kanade.tachiyomi.util.system.copyToClipboard
 import eu.kanade.tachiyomi.util.system.toast
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.launch
 import logcat.LogPriority
-import kotlinx.collections.immutable.toImmutableList
 import mihon.feature.migration.config.MigrationConfigScreen
 import mihon.feature.migration.dialog.MigrateMangaDialog
 import tachiyomi.core.common.i18n.stringResource

@@ -54,6 +54,10 @@ import tachiyomi.domain.category.model.Category.Companion.UNCATEGORIZED_ID
 import tachiyomi.domain.chapter.interactor.GetBookmarkedChaptersByMangaId
 import tachiyomi.domain.chapter.interactor.GetChaptersByMangaId
 import tachiyomi.domain.chapter.model.Chapter
+import tachiyomi.domain.collection.interactor.AddMangaToCollection
+import tachiyomi.domain.collection.interactor.CreateCollection
+import tachiyomi.domain.collection.interactor.GetCollectionCoverData
+import tachiyomi.domain.collection.interactor.GetCollectionsWithEntryCount
 import tachiyomi.domain.history.interactor.GetNextChapters
 import tachiyomi.domain.library.model.LibraryDisplayMode
 import tachiyomi.domain.library.model.LibraryGroup
@@ -93,9 +97,10 @@ class LibraryScreenModel(
     private val downloadManager: DownloadManager = Injekt.get(),
     private val downloadCache: DownloadCache = Injekt.get(),
     private val trackerManager: TrackerManager = Injekt.get(),
-    private val getCollections: tachiyomi.domain.collection.interactor.GetCollections = Injekt.get(),
-    private val getCollectionCoverData: tachiyomi.domain.collection.interactor.GetCollectionCoverData = Injekt.get(),
-    private val collectionRepository: tachiyomi.domain.collection.repository.CollectionRepository = Injekt.get(),
+    private val getCollectionsWithEntryCount: GetCollectionsWithEntryCount = Injekt.get(),
+    private val getCollectionCoverData: GetCollectionCoverData = Injekt.get(),
+    private val createCollection: CreateCollection = Injekt.get(),
+    private val addMangaToCollection: AddMangaToCollection = Injekt.get(),
 ) : StateScreenModel<LibraryScreenModel.State>(State()) {
 
     init {
@@ -149,7 +154,11 @@ class LibraryScreenModel(
                 .distinctUntilChanged()
                 .collectLatest { libraryData ->
                     mutableState.update { state ->
-                        state.copy(libraryData = libraryData)
+                        state.copy(
+                            libraryData = libraryData.copy(
+                                collectionItems = state.libraryData.collectionItems,
+                            ),
+                        )
                     }
                 }
         }
@@ -163,12 +172,18 @@ class LibraryScreenModel(
                 libraryPreferences.groupLibraryBy().changes(),
                 libraryPreferences.sortingMode.changes(),
             ) { data, groupType, globalSort ->
+                // Force-show the system category if any collection bucket lands there
+                // (categoryId == null, or pointing at a now-deleted category).
+                val collectionsFallToSystem = data.collectionItems.any { item ->
+                    val id = item.collection.categoryId
+                    id == null || data.categories.none { it.id == id }
+                }
                 val grouped = data.favorites
                     .applyGrouping(
                         categories = data.categories,
                         groupType = groupType,
                         showHiddenCategories = data.showHiddenCategories,
-                        showSystemCategory = data.showSystemCategory,
+                        showSystemCategory = data.showSystemCategory || collectionsFallToSystem,
                     )
                     .applySort(
                         data.favoritesById,
@@ -291,29 +306,30 @@ class LibraryScreenModel(
             }
             .launchIn(screenModelScope)
 
-        // Subscribe to collections for library grid
-        screenModelScope.launchIO {
-            getCollections.subscribe()
-                .distinctUntilChanged()
-                .collectLatest { collections ->
-                    val collectionItems = collections.map { collection ->
-                        val coverData = getCollectionCoverData.await(collection.id)
-                        val entryCount = collectionRepository.getEntryCountForCollection(collection.id)
-                        LibraryCollectionItem(
-                            collection = collection,
-                            coverData = coverData,
-                            entryCount = entryCount,
-                        )
-                    }
-                    mutableState.update { state ->
-                        state.copy(
-                            libraryData = state.libraryData.copy(
-                                collectionItems = collectionItems,
-                            ),
-                        )
-                    }
-                }
+        // Subscribe to collections for library grid (reactive to entry inserts/deletes)
+        combine(
+            getCollectionsWithEntryCount.subscribe(),
+            getCollectionCoverData.subscribeAll(),
+        ) { collectionsWithCount, coversByCollection ->
+            collectionsWithCount.map { (collection, entryCount) ->
+                LibraryCollectionItem(
+                    collection = collection,
+                    coverData = coversByCollection[collection.id].orEmpty(),
+                    entryCount = entryCount,
+                )
+            }
         }
+            .distinctUntilChanged()
+            .onEach { collectionItems ->
+                mutableState.update { state ->
+                    state.copy(
+                        libraryData = state.libraryData.copy(
+                            collectionItems = collectionItems,
+                        ),
+                    )
+                }
+            }
+            .launchIn(screenModelScope)
     }
 
     private fun List<LibraryItem>.applyFilters(
@@ -954,6 +970,34 @@ class LibraryScreenModel(
         mutableState.update { it.copy(dialog = Dialog.DeleteManga(state.value.selectedManga)) }
     }
 
+    fun openAddToCollectionDialog() {
+        mutableState.update { it.copy(dialog = Dialog.AddToCollection(state.value.selectedManga)) }
+    }
+
+    fun addMangasToCollection(collectionId: Long, manga: List<Manga>) {
+        screenModelScope.launchIO {
+            manga.forEach { addMangaToCollection.await(collectionId, it.id) }
+            clearSelection()
+            mutableState.update { it.copy(dialog = null) }
+        }
+    }
+
+    fun createCollectionAndAddMangas(name: String, manga: List<Manga>) {
+        screenModelScope.launchIO {
+            val activeCategoryId = state.value.activeCategory
+                ?.takeUnless { it.isSystemCategory }
+                ?.id
+            when (val result = createCollection.await(name, activeCategoryId)) {
+                is tachiyomi.domain.collection.interactor.CreateCollection.Result.Success -> {
+                    manga.forEach { addMangaToCollection.await(result.id, it.id) }
+                    clearSelection()
+                    mutableState.update { it.copy(dialog = null) }
+                }
+                is tachiyomi.domain.collection.interactor.CreateCollection.Result.InternalError -> Unit
+            }
+        }
+    }
+
     fun closeDialog() {
         mutableState.update { it.copy(dialog = null) }
     }
@@ -965,6 +1009,7 @@ class LibraryScreenModel(
             val initialSelection: ImmutableList<CheckboxState<Category>>,
         ) : Dialog
         data class DeleteManga(val manga: List<Manga>) : Dialog
+        data class AddToCollection(val manga: List<Manga>) : Dialog
     }
 
     @Immutable
@@ -1028,7 +1073,7 @@ class LibraryScreenModel(
 
         val activeCategory: Category? = displayedCategories.getOrNull(coercedActiveCategoryIndex)
 
-        val isLibraryEmpty = libraryData.favorites.isEmpty()
+        val isLibraryEmpty = libraryData.favorites.isEmpty() && libraryData.collectionItems.isEmpty()
 
         val selectionMode = selection.isNotEmpty()
 
@@ -1043,10 +1088,21 @@ class LibraryScreenModel(
         fun getItemsForCategory(category: Category): List<LibraryGridItem> {
             val mangaItems: List<LibraryGridItem> = groupedFavorites[category].orEmpty()
                 .mapNotNull { libraryData.favoritesById[it] }
+            // Library filters (downloaded, unread, etc.) only make sense for manga,
+            // so when any filter is active we hide collections to avoid confusion.
+            if (hasActiveFilters) return mangaItems
+            val onlyInThisCategory = libraryData.collectionItems.filter { item ->
+                val rawId = item.collection.categoryId
+                // Treat a categoryId pointing at a now-deleted category as null,
+                // so the collection still surfaces in the system "Default" tab
+                // instead of silently disappearing.
+                val effectiveId = rawId?.takeIf { id -> displayedCategories.any { it.id == id } }
+                if (effectiveId != null) effectiveId == category.id else category.isSystemCategory
+            }
             val filteredCollections: List<LibraryGridItem> = if (searchQuery.isNullOrEmpty()) {
-                libraryData.collectionItems
+                onlyInThisCategory
             } else {
-                libraryData.collectionItems.filter { it.matches(searchQuery) }
+                onlyInThisCategory.filter { it.matches(searchQuery) }
             }
             return mangaItems + filteredCollections
         }

@@ -7,10 +7,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.FilterList
 import androidx.compose.material.icons.outlined.FlipToBack
 import androidx.compose.material.icons.outlined.KeyboardArrowDown
 import androidx.compose.material.icons.outlined.SelectAll
+import androidx.compose.material.icons.outlined.SwapCalls
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
@@ -42,6 +44,8 @@ fun LibraryToolbar(
     onClickUnselectAll: () -> Unit,
     onClickSelectAll: () -> Unit,
     onClickInvertSelection: () -> Unit,
+    onClickMigrate: () -> Unit,
+    onClickDelete: () -> Unit,
     onClickFilter: () -> Unit,
     onClickRefresh: () -> Unit,
     onClickGlobalUpdate: () -> Unit,
@@ -56,6 +60,8 @@ fun LibraryToolbar(
         onClickUnselectAll = onClickUnselectAll,
         onClickSelectAll = onClickSelectAll,
         onClickInvertSelection = onClickInvertSelection,
+        onClickMigrate = onClickMigrate,
+        onClickDelete = onClickDelete,
     )
     else -> LibraryRegularToolbar(
         title = title,
@@ -165,6 +171,8 @@ private fun LibrarySelectionToolbar(
     onClickUnselectAll: () -> Unit,
     onClickSelectAll: () -> Unit,
     onClickInvertSelection: () -> Unit,
+    onClickMigrate: () -> Unit,
+    onClickDelete: () -> Unit,
 ) {
     AppBar(
         titleContent = { Text(text = "$selectedCount") },
@@ -180,6 +188,16 @@ private fun LibrarySelectionToolbar(
                         title = stringResource(MR.strings.action_select_inverse),
                         icon = Icons.Outlined.FlipToBack,
                         onClick = onClickInvertSelection,
+                    ),
+                    AppBar.Action(
+                        title = stringResource(MR.strings.migrate),
+                        icon = Icons.Outlined.SwapCalls,
+                        onClick = onClickMigrate,
+                    ),
+                    AppBar.Action(
+                        title = stringResource(MR.strings.action_delete),
+                        icon = Icons.Outlined.Delete,
+                        onClick = onClickDelete,
                     ),
                 ),
             )

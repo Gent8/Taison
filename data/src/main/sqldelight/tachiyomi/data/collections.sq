@@ -3,7 +3,8 @@ CREATE TABLE collections(
     name TEXT NOT NULL,
     description TEXT NOT NULL DEFAULT '',
     sort INTEGER NOT NULL,
-    created_at INTEGER NOT NULL DEFAULT 0
+    created_at INTEGER NOT NULL DEFAULT 0,
+    category_id INTEGER
 );
 
 CREATE TABLE collection_entries(
@@ -22,9 +23,37 @@ _id AS id,
 name,
 description,
 sort AS `order`,
-created_at AS createdAt
+created_at AS createdAt,
+category_id AS categoryId
 FROM collections
 ORDER BY sort;
+
+getCollectionsWithEntryCount:
+SELECT
+  c._id AS id,
+  c.name,
+  c.description,
+  c.sort AS `order`,
+  c.created_at AS createdAt,
+  c.category_id AS categoryId,
+  COUNT(ce._id) AS entryCount
+FROM collections c
+LEFT JOIN collection_entries ce ON ce.collection_id = c._id
+GROUP BY c._id
+ORDER BY c.sort;
+
+getAllCollectionCovers:
+SELECT
+  CE.collection_id AS collectionId,
+  M._id AS mangaId,
+  M.source AS sourceId,
+  M.thumbnail_url AS thumbnailUrl,
+  M.cover_last_modified AS coverLastModified,
+  M.favorite AS isFavorite,
+  CE.position
+FROM collection_entries CE
+JOIN mangas M ON CE.manga_id = M._id
+ORDER BY CE.collection_id, CE.position;
 
 getCollectionById:
 SELECT
@@ -32,7 +61,8 @@ _id AS id,
 name,
 description,
 sort AS `order`,
-created_at AS createdAt
+created_at AS createdAt,
+category_id AS categoryId
 FROM collections
 WHERE _id = :id
 LIMIT 1;
@@ -43,7 +73,8 @@ C._id AS id,
 C.name,
 C.description,
 C.sort AS `order`,
-C.created_at AS createdAt
+C.created_at AS createdAt,
+C.category_id AS categoryId
 FROM collections C
 JOIN collection_entries CE
 ON C._id = CE.collection_id
@@ -57,6 +88,7 @@ C.name,
 C.description,
 C.sort AS `order`,
 C.created_at AS createdAt,
+C.category_id AS categoryId,
 CE.label
 FROM collections C
 JOIN collection_entries CE ON C._id = CE.collection_id
@@ -150,14 +182,15 @@ FROM collection_entries
 WHERE collection_id = :collectionId;
 
 insertCollection:
-INSERT INTO collections(name, description, sort, created_at)
-VALUES (:name, :description, :order, :createdAt);
+INSERT INTO collections(name, description, sort, created_at, category_id)
+VALUES (:name, :description, :order, :createdAt, :categoryId);
 
 updateCollection:
 UPDATE collections
 SET name = coalesce(:name, name),
     description = coalesce(:description, description),
-    sort = coalesce(:order, sort)
+    sort = coalesce(:order, sort),
+    category_id = coalesce(:categoryId, category_id)
 WHERE _id = :collectionId;
 
 deleteCollection:

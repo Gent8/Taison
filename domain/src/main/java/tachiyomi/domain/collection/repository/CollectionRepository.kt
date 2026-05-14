@@ -5,6 +5,7 @@ import tachiyomi.domain.collection.model.Collection
 import tachiyomi.domain.collection.model.CollectionCoverData
 import tachiyomi.domain.collection.model.CollectionEntryWithManga
 import tachiyomi.domain.collection.model.CollectionUpdate
+import tachiyomi.domain.collection.model.CollectionWithEntryCount
 import tachiyomi.domain.collection.model.CollectionWithLabel
 import tachiyomi.domain.manga.model.Manga
 
@@ -13,6 +14,12 @@ interface CollectionRepository {
     suspend fun getAll(): List<Collection>
 
     fun getAllAsFlow(): Flow<List<Collection>>
+
+    suspend fun getAllWithEntryCount(): List<CollectionWithEntryCount>
+
+    fun getAllWithEntryCountAsFlow(): Flow<List<CollectionWithEntryCount>>
+
+    fun getAllCollectionCoversAsFlow(): Flow<Map<Long, List<CollectionCoverData>>>
 
     suspend fun getById(id: Long): Collection?
 

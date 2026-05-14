@@ -26,13 +26,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Label
 import androidx.compose.material.icons.outlined.BookmarkAdd
 import androidx.compose.material.icons.outlined.BookmarkRemove
+import androidx.compose.material.icons.outlined.CollectionsBookmark
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.DoneAll
 import androidx.compose.material.icons.outlined.Download
-import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.RemoveDone
-import androidx.compose.material.icons.outlined.SwapCalls
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -55,7 +53,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import eu.kanade.presentation.components.DownloadDropdownMenu
-import eu.kanade.presentation.components.DropdownMenu
 import eu.kanade.presentation.manga.DownloadAction
 import eu.kanade.tachiyomi.R
 import kotlinx.coroutines.Job
@@ -232,11 +229,10 @@ private fun RowScope.Button(
 fun LibraryBottomActionMenu(
     visible: Boolean,
     onChangeCategoryClicked: () -> Unit,
+    onAddToCollectionClicked: () -> Unit,
     onMarkAsReadClicked: () -> Unit,
     onMarkAsUnreadClicked: () -> Unit,
     onDownloadClicked: ((DownloadAction) -> Unit)?,
-    onDeleteClicked: () -> Unit,
-    onMigrateClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     AnimatedVisibility(
@@ -251,7 +247,7 @@ fun LibraryBottomActionMenu(
             color = MaterialTheme.colorScheme.surfaceContainerHigh,
         ) {
             val haptic = LocalHapticFeedback.current
-            val confirm = remember { mutableStateListOf(false, false, false, false, false, false) }
+            val confirm = remember { mutableStateListOf(false, false, false, false, false) }
             var resetJob by remember { mutableStateOf<Job?>(null) }
             val onLongClickItem: (Int) -> Unit = { toConfirmIndex ->
                 haptic.performHapticFeedback(HapticFeedbackType.LongPress)
@@ -262,7 +258,6 @@ fun LibraryBottomActionMenu(
                     if (isActive) confirm[toConfirmIndex] = false
                 }
             }
-            val itemOverflow = onDownloadClicked != null
             Row(
                 modifier = Modifier
                     .windowInsetsPadding(
@@ -279,17 +274,24 @@ fun LibraryBottomActionMenu(
                     onClick = onChangeCategoryClicked,
                 )
                 Button(
-                    title = stringResource(MR.strings.action_mark_as_read),
-                    icon = Icons.Outlined.DoneAll,
+                    title = stringResource(MR.strings.action_add_to_collection),
+                    icon = Icons.Outlined.CollectionsBookmark,
                     toConfirm = confirm[1],
                     onLongClick = { onLongClickItem(1) },
+                    onClick = onAddToCollectionClicked,
+                )
+                Button(
+                    title = stringResource(MR.strings.action_mark_as_read),
+                    icon = Icons.Outlined.DoneAll,
+                    toConfirm = confirm[2],
+                    onLongClick = { onLongClickItem(2) },
                     onClick = onMarkAsReadClicked,
                 )
                 Button(
                     title = stringResource(MR.strings.action_mark_as_unread),
                     icon = Icons.Outlined.RemoveDone,
-                    toConfirm = confirm[2],
-                    onLongClick = { onLongClickItem(2) },
+                    toConfirm = confirm[3],
+                    onLongClick = { onLongClickItem(3) },
                     onClick = onMarkAsUnreadClicked,
                 )
                 if (onDownloadClicked != null) {
@@ -297,8 +299,8 @@ fun LibraryBottomActionMenu(
                     Button(
                         title = stringResource(MR.strings.action_download),
                         icon = Icons.Outlined.Download,
-                        toConfirm = confirm[3],
-                        onLongClick = { onLongClickItem(3) },
+                        toConfirm = confirm[4],
+                        onLongClick = { onLongClickItem(4) },
                         onClick = { downloadExpanded = !downloadExpanded },
                     ) {
                         DownloadDropdownMenu(
@@ -307,46 +309,6 @@ fun LibraryBottomActionMenu(
                             onDownloadClicked = onDownloadClicked,
                             offset = BottomBarMenuDpOffset,
                         )
-                    }
-                }
-                if (!itemOverflow) {
-                    Button(
-                        title = stringResource(MR.strings.migrate),
-                        icon = Icons.Outlined.SwapCalls,
-                        toConfirm = confirm[4],
-                        onLongClick = { onLongClickItem(4) },
-                        onClick = onMigrateClicked,
-                    )
-                    Button(
-                        title = stringResource(MR.strings.action_delete),
-                        icon = Icons.Outlined.Delete,
-                        toConfirm = confirm[5],
-                        onLongClick = { onLongClickItem(5) },
-                        onClick = onDeleteClicked,
-                    )
-                } else {
-                    var overflowMenuOpen by remember { mutableStateOf(false) }
-                    Button(
-                        title = stringResource(MR.strings.label_more),
-                        icon = Icons.Outlined.MoreVert,
-                        toConfirm = false,
-                        onLongClick = {},
-                        onClick = { overflowMenuOpen = true },
-                    ) {
-                        DropdownMenu(
-                            expanded = overflowMenuOpen,
-                            onDismissRequest = { overflowMenuOpen = false },
-                            offset = BottomBarMenuDpOffset,
-                        ) {
-                            DropdownMenuItem(
-                                text = { Text(stringResource(MR.strings.migrate)) },
-                                onClick = onMigrateClicked,
-                            )
-                            DropdownMenuItem(
-                                text = { Text(stringResource(MR.strings.action_delete)) },
-                                onClick = onDeleteClicked,
-                            )
-                        }
                     }
                 }
             }

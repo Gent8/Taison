@@ -38,8 +38,8 @@ import mihon.domain.extensionrepo.service.ExtensionRepoService
 import mihon.domain.migration.usecases.MigrateMangaUseCase
 import mihon.domain.upcoming.interactor.GetUpcomingManga
 import tachiyomi.data.category.CategoryRepositoryImpl
-import tachiyomi.data.collection.CollectionRepositoryImpl
 import tachiyomi.data.chapter.ChapterRepositoryImpl
+import tachiyomi.data.collection.CollectionRepositoryImpl
 import tachiyomi.data.history.HistoryRepositoryImpl
 import tachiyomi.data.manga.MangaRepositoryImpl
 import tachiyomi.data.release.ReleaseServiceImpl
@@ -59,22 +59,6 @@ import tachiyomi.domain.category.interactor.SetMangaCategories
 import tachiyomi.domain.category.interactor.SetSortModeForCategory
 import tachiyomi.domain.category.interactor.UpdateCategory
 import tachiyomi.domain.category.repository.CategoryRepository
-import tachiyomi.domain.collection.interactor.AddMangaToCollection
-import tachiyomi.domain.collection.interactor.CreateCollection
-import tachiyomi.domain.collection.interactor.DeleteCollection
-import tachiyomi.domain.collection.interactor.GetCollectionById
-import tachiyomi.domain.collection.interactor.GetCollectionEntries
-import tachiyomi.domain.collection.interactor.GetCollections
-import tachiyomi.domain.collection.interactor.GetCollectionsByMangaId
-import tachiyomi.domain.collection.interactor.RemoveMangaFromCollection
-import tachiyomi.domain.collection.interactor.RenameCollection
-import tachiyomi.domain.collection.interactor.ReorderCollection
-import tachiyomi.domain.collection.interactor.ReorderCollectionEntry
-import tachiyomi.domain.collection.interactor.UpdateCollectionEntryLabel
-import tachiyomi.domain.collection.interactor.UpdateCollectionDescription
-import tachiyomi.domain.collection.interactor.GetCollectionsWithLabelByMangaId
-import tachiyomi.domain.collection.interactor.GetCollectionCoverData
-import tachiyomi.domain.collection.repository.CollectionRepository
 import tachiyomi.domain.chapter.interactor.GetBookmarkedChaptersByMangaId
 import tachiyomi.domain.chapter.interactor.GetChapter
 import tachiyomi.domain.chapter.interactor.GetChapterByUrlAndMangaId
@@ -83,6 +67,23 @@ import tachiyomi.domain.chapter.interactor.SetMangaDefaultChapterFlags
 import tachiyomi.domain.chapter.interactor.ShouldUpdateDbChapter
 import tachiyomi.domain.chapter.interactor.UpdateChapter
 import tachiyomi.domain.chapter.repository.ChapterRepository
+import tachiyomi.domain.collection.interactor.AddMangaToCollection
+import tachiyomi.domain.collection.interactor.CreateCollection
+import tachiyomi.domain.collection.interactor.DeleteCollection
+import tachiyomi.domain.collection.interactor.GetCollectionById
+import tachiyomi.domain.collection.interactor.GetCollectionCoverData
+import tachiyomi.domain.collection.interactor.GetCollectionEntries
+import tachiyomi.domain.collection.interactor.GetCollections
+import tachiyomi.domain.collection.interactor.GetCollectionsByMangaId
+import tachiyomi.domain.collection.interactor.GetCollectionsWithEntryCount
+import tachiyomi.domain.collection.interactor.GetCollectionsWithLabelByMangaId
+import tachiyomi.domain.collection.interactor.RemoveMangaFromCollection
+import tachiyomi.domain.collection.interactor.RenameCollection
+import tachiyomi.domain.collection.interactor.ReorderCollection
+import tachiyomi.domain.collection.interactor.ReorderCollectionEntry
+import tachiyomi.domain.collection.interactor.UpdateCollectionDescription
+import tachiyomi.domain.collection.interactor.UpdateCollectionEntryLabel
+import tachiyomi.domain.collection.repository.CollectionRepository
 import tachiyomi.domain.history.interactor.GetHistory
 import tachiyomi.domain.history.interactor.GetNextChapters
 import tachiyomi.domain.history.interactor.GetTotalReadDuration
@@ -137,6 +138,7 @@ class DomainModule : InjektModule {
 
         addSingletonFactory<CollectionRepository> { CollectionRepositoryImpl(get()) }
         addFactory { GetCollections(get()) }
+        addFactory { GetCollectionsWithEntryCount(get()) }
         addFactory { GetCollectionById(get()) }
         addFactory { GetCollectionsByMangaId(get()) }
         addFactory { GetCollectionEntries(get()) }

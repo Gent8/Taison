@@ -38,6 +38,7 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import eu.kanade.presentation.category.components.ChangeCategoryDialog
 import eu.kanade.presentation.category.visualName
+import eu.kanade.presentation.collection.components.AddToCollectionDialog
 import eu.kanade.presentation.library.DeleteLibraryMangaDialog
 import eu.kanade.presentation.library.LibrarySettingsDialog
 import eu.kanade.presentation.library.components.LibraryContent
@@ -55,6 +56,7 @@ import eu.kanade.tachiyomi.ui.main.MainActivity
 import eu.kanade.tachiyomi.ui.manga.MangaScreen
 import eu.kanade.tachiyomi.ui.reader.ReaderActivity
 import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -63,6 +65,7 @@ import mihon.feature.migration.config.MigrationConfigScreen
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.domain.category.model.Category
+import tachiyomi.domain.collection.interactor.GetCollections
 import tachiyomi.domain.library.model.LibraryManga
 import tachiyomi.domain.manga.model.Manga
 import tachiyomi.i18n.MR
@@ -72,6 +75,8 @@ import tachiyomi.presentation.core.screens.EmptyScreen
 import tachiyomi.presentation.core.screens.EmptyScreenAction
 import tachiyomi.presentation.core.screens.LoadingScreen
 import tachiyomi.source.local.isLocal
+import uy.kohesive.injekt.Injekt
+import uy.kohesive.injekt.api.get
 
 data object LibraryTab : Tab {
 
@@ -146,6 +151,12 @@ data object LibraryTab : Tab {
                         onClickUnselectAll = screenModel::clearSelection,
                         onClickSelectAll = screenModel::selectAll,
                         onClickInvertSelection = screenModel::invertSelection,
+                        onClickMigrate = {
+                            val selection = state.selection
+                            screenModel.clearSelection()
+                            navigator.push(MigrationConfigScreen(selection))
+                        },
+                        onClickDelete = screenModel::openDeleteMangaDialog,
                         onClickFilter = screenModel::showSettingsDialog,
                         onClickRefresh = { onClickRefresh(state.activeCategory) },
                         onClickGlobalUpdate = { onClickRefresh(null) },
@@ -200,16 +211,11 @@ data object LibraryTab : Tab {
                 LibraryBottomActionMenu(
                     visible = state.selectionMode,
                     onChangeCategoryClicked = screenModel::openChangeCategoryDialog,
+                    onAddToCollectionClicked = screenModel::openAddToCollectionDialog,
                     onMarkAsReadClicked = { screenModel.markReadSelection(true) },
                     onMarkAsUnreadClicked = { screenModel.markReadSelection(false) },
                     onDownloadClicked = screenModel::performDownloadAction
                         .takeIf { state.selectedManga.fastAll { !it.isLocal() } },
-                    onDeleteClicked = screenModel::openDeleteMangaDialog,
-                    onMigrateClicked = {
-                        val selection = state.selection
-                        screenModel.clearSelection()
-                        navigator.push(MigrationConfigScreen(selection))
-                    },
                 )
             },
             snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
@@ -306,6 +312,19 @@ data object LibraryTab : Tab {
                     onConfirm = { deleteManga, deleteChapter ->
                         screenModel.removeMangas(dialog.manga, deleteManga, deleteChapter)
                         screenModel.clearSelection()
+                    },
+                )
+            }
+            is LibraryScreenModel.Dialog.AddToCollection -> {
+                val getCollections: GetCollections = remember { Injekt.get() }
+                val collections by getCollections.subscribe().collectAsState(initial = emptyList())
+                AddToCollectionDialog(
+                    onDismissRequest = onDismissRequest,
+                    collections = collections.toImmutableList(),
+                    onSelectCollection = { id -> screenModel.addMangasToCollection(id, dialog.manga) },
+                    onCreateCollection = { name ->
+                        screenModel.createCollectionAndAddMangas(name, dialog.manga)
+                        onDismissRequest()
                     },
                 )
             }

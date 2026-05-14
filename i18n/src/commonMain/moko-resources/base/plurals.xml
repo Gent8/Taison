@@ -96,6 +96,11 @@
         <item quantity="other">%d repos</item>
     </plurals>
 
+    <plurals name="collection_entry_count">
+        <item quantity="one">%d entry</item>
+        <item quantity="other">%d entries</item>
+    </plurals>
+
     <!--Migration-->
     <plurals name="migrationListScreen.migrateDialog.migrateTitle">
         <item quantity="one">Migrate %1$d entry?</item>

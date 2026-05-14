@@ -2,12 +2,14 @@ package tachiyomi.data.collection
 
 import eu.kanade.tachiyomi.source.model.UpdateStrategy
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import tachiyomi.data.DatabaseHandler
 import tachiyomi.domain.collection.model.Collection
 import tachiyomi.domain.collection.model.CollectionCoverData
 import tachiyomi.domain.collection.model.CollectionEntry
 import tachiyomi.domain.collection.model.CollectionEntryWithManga
 import tachiyomi.domain.collection.model.CollectionUpdate
+import tachiyomi.domain.collection.model.CollectionWithEntryCount
 import tachiyomi.domain.collection.model.CollectionWithLabel
 import tachiyomi.domain.collection.repository.CollectionRepository
 import tachiyomi.domain.manga.model.Manga
@@ -22,6 +24,27 @@ class CollectionRepositoryImpl(
 
     override fun getAllAsFlow(): Flow<List<Collection>> {
         return handler.subscribeToList { collectionsQueries.getCollections(::mapCollection) }
+    }
+
+    override suspend fun getAllWithEntryCount(): List<CollectionWithEntryCount> {
+        return handler.awaitList {
+            collectionsQueries.getCollectionsWithEntryCount(::mapCollectionWithEntryCount)
+        }
+    }
+
+    override fun getAllWithEntryCountAsFlow(): Flow<List<CollectionWithEntryCount>> {
+        return handler.subscribeToList {
+            collectionsQueries.getCollectionsWithEntryCount(::mapCollectionWithEntryCount)
+        }
+    }
+
+    override fun getAllCollectionCoversAsFlow(): Flow<Map<Long, List<CollectionCoverData>>> {
+        return handler.subscribeToList {
+            collectionsQueries.getAllCollectionCovers(::mapAllCollectionCoverRow)
+        }.map { rows ->
+            rows.groupBy { it.first }
+                .mapValues { (_, list) -> list.map { it.second }.take(3) }
+        }
     }
 
     override suspend fun getById(id: Long): Collection? {
@@ -81,6 +104,7 @@ class CollectionRepositoryImpl(
                 description = collection.description,
                 order = collection.order,
                 createdAt = collection.createdAt,
+                categoryId = collection.categoryId,
             )
             collectionsQueries.selectLastInsertedRowId()
         }
@@ -105,6 +129,7 @@ class CollectionRepositoryImpl(
             name = update.name,
             description = update.description,
             order = update.order,
+            categoryId = update.categoryId,
             collectionId = update.id,
         )
     }
@@ -145,8 +170,9 @@ class CollectionRepositoryImpl(
     }
 
     override suspend fun getMaxEntryPosition(collectionId: Long): Long? {
-        val entries = getEntriesWithManga(collectionId)
-        return entries.maxOfOrNull { it.entry.position }
+        return handler.awaitOneOrNull {
+            collectionsQueries.getMaxEntryPosition(collectionId)
+        }?.maxPosition
     }
 
     private fun mapCollection(
@@ -155,6 +181,7 @@ class CollectionRepositoryImpl(
         description: String,
         order: Long,
         createdAt: Long,
+        categoryId: Long?,
     ): Collection {
         return Collection(
             id = id,
@@ -162,6 +189,7 @@ class CollectionRepositoryImpl(
             description = description,
             order = order,
             createdAt = createdAt,
+            categoryId = categoryId,
         )
     }
 
@@ -171,6 +199,7 @@ class CollectionRepositoryImpl(
         description: String,
         order: Long,
         createdAt: Long,
+        categoryId: Long?,
         label: String,
     ): CollectionWithLabel {
         return CollectionWithLabel(
@@ -180,6 +209,7 @@ class CollectionRepositoryImpl(
                 description = description,
                 order = order,
                 createdAt = createdAt,
+                categoryId = categoryId,
             ),
             label = label,
         )
@@ -240,27 +270,27 @@ class CollectionRepositoryImpl(
                 position = position,
                 label = label,
             ),
-            manga = Manga(
-                id = mId,
+            manga = buildMangaFromColumns(
+                mId = mId,
                 source = source,
-                favorite = favorite,
-                lastUpdate = lastUpdate ?: 0,
-                nextUpdate = nextUpdate ?: 0,
-                fetchInterval = fetchInterval.toInt(),
-                dateAdded = dateAdded,
-                viewerFlags = viewerFlags,
-                chapterFlags = chapterFlags,
-                coverLastModified = coverLastModified,
                 url = url,
-                title = title,
                 artist = artist,
                 author = author,
                 description = description,
                 genre = genre,
+                title = title,
                 status = status,
                 thumbnailUrl = thumbnailUrl,
-                updateStrategy = updateStrategy,
+                favorite = favorite,
+                lastUpdate = lastUpdate,
+                nextUpdate = nextUpdate,
                 initialized = initialized,
+                viewerFlags = viewerFlags,
+                chapterFlags = chapterFlags,
+                coverLastModified = coverLastModified,
+                dateAdded = dateAdded,
+                updateStrategy = updateStrategy,
+                fetchInterval = fetchInterval,
                 lastModifiedAt = lastModifiedAt,
                 favoriteModifiedAt = favoriteModifiedAt,
                 version = version,
@@ -270,6 +300,60 @@ class CollectionRepositoryImpl(
     }
 
     private fun mapMangaFromCollection(
+        mId: Long,
+        source: Long,
+        url: String,
+        artist: String?,
+        author: String?,
+        description: String?,
+        genre: List<String>?,
+        title: String,
+        status: Long,
+        thumbnailUrl: String?,
+        favorite: Boolean,
+        lastUpdate: Long?,
+        nextUpdate: Long?,
+        initialized: Boolean,
+        viewerFlags: Long,
+        chapterFlags: Long,
+        coverLastModified: Long,
+        dateAdded: Long,
+        updateStrategy: UpdateStrategy,
+        fetchInterval: Long,
+        lastModifiedAt: Long,
+        favoriteModifiedAt: Long?,
+        version: Long,
+        notes: String,
+    ): Manga {
+        return buildMangaFromColumns(
+            mId = mId,
+            source = source,
+            url = url,
+            artist = artist,
+            author = author,
+            description = description,
+            genre = genre,
+            title = title,
+            status = status,
+            thumbnailUrl = thumbnailUrl,
+            favorite = favorite,
+            lastUpdate = lastUpdate,
+            nextUpdate = nextUpdate,
+            initialized = initialized,
+            viewerFlags = viewerFlags,
+            chapterFlags = chapterFlags,
+            coverLastModified = coverLastModified,
+            dateAdded = dateAdded,
+            updateStrategy = updateStrategy,
+            fetchInterval = fetchInterval,
+            lastModifiedAt = lastModifiedAt,
+            favoriteModifiedAt = favoriteModifiedAt,
+            version = version,
+            notes = notes,
+        )
+    }
+
+    private fun buildMangaFromColumns(
         mId: Long,
         source: Long,
         url: String,
@@ -320,6 +404,49 @@ class CollectionRepositoryImpl(
             favoriteModifiedAt = favoriteModifiedAt,
             version = version,
             notes = notes,
+        )
+    }
+
+    private fun mapCollectionWithEntryCount(
+        id: Long,
+        name: String,
+        description: String,
+        order: Long,
+        createdAt: Long,
+        categoryId: Long?,
+        entryCount: Long,
+    ): CollectionWithEntryCount {
+        return CollectionWithEntryCount(
+            collection = Collection(
+                id = id,
+                name = name,
+                description = description,
+                order = order,
+                createdAt = createdAt,
+                categoryId = categoryId,
+            ),
+            entryCount = entryCount,
+        )
+    }
+
+    private fun mapAllCollectionCoverRow(
+        collectionId: Long,
+        mangaId: Long,
+        sourceId: Long,
+        thumbnailUrl: String?,
+        coverLastModified: Long,
+        isFavorite: Boolean,
+        position: Long,
+    ): Pair<Long, CollectionCoverData> {
+        // position is included by SQL ordering; we don't need to keep it.
+        @Suppress("UNUSED_VARIABLE")
+        val pos = position
+        return collectionId to CollectionCoverData(
+            mangaId = mangaId,
+            sourceId = sourceId,
+            thumbnailUrl = thumbnailUrl,
+            coverLastModified = coverLastModified,
+            isFavorite = isFavorite,
         )
     }
 }

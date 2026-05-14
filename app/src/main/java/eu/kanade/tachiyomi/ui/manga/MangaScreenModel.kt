@@ -66,7 +66,6 @@ import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.lang.withUIContext
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.category.interactor.GetCategories
-import tachiyomi.domain.collection.model.CollectionWithLabel
 import tachiyomi.domain.category.interactor.SetMangaCategories
 import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.chapter.interactor.SetMangaDefaultChapterFlags
@@ -76,6 +75,7 @@ import tachiyomi.domain.chapter.model.ChapterUpdate
 import tachiyomi.domain.chapter.model.NoChaptersException
 import tachiyomi.domain.chapter.service.calculateChapterGap
 import tachiyomi.domain.chapter.service.getChapterSort
+import tachiyomi.domain.collection.model.CollectionWithLabel
 import tachiyomi.domain.library.service.LibraryPreferences
 import tachiyomi.domain.manga.interactor.GetDuplicateLibraryManga
 import tachiyomi.domain.manga.interactor.GetMangaWithChapters
@@ -121,7 +121,10 @@ class MangaScreenModel(
     private val setMangaCategories: SetMangaCategories = Injekt.get(),
     private val mangaRepository: MangaRepository = Injekt.get(),
     private val filterChaptersForDownload: FilterChaptersForDownload = Injekt.get(),
-    private val getCollectionsWithLabelByMangaId: tachiyomi.domain.collection.interactor.GetCollectionsWithLabelByMangaId = Injekt.get(),
+    private val getCollectionsWithLabelByMangaId:
+    tachiyomi.domain.collection.interactor.GetCollectionsWithLabelByMangaId = Injekt.get(),
+    private val createCollection: tachiyomi.domain.collection.interactor.CreateCollection = Injekt.get(),
+    private val addMangaToCollection: tachiyomi.domain.collection.interactor.AddMangaToCollection = Injekt.get(),
     val snackbarHostState: SnackbarHostState = SnackbarHostState(),
 ) : StateScreenModel<MangaScreenModel.State>(State.Loading) {
 
@@ -1089,6 +1092,26 @@ class MangaScreenModel(
                         it.copy(collections = collections.toImmutableList())
                     }
                 }
+        }
+    }
+
+    fun addToExistingCollection(collectionId: Long) {
+        screenModelScope.launchIO {
+            addMangaToCollection.await(collectionId, mangaId)
+        }
+    }
+
+    fun createCollectionWithManga(name: String) {
+        screenModelScope.launchIO {
+            // Place the new collection in the manga's first non-system category, if any,
+            // so the user actually sees it in the library tab they're working in.
+            val categoryId = getCategories.await(mangaId)
+                .firstOrNull { !it.isSystemCategory }
+                ?.id
+            val result = createCollection.await(name, categoryId)
+            if (result is tachiyomi.domain.collection.interactor.CreateCollection.Result.Success) {
+                addMangaToCollection.await(result.id, mangaId)
+            }
         }
     }
 

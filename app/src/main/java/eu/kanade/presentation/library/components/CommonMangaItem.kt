@@ -121,7 +121,7 @@ fun MangaCompactGridItem(
  * Title overlay for [MangaCompactGridItem]
  */
 @Composable
-private fun BoxScope.CoverTextOverlay(
+internal fun BoxScope.CoverTextOverlay(
     title: String,
     onClickContinueReading: (() -> Unit)? = null,
 ) {
@@ -231,7 +231,7 @@ fun MangaComfortableGridItem(
  * Common cover layout to add contents to be drawn on top of the cover.
  */
 @Composable
-private fun MangaGridCover(
+internal fun MangaGridCover(
     modifier: Modifier = Modifier,
     cover: @Composable BoxScope.() -> Unit = {},
     badgesStart: (@Composable RowScope.() -> Unit)? = null,
@@ -266,7 +266,7 @@ private fun MangaGridCover(
 }
 
 @Composable
-private fun GridItemTitle(
+internal fun GridItemTitle(
     title: String,
     style: TextStyle,
     minLines: Int,
@@ -289,7 +289,7 @@ private fun GridItemTitle(
  * Wrapper for grid items to handle selection state, click and long click.
  */
 @Composable
-private fun GridItemSelectable(
+internal fun GridItemSelectable(
     isSelected: Boolean,
     onClick: () -> Unit,
     onLongClick: () -> Unit,
