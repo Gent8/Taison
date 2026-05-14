@@ -69,7 +69,15 @@ class DeepLinkScreen(
                                 stringRes = MR.strings.label_extensions,
                                 icon = Icons.Outlined.Extension,
                                 onClick = {
-                                    scope.launch { HomeScreen.openTab(HomeScreen.Tab.Browse(toExtensions = true)) }
+                                    navigator.pop()
+                                    scope.launch {
+                                        HomeScreen.openTab(
+                                            HomeScreen.Tab.Browse(
+                                                toExtensions = true,
+                                                extensionsSearchQuery = s.sourceName ?: s.sourceId.toString(),
+                                            ),
+                                        )
+                                    }
                                 },
                             ),
                             EmptyScreenAction(
@@ -103,4 +111,3 @@ class DeepLinkScreen(
         }
     }
 }
-

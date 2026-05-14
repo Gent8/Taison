@@ -158,7 +158,7 @@ object HomeScreen : Screen() {
                             Tab.History -> HistoryTab
                             is Tab.Browse -> {
                                 if (it.toExtensions) {
-                                    BrowseTab.showExtension()
+                                    BrowseTab.showExtension(it.extensionsSearchQuery)
                                 }
                                 BrowseTab
                             }
@@ -306,7 +306,7 @@ object HomeScreen : Screen() {
         data class Library(val mangaIdToOpen: Long? = null) : Tab
         data object Updates : Tab
         data object History : Tab
-        data class Browse(val toExtensions: Boolean = false) : Tab
+        data class Browse(val toExtensions: Boolean = false, val extensionsSearchQuery: String? = null) : Tab
         data class More(val toDownloads: Boolean) : Tab
     }
 }

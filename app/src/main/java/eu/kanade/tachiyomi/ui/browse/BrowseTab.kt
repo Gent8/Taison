@@ -48,10 +48,10 @@ data object BrowseTab : Tab {
         navigator.push(GlobalSearchScreen())
     }
 
-    private val switchToExtensionTabChannel = Channel<Unit>(1, BufferOverflow.DROP_OLDEST)
+    private val switchToExtensionTabChannel = Channel<String?>(1, BufferOverflow.DROP_OLDEST)
 
-    fun showExtension() {
-        switchToExtensionTabChannel.trySend(Unit)
+    fun showExtension(searchQuery: String? = null) {
+        switchToExtensionTabChannel.trySend(searchQuery)
     }
 
     @Composable
@@ -79,7 +79,10 @@ data object BrowseTab : Tab {
         )
         LaunchedEffect(Unit) {
             switchToExtensionTabChannel.receiveAsFlow()
-                .collectLatest { state.scrollToPage(1) }
+                .collectLatest { searchQuery ->
+                    if (searchQuery != null) extensionsScreenModel.search(searchQuery)
+                    state.scrollToPage(1)
+                }
         }
 
         LaunchedEffect(Unit) {
