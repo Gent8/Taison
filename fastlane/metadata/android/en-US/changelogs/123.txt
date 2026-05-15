@@ -1,0 +1,10 @@
+A mini release — direct entry sharing between Taison users and themed icon support.
+
+✨ New
+- Share entries directly with other Taison users.
+- Themed icon and adaptive icon support.
+
+🔧 Changed
+- Synced Taison with Mihon v0.19.9.
+
+Collections are in the works and coming soon.

@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -32,7 +33,9 @@ import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
 @Composable
-fun LogoHeader() {
+fun LogoHeader(
+    iconPadding: PaddingValues = PaddingValues(),
+) {
     val uiPreferences = remember { Injekt.get<UiPreferences>() }
     val appTheme by uiPreferences.appTheme.changes()
         .collectAsState(initial = uiPreferences.appTheme.get())
@@ -41,12 +44,14 @@ fun LogoHeader() {
     if (isTaisonTheme) {
         TaisonLogoHeader()
     } else {
-        DefaultLogoHeader()
+        DefaultLogoHeader(iconPadding)
     }
 }
 
 @Composable
-private fun DefaultLogoHeader() {
+private fun DefaultLogoHeader(
+    iconPadding: PaddingValues = PaddingValues(),
+) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -56,7 +61,7 @@ private fun DefaultLogoHeader() {
             contentDescription = null,
             tint = Color.Unspecified,
             modifier = Modifier
-                .padding(vertical = 56.dp)
+                .padding(iconPadding)
                 .size(64.dp),
         )
 

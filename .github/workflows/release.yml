@@ -45,7 +45,7 @@ jobs:
         run: ./gradlew assembleRelease -Pinclude-telemetry -Penable-updater
 
       - name: Sign APK
-        uses: r0adkll/sign-android-release@f30bdd30588842ac76044ecdbd4b6d0e3e813478
+        uses: r0adkll/sign-android-release@a391126403df92c6a0a3988a829dd47f79b89ed7
         with:
           releaseDirectory: app/build/outputs/apk/release
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
@@ -100,7 +100,7 @@ jobs:
         run: ./gradlew assembleFoss -Penable-updater
 
       - name: Sign APK
-        uses: r0adkll/sign-android-release@f30bdd30588842ac76044ecdbd4b6d0e3e813478
+        uses: r0adkll/sign-android-release@a391126403df92c6a0a3988a829dd47f79b89ed7
         with:
           releaseDirectory: app/build/outputs/apk/foss
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
@@ -158,8 +158,8 @@ jobs:
           } > "$body_file"
 
           if awk -v section="$section_title" '
-            $0 == section { found=1 }
-            found && /^## \[/ && $0 != section { exit }
+            index($0, section) == 1 { found=1 }
+            found && /^## \[/ && index($0, section) != 1 { exit }
             found { print }
             END { if (!found) exit 1 }
           ' CHANGELOG.md >> "$body_file"; then
