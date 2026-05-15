@@ -93,7 +93,7 @@
       const sourceName = params.get("n")  || "";
       const sourceLang = params.get("l")  || "";
       const titleParam = params.get("t")  || "";
-      const encodedUrl = params.get("u")  || "";
+      const encodedPu  = params.get("pu") || "";
       const encodedCu  = params.get("cu") || "";
       const author     = params.get("a")  || "";
       const genres     = params.get("g")  || "";
@@ -146,7 +146,7 @@
         ));
       }
 
-      const sourceUrl  = b64urlDecode(encodedUrl);
+      const publicUrl  = b64urlDecode(encodedPu);
       const chapterUrl = b64urlDecode(encodedCu);
 
       titleEl.textContent = titleParam || "Shared manga entry";
@@ -185,15 +185,15 @@
       const isAndroid = /android/i.test(navigator.userAgent || "");
       if (isAndroid) {
         openBtn.href = intentUrl;
-      } else if (sourceUrl) {
-        openBtn.href = sourceUrl;
+      } else if (publicUrl) {
+        openBtn.href = publicUrl;
         openBtn.textContent = "Open original source page";
       } else {
         openBtn.style.display = "none";
       }
 
-      if (sourceUrl) {
-        srcBtn.href = sourceUrl;
+      if (publicUrl) {
+        srcBtn.href = publicUrl;
         if (!isAndroid) srcBtn.style.display = "none";
       } else {
         srcBtn.style.display = "none";

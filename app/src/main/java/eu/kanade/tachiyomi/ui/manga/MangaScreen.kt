@@ -337,7 +337,7 @@ class MangaScreen(
             } else {
                 val taisonLink = TaisonEntryLink(
                     sourceId = source.id,
-                    sourceUrl = fullSourceUrl,
+                    sourceUrl = manga.url,
                     title = manga.title,
                     sourceName = source.name,
                     sourceLang = source.lang,
@@ -345,6 +345,7 @@ class MangaScreen(
                     author = manga.author,
                     genres = manga.genre?.joinToString(", "),
                     status = manga.status.toInt().takeIf { it != 0 },
+                    publicUrl = fullSourceUrl,
                 ).toAppLinkUri()
 
                 // Emit the source URL alongside the Taison link as a graceful-degradation

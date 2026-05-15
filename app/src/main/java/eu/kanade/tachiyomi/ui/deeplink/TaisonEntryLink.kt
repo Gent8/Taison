@@ -13,10 +13,17 @@ import android.util.Base64
  * - App Link (preferred for sharing): `https://taison.gent8.com/e/?<params>`
  * - Custom scheme (no-infra fallback): `taison://entry?<params>`
  *
+ * `u`/`cu` carry the raw source-relative `SManga.url`/`SChapter.url` identifiers — the values the
+ * source's getMangaDetails/getChapterList and NetworkToLocalManga expect. They are NOT the public
+ * https URLs: getMangaUrl()/getChapterUrl() may canonicalize (different host, hash suffix, path
+ * shape) and do not reliably round-trip back to the stored identifier. `pu` separately carries the
+ * public https URL, used only by the web landing page (which can't run extension code) for its
+ * "Open original source page" link.
+ *
  * Encoding rules:
  * - `s`, `v`, `st` are decimal integers.
  * - `n`, `l`, `t`, `a`, `g` are URL-encoded UTF-8 (no Base64).
- * - `u`, `cu`, `c`, `d` are URL-safe Base64 (no padding) of the UTF-8 bytes.
+ * - `u`, `cu`, `pu` are URL-safe Base64 (no padding) of the UTF-8 bytes.
  *
  * Hard caps applied by the sender to keep the URL chat-safe (~2 KB total):
  * - `d` (description) is truncated to [DESCRIPTION_MAX] characters.
@@ -34,6 +41,7 @@ data class TaisonEntryLink(
     val author: String? = null,
     val genres: String? = null,
     val status: Int? = null,
+    val publicUrl: String? = null,
 ) {
     fun toAppLinkUri(): Uri = Uri.Builder()
         .scheme(APP_LINK_SCHEME)
@@ -59,6 +67,7 @@ data class TaisonEntryLink(
         author?.let { appendQueryParameter(PARAM_AUTHOR, truncate(it, AUTHOR_MAX)) }
         genres?.let { appendQueryParameter(PARAM_GENRES, joinedGenres(it)) }
         status?.takeIf { it != 0 }?.let { appendQueryParameter(PARAM_STATUS, it.toString()) }
+        publicUrl?.let { appendQueryParameter(PARAM_PUBLIC_URL, encodeB64(it)) }
     }
 
     companion object {
@@ -79,6 +88,7 @@ data class TaisonEntryLink(
         private const val PARAM_AUTHOR = "a"
         private const val PARAM_GENRES = "g"
         private const val PARAM_STATUS = "st"
+        private const val PARAM_PUBLIC_URL = "pu"
 
         private const val AUTHOR_MAX = 80
         private const val GENRES_MAX = 5
@@ -112,6 +122,7 @@ data class TaisonEntryLink(
                 author = uri.getQueryParameter(PARAM_AUTHOR),
                 genres = uri.getQueryParameter(PARAM_GENRES),
                 status = uri.getQueryParameter(PARAM_STATUS)?.toIntOrNull(),
+                publicUrl = uri.getQueryParameter(PARAM_PUBLIC_URL)?.let(::decodeB64),
             )
         }
 

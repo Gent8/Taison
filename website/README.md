@@ -4,7 +4,9 @@ Static site backing Taison's direct entry sharing feature, served at
 [`https://taison.gent8.com`](https://taison.gent8.com).
 
 When a Taison user shares an entry, the app emits a link of the form
-`https://taison.gent8.com/e/?s=…&t=…&u=…&c=…&d=…&a=…&g=…&st=…`. The browser
+`https://taison.gent8.com/e/?s=…&n=…&l=…&v=…&t=…&u=…&cu=…&a=…&g=…&st=…&pu=…`.
+`u` is the source-relative entry identifier the app resolves against; `pu` is
+the public https URL the page links to as **Open original source page**. The browser
 loads `e/index.html`, which decodes the payload, renders a preview (cover,
 title, author, status, genres, description) and offers an **Open in Taison**
 button. The button dispatches an `intent://` URL that hands off to the

@@ -57,16 +57,12 @@ class DeepLinkScreenModel(
             return
         }
 
-        // The wire format carries the full https URL in `u`; HttpSource.getMangaDetails wants the
-        // source-relative path stored in SManga.url. Strip the known baseUrl prefix to recover it,
-        // falling back to the raw value if the URL doesn't sit under the source's base.
-        val mangaPath = source.baseUrl
-            .takeIf { link.sourceUrl.startsWith(it) }
-            ?.let { link.sourceUrl.removePrefix(it) }
-            ?: link.sourceUrl
-
+        // `u` carries the raw source-relative SManga.url identifier, which is exactly what
+        // getMangaDetails/getChapterList and NetworkToLocalManga expect. It is used verbatim
+        // rather than reconstructed from getMangaUrl(), because getMangaUrl() is free to return
+        // a canonicalized public URL that does not round-trip back to SManga.url.
         val seed = SManga.create().apply {
-            url = mangaPath
+            url = link.sourceUrl
             title = link.title
             link.author?.let { author = it }
             link.genres?.let { genre = it }
@@ -83,11 +79,7 @@ class DeepLinkScreenModel(
         val manga = networkToLocalManga(seed.toDomainManga(source.id))
 
         val chapter = if (link.chapterUrl != null) {
-            val chapterPath = source.baseUrl
-                .takeIf { link.chapterUrl.startsWith(it) }
-                ?.let { link.chapterUrl.removePrefix(it) }
-                ?: link.chapterUrl
-            resolveChapter(source, manga, chapterPath)
+            resolveChapter(source, manga, link.chapterUrl)
         } else {
             null
         }
