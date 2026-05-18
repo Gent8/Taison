@@ -44,6 +44,7 @@ _Requires Android 8.0 or higher._
 
 - **Flexible navigation** – choose tabs or dropdowns across multiple grouping options, including categories, sources, status, and ungrouped items.
 - **History scoping** – History mirrors library navigation, keeps the active group in sync, and supports scoped cleanup.
+- **Direct entry sharing** – share entries with other Taison users and they open directly in the app.
 - **Taison look** – a distinct, warm palette.
 
 ## Changelog

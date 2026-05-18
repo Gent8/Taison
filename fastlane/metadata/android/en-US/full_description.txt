@@ -9,3 +9,4 @@ More Taison features:
 • Group-aware filters for categories, sources, status, and ungrouped items.
 • Customizable category visibility and editable default category names.
 • History eye toggle to show or hide items outside your library, with scoped or full deletions.
+• Direct entry sharing – share entries with other Taison users and they open directly in the app.
