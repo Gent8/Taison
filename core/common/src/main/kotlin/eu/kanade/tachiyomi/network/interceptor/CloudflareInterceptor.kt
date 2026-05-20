@@ -2,6 +2,8 @@ package eu.kanade.tachiyomi.network.interceptor
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
+import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
@@ -119,6 +121,24 @@ class CloudflareInterceptor(
                             // Unlock thread, the challenge wasn't found.
                             latch.countDown()
                         }
+                    }
+                }
+
+                override fun onReceivedError(
+                    view: WebView?,
+                    request: WebResourceRequest?,
+                    error: WebResourceError?,
+                ) {
+                    if (request?.isForMainFrame == true) {
+                        Log.w(
+                            "CloudflareInterceptor",
+                            "Main-frame load failed for ${request.url}: " +
+                                "code=${error?.errorCode} desc=${error?.description}",
+                        )
+                        // The main frame failed to load (DNS, no network, TLS, ...).
+                        // Without releasing the latch, the interceptor would block for
+                        // the full 30-second timeout before giving up.
+                        latch.countDown()
                     }
                 }
             }
