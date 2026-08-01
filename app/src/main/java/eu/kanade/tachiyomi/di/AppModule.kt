@@ -22,6 +22,7 @@ import eu.kanade.tachiyomi.network.NetworkHelper
 import eu.kanade.tachiyomi.source.AndroidSourceManager
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.protobuf.ProtoBuf
+import mihon.core.database.TaisonSchemaRepair
 import nl.adaptivity.xmlutil.XmlDeclMode
 import nl.adaptivity.xmlutil.core.XmlVersion
 import nl.adaptivity.xmlutil.serialization.DefaultXmlSerializationPolicy
@@ -59,6 +60,9 @@ class AppModule(val app: Application) : InjektModule {
         addSingletonFactory<SqlDriver> {
             synchronized(lock) {
                 sqlDriverRef?.get()?.let { return@synchronized it }
+
+                // Must happen before the driver opens the file, since it migrates on first use.
+                TaisonSchemaRepair.repairIfNeeded(app, "tachiyomi.db")
 
                 AndroidxSqliteDriver(
                     driver = BundledSQLiteDriver(),

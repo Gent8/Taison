@@ -19,7 +19,7 @@ The format is a modified version of [Keep a Changelog](https://keepachangelog.co
 This section tracks changes unique to the Taison fork so they don't conflict with upstream Mihon release notes.
 
 ### 🐛 Fixed
-- Fix app failing to start on update from v1.2.x — the database migration renumbering below caused upgrading installs to silently skip the migrations that create the `extension_store` table and the `memo` columns on manga/chapters, crash-looping the app on launch. Existing installs now self-repair on first launch ([@Gent8](https://github.com/Gent8)).
+- Fix app failing to start on update from v1.2.x — the sync below reused the migration slots that Taison v1.2.x had already filled with its own migrations, so upgrading installs skipped the ones that create the `extension_store` table and the `memo` columns on manga/chapters and crash-looped on launch. Affected installs are now detected and repaired before the database is opened, leaving library data untouched ([@Gent8](https://github.com/Gent8)).
 
 ### 🔧 Changed
 - Synced the fork to Mihon v0.20.1f, pulling in the upstream changes from Mihon v0.19.9 through v0.20.1f — including the extension repo → extension store rework and new chapter/manga `memo` fields — while keeping Taison-specific features and branding intact ([@Gent8](https://github.com/Gent8)).
