@@ -15,6 +15,14 @@ The format is a modified version of [Keep a Changelog](https://keepachangelog.co
 - Support resumable image downloads if supported by source ([@xMohnad](https://github.com/xMohnad)) ([#3167](https://github.com/mihonapp/mihon/pull/3167))
   - Fix HTTP Error 416 not being handled properly ([@AntsyLich](https://github.com/AntsyLich)) ([#3563](https://github.com/mihonapp/mihon/pull/3563))
 
+## [Taison v1.3.0] - 2026-08-01
+This section tracks changes unique to the Taison fork so they don't conflict with upstream Mihon release notes.
+
+### 🔧 Changed
+- Synced the fork to Mihon v0.20.1f, pulling in the upstream changes from Mihon v0.19.9 through v0.20.1f — including the extension repo → extension store rework and new chapter/manga `memo` fields — while keeping Taison-specific features and branding intact ([@Gent8](https://github.com/Gent8)).
+
+---
+
 ## [v0.20.1] - 2026-07-09
 ### Added
 - [Hikka](https://hikka.io/) tracker support ([@Lorg0n](https://github.com/Lorg0n)) ([#1386](https://github.com/mihonapp/mihon/pull/1386))
