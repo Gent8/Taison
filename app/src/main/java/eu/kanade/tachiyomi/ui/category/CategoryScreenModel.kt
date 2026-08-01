@@ -4,8 +4,6 @@ import androidx.compose.runtime.Immutable
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import dev.icerock.moko.resources.StringResource
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -42,8 +40,7 @@ class CategoryScreenModel(
                         CategoryScreenState.Success(
                             systemCategory = categories.find(Category::isSystemCategory),
                             categories = categories
-                                .filterNot(Category::isSystemCategory)
-                                .toImmutableList(),
+                                .filterNot(Category::isSystemCategory),
                         )
                     }
                 }
@@ -133,7 +130,7 @@ sealed interface CategoryScreenState {
     @Immutable
     data class Success(
         val systemCategory: Category?,
-        val categories: ImmutableList<Category>,
+        val categories: List<Category>,
         val dialog: CategoryDialog? = null,
     ) : CategoryScreenState {
 

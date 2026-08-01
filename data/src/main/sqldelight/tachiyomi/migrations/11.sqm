@@ -1,29 +1,16 @@
--- Add excluded_scanlators to updatesView
-DROP VIEW IF EXISTS updatesView;
+import kotlin.Boolean;
 
-CREATE VIEW updatesView AS
-SELECT
-    mangas._id AS mangaId,
-    mangas.title AS mangaTitle,
-    chapters._id AS chapterId,
-    chapters.name AS chapterName,
-    chapters.scanlator,
-    chapters.url AS chapterUrl,
-    chapters.read,
-    chapters.bookmark,
-    chapters.last_page_read,
-    mangas.source,
-    mangas.favorite,
-    mangas.thumbnail_url AS thumbnailUrl,
-    mangas.cover_last_modified AS coverLastModified,
-    chapters.date_upload AS dateUpload,
-    chapters.date_fetch AS datefetch,
-    excluded_scanlators.scanlator AS excludedScanlator
-FROM mangas JOIN chapters
-ON mangas._id = chapters.manga_id
-LEFT JOIN excluded_scanlators
-ON mangas._id = excluded_scanlators.manga_id
-AND chapters.scanlator = excluded_scanlators.scanlator
-WHERE favorite = 1
-AND date_fetch > date_added
-ORDER BY date_fetch DESC;
+CREATE TABLE extension_store(
+    index_url TEXT NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    badge_label TEXT NOT NULL,
+    signing_key TEXT NOT NULL,
+    contact_website TEXT NOT NULL,
+    contact_discord TEXT,
+    is_legacy INTEGER AS Boolean NOT NULL
+);
+
+INSERT INTO extension_store(index_url, name, badge_label, signing_key, contact_website, contact_discord, is_legacy)
+SELECT base_url || '/repo.json', name, coalesce(short_name, name), signing_key_fingerprint, website, NULL, 1 FROM extension_repos;
+
+DROP TABLE extension_repos;

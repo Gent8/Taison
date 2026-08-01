@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEachIndexed
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.TabText
 import tachiyomi.presentation.core.i18n.stringResource
@@ -64,7 +65,7 @@ fun rememberTabbedDialogState(initialPage: Int = 0): MutableIntState {
 @Composable
 fun TabbedDialog(
     onDismissRequest: () -> Unit,
-    tabTitles: ImmutableList<String>,
+    tabTitles: List<String>,
     modifier: Modifier = Modifier,
     tabOverflowMenuContent: (@Composable ColumnScope.(() -> Unit) -> Unit)? = null,
     content: @Composable (Int) -> Unit,
@@ -72,7 +73,7 @@ fun TabbedDialog(
     val tabState = rememberTabbedDialogState()
     TabbedDialog(
         onDismissRequest = onDismissRequest,
-        tabTitles = tabTitles,
+        tabTitles = tabTitles.toImmutableList(),
         tabState = tabState,
         modifier = modifier,
         tabOverflowMenuContent = tabOverflowMenuContent,

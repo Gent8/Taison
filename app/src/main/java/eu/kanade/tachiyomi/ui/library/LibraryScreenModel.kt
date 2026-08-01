@@ -12,7 +12,6 @@ import eu.kanade.core.util.fastFilterNot
 import eu.kanade.domain.base.BasePreferences
 import eu.kanade.domain.chapter.interactor.SetReadStatus
 import eu.kanade.domain.manga.interactor.UpdateManga
-import eu.kanade.presentation.components.SEARCH_DEBOUNCE_MILLIS
 import eu.kanade.presentation.library.components.LibraryToolbarTitle
 import eu.kanade.presentation.manga.DownloadAction
 import eu.kanade.tachiyomi.data.cache.CoverCache
@@ -25,8 +24,6 @@ import eu.kanade.tachiyomi.util.category.LastUsedCategoryState
 import eu.kanade.tachiyomi.util.chapter.getNextUnread
 import eu.kanade.tachiyomi.util.isMature
 import eu.kanade.tachiyomi.util.removeCovers
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
@@ -74,6 +71,7 @@ import tachiyomi.source.local.isLocal
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import kotlin.random.Random
+import kotlin.time.Duration.Companion.seconds
 
 class LibraryScreenModel(
     private val getLibraryManga: GetLibraryManga = Injekt.get(),
@@ -102,7 +100,7 @@ class LibraryScreenModel(
         screenModelScope.launchIO {
             @Suppress("UNCHECKED_CAST")
             combine(
-                state.map { it.searchQuery }.distinctUntilChanged().debounce(SEARCH_DEBOUNCE_MILLIS),
+                state.map { it.searchQuery }.distinctUntilChanged().debounce(0.25.seconds),
                 getCategories.subscribe(),
                 getFavoritesFlow(),
                 combine(getTracksPerManga.subscribe(), getTrackingFiltersFlow(), ::Pair),
@@ -131,7 +129,7 @@ class LibraryScreenModel(
 
                 val filteredFavorites = favorites
                     .applyFilters(tracksMap, trackingFilters, itemPreferences)
-                    .let { if (searchQuery == null) it else it.filter { m -> m.matches(searchQuery) } }
+                    .let { if (searchQuery == null) it else it.filter { m -> m.matches(searchQuery, sourceManager) } }
 
                 LibraryData(
                     isInitialized = true,
@@ -311,11 +309,7 @@ class LibraryScreenModel(
         val trackFiltersIsIgnored = includedTracks.isEmpty() && excludedTracks.isEmpty()
 
         val filterFnDownloaded: (LibraryItem) -> Boolean = {
-            applyFilter(filterDownloaded) {
-                it.libraryManga.manga.isLocal() ||
-                    it.downloadCount > 0 ||
-                    downloadManager.getDownloadCount(it.libraryManga.manga) > 0
-            }
+            applyFilter(filterDownloaded) { it.isLocal || it.downloadCount > 0 }
         }
 
         val filterFnUnread: (LibraryItem) -> Boolean = {
@@ -595,26 +589,31 @@ class LibraryScreenModel(
             libraryManga.map { manga ->
                 LibraryItem(
                     libraryManga = manga,
-                    downloadCount = if (preferences.downloadBadge) {
-                        downloadManager.getDownloadCount(manga.manga).toLong()
-                    } else {
-                        0
-                    },
-                    unreadCount = if (preferences.unreadBadge) {
-                        manga.unreadCount
-                    } else {
-                        0
-                    },
-                    isLocal = if (preferences.localBadge) {
-                        manga.manga.isLocal()
-                    } else {
-                        false
-                    },
-                    sourceLanguage = if (preferences.languageBadge) {
-                        sourceManager.getOrStub(manga.manga.source).lang
-                    } else {
-                        ""
-                    },
+                    downloadCount = downloadManager.getDownloadCount(manga.manga),
+                    unreadCount = manga.unreadCount,
+                    isLocal = manga.manga.isLocal(),
+                    badges = LibraryItem.Badges(
+                        downloadCount = if (preferences.downloadBadge) {
+                            downloadManager.getDownloadCount(manga.manga)
+                        } else {
+                            0
+                        },
+                        unreadCount = if (preferences.unreadBadge) {
+                            manga.unreadCount
+                        } else {
+                            0
+                        },
+                        isLocal = if (preferences.localBadge) {
+                            manga.manga.isLocal()
+                        } else {
+                            false
+                        },
+                        sourceLanguage = if (preferences.languageBadge) {
+                            sourceManager.getOrStub(manga.manga.source).lang
+                        } else {
+                            ""
+                        },
+                    ),
                 )
             }
         }
@@ -918,7 +917,7 @@ class LibraryScreenModel(
                         else -> CheckboxState.State.None(it)
                     }
                 }
-                .toImmutableList()
+
             mutableState.update { it.copy(dialog = Dialog.ChangeCategory(mangaList, preselected)) }
         }
     }
@@ -935,7 +934,7 @@ class LibraryScreenModel(
         data object SettingsSheet : Dialog
         data class ChangeCategory(
             val manga: List<Manga>,
-            val initialSelection: ImmutableList<CheckboxState<Category>>,
+            val initialSelection: List<CheckboxState<Category>>,
         ) : Dialog
         data class DeleteManga(val manga: List<Manga>) : Dialog
     }

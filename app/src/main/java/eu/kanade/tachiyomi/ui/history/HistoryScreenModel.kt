@@ -657,7 +657,7 @@ class HistoryScreenModel(
                 currentState.copy(
                     dialog = Dialog.ChangeCategory(
                         manga = manga,
-                        initialSelection = categories.mapAsCheckboxState { it.id in selection }.toImmutableList(),
+                        initialSelection = categories.mapAsCheckboxState { it.id in selection },
                     ),
                 )
             }
@@ -688,7 +688,7 @@ class HistoryScreenModel(
         data class DuplicateManga(val manga: Manga, val duplicates: List<MangaWithChapterCount>) : Dialog
         data class ChangeCategory(
             val manga: Manga,
-            val initialSelection: ImmutableList<CheckboxState<Category>>,
+            val initialSelection: List<CheckboxState<Category>>,
         ) : Dialog
         data class Migrate(val target: Manga, val current: Manga) : Dialog
     }

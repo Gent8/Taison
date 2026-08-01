@@ -6,6 +6,7 @@ import dev.icerock.moko.resources.StringResource
 import tachiyomi.core.common.preference.Preference
 import tachiyomi.core.common.preference.PreferenceStore
 import tachiyomi.core.common.preference.getEnum
+import tachiyomi.core.common.preference.getEnumSet
 import tachiyomi.i18n.MR
 
 class ReaderPreferences(
@@ -27,6 +28,21 @@ class ReaderPreferences(
     val doubleTapAnimSpeed: Preference<Int> = preferenceStore.getInt("pref_double_tap_anim_speed", 500)
 
     val showPageNumber: Preference<Boolean> = preferenceStore.getBoolean("pref_show_page_number_key", true)
+
+    val verticalNavigator: Preference<Set<ReadingMode>> = preferenceStore.getEnumSet(
+        "pref_vertical_navigator",
+        emptySet(),
+    )
+
+    val verticalNavigatorOnLeft: Preference<Boolean> = preferenceStore.getBoolean(
+        "pref_vertical_navigator_on_left",
+        false,
+    )
+
+    val verticalNavigatorHeight: Preference<Int> = preferenceStore.getInt(
+        "pref_vertical_navigator_height",
+        65,
+    )
 
     val showReadingMode: Preference<Boolean> = preferenceStore.getBoolean("pref_show_reading_mode", true)
 

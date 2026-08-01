@@ -26,7 +26,6 @@ import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.ui.library.LibrarySettingsScreenModel
 import eu.kanade.tachiyomi.util.system.isReleaseBuildType
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import tachiyomi.core.common.preference.TriState
 import tachiyomi.domain.category.model.Category
@@ -56,7 +55,7 @@ fun LibrarySettingsDialog(
 ) {
     TabbedDialog(
         onDismissRequest = onDismissRequest,
-        tabTitles = persistentListOf(
+        tabTitles = listOf(
             stringResource(MR.strings.action_filter),
             stringResource(MR.strings.action_sort),
             stringResource(MR.strings.action_display),
