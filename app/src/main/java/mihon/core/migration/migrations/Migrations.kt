@@ -11,4 +11,5 @@ val migrations: List<Migration>
         SetupDefaultCategoryHiddenMigration(),
         InstallationIdMigration(),
         VerticalNavigatorMigration(),
+        RepairExtensionStoreMigration(),
     )

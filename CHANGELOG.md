@@ -15,6 +15,12 @@ The format is a modified version of [Keep a Changelog](https://keepachangelog.co
 - Support resumable image downloads if supported by source ([@xMohnad](https://github.com/xMohnad)) ([#3167](https://github.com/mihonapp/mihon/pull/3167))
   - Fix HTTP Error 416 not being handled properly ([@AntsyLich](https://github.com/AntsyLich)) ([#3563](https://github.com/mihonapp/mihon/pull/3563))
 
+## [Taison v1.3.1] - 2026-08-01
+This section tracks changes unique to the Taison fork so they don't conflict with upstream Mihon release notes.
+
+### 🐛 Fixed
+- Fix app failing to start on update from v1.2.x — the v1.3.0 database migration renumbering caused upgrading installs to silently skip the migrations that create the `extension_store` table and the `memo` columns on manga/chapters, crash-looping the app on launch. Existing installs now self-repair on first launch of this version ([@Gent8](https://github.com/Gent8)).
+
 ## [Taison v1.3.0] - 2026-08-01
 This section tracks changes unique to the Taison fork so they don't conflict with upstream Mihon release notes.
 
