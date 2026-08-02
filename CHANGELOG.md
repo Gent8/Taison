@@ -19,7 +19,6 @@ The format is a modified version of [Keep a Changelog](https://keepachangelog.co
 This section tracks changes unique to the Taison fork so they don't conflict with upstream Mihon release notes.
 
 ### 🐛 Fixed
-- Fix installed extensions being labelled orphaned after updating from v1.2.x — converting the old extension repos leaves them flagged as legacy, and the legacy index now only carries placeholders telling the user to update, so every extension went missing from the available list. The stores are now refreshed on first launch instead of waiting for the daily check ([@Gent8](https://github.com/Gent8)).
 - Fix app failing to start on update from v1.2.x — the sync below reused the migration slots that Taison v1.2.x had already filled with its own migrations, so upgrading installs skipped the ones that create the `extension_store` table and the `memo` columns on manga/chapters and crash-looped on launch. Affected installs are now detected and repaired before the database is opened, leaving library data untouched ([@Gent8](https://github.com/Gent8)).
 
 ### 🔧 Changed
