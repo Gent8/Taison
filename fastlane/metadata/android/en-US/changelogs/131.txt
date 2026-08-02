@@ -1,0 +1,11 @@
+Synced Taison with Mihon v0.20.1 — the biggest catch-up yet.
+
+✨ New
+- Hikka and MangaBaka tracker support.
+- Vertical chapter navigator, with height and per-reader options.
+- Extension repos are now extension stores.
+
+🐛 Fixed
+- No longer gets stuck on the loading screen when updating from v1.2.x.
+
+Extensions may show as "Orphaned" for up to 24 hours after updating. They still work — don't uninstall them.
